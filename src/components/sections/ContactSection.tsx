@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,38 +20,59 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-gradient-section">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="section-padding bg-gradient-section relative overflow-hidden">
+      {/* Cinematic background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, hsl(217 91% 60% / 0.08) 0%, transparent 70%)",
+          }}
+          animate={{ x: [0, 30, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 left-0 w-[350px] h-[350px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, hsl(265 75% 55% / 0.06) 0%, transparent 70%)",
+          }}
+          animate={{ x: [0, -20, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-premium text-primary text-sm font-medium mb-6">
+            <Mail className="w-4 h-4" />
             Contact Us
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
             Let's Build
             <span className="text-gradient"> Something Great</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">
             Ready to start your digital transformation? Get in touch today.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 content-width">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 content-width">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="p-8 rounded-2xl bg-gradient-card border border-border/50"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="cinematic-card p-8 lg:p-10"
           >
-            <h3 className="font-display font-semibold text-xl mb-6">Send us a message</h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <h3 className="font-display font-semibold text-xl mb-8">Send us a message</h3>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm text-muted-foreground mb-2">Name</label>
                 <Input 
@@ -59,7 +80,7 @@ export const ContactSection = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="bg-secondary/50 border-border/50 focus:border-primary"
+                  className="h-12 bg-secondary/30 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
               <div>
@@ -70,7 +91,7 @@ export const ContactSection = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="bg-secondary/50 border-border/50 focus:border-primary"
+                  className="h-12 bg-secondary/30 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
               <div>
@@ -81,81 +102,96 @@ export const ContactSection = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
-                  className="bg-secondary/50 border-border/50 focus:border-primary resize-none"
+                  className="bg-secondary/30 border-border/50 focus:border-primary/50 resize-none transition-colors"
                 />
               </div>
-              <Button type="submit" className="w-full h-12 glow-primary">
-                Send Message
-                <Send className="w-4 h-4" />
+              <Button type="submit" className="w-full h-12 glow-primary group">
+                <span>Send Message</span>
+                <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </form>
           </motion.div>
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="p-6 rounded-2xl bg-gradient-card border border-border/50">
-              <h3 className="font-display font-semibold text-xl mb-6">Get in touch</h3>
+            <div className="cinematic-card p-8">
+              <h3 className="font-display font-semibold text-xl mb-8">Get in touch</h3>
               
-              <div className="space-y-5">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Email</p>
-                    <p className="text-foreground">hello@fusionify.id</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                    <p className="text-foreground">+62 812 3456 7890</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Location</p>
-                    <p className="text-foreground">Indonesia</p>
-                  </div>
-                </div>
+              <div className="space-y-6">
+                {[
+                  { icon: Mail, label: "Email", value: "hello@fusionify.id" },
+                  { icon: Phone, label: "Phone", value: "+62 812 3456 7890" },
+                  { icon: MapPin, label: "Location", value: "Indonesia" },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
+                      <p className="text-foreground font-medium">{item.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
             {/* Response Time */}
-            <div className="p-6 rounded-2xl glass">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="cinematic-card p-6"
+            >
               <div className="flex items-center gap-3 mb-3">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <motion.span 
+                  className="w-2.5 h-2.5 rounded-full bg-green-500"
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
                 <span className="text-sm font-medium text-foreground">Quick Response</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 We typically respond within 24 hours. For urgent inquiries, 
                 please reach out via WhatsApp.
               </p>
-            </div>
+            </motion.div>
 
             {/* Social Proof */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 border border-border/50">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="cinematic-card p-6 bg-gradient-to-br from-primary/10 to-accent/5"
+            >
               <div className="text-center">
-                <div className="text-3xl font-bold text-gradient-blue mb-2">50+</div>
+                <motion.div 
+                  className="text-4xl font-bold text-gradient-blue mb-2"
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  50+
+                </motion.div>
                 <p className="text-sm text-muted-foreground">
                   Satisfied clients across Indonesia
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const footerLinks = {
   ],
   Company: [
     { name: "About Us", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
+    { name: "Portfolio", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ],
   Legal: [
@@ -28,8 +28,8 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border/30 bg-background">
-      <div className="container mx-auto px-4 py-16">
+    <footer className="border-t border-border/20 bg-gradient-section">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 content-width-lg">
           {/* Brand Column */}
           <div className="lg:col-span-2">
@@ -37,17 +37,17 @@ export const Footer = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <a href="#home" className="flex items-center gap-2 mb-4">
-                <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">F</span>
+              <a href="#home" className="flex items-center gap-3 mb-6 group">
+                <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:glow-primary transition-shadow">
+                  <span className="text-primary-foreground font-bold text-xl">F</span>
                 </div>
-                <span className="font-display font-bold text-lg text-foreground">
+                <span className="font-display font-bold text-xl text-foreground">
                   Fusionify
                 </span>
               </a>
-              <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-8">
                 Your trusted partner for digital transformation. Building scalable 
                 solutions for Indonesian businesses and beyond.
               </p>
@@ -55,14 +55,16 @@ export const Footer = () => {
               {/* Social Links */}
               <div className="flex gap-3">
                 {socialLinks.map((social) => (
-                  <a
+                  <motion.a
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                    className="w-10 h-10 rounded-xl bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-300"
+                    whileHover={{ y: -2 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <social.icon className="w-5 h-5" />
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </motion.div>
@@ -75,9 +77,9 @@ export const Footer = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
             >
-              <h4 className="font-display font-semibold text-foreground mb-4 text-sm">
+              <h4 className="font-display font-semibold text-foreground mb-5 text-sm">
                 {title}
               </h4>
               <ul className="space-y-3">
@@ -85,7 +87,7 @@ export const Footer = () => {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
                     >
                       {link.name}
                     </a>
@@ -101,14 +103,21 @@ export const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="border-t border-border/30 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="border-t border-border/20 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} PT Fusionify Digital Store. All rights reserved.
           </p>
-          <p className="text-muted-foreground text-sm">
-            Made with ❤️ in Indonesia
+          <p className="text-muted-foreground text-sm flex items-center gap-2">
+            <span>Made with</span>
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              ❤️
+            </motion.span>
+            <span>in Indonesia</span>
           </p>
         </motion.div>
       </div>

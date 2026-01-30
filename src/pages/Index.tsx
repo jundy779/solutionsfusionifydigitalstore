@@ -7,6 +7,7 @@ import { UnifiedEcosystemSection } from "@/components/sections/UnifiedEcosystemS
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { ResultsSection } from "@/components/sections/ResultsSection";
 import { ProductSuiteSection } from "@/components/sections/ProductSuiteSection";
+import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { FutureVisionSection } from "@/components/sections/FutureVisionSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -25,6 +26,7 @@ const Index = () => {
         <WhyChooseUsSection />
         <ResultsSection />
         <ProductSuiteSection />
+        <FeaturedProjectsSection />
         <FutureVisionSection />
         <CTASection />
         <ContactSection />
