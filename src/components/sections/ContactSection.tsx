@@ -41,48 +41,51 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-background">
+    <section id="contact" className="section-padding bg-background relative">
+      {/* Subtle top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             Contact Us
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 text-foreground">
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground tracking-tight">
             Mari Berkolaborasi
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground content-width-sm text-lg leading-relaxed">
             Punya proyek atau ide? Hubungi kami dan mari wujudkan bersama.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 content-width">
           {/* Left Column - Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
           >
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl bg-card border border-border p-8 shadow-card"
+              className="rounded-2xl bg-card border border-border/80 p-8 lg:p-10 shadow-card"
             >
-              <h3 className="font-display font-semibold text-xl mb-6 text-foreground">
+              <h3 className="font-display font-semibold text-xl mb-8 text-foreground">
                 Kirim Pesan
               </h3>
 
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="block text-sm font-medium text-foreground mb-2.5"
                   >
                     Nama Lengkap
                   </label>
@@ -94,14 +97,14 @@ export const ContactSection = () => {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
-                    className="bg-background border-border focus:border-primary rounded-xl"
+                    className="bg-background border-border focus:border-primary h-12 rounded-xl"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="block text-sm font-medium text-foreground mb-2.5"
                   >
                     Email
                   </label>
@@ -114,14 +117,14 @@ export const ContactSection = () => {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                    className="bg-background border-border focus:border-primary rounded-xl"
+                    className="bg-background border-border focus:border-primary h-12 rounded-xl"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="block text-sm font-medium text-foreground mb-2.5"
                   >
                     Pesan
                   </label>
@@ -138,7 +141,7 @@ export const ContactSection = () => {
                   />
                 </div>
 
-                <Button type="submit" variant="hero" size="lg" className="w-full">
+                <Button type="submit" variant="hero" size="lg" className="w-full h-12">
                   Kirim Pesan
                   <Send className="w-4 h-4" />
                 </Button>
@@ -148,38 +151,42 @@ export const ContactSection = () => {
 
           {/* Right Column - Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-center lg:pl-6"
           >
-            <h3 className="font-display font-semibold text-2xl mb-6 text-foreground">
+            <h3 className="font-display font-semibold text-2xl mb-4 text-foreground">
               Informasi Kontak
             </h3>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-muted-foreground mb-10 leading-relaxed text-[15px]">
               Tim kami siap membantu Anda mencapai tujuan digital. 
               Jangan ragu untuk menghubungi kami melalui salah satu channel di bawah ini.
             </p>
 
             {/* Contact Info */}
-            <div className="space-y-5">
-              {contactInfo.map((info) => (
-                <a
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => (
+                <motion.a
                   key={info.label}
                   href={info.href}
-                  className="flex items-center gap-4 group p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-soft transition-all duration-300"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                  className="flex items-center gap-4 group p-5 rounded-xl bg-card border border-border/80 hover:border-primary/30 hover:shadow-soft transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <info.icon className="w-5 h-5 text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all duration-300">
+                    <info.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">{info.label}</div>
+                    <div className="text-sm text-muted-foreground mb-0.5">{info.label}</div>
                     <div className="text-foreground font-medium group-hover:text-primary transition-colors">
                       {info.value}
                     </div>
                   </div>
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.div>
