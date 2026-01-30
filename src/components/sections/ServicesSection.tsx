@@ -16,28 +16,28 @@ const services = [
   },
   {
     icon: Smartphone,
-    title: "Mobile App Development",
-    description: "Aplikasi mobile yang intuitif untuk iOS dan Android yang memberikan pengalaman terbaik bagi pengguna.",
+    title: "Mobile App",
+    description: "Aplikasi mobile yang intuitif untuk iOS dan Android dengan pengalaman pengguna terbaik.",
   },
   {
     icon: TrendingUp,
     title: "Digital Marketing",
-    description: "Strategi pemasaran digital yang efektif untuk meningkatkan visibilitas dan konversi bisnis Anda.",
+    description: "Strategi pemasaran digital yang efektif untuk meningkatkan visibilitas dan konversi.",
   },
   {
     icon: Palette,
     title: "UI/UX Design",
-    description: "Desain antarmuka yang menarik dan user experience yang optimal untuk produk digital Anda.",
+    description: "Desain antarmuka yang menarik dan user experience yang optimal untuk produk Anda.",
   },
   {
     icon: ShieldCheck,
     title: "Cyber Security",
-    description: "Solusi keamanan siber untuk melindungi data dan infrastruktur digital bisnis Anda.",
+    description: "Solusi keamanan siber untuk melindungi data dan infrastruktur digital bisnis.",
   },
   {
     icon: Headphones,
     title: "IT Consulting",
-    description: "Konsultasi IT profesional untuk membantu transformasi digital dan optimalisasi sistem Anda.",
+    description: "Konsultasi IT profesional untuk membantu transformasi digital dan optimalisasi sistem.",
   },
 ];
 
@@ -62,26 +62,23 @@ const itemVariants = {
 
 export const ServicesSection = () => {
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-glow opacity-50" />
-
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="services" className="py-24 bg-background">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm font-semibold tracking-wider uppercase">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
             Our Services
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl mt-4 mb-6">
-            Solusi Digital <span className="text-gradient">Lengkap</span>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 text-foreground">
+            Layanan Digital Lengkap
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Kami menyediakan berbagai layanan digital untuk membantu bisnis Anda 
             tumbuh dan berkembang di era digital.
           </p>
@@ -99,10 +96,10 @@ export const ServicesSection = () => {
             <motion.div
               key={service.title}
               variants={itemVariants}
-              className="group p-8 rounded-2xl bg-gradient-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow"
+              className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-card transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <service.icon className="w-7 h-7 text-primary-foreground" />
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                <service.icon className="w-7 h-7 text-primary" />
               </div>
               <h3 className="font-display font-semibold text-xl mb-3 text-foreground">
                 {service.title}

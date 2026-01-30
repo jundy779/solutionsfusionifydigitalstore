@@ -7,7 +7,6 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
   { name: "About", href: "#about" },
-  { name: "Portfolio", href: "#portfolio" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -27,19 +26,21 @@ export const Navbar = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
+        isScrolled 
+          ? "bg-background/95 backdrop-blur-md border-b border-border py-3 shadow-sm" 
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
             <span className="text-primary-foreground font-display font-bold text-xl">F</span>
           </div>
           <span className="font-display font-bold text-xl text-foreground">
-            FUSIONIFY
+            Fusionify
           </span>
         </a>
 
@@ -49,7 +50,7 @@ export const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
             >
               {link.name}
             </a>
@@ -79,14 +80,14 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong border-t border-border mt-3"
+            className="md:hidden bg-background border-b border-border"
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-base font-medium py-2"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-base font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
