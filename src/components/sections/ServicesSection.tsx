@@ -1,36 +1,43 @@
+import { motion } from "framer-motion";
 import { 
   Code2, 
   Bot, 
   Settings2, 
   Cloud, 
-  Briefcase 
+  Briefcase,
+  ArrowUpRight
 } from "lucide-react";
 
 const services = [
   {
     icon: Code2,
     title: "Web & App Development",
-    description: "Custom websites and mobile applications built with modern frameworks. From landing pages to complex platforms.",
+    description: "Modern scalable websites & mobile apps built with cutting-edge frameworks and best practices.",
+    features: ["React/Next.js", "Mobile Apps", "E-commerce"],
   },
   {
     icon: Bot,
     title: "Automation Bots",
-    description: "Intelligent Telegram and WhatsApp bots to automate customer service, notifications, and workflows.",
+    description: "Intelligent Telegram & WhatsApp bots for auto order systems and workflow automation.",
+    features: ["Telegram Bots", "WhatsApp API", "Auto Orders"],
   },
   {
     icon: Settings2,
     title: "Digital Systems & Integrations",
-    description: "Seamless integration of APIs, payment gateways, CRMs, and internal tools for unified operations.",
+    description: "Seamless API, CRM, and payment gateway integrations for unified operations.",
+    features: ["API Integration", "CRM Systems", "Payment Gateway"],
   },
   {
     icon: Cloud,
-    title: "Cloud & IT Support",
-    description: "Cloud infrastructure setup, maintenance, and IT support with reliable hosting and monitoring.",
+    title: "Cloud & IT Solutions",
+    description: "Enterprise hosting, VPS, and infrastructure management with 99.9% uptime.",
+    features: ["Cloud Hosting", "VPS Management", "Monitoring"],
   },
   {
     icon: Briefcase,
-    title: "Project-based Services",
-    description: "Flexible engagement for specific projects. From MVP development to system audits.",
+    title: "Project-Based Services",
+    description: "Custom IT & software projects tailored to your specific business needs.",
+    features: ["MVP Development", "System Audit", "Consulting"],
   },
 ];
 
@@ -39,36 +46,67 @@ export const ServicesSection = () => {
     <section id="services" className="section-padding bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
             Our Services
           </span>
-          <h2 className="font-bold text-3xl md:text-4xl mb-4 text-foreground">
-            Layanan Digital Lengkap
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4">
+            Complete Digital
+            <span className="text-gradient"> Solutions</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Kami menyediakan berbagai layanan digital untuk membantu bisnis Anda 
-            tumbuh dan berkembang di era digital.
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+            Everything you need to build, automate, and scale your digital presence
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 content-width-lg">
-          {services.map((service) => (
-            <div
+          {services.map((service, index) => (
+            <motion.div
               key={service.title}
-              className="group p-6 rounded-xl bg-card border border-border hover:border-primary/40 hover:shadow-lg transition-all duration-200"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative p-6 rounded-2xl bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-200">
-                <service.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-200" />
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative z-10">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
+                  <service.icon className="w-7 h-7 text-primary" />
+                </div>
+                
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-display font-semibold text-xl text-foreground group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                
+                <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+                  {service.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {service.features.map((feature) => (
+                    <span
+                      key={feature}
+                      className="px-3 py-1 rounded-full bg-secondary/50 text-xs text-muted-foreground"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-foreground">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {service.description}
-              </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
