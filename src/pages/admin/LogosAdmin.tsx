@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   Plus, 
   Pencil, 
@@ -14,9 +15,10 @@ import {
   ArrowLeft,
   GripVertical,
   ExternalLink,
-  Image as ImageIcon
+  Image as ImageIcon,
+  LogOut
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -73,6 +75,8 @@ const initialFormData: LogoFormData = {
 
 export default function LogosAdmin() {
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingLogo, setEditingLogo] = useState<ClientLogo | null>(null);
@@ -80,6 +84,11 @@ export default function LogosAdmin() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/admin/login");
+  };
 
   // Fetch logos
   const { data: logos, isLoading } = useQuery({
@@ -264,123 +273,131 @@ export default function LogosAdmin() {
             </Link>
             <div>
               <h1 className="text-xl font-bold text-foreground">Logo Management</h1>
-              <p className="text-sm text-muted-foreground">Kelola logo klien dan partner</p>
+              <p className="text-sm text-muted-foreground">
+                {user?.email}
+              </p>
             </div>
           </div>
-          
-          <Dialog open={isDialogOpen} onOpenChange={(open) => {
-            if (!open) resetForm();
-            setIsDialogOpen(open);
-          }}>
-            <DialogTrigger asChild>
-              <Button className="gap-2">
-                <Plus className="w-4 h-4" />
-                Tambah Logo
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md bg-card border-border">
-              <DialogHeader>
-                <DialogTitle>
-                  {editingLogo ? "Edit Logo" : "Tambah Logo Baru"}
-                </DialogTitle>
-              </DialogHeader>
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Logo Upload */}
-                <div className="space-y-2">
-                  <Label>Logo Image</Label>
-                  <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-lg border border-border bg-muted/50 flex items-center justify-center overflow-hidden">
-                      {previewUrl ? (
-                        <img src={previewUrl} alt="Preview" className="w-full h-full object-contain" />
-                      ) : (
-                        <ImageIcon className="w-8 h-8 text-muted-foreground" />
-                      )}
+
+          <div className="flex items-center gap-3">
+            <Dialog open={isDialogOpen} onOpenChange={(open) => {
+              if (!open) resetForm();
+              setIsDialogOpen(open);
+            }}>
+              <DialogTrigger asChild>
+                <Button className="gap-2">
+                  <Plus className="w-4 h-4" />
+                  Tambah Logo
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md bg-card border-border">
+                <DialogHeader>
+                  <DialogTitle>
+                    {editingLogo ? "Edit Logo" : "Tambah Logo Baru"}
+                  </DialogTitle>
+                </DialogHeader>
+                
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Logo Upload */}
+                  <div className="space-y-2">
+                    <Label>Logo Image</Label>
+                    <div className="flex items-center gap-4">
+                      <div className="w-20 h-20 rounded-lg border border-border bg-muted/50 flex items-center justify-center overflow-hidden">
+                        {previewUrl ? (
+                          <img src={previewUrl} alt="Preview" className="w-full h-full object-contain" />
+                        ) : (
+                          <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="cursor-pointer"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">
+                          PNG, JPG, atau SVG. Max 2MB.
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="cursor-pointer"
+                  </div>
+
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Nama Klien/Partner</Label>
+                    <Input
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="PT Example Indonesia"
+                      required
+                    />
+                  </div>
+
+                  {/* Website URL */}
+                  <div className="space-y-2">
+                    <Label htmlFor="website_url">Website URL (opsional)</Label>
+                    <Input
+                      id="website_url"
+                      type="url"
+                      value={formData.website_url}
+                      onChange={(e) => setFormData({ ...formData, website_url: e.target.value })}
+                      placeholder="https://example.com"
+                    />
+                  </div>
+
+                  {/* Display Order */}
+                  <div className="space-y-2">
+                    <Label htmlFor="display_order">Urutan Tampil</Label>
+                    <Input
+                      id="display_order"
+                      type="number"
+                      value={formData.display_order}
+                      onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
+                      min={0}
+                    />
+                  </div>
+
+                  {/* Switches */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        id="is_partner"
+                        checked={formData.is_partner}
+                        onCheckedChange={(checked) => setFormData({ ...formData, is_partner: checked })}
                       />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        PNG, JPG, atau SVG. Max 2MB.
-                      </p>
+                      <Label htmlFor="is_partner" className="cursor-pointer">Partner</Label>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        id="is_active"
+                        checked={formData.is_active}
+                        onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
+                      />
+                      <Label htmlFor="is_active" className="cursor-pointer">Aktif</Label>
                     </div>
                   </div>
-                </div>
 
-                {/* Name */}
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nama Klien/Partner</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="PT Example Indonesia"
-                    required
-                  />
-                </div>
-
-                {/* Website URL */}
-                <div className="space-y-2">
-                  <Label htmlFor="website_url">Website URL (opsional)</Label>
-                  <Input
-                    id="website_url"
-                    type="url"
-                    value={formData.website_url}
-                    onChange={(e) => setFormData({ ...formData, website_url: e.target.value })}
-                    placeholder="https://example.com"
-                  />
-                </div>
-
-                {/* Display Order */}
-                <div className="space-y-2">
-                  <Label htmlFor="display_order">Urutan Tampil</Label>
-                  <Input
-                    id="display_order"
-                    type="number"
-                    value={formData.display_order}
-                    onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
-                    min={0}
-                  />
-                </div>
-
-                {/* Switches */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Switch
-                      id="is_partner"
-                      checked={formData.is_partner}
-                      onCheckedChange={(checked) => setFormData({ ...formData, is_partner: checked })}
-                    />
-                    <Label htmlFor="is_partner" className="cursor-pointer">Partner</Label>
+                  {/* Submit */}
+                  <div className="flex gap-2 pt-4">
+                    <Button type="button" variant="outline" onClick={resetForm} className="flex-1">
+                      Batal
+                    </Button>
+                    <Button type="submit" disabled={isUploading} className="flex-1 gap-2">
+                      {isUploading && <Upload className="w-4 h-4 animate-spin" />}
+                      {editingLogo ? "Update" : "Simpan"}
+                    </Button>
                   </div>
-                  
-                  <div className="flex items-center gap-2">
-                    <Switch
-                      id="is_active"
-                      checked={formData.is_active}
-                      onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
-                    />
-                    <Label htmlFor="is_active" className="cursor-pointer">Aktif</Label>
-                  </div>
-                </div>
+                </form>
+              </DialogContent>
+            </Dialog>
 
-                {/* Submit */}
-                <div className="flex gap-2 pt-4">
-                  <Button type="button" variant="outline" onClick={resetForm} className="flex-1">
-                    Batal
-                  </Button>
-                  <Button type="submit" disabled={isUploading} className="flex-1 gap-2">
-                    {isUploading && <Upload className="w-4 h-4 animate-spin" />}
-                    {editingLogo ? "Update" : "Simpan"}
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
-          </Dialog>
+            <Button variant="ghost" size="icon" onClick={handleSignOut} title="Logout">
+              <LogOut className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </header>
 
