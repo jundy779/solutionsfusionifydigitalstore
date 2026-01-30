@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Users, Code2, Clock, ArrowRight, Zap, Target, Layers } from "lucide-react";
+import { CheckCircle2, Users, Code2, Clock, ArrowRight } from "lucide-react";
 
 const features = [
   {
@@ -20,139 +20,126 @@ const features = [
 ];
 
 const highlights = [
-  { icon: Target, label: "Digital Solutions End-to-End" },
-  { icon: Zap, label: "Automation Driven Workflows" },
-  { icon: Layers, label: "Cloud Infrastructure Support" },
-  { icon: CheckCircle2, label: "Scalable Systems" },
+  "Digital Solutions End-to-End",
+  "Automation Driven Workflows",
+  "Cloud Infrastructure Support",
+  "Scalable Systems",
 ];
 
 export const AboutFusionifySection = () => {
   return (
-    <section id="about" className="section-padding bg-gradient-section relative overflow-hidden">
-      {/* Cinematic background */}
+    <section id="about" className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, hsl(217 91% 60% / 0.08) 0%, transparent 70%)",
+          className="absolute top-1/3 right-0 w-[500px] h-[500px]"
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
           }}
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, hsl(265 75% 55% / 0.06) 0%, transparent 70%)",
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
-          animate={{ scale: [1, 1.15, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
         />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center content-width-lg">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Left - Visual */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative"
           >
-            <div className="cinematic-card p-8 lg:p-10 overflow-hidden">
-              {/* Animated glow effects */}
-              <motion.div 
-                className="absolute top-0 right-0 w-60 h-60 rounded-full"
-                style={{
-                  background: "radial-gradient(circle, hsl(217 91% 60% / 0.2) 0%, transparent 70%)",
-                }}
-                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              />
-              
-              <div className="relative z-10">
-                {/* Brand Visual */}
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-primary/20 via-accent/10 to-transparent flex items-center justify-center mb-8 overflow-hidden">
+            <div className="p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden">
+              {/* Brand Visual */}
+              <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent flex items-center justify-center mb-6 overflow-hidden border border-primary/10">
+                <motion.div 
+                  className="text-center"
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
                   <motion.div 
-                    className="text-center"
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-20 h-20 mx-auto mb-3 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20"
+                    animate={{ rotate: [0, 2, 0, -2, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <motion.div 
-                      className="w-28 h-28 mx-auto mb-4 bg-primary/20 rounded-3xl flex items-center justify-center border border-primary/30 glow-border"
-                      animate={{ rotate: [0, 3, 0, -3, 0] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="text-6xl font-bold text-primary">F</span>
-                    </motion.div>
-                    <h3 className="font-display font-bold text-3xl text-foreground mb-2">
-                      FUSIONIFY
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Digital Solutions
-                    </p>
+                    <span className="text-4xl font-bold text-primary">F</span>
                   </motion.div>
-                </div>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-1">
+                    FUSIONIFY
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Digital Solutions
+                  </p>
+                </motion.div>
+              </div>
 
-                {/* Highlight pills */}
-                <div className="grid grid-cols-2 gap-3">
-                  {highlights.map((item, index) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary/50 border border-border/30"
-                    >
-                      <item.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span className="text-xs text-muted-foreground">{item.label}</span>
-                    </motion.div>
-                  ))}
-                </div>
+              {/* Highlight pills */}
+              <div className="flex flex-wrap gap-2">
+                {highlights.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border border-border/30"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span className="text-xs text-muted-foreground">{item}</span>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
 
           {/* Right - Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-premium text-primary text-sm font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              About Fusionify
-            </span>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight">
-              Fusionify: Your Complete
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              <span className="text-sm font-medium text-muted-foreground">About Fusionify</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 leading-tight text-foreground">
+              Your Complete
               <span className="text-gradient"> Digital Partner</span>
             </h2>
-            <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+            <p className="text-muted-foreground text-base md:text-lg mb-8 leading-relaxed">
               Fusionify Digital Solutions helps businesses transform digitally with modern, 
               scalable solutions. From automation to cloud infrastructure, we provide 
               end-to-end digital services tailored to your needs.
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-8">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  initial={{ opacity: 0, x: 30 }}
+                  initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="group flex items-start gap-4 p-4 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-transparent hover:border-primary/20 transition-all duration-300"
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                  className="group flex items-start gap-4 p-4 rounded-xl bg-card/50 hover:bg-card border border-border/50 hover:border-primary/20 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <feature.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-semibold text-foreground mb-0.5 group-hover:text-primary transition-colors text-sm">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -165,10 +152,10 @@ export const AboutFusionifySection = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+              transition={{ duration: 0.4, delay: 0.5 }}
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group text-sm font-medium"
             >
-              <span className="font-medium">Learn more about us</span>
+              <span>Learn more about us</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </motion.div>

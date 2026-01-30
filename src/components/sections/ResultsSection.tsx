@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Zap, Shield, TrendingUp, Heart, Clock, Activity } from "lucide-react";
+import { Zap, Shield, TrendingUp, Heart, Clock } from "lucide-react";
 
 const results = [
   {
@@ -8,35 +8,30 @@ const results = [
     value: 10000,
     suffix: "+",
     label: "Users Impacted",
-    gradient: "from-blue-500/15 to-cyan-500/5",
   },
   {
     icon: Shield,
     value: 99.9,
     suffix: "%",
     label: "System Uptime",
-    gradient: "from-green-500/15 to-emerald-500/5",
   },
   {
     icon: TrendingUp,
     value: 80,
     suffix: "%",
     label: "Efficiency Increase",
-    gradient: "from-purple-500/15 to-pink-500/5",
   },
   {
     icon: Heart,
     value: 100,
     suffix: "%",
     label: "Client Satisfaction",
-    gradient: "from-orange-500/15 to-amber-500/5",
   },
   {
     icon: Clock,
     value: 24,
     suffix: "/7",
     label: "Support Available",
-    gradient: "from-cyan-500/15 to-blue-500/5",
   },
 ];
 
@@ -71,7 +66,7 @@ const AnimatedCounter = ({ value, suffix, isInView }: { value: number; suffix: s
       : count.toFixed(1);
   
   return (
-    <span className="text-gradient-blue">
+    <span className="text-gradient">
       {displayValue}{suffix}
     </span>
   );
@@ -82,90 +77,69 @@ export const ResultsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="section-padding bg-gradient-section-alt relative overflow-hidden">
-      {/* Cinematic background effects */}
+    <section ref={ref} className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, hsl(217 91% 60% / 0.1) 0%, transparent 60%)",
-          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]"
           animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.4, 0.6, 0.4],
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.05, 1],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
+          style={{
+            background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
         />
-        
-        {/* Floating particles */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-primary/40"
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + (i % 3) * 20}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 4 + i * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-          />
-        ))}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-premium text-primary text-sm font-medium mb-6">
-            <Activity className="w-4 h-4" />
-            Real Results
-          </span>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+            <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground">Real Results</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
             Proven
             <span className="text-gradient"> Impact</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">
+          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">
             Numbers that demonstrate our commitment to excellence
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 content-width-lg">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
           {results.map((result, index) => (
             <motion.div
               key={result.label}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-              className="group cinematic-card p-6 text-center"
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+              className="group p-5 rounded-2xl bg-card/50 border border-border/50 text-center hover:border-primary/30 transition-all duration-300"
             >
               <motion.div 
-                className={`w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br ${result.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
-                animate={{ y: [0, -3, 0] }}
-                transition={{ duration: 3, delay: index * 0.2, repeat: Infinity, ease: "easeInOut" }}
+                className="w-11 h-11 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300"
               >
-                <result.icon className="w-7 h-7 text-primary" />
+                <result.icon className="w-5 h-5 text-primary" />
               </motion.div>
-              <div className="text-3xl md:text-4xl font-bold mb-2 group-hover:glow-text transition-all duration-300">
+              <div className="text-2xl md:text-3xl font-bold mb-1">
                 <AnimatedCounter value={result.value} suffix={result.suffix} isInView={isInView} />
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 {result.label}
               </p>
             </motion.div>
