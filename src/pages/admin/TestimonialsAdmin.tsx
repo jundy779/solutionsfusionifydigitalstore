@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogContent,
@@ -20,7 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, Quote } from "lucide-react";
+import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, Quote, Upload, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   DndContext,
@@ -66,6 +67,10 @@ const TestimonialsAdmin = () => {
     avatar_initials: "",
     image_url: "",
   });
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -86,6 +91,32 @@ const TestimonialsAdmin = () => {
       return data as Testimonial[];
     },
   });
+
+  // Upload photo to storage
+  const uploadPhoto = async (file: File): Promise<string> => {
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${crypto.randomUUID()}.${fileExt}`;
+    
+    const { error: uploadError } = await supabase.storage
+      .from("testimonials")
+      .upload(fileName, file);
+    
+    if (uploadError) throw uploadError;
+    
+    const { data } = supabase.storage.from("testimonials").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
+  // Delete photo from storage
+  const deletePhoto = async (url: string) => {
+    // Only delete if it's from our storage bucket
+    if (url.includes("/testimonials/")) {
+      const fileName = url.split("/testimonials/").pop();
+      if (fileName) {
+        await supabase.storage.from("testimonials").remove([fileName]);
+      }
+    }
+  };
 
   const createMutation = useMutation({
     mutationFn: async (data: Omit<Testimonial, "id" | "created_at" | "updated_at" | "display_order" | "is_active">) => {
@@ -123,8 +154,12 @@ const TestimonialsAdmin = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("testimonials").delete().eq("id", id);
+    mutationFn: async (testimonial: Testimonial) => {
+      // Delete photo from storage first if exists
+      if (testimonial.image_url) {
+        await deletePhoto(testimonial.image_url);
+      }
+      const { error } = await supabase.from("testimonials").delete().eq("id", testimonial.id);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -163,25 +198,71 @@ const TestimonialsAdmin = () => {
   const resetForm = () => {
     setFormData({ name: "", role: "", company: "", quote: "", avatar_initials: "", image_url: "" });
     setEditingTestimonial(null);
+    setPhotoFile(null);
+    setPhotoPreview("");
     setIsDialogOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast({ title: "File terlalu besar", description: "Maksimal ukuran file 2MB", variant: "destructive" });
+        return;
+      }
+      setPhotoFile(file);
+      setPhotoPreview(URL.createObjectURL(file));
+      // Clear URL input when file is selected
+      setFormData({ ...formData, image_url: "" });
+    }
+  };
+
+  const clearPhoto = () => {
+    setPhotoFile(null);
+    setPhotoPreview("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingTestimonial) {
-      updateMutation.mutate({
-        id: editingTestimonial.id,
-        data: {
-          name: formData.name,
-          role: formData.role,
-          company: formData.company,
-          quote: formData.quote,
-          avatar_initials: formData.avatar_initials,
-          image_url: formData.image_url || null,
-        },
-      });
-    } else {
-      createMutation.mutate(formData);
+    setIsUploading(true);
+
+    try {
+      let imageUrl = formData.image_url || editingTestimonial?.image_url || "";
+
+      // Upload new file if selected
+      if (photoFile) {
+        // Delete old photo if updating and it's from our storage
+        if (editingTestimonial?.image_url) {
+          await deletePhoto(editingTestimonial.image_url);
+        }
+        imageUrl = await uploadPhoto(photoFile);
+      }
+
+      if (editingTestimonial) {
+        await updateMutation.mutateAsync({
+          id: editingTestimonial.id,
+          data: {
+            name: formData.name,
+            role: formData.role,
+            company: formData.company,
+            quote: formData.quote,
+            avatar_initials: formData.avatar_initials,
+            image_url: imageUrl || null,
+          },
+        });
+      } else {
+        await createMutation.mutateAsync({
+          ...formData,
+          image_url: imageUrl,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -193,13 +274,21 @@ const TestimonialsAdmin = () => {
       company: testimonial.company,
       quote: testimonial.quote,
       avatar_initials: testimonial.avatar_initials,
-      image_url: testimonial.image_url || "",
+      image_url: "",
     });
+    setPhotoPreview(testimonial.image_url || "");
     setIsDialogOpen(true);
   };
 
   const handleToggleActive = (id: string, is_active: boolean) => {
     updateMutation.mutate({ id, data: { is_active } });
+  };
+
+  const handleDelete = (id: string) => {
+    const testimonial = testimonials?.find((t) => t.id === id);
+    if (testimonial) {
+      deleteMutation.mutate(testimonial);
+    }
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -249,7 +338,10 @@ const TestimonialsAdmin = () => {
                 FAQ
               </Button>
             </Link>
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <Dialog open={isDialogOpen} onOpenChange={(open) => {
+              if (!open) resetForm();
+              setIsDialogOpen(open);
+            }}>
               <DialogTrigger asChild>
                 <Button onClick={() => resetForm()}>
                   <Plus className="h-4 w-4 mr-2" />
@@ -263,6 +355,54 @@ const TestimonialsAdmin = () => {
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Photo Upload Section */}
+                  <div className="space-y-2">
+                    <Label>Foto Klien</Label>
+                    <div className="flex items-start gap-4">
+                      <div className="relative">
+                        <Avatar className="w-20 h-20 border-2 border-dashed border-border">
+                          <AvatarImage src={photoPreview || undefined} alt="Preview" />
+                          <AvatarFallback className="bg-muted text-muted-foreground">
+                            {formData.avatar_initials || <ImageIcon className="w-8 h-8" />}
+                          </AvatarFallback>
+                        </Avatar>
+                        {photoPreview && (
+                          <button
+                            type="button"
+                            onClick={clearPhoto}
+                            className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center hover:bg-destructive/90"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <Input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="cursor-pointer"
+                        />
+                        <p className="text-xs text-muted-foreground">
+                          Upload foto (PNG, JPG. Max 2MB) atau masukkan URL di bawah.
+                        </p>
+                        <Input
+                          value={formData.image_url}
+                          onChange={(e) => {
+                            setFormData({ ...formData, image_url: e.target.value });
+                            if (e.target.value) {
+                              setPhotoFile(null);
+                              setPhotoPreview(e.target.value);
+                            }
+                          }}
+                          placeholder="https://example.com/photo.jpg"
+                          disabled={!!photoFile}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Nama</Label>
@@ -319,21 +459,19 @@ const TestimonialsAdmin = () => {
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="image_url">URL Foto (opsional)</Label>
-                    <Input
-                      id="image_url"
-                      value={formData.image_url}
-                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                      placeholder="https://example.com/photo.jpg"
-                    />
-                  </div>
                   <div className="flex justify-end gap-2">
                     <Button type="button" variant="outline" onClick={resetForm}>
                       Batal
                     </Button>
-                    <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
-                      {editingTestimonial ? "Simpan Perubahan" : "Tambah"}
+                    <Button type="submit" disabled={isUploading || createMutation.isPending || updateMutation.isPending}>
+                      {isUploading ? (
+                        <>
+                          <Upload className="h-4 w-4 mr-2 animate-spin" />
+                          Mengupload...
+                        </>
+                      ) : (
+                        editingTestimonial ? "Simpan Perubahan" : "Tambah"
+                      )}
                     </Button>
                   </div>
                 </form>
@@ -369,7 +507,7 @@ const TestimonialsAdmin = () => {
                         key={testimonial.id}
                         testimonial={testimonial}
                         onEdit={handleEdit}
-                        onDelete={(id) => deleteMutation.mutate(id)}
+                        onDelete={handleDelete}
                         onToggleActive={handleToggleActive}
                       />
                     ))}
