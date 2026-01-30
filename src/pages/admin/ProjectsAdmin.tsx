@@ -1,0 +1,615 @@
+import { useState, useRef } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useToast } from "@/components/ui/use-toast";
+import { 
+  Plus, 
+  ArrowLeft, 
+  Pencil, 
+  Trash2, 
+  Image as ImageIcon, 
+  FileQuestion, 
+  Quote,
+  Briefcase,
+  ExternalLink,
+  Star
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  full_description: string | null;
+  thumbnail_url: string | null;
+  client_name: string | null;
+  service_category: string;
+  technologies: string[];
+  results: string[];
+  live_url: string | null;
+  completion_date: string | null;
+  display_order: number;
+  is_featured: boolean;
+  is_active: boolean;
+  created_at: string;
+}
+
+const serviceCategories = [
+  "Web & App Development",
+  "Automation Bots",
+  "Digital Systems & API",
+  "Cloud & IT Support",
+  "Project-Based Services",
+];
+
+const ProjectsAdmin = () => {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    slug: "",
+    description: "",
+    full_description: "",
+    client_name: "",
+    service_category: "Web & App Development",
+    technologies: "",
+    results: "",
+    live_url: "",
+    completion_date: "",
+    is_featured: false,
+  });
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ["admin-projects"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .order("display_order", { ascending: true });
+
+      if (error) throw error;
+      return data as Project[];
+    },
+  });
+
+  const uploadThumbnail = async (file: File): Promise<string> => {
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${crypto.randomUUID()}.${fileExt}`;
+    
+    const { error: uploadError } = await supabase.storage
+      .from("projects")
+      .upload(fileName, file);
+    
+    if (uploadError) throw uploadError;
+    
+    const { data } = supabase.storage.from("projects").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
+  const deleteThumbnail = async (url: string) => {
+    if (url.includes("/projects/")) {
+      const fileName = url.split("/projects/").pop();
+      if (fileName) {
+        await supabase.storage.from("projects").remove([fileName]);
+      }
+    }
+  };
+
+  const createMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const maxOrder = projects?.length ? Math.max(...projects.map((p) => p.display_order)) : 0;
+      const { error } = await supabase.from("projects").insert({
+        ...data,
+        display_order: maxOrder + 1,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "Project berhasil ditambahkan" });
+      resetForm();
+    },
+    onError: (error) => {
+      toast({ title: "Gagal menambahkan project", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      const { error } = await supabase.from("projects").update(data).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "Project berhasil diperbarui" });
+      resetForm();
+    },
+    onError: (error) => {
+      toast({ title: "Gagal memperbarui project", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (project: Project) => {
+      if (project.thumbnail_url) {
+        await deleteThumbnail(project.thumbnail_url);
+      }
+      const { error } = await supabase.from("projects").delete().eq("id", project.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "Project berhasil dihapus" });
+    },
+    onError: (error) => {
+      toast({ title: "Gagal menghapus project", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      slug: "",
+      description: "",
+      full_description: "",
+      client_name: "",
+      service_category: "Web & App Development",
+      technologies: "",
+      results: "",
+      live_url: "",
+      completion_date: "",
+      is_featured: false,
+    });
+    setEditingProject(null);
+    setThumbnailFile(null);
+    setThumbnailPreview("");
+    setIsDialogOpen(false);
+  };
+
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .trim();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast({ title: "File terlalu besar", description: "Maksimal ukuran file 5MB", variant: "destructive" });
+        return;
+      }
+      setThumbnailFile(file);
+      setThumbnailPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsUploading(true);
+
+    try {
+      let thumbnailUrl = editingProject?.thumbnail_url || null;
+
+      if (thumbnailFile) {
+        if (editingProject?.thumbnail_url) {
+          await deleteThumbnail(editingProject.thumbnail_url);
+        }
+        thumbnailUrl = await uploadThumbnail(thumbnailFile);
+      }
+
+      const projectData = {
+        title: formData.title,
+        slug: formData.slug || generateSlug(formData.title),
+        description: formData.description,
+        full_description: formData.full_description || null,
+        client_name: formData.client_name || null,
+        service_category: formData.service_category,
+        technologies: formData.technologies.split(",").map((t) => t.trim()).filter(Boolean),
+        results: formData.results.split("\n").map((r) => r.trim()).filter(Boolean),
+        live_url: formData.live_url || null,
+        completion_date: formData.completion_date || null,
+        is_featured: formData.is_featured,
+        thumbnail_url: thumbnailUrl,
+      };
+
+      if (editingProject) {
+        await updateMutation.mutateAsync({ id: editingProject.id, data: projectData });
+      } else {
+        await createMutation.mutateAsync(projectData);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleEdit = (project: Project) => {
+    setEditingProject(project);
+    setFormData({
+      title: project.title,
+      slug: project.slug,
+      description: project.description,
+      full_description: project.full_description || "",
+      client_name: project.client_name || "",
+      service_category: project.service_category,
+      technologies: project.technologies.join(", "),
+      results: project.results.join("\n"),
+      live_url: project.live_url || "",
+      completion_date: project.completion_date || "",
+      is_featured: project.is_featured,
+    });
+    setThumbnailPreview(project.thumbnail_url || "");
+    setIsDialogOpen(true);
+  };
+
+  const handleToggleActive = (project: Project) => {
+    updateMutation.mutate({ id: project.id, data: { is_active: !project.is_active } });
+  };
+
+  const handleToggleFeatured = (project: Project) => {
+    updateMutation.mutate({ id: project.id, data: { is_featured: !project.is_featured } });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Memuat...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link to="/">
+              <Button variant="ghost" size="icon">
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold">Kelola Portfolio</h1>
+              <p className="text-muted-foreground">Tambah dan edit project portfolio</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <Link to="/admin/logos">
+              <Button variant="outline" size="sm">
+                <ImageIcon className="h-4 w-4 mr-2" />
+                Logo
+              </Button>
+            </Link>
+            <Link to="/admin/faq">
+              <Button variant="outline" size="sm">
+                <FileQuestion className="h-4 w-4 mr-2" />
+                FAQ
+              </Button>
+            </Link>
+            <Link to="/admin/testimonials">
+              <Button variant="outline" size="sm">
+                <Quote className="h-4 w-4 mr-2" />
+                Testimonial
+              </Button>
+            </Link>
+            <Dialog open={isDialogOpen} onOpenChange={(open) => {
+              if (!open) resetForm();
+              setIsDialogOpen(open);
+            }}>
+              <DialogTrigger asChild>
+                <Button onClick={() => resetForm()}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Tambah Project
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>
+                    {editingProject ? "Edit Project" : "Tambah Project Baru"}
+                  </DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Thumbnail */}
+                  <div className="space-y-2">
+                    <Label>Thumbnail</Label>
+                    <div className="flex items-start gap-4">
+                      <div className="w-32 h-20 rounded-lg border border-dashed border-border bg-muted/50 overflow-hidden flex items-center justify-center">
+                        {thumbnailPreview ? (
+                          <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover" />
+                        ) : (
+                          <ImageIcon className="w-8 h-8 text-muted-foreground/30" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <Input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="cursor-pointer"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">PNG, JPG. Max 5MB.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="title">Judul Project *</Label>
+                      <Input
+                        id="title"
+                        value={formData.title}
+                        onChange={(e) => {
+                          setFormData({ 
+                            ...formData, 
+                            title: e.target.value,
+                            slug: generateSlug(e.target.value)
+                          });
+                        }}
+                        placeholder="E-Commerce Platform"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="slug">Slug URL</Label>
+                      <Input
+                        id="slug"
+                        value={formData.slug}
+                        onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                        placeholder="ecommerce-platform"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="service_category">Kategori Layanan *</Label>
+                      <Select
+                        value={formData.service_category}
+                        onValueChange={(value) => setFormData({ ...formData, service_category: value })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {serviceCategories.map((cat) => (
+                            <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="client_name">Nama Klien</Label>
+                      <Input
+                        id="client_name"
+                        value={formData.client_name}
+                        onChange={(e) => setFormData({ ...formData, client_name: e.target.value })}
+                        placeholder="PT Example Indonesia"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="description">Deskripsi Singkat *</Label>
+                    <Textarea
+                      id="description"
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="Penjelasan singkat tentang project..."
+                      rows={2}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="full_description">Deskripsi Lengkap</Label>
+                    <Textarea
+                      id="full_description"
+                      value={formData.full_description}
+                      onChange={(e) => setFormData({ ...formData, full_description: e.target.value })}
+                      placeholder="Penjelasan detail tentang project, tantangan, dan solusi..."
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="technologies">Teknologi (pisahkan dengan koma)</Label>
+                      <Input
+                        id="technologies"
+                        value={formData.technologies}
+                        onChange={(e) => setFormData({ ...formData, technologies: e.target.value })}
+                        placeholder="React, Node.js, PostgreSQL"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="live_url">URL Live</Label>
+                      <Input
+                        id="live_url"
+                        value={formData.live_url}
+                        onChange={(e) => setFormData({ ...formData, live_url: e.target.value })}
+                        placeholder="https://example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="results">Hasil (satu per baris)</Label>
+                    <Textarea
+                      id="results"
+                      value={formData.results}
+                      onChange={(e) => setFormData({ ...formData, results: e.target.value })}
+                      placeholder="200% peningkatan konversi&#10;50% pengurangan biaya&#10;3x lipat traffic"
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="completion_date">Tanggal Selesai</Label>
+                      <Input
+                        id="completion_date"
+                        type="date"
+                        value={formData.completion_date}
+                        onChange={(e) => setFormData({ ...formData, completion_date: e.target.value })}
+                      />
+                    </div>
+                    <div className="flex items-center gap-4 pt-6">
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="is_featured"
+                          checked={formData.is_featured}
+                          onCheckedChange={(checked) => setFormData({ ...formData, is_featured: checked })}
+                        />
+                        <Label htmlFor="is_featured">Featured</Label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end gap-2 pt-4">
+                    <Button type="button" variant="outline" onClick={resetForm}>
+                      Batal
+                    </Button>
+                    <Button type="submit" disabled={isUploading}>
+                      {isUploading ? "Menyimpan..." : (editingProject ? "Simpan Perubahan" : "Tambah")}
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+
+        <div className="bg-card rounded-lg border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Project</TableHead>
+                <TableHead>Kategori</TableHead>
+                <TableHead className="w-24">Featured</TableHead>
+                <TableHead className="w-20">Aktif</TableHead>
+                <TableHead className="w-24 text-right">Aksi</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {projects && projects.length > 0 ? (
+                projects.map((project) => (
+                  <TableRow key={project.id}>
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <div className="w-16 h-10 rounded-lg bg-muted/50 overflow-hidden flex items-center justify-center">
+                          {project.thumbnail_url ? (
+                            <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" />
+                          ) : (
+                            <Briefcase className="w-4 h-4 text-muted-foreground/30" />
+                          )}
+                        </div>
+                        <div>
+                          <p className="font-medium">{project.title}</p>
+                          <p className="text-xs text-muted-foreground line-clamp-1">{project.description}</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-sm text-muted-foreground">{project.service_category}</span>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleToggleFeatured(project)}
+                        className={project.is_featured ? "text-yellow-500" : "text-muted-foreground"}
+                      >
+                        <Star className={`h-4 w-4 ${project.is_featured ? "fill-current" : ""}`} />
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={project.is_active}
+                        onCheckedChange={() => handleToggleActive(project)}
+                      />
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        {project.live_url && (
+                          <a href={project.live_url} target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="icon">
+                              <ExternalLink className="h-4 w-4" />
+                            </Button>
+                          </a>
+                        )}
+                        <Button variant="ghost" size="icon" onClick={() => handleEdit(project)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-destructive hover:text-destructive"
+                          onClick={() => {
+                            if (confirm("Apakah Anda yakin ingin menghapus project ini?")) {
+                              deleteMutation.mutate(project);
+                            }
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                    <Briefcase className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                    <p>Belum ada project. Klik "Tambah Project" untuk memulai.</p>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectsAdmin;

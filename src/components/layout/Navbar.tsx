@@ -2,18 +2,22 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import fusionifyLogo from "@/assets/fusionify-logo.png";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Services", href: "#services" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/#home" },
+  { name: "Services", href: "/#services" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "About", href: "/#about" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,24 +27,42 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-    
     setIsMobileMenuOpen(false);
-  }, []);
+
+    // Check if it's a hash link (section on homepage)
+    if (href.startsWith("/#")) {
+      const targetId = href.replace("/#", "");
+      
+      // If we're not on the homepage, navigate first then scroll
+      if (location.pathname !== "/") {
+        navigate("/");
+        // Wait for navigation then scroll
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            const navbarHeight = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+          }
+        }, 100);
+      } else {
+        // We're on homepage, just scroll
+        const element = document.getElementById(targetId);
+        if (element) {
+          const navbarHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+      }
+    } else {
+      // Regular link navigation
+      navigate(href);
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <motion.nav
@@ -56,9 +78,8 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo - Minimal like Covena */}
-          <a 
-            href="#home" 
-            onClick={(e) => scrollToSection(e, "#home")}
+          <Link 
+            to="/"
             className="flex items-center gap-2 group"
           >
             <motion.img 
@@ -70,7 +91,7 @@ export const Navbar = () => {
             <span className="font-display font-semibold text-lg text-foreground">
               fusionify
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation - Hidden on mobile, minimal like Covena */}
           <div className="hidden md:flex items-center gap-8">
@@ -78,7 +99,7 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.name}
@@ -88,12 +109,14 @@ export const Navbar = () => {
 
           {/* CTA Button - Covena style with arrow */}
           <div className="hidden md:block">
-            <Button 
-              className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
-            >
-              <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
-              Get started
-            </Button>
+            <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
+              <Button 
+                className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
+              >
+                <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
+                Get started
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,7 +145,7 @@ export const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
@@ -134,13 +157,15 @@ export const Navbar = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: 0.2 }}
+                transition={{ duration: 0.2, delay: 0.25 }}
                 className="pt-3"
               >
-                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full">
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Get started
-                </Button>
+                <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
+                  <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full">
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    Get started
+                  </Button>
+                </a>
               </motion.div>
             </div>
           </motion.div>

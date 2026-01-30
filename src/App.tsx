@@ -7,11 +7,14 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Portfolio from "./pages/Portfolio";
+import ProjectDetail from "./pages/ProjectDetail";
 import LogosAdmin from "./pages/admin/LogosAdmin";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminSignup from "./pages/admin/AdminSignup";
 import FAQAdmin from "./pages/admin/FAQAdmin";
 import TestimonialsAdmin from "./pages/admin/TestimonialsAdmin";
+import ProjectsAdmin from "./pages/admin/ProjectsAdmin";
 import WebDevelopment from "./pages/services/WebDevelopment";
 import AutomationBots from "./pages/services/AutomationBots";
 import DigitalSystems from "./pages/services/DigitalSystems";
@@ -29,6 +32,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:slug" element={<ProjectDetail />} />
             <Route path="/services/web-development" element={<WebDevelopment />} />
             <Route path="/services/automation-bots" element={<AutomationBots />} />
             <Route path="/services/digital-systems" element={<DigitalSystems />} />
@@ -57,6 +62,14 @@ const App = () => (
               element={
                 <ProtectedRoute requireAdmin>
                   <TestimonialsAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/projects"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <ProjectsAdmin />
                 </ProtectedRoute>
               }
             />

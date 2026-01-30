@@ -80,6 +80,72 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          client_logo_url: string | null
+          client_name: string | null
+          completion_date: string | null
+          created_at: string
+          description: string
+          display_order: number
+          full_description: string | null
+          id: string
+          images: string[] | null
+          is_active: boolean
+          is_featured: boolean
+          live_url: string | null
+          results: string[] | null
+          service_category: string
+          slug: string
+          technologies: string[] | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          client_logo_url?: string | null
+          client_name?: string | null
+          completion_date?: string | null
+          created_at?: string
+          description: string
+          display_order?: number
+          full_description?: string | null
+          id?: string
+          images?: string[] | null
+          is_active?: boolean
+          is_featured?: boolean
+          live_url?: string | null
+          results?: string[] | null
+          service_category: string
+          slug: string
+          technologies?: string[] | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          client_logo_url?: string | null
+          client_name?: string | null
+          completion_date?: string | null
+          created_at?: string
+          description?: string
+          display_order?: number
+          full_description?: string | null
+          id?: string
+          images?: string[] | null
+          is_active?: boolean
+          is_featured?: boolean
+          live_url?: string | null
+          results?: string[] | null
+          service_category?: string
+          slug?: string
+          technologies?: string[] | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           avatar_initials: string
