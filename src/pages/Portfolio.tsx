@@ -197,15 +197,31 @@ const Portfolio = () => {
                           ))}
                         </div>
 
-                        {/* Results */}
-                        {project.results.length > 0 && (
-                          <div className="pt-4 border-t border-border/30">
-                            <p className="text-xs text-muted-foreground mb-2">Key Results:</p>
-                            <div className="text-sm text-primary font-medium">
-                              {project.results[0]}
+                        {/* Results & Demo Button */}
+                        <div className="pt-4 border-t border-border/30 flex items-center justify-between gap-3">
+                          {project.results.length > 0 ? (
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-muted-foreground mb-1">Key Results:</p>
+                              <div className="text-sm text-primary font-medium truncate">
+                                {project.results[0]}
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          ) : (
+                            <div className="flex-1" />
+                          )}
+                          {project.live_url && (
+                            <a
+                              href={project.live_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/30 text-xs font-medium text-primary transition-colors flex-shrink-0"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              Live Demo
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </Link>
                   </motion.div>
@@ -264,15 +280,29 @@ const Portfolio = () => {
                         <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                           {project.description}
                         </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.technologies.slice(0, 3).map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-0.5 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground"
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex flex-wrap gap-1.5 flex-1 min-w-0">
+                            {project.technologies.slice(0, 3).map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-2 py-0.5 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                          {project.live_url && (
+                            <a
+                              href={project.live_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/30 text-xs font-medium text-primary transition-colors flex-shrink-0"
                             >
-                              {tech}
-                            </span>
-                          ))}
+                              <ExternalLink className="w-3 h-3" />
+                              Demo
+                            </a>
+                          )}
                         </div>
                       </div>
                     </Link>
