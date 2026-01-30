@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { LogoCarouselSection } from "@/components/sections/LogoCarouselSection";
 import { PainPointSection } from "@/components/sections/PainPointSection";
 import { AboutFusionifySection } from "@/components/sections/AboutFusionifySection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -20,6 +21,7 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <LogoCarouselSection />
         <PainPointSection />
         <AboutFusionifySection />
         <ServicesSection />
