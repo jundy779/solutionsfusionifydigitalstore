@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,51 +40,37 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-background relative">
-      {/* Subtle top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-      
+    <section id="contact" className="section-padding bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-20"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
             Contact Us
           </span>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground tracking-tight">
+          <h2 className="font-bold text-3xl md:text-4xl mb-4 text-foreground">
             Mari Berkolaborasi
           </h2>
-          <p className="text-muted-foreground content-width-sm text-lg leading-relaxed">
+          <p className="text-muted-foreground max-w-xl mx-auto">
             Punya proyek atau ide? Hubungi kami dan mari wujudkan bersama.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 content-width">
           {/* Left Column - Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl bg-card border border-border/80 p-8 lg:p-10 shadow-card"
+              className="rounded-xl bg-card border border-border p-6 lg:p-8"
             >
-              <h3 className="font-display font-semibold text-xl mb-8 text-foreground">
+              <h3 className="font-semibold text-lg mb-6 text-foreground">
                 Kirim Pesan
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-foreground mb-2.5"
+                    className="block text-sm font-medium text-foreground mb-2"
                   >
                     Nama Lengkap
                   </label>
@@ -97,14 +82,14 @@ export const ContactSection = () => {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
-                    className="bg-background border-border focus:border-primary h-12 rounded-xl"
+                    className="h-11"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-foreground mb-2.5"
+                    className="block text-sm font-medium text-foreground mb-2"
                   >
                     Email
                   </label>
@@ -117,79 +102,69 @@ export const ContactSection = () => {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                    className="bg-background border-border focus:border-primary h-12 rounded-xl"
+                    className="h-11"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-foreground mb-2.5"
+                    className="block text-sm font-medium text-foreground mb-2"
                   >
                     Pesan
                   </label>
                   <Textarea
                     id="message"
                     placeholder="Ceritakan tentang proyek Anda..."
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
                     required
-                    className="bg-background border-border focus:border-primary resize-none rounded-xl"
+                    className="resize-none"
                   />
                 </div>
 
-                <Button type="submit" variant="hero" size="lg" className="w-full h-12">
+                <Button type="submit" className="w-full h-11">
                   Kirim Pesan
                   <Send className="w-4 h-4" />
                 </Button>
               </div>
             </form>
-          </motion.div>
+          </div>
 
           {/* Right Column - Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center lg:pl-6"
-          >
-            <h3 className="font-display font-semibold text-2xl mb-4 text-foreground">
+          <div className="flex flex-col justify-center">
+            <h3 className="font-semibold text-xl mb-3 text-foreground">
               Informasi Kontak
             </h3>
-            <p className="text-muted-foreground mb-10 leading-relaxed text-[15px]">
+            <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
               Tim kami siap membantu Anda mencapai tujuan digital. 
               Jangan ragu untuk menghubungi kami melalui salah satu channel di bawah ini.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.a
+              {contactInfo.map((info) => (
+                <a
                   key={info.label}
                   href={info.href}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                  className="flex items-center gap-4 group p-5 rounded-xl bg-card border border-border/80 hover:border-primary/30 hover:shadow-soft transition-all duration-300"
+                  className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border hover:border-primary/40 transition-colors duration-200"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all duration-300">
-                    <info.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <info.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground mb-0.5">{info.label}</div>
-                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">
+                    <div className="text-xs text-muted-foreground">{info.label}</div>
+                    <div className="text-foreground font-medium text-sm">
                       {info.value}
                     </div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

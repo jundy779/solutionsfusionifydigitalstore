@@ -1,17 +1,3 @@
-import { 
-  Facebook, 
-  Instagram, 
-  Linkedin, 
-  Twitter 
-} from "lucide-react";
-
-const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-];
-
 const footerLinks = {
   Services: [
     { name: "Web & App Development", href: "#services" },
@@ -21,64 +7,43 @@ const footerLinks = {
   ],
   Company: [
     { name: "About Us", href: "#about" },
-    { name: "Careers", href: "#" },
     { name: "Contact", href: "#contact" },
-  ],
-  Legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
   ],
 };
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card/50">
-      <div className="container mx-auto px-4 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 content-width-lg">
+    <footer className="border-t border-border bg-card">
+      <div className="container mx-auto px-4 py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 content-width-lg">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-2.5 mb-6">
-              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
-                <span className="text-primary-foreground font-display font-bold text-xl">
-                  F
-                </span>
+            <a href="#home" className="flex items-center gap-2 mb-4">
+              <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">F</span>
               </div>
-              <span className="font-display font-bold text-xl text-foreground">
+              <span className="font-bold text-lg text-foreground">
                 Fusionify
               </span>
             </a>
-            <p className="text-muted-foreground mb-8 max-w-sm leading-relaxed text-[15px]">
+            <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
               Solusi digital inovatif untuk pertumbuhan bisnis Anda. 
               Bersama Fusionify, wujudkan transformasi digital yang berkelanjutan.
             </p>
-
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-secondary/80 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-muted-foreground"
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Links Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-display font-semibold text-foreground mb-5">
+              <h4 className="font-semibold text-foreground mb-4 text-sm">
                 {title}
               </h4>
-              <ul className="space-y-3.5">
+              <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-colors duration-200 text-[15px]"
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                     >
                       {link.name}
                     </a>
@@ -90,7 +55,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-14 lg:mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-border mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Fusionify Digital Solutions. All rights reserved.
           </p>
