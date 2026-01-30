@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
 
 const testimonials = [
   {
@@ -61,10 +60,6 @@ const testimonials = [
 ];
 
 export const TestimonialsSection = () => {
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
-  );
-
   return (
     <section className="section-padding bg-gradient-section-alt relative overflow-hidden">
       {/* Background decorations */}
@@ -103,7 +98,13 @@ export const TestimonialsSection = () => {
               align: "center",
               loop: true,
             }}
-            plugins={[autoplayPlugin.current]}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
             className="w-full"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
