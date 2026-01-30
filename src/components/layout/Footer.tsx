@@ -14,10 +14,10 @@ const socialLinks = [
 
 const footerLinks = {
   Services: [
-    { name: "Web Development", href: "#services" },
-    { name: "Mobile App", href: "#services" },
-    { name: "UI/UX Design", href: "#services" },
-    { name: "Digital Marketing", href: "#services" },
+    { name: "Web & App Development", href: "#services" },
+    { name: "Automation Bots", href: "#services" },
+    { name: "Digital Systems", href: "#services" },
+    { name: "Cloud & IT Support", href: "#services" },
   ],
   Company: [
     { name: "About Us", href: "#about" },
@@ -32,13 +32,13 @@ const footerLinks = {
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+    <footer className="border-t border-border bg-card/50">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 content-width-lg">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+            <a href="#home" className="flex items-center gap-2.5 mb-6">
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
                 <span className="text-primary-foreground font-display font-bold text-xl">
                   F
                 </span>
@@ -47,7 +47,7 @@ export const Footer = () => {
                 Fusionify
               </span>
             </a>
-            <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
+            <p className="text-muted-foreground mb-8 max-w-sm leading-relaxed text-[15px]">
               Solusi digital inovatif untuk pertumbuhan bisnis Anda. 
               Bersama Fusionify, wujudkan transformasi digital yang berkelanjutan.
             </p>
@@ -59,9 +59,9 @@ export const Footer = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-xl bg-secondary/80 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-muted-foreground"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
@@ -70,15 +70,15 @@ export const Footer = () => {
           {/* Links Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-display font-semibold text-foreground mb-4">
+              <h4 className="font-display font-semibold text-foreground mb-5">
                 {title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-3.5">
                 {links.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-200 text-[15px]"
                     >
                       {link.name}
                     </a>
@@ -90,7 +90,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-border mt-14 lg:mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Fusionify Digital Solutions. All rights reserved.
           </p>
