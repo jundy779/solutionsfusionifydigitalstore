@@ -16,7 +16,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -31,8 +30,24 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, HelpCircle } from "lucide-react";
+import { ArrowLeft, Plus, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { SortableFAQRow } from "@/components/admin/SortableFAQRow";
 
 interface FAQ {
   id: string;
@@ -55,6 +70,13 @@ const FAQAdmin = () => {
     display_order: 0,
     is_active: true,
   });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   // Fetch FAQs
   const { data: faqs, isLoading } = useQuery({
@@ -150,6 +172,41 @@ const FAQAdmin = () => {
       toast({ title: "Gagal mengubah status", description: error.message, variant: "destructive" });
     },
   });
+
+  // Reorder mutation for drag-and-drop
+  const reorderMutation = useMutation({
+    mutationFn: async (updates: { id: string; display_order: number }[]) => {
+      const promises = updates.map(({ id, display_order }) =>
+        supabase.from("faqs").update({ display_order }).eq("id", id)
+      );
+      const results = await Promise.all(promises);
+      const error = results.find((r) => r.error)?.error;
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-faqs"] });
+      toast({ title: "Urutan FAQ berhasil diperbarui" });
+    },
+    onError: (error: Error) => {
+      toast({ title: "Gagal mengubah urutan", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !faqs) return;
+
+    const oldIndex = faqs.findIndex((f) => f.id === active.id);
+    const newIndex = faqs.findIndex((f) => f.id === over.id);
+
+    const newOrder = arrayMove(faqs, oldIndex, newIndex);
+    const updates = newOrder.map((faq, index) => ({
+      id: faq.id,
+      display_order: index + 1,
+    }));
+
+    reorderMutation.mutate(updates);
+  };
 
   const resetForm = () => {
     setFormData({
@@ -279,6 +336,69 @@ const FAQAdmin = () => {
                 </form>
               </DialogContent>
             </Dialog>
+
+            {/* Edit Dialog */}
+            <Dialog open={!!editingFaq} onOpenChange={(open) => !open && closeDialog()}>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Edit FAQ</DialogTitle>
+                  <DialogDescription>
+                    Ubah pertanyaan dan jawaban
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="edit-question">Pertanyaan</Label>
+                    <Input
+                      id="edit-question"
+                      value={formData.question}
+                      onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                      placeholder="Masukkan pertanyaan"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="edit-answer">Jawaban</Label>
+                    <Textarea
+                      id="edit-answer"
+                      value={formData.answer}
+                      onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
+                      placeholder="Masukkan jawaban"
+                      rows={4}
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="edit-display_order">Urutan</Label>
+                      <Input
+                        id="edit-display_order"
+                        type="number"
+                        value={formData.display_order}
+                        onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) })}
+                        min={0}
+                      />
+                    </div>
+                    <div className="flex items-center space-x-2 pt-6">
+                      <Switch
+                        id="edit-is_active"
+                        checked={formData.is_active}
+                        onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
+                      />
+                      <Label htmlFor="edit-is_active">Aktif</Label>
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="button" variant="outline" onClick={closeDialog}>
+                      Batal
+                    </Button>
+                    <Button type="submit" disabled={updateMutation.isPending}>
+                      {updateMutation.isPending ? "Menyimpan..." : "Simpan"}
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
           </CardHeader>
           <CardContent>
             {isLoading ? (
@@ -288,130 +408,40 @@ const FAQAdmin = () => {
                 Belum ada FAQ. Klik "Tambah FAQ" untuk menambahkan.
               </div>
             ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-12">#</TableHead>
-                    <TableHead>Pertanyaan</TableHead>
-                    <TableHead className="w-24">Status</TableHead>
-                    <TableHead className="w-32 text-right">Aksi</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {faqs?.map((faq) => (
-                    <TableRow key={faq.id}>
-                      <TableCell className="font-medium">
-                        <div className="flex items-center gap-2">
-                          <GripVertical className="h-4 w-4 text-muted-foreground" />
-                          {faq.display_order}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium line-clamp-1">{faq.question}</p>
-                          <p className="text-sm text-muted-foreground line-clamp-1">
-                            {faq.answer}
-                          </p>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Switch
-                          checked={faq.is_active}
-                          onCheckedChange={(checked) =>
-                            toggleActiveMutation.mutate({ id: faq.id, is_active: checked })
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+              >
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-12">#</TableHead>
+                      <TableHead>Pertanyaan</TableHead>
+                      <TableHead className="w-24">Status</TableHead>
+                      <TableHead className="w-32 text-right">Aksi</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext
+                      items={faqs?.map((f) => f.id) || []}
+                      strategy={verticalListSortingStrategy}
+                    >
+                      {faqs?.map((faq) => (
+                        <SortableFAQRow
+                          key={faq.id}
+                          faq={faq}
+                          onEdit={openEditDialog}
+                          onDelete={(id) => deleteMutation.mutate(id)}
+                          onToggleActive={(id, is_active) =>
+                            toggleActiveMutation.mutate({ id, is_active })
                           }
                         />
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Dialog open={editingFaq?.id === faq.id} onOpenChange={(open) => !open && closeDialog()}>
-                            <DialogTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => openEditDialog(faq)}
-                              >
-                                <Pencil className="h-4 w-4" />
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-w-2xl">
-                              <DialogHeader>
-                                <DialogTitle>Edit FAQ</DialogTitle>
-                                <DialogDescription>
-                                  Ubah pertanyaan dan jawaban
-                                </DialogDescription>
-                              </DialogHeader>
-                              <form onSubmit={handleSubmit} className="space-y-4">
-                                <div className="space-y-2">
-                                  <Label htmlFor="edit-question">Pertanyaan</Label>
-                                  <Input
-                                    id="edit-question"
-                                    value={formData.question}
-                                    onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                                    placeholder="Masukkan pertanyaan"
-                                    required
-                                  />
-                                </div>
-                                <div className="space-y-2">
-                                  <Label htmlFor="edit-answer">Jawaban</Label>
-                                  <Textarea
-                                    id="edit-answer"
-                                    value={formData.answer}
-                                    onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                                    placeholder="Masukkan jawaban"
-                                    rows={4}
-                                    required
-                                  />
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                  <div className="space-y-2">
-                                    <Label htmlFor="edit-display_order">Urutan</Label>
-                                    <Input
-                                      id="edit-display_order"
-                                      type="number"
-                                      value={formData.display_order}
-                                      onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) })}
-                                      min={0}
-                                    />
-                                  </div>
-                                  <div className="flex items-center space-x-2 pt-6">
-                                    <Switch
-                                      id="edit-is_active"
-                                      checked={formData.is_active}
-                                      onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
-                                    />
-                                    <Label htmlFor="edit-is_active">Aktif</Label>
-                                  </div>
-                                </div>
-                                <DialogFooter>
-                                  <Button type="button" variant="outline" onClick={closeDialog}>
-                                    Batal
-                                  </Button>
-                                  <Button type="submit" disabled={updateMutation.isPending}>
-                                    {updateMutation.isPending ? "Menyimpan..." : "Simpan"}
-                                  </Button>
-                                </DialogFooter>
-                              </form>
-                            </DialogContent>
-                          </Dialog>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="text-destructive hover:text-destructive"
-                            onClick={() => {
-                              if (confirm("Apakah Anda yakin ingin menghapus FAQ ini?")) {
-                                deleteMutation.mutate(faq.id);
-                              }
-                            }}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             )}
           </CardContent>
         </Card>
