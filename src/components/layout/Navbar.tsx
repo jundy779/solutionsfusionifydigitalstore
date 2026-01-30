@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import fusionifyLogo from "@/assets/fusionify-logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -37,12 +38,12 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-18 md:h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2.5 group">
-            <motion.div 
-              className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:glow-primary transition-all duration-300"
+            <motion.img 
+              src={fusionifyLogo}
+              alt="Fusionify Logo"
+              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
               whileHover={{ scale: 1.05 }}
-            >
-              <span className="text-primary-foreground font-bold text-xl">F</span>
-            </motion.div>
+            />
             <span className="font-display font-bold text-xl text-foreground">
               Fusionify
             </span>
