@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Cpu, Database, Workflow, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, Cpu, Database, Workflow, Zap, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const FloatingShape = ({ className, delay = 0, children }: { className?: string; delay?: number; children?: React.ReactNode }) => (
@@ -180,9 +180,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Fusionify Digital Solutions helps businesses, UMKM, and individuals build 
-            modern websites, automation systems, digital platforms, and cloud infrastructure 
-            that grow with you.
+            Helping businesses grow with automation systems, digital platforms, 
+            and scalable technology solutions that drive real results.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -197,7 +196,8 @@ export const HeroSection = () => {
               <ArrowRight className="w-5 h-5" />
             </Button>
             <Button variant="outline" size="lg" className="h-14 px-8 text-base glass border-border/50">
-              Explore Solutions
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Contact Us
             </Button>
           </motion.div>
 
@@ -206,13 +206,13 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-8 md:gap-16 pt-8 border-t border-border/30"
+            className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16 pt-8 border-t border-border/30"
           >
             {[
               { value: "100+", label: "Projects Delivered" },
               { value: "50+", label: "Happy Clients" },
               { value: "99%", label: "Satisfaction Rate" },
-              { value: "24/7", label: "Support Available" },
+              { value: "24/7", label: "Support" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

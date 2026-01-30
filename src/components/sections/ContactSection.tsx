@@ -10,14 +10,13 @@ export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Your message has been sent! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -38,7 +37,7 @@ export const ContactSection = () => {
             <span className="text-gradient"> Something Great</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            Ready to start your project? Get in touch with us today.
+            Ready to start your digital transformation? Get in touch today.
           </p>
         </motion.div>
 
@@ -53,35 +52,23 @@ export const ContactSection = () => {
           >
             <h3 className="font-display font-semibold text-xl mb-6">Send us a message</h3>
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm text-muted-foreground mb-2">Name</label>
-                  <Input 
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="bg-secondary/50 border-border/50 focus:border-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm text-muted-foreground mb-2">Email</label>
-                  <Input 
-                    type="email" 
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="bg-secondary/50 border-border/50 focus:border-primary"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm text-muted-foreground mb-2">Name</label>
+                <Input 
+                  placeholder="Your name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="bg-secondary/50 border-border/50 focus:border-primary"
+                />
               </div>
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">Subject</label>
+                <label className="block text-sm text-muted-foreground mb-2">Email</label>
                 <Input 
-                  placeholder="Project inquiry"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  type="email" 
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                   className="bg-secondary/50 border-border/50 focus:border-primary"
                 />
@@ -158,6 +145,16 @@ export const ContactSection = () => {
                 We typically respond within 24 hours. For urgent inquiries, 
                 please reach out via WhatsApp.
               </p>
+            </div>
+
+            {/* Social Proof */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 border border-border/50">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-gradient-blue mb-2">50+</div>
+                <p className="text-sm text-muted-foreground">
+                  Satisfied clients across Indonesia
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
