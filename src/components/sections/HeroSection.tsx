@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, ShieldCheck, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const trustBadges = [
+  { icon: ShieldCheck, label: "Secure Process" },
+  { icon: Zap, label: "Fast Response" },
+  { icon: Users, label: "Professional Team" },
+];
 
 const FloatingShape = ({ 
   className, 
@@ -248,6 +254,32 @@ export const HeroSection = () => {
                 <div className="text-sm text-muted-foreground mt-1">
                   {stat.label}
                 </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.2 }}
+            className="flex flex-wrap justify-center gap-6 md:gap-8 mt-12 pt-8 border-t border-border/50"
+          >
+            {trustBadges.map((badge, index) => (
+              <motion.div
+                key={badge.label}
+                className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-card/80 border border-border hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 cursor-default"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 1.3 + index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+              >
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                  <badge.icon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium text-foreground">
+                  {badge.label}
+                </span>
               </motion.div>
             ))}
           </motion.div>
