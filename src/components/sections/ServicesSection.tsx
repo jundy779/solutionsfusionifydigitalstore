@@ -90,12 +90,17 @@ export const ServicesSection = () => {
             <motion.div
               key={service.title}
               variants={itemVariants}
-              className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-card transition-all duration-300"
+              whileHover={{ 
+                y: -8, 
+                scale: 1.02,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
+              className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/40 hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
-                <service.icon className="w-7 h-7 text-primary" />
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
               </div>
-              <h3 className="font-display font-semibold text-xl mb-3 text-foreground">
+              <h3 className="font-display font-semibold text-xl mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
                 {service.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
