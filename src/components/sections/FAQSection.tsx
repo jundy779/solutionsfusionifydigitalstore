@@ -1,48 +1,37 @@
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const faqs = [
-  {
-    question: "Apa saja layanan yang ditawarkan Fusionify?",
-    answer: "Fusionify menyediakan layanan lengkap transformasi digital termasuk Web & App Development, Automation Bots (WhatsApp & Telegram), Digital Systems & API Integration, Cloud & IT Support, serta Project-Based Services seperti MVP Development dan System Audit.",
-  },
-  {
-    question: "Berapa lama waktu pengerjaan project?",
-    answer: "Waktu pengerjaan bervariasi tergantung kompleksitas project. Website landing page biasanya 1-2 minggu, aplikasi web custom 4-8 minggu, dan sistem enterprise 2-4 bulan. Kami akan memberikan timeline detail setelah konsultasi awal.",
-  },
-  {
-    question: "Apakah ada garansi untuk layanan yang diberikan?",
-    answer: "Ya, kami memberikan garansi maintenance selama 30 hari setelah project selesai. Selama periode ini, kami akan memperbaiki bug atau issue tanpa biaya tambahan. Untuk support jangka panjang, tersedia paket maintenance bulanan.",
-  },
-  {
-    question: "Bagaimana proses kerja sama dengan Fusionify?",
-    answer: "Proses dimulai dengan konsultasi gratis untuk memahami kebutuhan Anda. Kemudian kami menyiapkan proposal dan timeline. Setelah deal, kami mulai development dengan update progress berkala. Project diserahkan setelah testing dan approval Anda.",
-  },
-  {
-    question: "Apakah Fusionify menerima project dari luar Indonesia?",
-    answer: "Tentu! Kami melayani klien dari berbagai negara. Komunikasi bisa dilakukan dalam Bahasa Indonesia atau English melalui video call, WhatsApp, atau email sesuai preferensi Anda.",
-  },
-  {
-    question: "Berapa biaya untuk membuat aplikasi atau website?",
-    answer: "Biaya tergantung pada scope dan fitur yang dibutuhkan. Kami menawarkan berbagai paket mulai dari landing page hingga sistem enterprise. Hubungi kami untuk konsultasi gratis dan dapatkan penawaran yang sesuai dengan budget Anda.",
-  },
-  {
-    question: "Apakah saya bisa request revisi selama pengerjaan?",
-    answer: "Ya, revisi adalah bagian dari proses development kami. Setiap milestone akan di-review bersama dan Anda bisa memberikan feedback. Jumlah revisi yang termasuk dalam paket akan dijelaskan di proposal.",
-  },
-  {
-    question: "Teknologi apa yang digunakan Fusionify?",
-    answer: "Kami menggunakan teknologi modern seperti React, Next.js, Node.js, Python, dan berbagai cloud platform (AWS, Google Cloud, Supabase). Pemilihan tech stack disesuaikan dengan kebutuhan project untuk hasil optimal.",
-  },
-];
+interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  display_order: number;
+}
 
 export const FAQSection = () => {
+  const { data: faqs, isLoading } = useQuery({
+    queryKey: ["faqs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("faqs")
+        .select("id, question, answer, display_order")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+
+      if (error) throw error;
+      return data as FAQ[];
+    },
+  });
+
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
       {/* Subtle background glow */}
@@ -92,22 +81,32 @@ export const FAQSection = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="max-w-3xl mx-auto"
         >
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border border-border/50 rounded-xl bg-card/50 backdrop-blur-sm px-6 data-[state=open]:border-primary/30 transition-colors"
-              >
-                <AccordionTrigger className="text-left text-foreground hover:text-primary transition-colors py-5 text-base font-medium [&[data-state=open]>svg]:text-primary">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          {isLoading ? (
+            <div className="space-y-3">
+              {[...Array(5)].map((_, i) => (
+                <Skeleton key={i} className="h-16 rounded-xl" />
+              ))}
+            </div>
+          ) : faqs && faqs.length > 0 ? (
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id}
+                  className="border border-border/50 rounded-xl bg-card/50 backdrop-blur-sm px-6 data-[state=open]:border-primary/30 transition-colors"
+                >
+                  <AccordionTrigger className="text-left text-foreground hover:text-primary transition-colors py-5 text-base font-medium [&[data-state=open]>svg]:text-primary">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          ) : (
+            <p className="text-center text-muted-foreground">Belum ada FAQ tersedia.</p>
+          )}
         </motion.div>
 
         {/* Bottom CTA */}
