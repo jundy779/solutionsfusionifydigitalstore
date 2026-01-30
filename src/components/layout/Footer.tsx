@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { 
   Facebook, 
   Instagram, 
@@ -22,47 +21,45 @@ const footerLinks = {
   ],
   Company: [
     { name: "About Us", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
     { name: "Careers", href: "#" },
     { name: "Contact", href: "#contact" },
   ],
   Legal: [
     { name: "Privacy Policy", href: "#" },
     { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
   ],
 };
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card/50">
+    <footer className="border-t border-border bg-card">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <a href="#home" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
                 <span className="text-primary-foreground font-display font-bold text-xl">
                   F
                 </span>
               </div>
               <span className="font-display font-bold text-xl text-foreground">
-                FUSIONIFY
+                Fusionify
               </span>
             </a>
-            <p className="text-muted-foreground mb-6 max-w-sm">
-              Transformasi digital bisnis Anda bersama FUSIONIFY DIGITAL SOLUTIONS. 
-              Solusi inovatif untuk pertumbuhan yang berkelanjutan.
+            <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
+              Solusi digital inovatif untuk pertumbuhan bisnis Anda. 
+              Bersama Fusionify, wujudkan transformasi digital yang berkelanjutan.
             </p>
 
             {/* Social Links */}
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -95,7 +92,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} PT FUSIONIFY DIGITAL STORE. All rights reserved.
+            © {new Date().getFullYear()} Fusionify Digital Solutions. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm">
             Made with ❤️ in Indonesia

@@ -41,68 +41,44 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-glow opacity-30" />
+    <section id="contact" className="py-24 bg-background">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            Contact Us
+          </span>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 text-foreground">
+            Mari Berkolaborasi
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Punya proyek atau ide? Hubungi kami dan mari wujudkan bersama.
+          </p>
+        </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Left Column - Info */}
+        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          {/* Left Column - Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-              Contact Us
-            </span>
-            <h2 className="font-display font-bold text-3xl md:text-5xl mt-4 mb-6">
-              Mari <span className="text-gradient">Berkolaborasi</span>
-            </h2>
-            <p className="text-muted-foreground text-lg mb-10">
-              Punya proyek atau ide? Hubungi kami dan mari wujudkan bersama. 
-              Tim kami siap membantu Anda mencapai tujuan digital.
-            </p>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              {contactInfo.map((info) => (
-                <a
-                  key={info.label}
-                  href={info.href}
-                  className="flex items-center gap-4 group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <info.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">{info.label}</div>
-                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">
-                      {info.value}
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Column - Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl bg-gradient-card border border-border p-8 shadow-elevated"
+              className="rounded-2xl bg-card border border-border p-8 shadow-card"
             >
               <h3 className="font-display font-semibold text-xl mb-6 text-foreground">
                 Kirim Pesan
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
                   <label
                     htmlFor="name"
@@ -118,7 +94,7 @@ export const ContactSection = () => {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
-                    className="bg-secondary/50 border-border focus:border-primary"
+                    className="bg-background border-border focus:border-primary rounded-xl"
                   />
                 </div>
 
@@ -138,7 +114,7 @@ export const ContactSection = () => {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                    className="bg-secondary/50 border-border focus:border-primary"
+                    className="bg-background border-border focus:border-primary rounded-xl"
                   />
                 </div>
 
@@ -158,7 +134,7 @@ export const ContactSection = () => {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     required
-                    className="bg-secondary/50 border-border focus:border-primary resize-none"
+                    className="bg-background border-border focus:border-primary resize-none rounded-xl"
                   />
                 </div>
 
@@ -168,6 +144,44 @@ export const ContactSection = () => {
                 </Button>
               </div>
             </form>
+          </motion.div>
+
+          {/* Right Column - Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col justify-center"
+          >
+            <h3 className="font-display font-semibold text-2xl mb-6 text-foreground">
+              Informasi Kontak
+            </h3>
+            <p className="text-muted-foreground mb-8 leading-relaxed">
+              Tim kami siap membantu Anda mencapai tujuan digital. 
+              Jangan ragu untuk menghubungi kami melalui salah satu channel di bawah ini.
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-5">
+              {contactInfo.map((info) => (
+                <a
+                  key={info.label}
+                  href={info.href}
+                  className="flex items-center gap-4 group p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-soft transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <info.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-muted-foreground">{info.label}</div>
+                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">
+                      {info.value}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
