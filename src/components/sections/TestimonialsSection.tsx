@@ -6,7 +6,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -61,37 +60,52 @@ const testimonials = [
 
 export const TestimonialsSection = () => {
   return (
-    <section className="section-padding bg-gradient-section-alt relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 mesh-gradient opacity-30" />
-      <div className="absolute top-20 left-10 w-64 h-64 orb-3d opacity-20 animate-float-slow" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 orb-dark opacity-15 animate-float" />
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]"
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            background: "radial-gradient(circle, hsl(265 75% 55% / 0.08) 0%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
+        />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Testimonials
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+            <Quote className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-muted-foreground">Testimonials</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
             Apa Kata <span className="text-gradient">Klien Kami</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             Dengarkan langsung dari bisnis yang telah bertransformasi bersama Fusionify
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-5xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
           <Carousel
             opts={{
@@ -100,60 +114,58 @@ export const TestimonialsSection = () => {
             }}
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: 4000,
                 stopOnInteraction: false,
                 stopOnMouseEnter: true,
               }),
             ]}
             className="w-full"
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="-ml-3 md:-ml-4">
               {testimonials.map((testimonial, index) => (
                 <CarouselItem
                   key={index}
-                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2"
+                  className="pl-3 md:pl-4 md:basis-1/2"
                 >
-                  <Card className="cinematic-card h-full border-0">
-                    <CardContent className="p-6 md:p-8 h-full flex flex-col">
-                      {/* Quote icon */}
-                      <div className="mb-4">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                          <Quote className="w-5 h-5 text-primary" />
-                        </div>
+                  <div className="h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
+                    {/* Quote icon */}
+                    <div className="mb-4">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <Quote className="w-4 h-4 text-primary" />
                       </div>
+                    </div>
 
-                      {/* Quote text */}
-                      <p className="text-foreground/90 text-base md:text-lg leading-relaxed mb-6 flex-grow">
-                        "{testimonial.quote}"
-                      </p>
+                    {/* Quote text */}
+                    <p className="text-foreground/90 text-sm md:text-base leading-relaxed mb-5">
+                      "{testimonial.quote}"
+                    </p>
 
-                      {/* Author info */}
-                      <div className="flex items-center gap-4 pt-4 border-t border-border/30">
-                        <Avatar className="w-12 h-12 ring-2 ring-primary/20">
-                          <AvatarImage
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                          />
-                          <AvatarFallback className="bg-primary/20 text-primary font-semibold">
-                            {testimonial.avatar}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <h4 className="font-semibold text-foreground">
-                            {testimonial.name}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">
-                            {testimonial.role} • {testimonial.company}
-                          </p>
-                        </div>
+                    {/* Author info */}
+                    <div className="flex items-center gap-3 pt-4 border-t border-border/30">
+                      <Avatar className="w-10 h-10 ring-2 ring-primary/10">
+                        <AvatarImage
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                        />
+                        <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
+                          {testimonial.avatar}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h4 className="font-medium text-foreground text-sm">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-xs text-muted-foreground">
+                          {testimonial.role} • {testimonial.company}
+                        </p>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12 bg-card/80 border-primary/20 hover:bg-primary/20 hover:border-primary/40" />
-            <CarouselNext className="hidden md:flex -right-4 lg:-right-12 bg-card/80 border-primary/20 hover:bg-primary/20 hover:border-primary/40" />
+            <CarouselPrevious className="hidden md:flex -left-4 lg:-left-10 bg-card/80 border-border/50 hover:bg-primary/10 hover:border-primary/30" />
+            <CarouselNext className="hidden md:flex -right-4 lg:-right-10 bg-card/80 border-border/50 hover:bg-primary/10 hover:border-primary/30" />
           </Carousel>
         </motion.div>
       </div>

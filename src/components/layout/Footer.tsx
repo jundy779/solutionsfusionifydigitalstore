@@ -29,44 +29,44 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border/20 bg-gradient-section">
-      <div className="container mx-auto px-4 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 content-width-lg">
+    <footer className="border-t border-border/30 bg-background">
+      <div className="container mx-auto px-4 py-14 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 max-w-6xl mx-auto">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
             >
-              <a href="#home" className="flex items-center gap-3 mb-6 group">
+              <a href="#home" className="flex items-center gap-2 mb-5 group">
                 <img 
                   src={fusionifyLogo}
-                  alt="Fusionify Logo"
-                  className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
+                  alt="Fusionify"
+                  className="w-8 h-8 object-contain"
                 />
-                <span className="font-display font-bold text-xl text-foreground">
-                  Fusionify
+                <span className="font-display font-semibold text-lg text-foreground">
+                  fusionify
                 </span>
               </a>
-              <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-8">
+              <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
                 Your trusted partner for digital transformation. Building scalable 
                 solutions for Indonesian businesses and beyond.
               </p>
               
               {/* Social Links */}
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 {socialLinks.map((social) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-xl bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-300"
+                    className="w-9 h-9 rounded-lg bg-muted/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
                     whileHover={{ y: -2 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-4 h-4" />
                   </motion.a>
                 ))}
               </div>
@@ -80,12 +80,12 @@ export const Footer = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
             >
-              <h4 className="font-display font-semibold text-foreground mb-5 text-sm">
+              <h4 className="font-display font-semibold text-foreground mb-4 text-sm">
                 {title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
                     <a
@@ -106,20 +106,15 @@ export const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="border-t border-border/20 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="border-t border-border/30 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-xs">
             © {new Date().getFullYear()} PT Fusionify Digital Store. All rights reserved.
           </p>
-          <p className="text-muted-foreground text-sm flex items-center gap-2">
+          <p className="text-muted-foreground text-xs flex items-center gap-1.5">
             <span>Made with</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              ❤️
-            </motion.span>
+            <span>❤️</span>
             <span>in Indonesia</span>
           </p>
         </motion.div>
