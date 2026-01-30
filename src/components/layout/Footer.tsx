@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import fusionifyLogo from "@/assets/fusionify-logo.png";
 
 const footerLinks = {
   Services: [
@@ -40,9 +41,11 @@ export const Footer = () => {
               transition={{ duration: 0.6 }}
             >
               <a href="#home" className="flex items-center gap-3 mb-6 group">
-                <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:glow-primary transition-shadow">
-                  <span className="text-primary-foreground font-bold text-xl">F</span>
-                </div>
+                <img 
+                  src={fusionifyLogo}
+                  alt="Fusionify Logo"
+                  className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
+                />
                 <span className="font-display font-bold text-xl text-foreground">
                   Fusionify
                 </span>
