@@ -74,13 +74,13 @@ export const PartnerLogosSection = () => {
           {duplicatedLogos.map((logo, index) => (
             <div
               key={`${logo.id}-${index}`}
-              className="flex-shrink-0 flex items-center gap-3 opacity-30 hover:opacity-60 transition-opacity duration-300"
+              className="flex-shrink-0 flex items-center gap-3 opacity-40 hover:opacity-80 transition-all duration-300 group"
             >
               {logo.logo_url ? (
                 <img 
                   src={logo.logo_url} 
                   alt={`${logo.name} logo`}
-                  className="h-8 w-auto object-contain grayscale"
+                  className="h-8 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                 />
               ) : (
                 <div className="w-9 h-9 rounded-lg bg-foreground/10 flex items-center justify-center">
