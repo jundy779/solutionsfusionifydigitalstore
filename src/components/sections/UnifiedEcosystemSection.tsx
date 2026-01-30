@@ -1,44 +1,45 @@
 import { motion } from "framer-motion";
-import { Bot, Store, CreditCard, Cloud, ArrowRight, Zap } from "lucide-react";
+import { Bot, Store, CreditCard, Shield, ArrowRight, Zap } from "lucide-react";
 
 const ecosystemSteps = [
   {
     icon: Bot,
-    title: "Automation",
-    subtitle: "Intelligent Bots",
-    description: "Automate customer interactions, orders, and workflows",
-    color: "from-blue-500/20 to-cyan-500/20",
+    title: "Automation Systems",
+    subtitle: "Fusionify Bot",
+    description: "Intelligent automation platform for business workflows",
+    color: "from-blue-500/20 to-cyan-500/10",
     glowColor: "bg-blue-500/30",
   },
   {
     icon: Store,
-    title: "Store",
-    subtitle: "Digital Products",
-    description: "Sell digital products, templates, and services",
-    color: "from-purple-500/20 to-pink-500/20",
+    title: "Digital Marketplace",
+    subtitle: "Fusionify Store",
+    description: "Digital products and services marketplace",
+    color: "from-purple-500/20 to-pink-500/10",
     glowColor: "bg-purple-500/30",
   },
   {
     icon: CreditCard,
-    title: "Payment",
-    subtitle: "Gateway Integration",
-    description: "Process payments seamlessly across platforms",
-    color: "from-green-500/20 to-emerald-500/20",
+    title: "Payment Gateway",
+    subtitle: "FTVPay",
+    description: "Seamless payment processing (coming soon)",
+    color: "from-green-500/20 to-emerald-500/10",
     glowColor: "bg-green-500/30",
+    comingSoon: true,
   },
   {
-    icon: Cloud,
-    title: "Cloud",
-    subtitle: "Infrastructure",
-    description: "Scale infinitely with enterprise-grade hosting",
-    color: "from-orange-500/20 to-amber-500/20",
+    icon: Shield,
+    title: "VPN Infrastructure",
+    subtitle: "Fusionify Tempest",
+    description: "Secure, high-speed VPN services",
+    color: "from-orange-500/20 to-amber-500/10",
     glowColor: "bg-orange-500/30",
   },
 ];
 
-export const EcosystemFlowSection = () => {
+export const UnifiedEcosystemSection = () => {
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
+    <section className="section-padding bg-gradient-section relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -54,15 +55,15 @@ export const EcosystemFlowSection = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
-            Connected Ecosystem
+            Our Ecosystem
           </span>
           <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4">
             One Unified
             <span className="text-gradient"> Digital Flow</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Our integrated ecosystem connects every aspect of your digital business, 
-            from automation to payments, creating a seamless operational flow.
+            Fusionify connects automation, systems, payments, and digital services 
+            into one seamless ecosystem for your business
           </p>
         </motion.div>
 
@@ -82,13 +83,18 @@ export const EcosystemFlowSection = () => {
                   <div className={`absolute inset-0 rounded-3xl ${step.glowColor} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   
                   <div className={`relative w-56 p-6 rounded-3xl bg-gradient-to-br ${step.color} border border-border/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-300`}>
+                    {step.comingSoon && (
+                      <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-primary text-xs font-medium text-primary-foreground">
+                        Soon
+                      </span>
+                    )}
                     <div className="w-14 h-14 rounded-2xl bg-card/80 flex items-center justify-center mb-4 border border-border/50">
                       <step.icon className="w-7 h-7 text-primary" />
                     </div>
                     <div className="text-xs text-primary font-medium uppercase tracking-wider mb-1">
                       {step.subtitle}
                     </div>
-                    <h3 className="font-display font-bold text-xl text-foreground mb-2">
+                    <h3 className="font-display font-bold text-lg text-foreground mb-2">
                       {step.title}
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -143,6 +149,11 @@ export const EcosystemFlowSection = () => {
               className="relative"
             >
               <div className={`p-5 rounded-2xl bg-gradient-to-br ${step.color} border border-border/50`}>
+                {step.comingSoon && (
+                  <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-primary text-xs font-medium text-primary-foreground">
+                    Soon
+                  </span>
+                )}
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-card/80 flex items-center justify-center flex-shrink-0 border border-border/50">
                     <step.icon className="w-6 h-6 text-primary" />

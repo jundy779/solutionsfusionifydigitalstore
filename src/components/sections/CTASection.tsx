@@ -54,19 +54,19 @@ export const CTASection = () => {
             <span className="text-gradient">Into a Digital Powerhouse</span>
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto">
-            Join 50+ businesses that have already automated their operations, 
-            scaled their systems, and accelerated their growth with Fusionify.
+            Join 50+ businesses that have automated their operations, 
+            scaled their systems, and accelerated growth with Fusionify.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" className="h-14 px-8 text-base glow-primary group">
               <Rocket className="w-5 h-5 mr-2 group-hover:animate-pulse" />
-              Start Your Project
+              Get Started
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button variant="outline" size="lg" className="h-14 px-8 text-base glass border-border/50">
               <MessageCircle className="w-5 h-5 mr-2" />
-              Schedule a Call
+              Talk to Us
             </Button>
           </div>
 

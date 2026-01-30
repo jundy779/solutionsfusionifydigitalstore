@@ -1,14 +1,13 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { TrustedBySection } from "@/components/sections/TrustedBySection";
-import { ProblemSolutionSection } from "@/components/sections/ProblemSolutionSection";
+import { PainPointSection } from "@/components/sections/PainPointSection";
+import { AboutFusionifySection } from "@/components/sections/AboutFusionifySection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
-import { EcosystemFlowSection } from "@/components/sections/EcosystemFlowSection";
-import { WhyDifferentSection } from "@/components/sections/WhyDifferentSection";
-import { WhyFusionifySection } from "@/components/sections/WhyFusionifySection";
-import { ProductEcosystemSection } from "@/components/sections/ProductEcosystemSection";
-import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
-import { AboutSection } from "@/components/sections/AboutSection";
+import { UnifiedEcosystemSection } from "@/components/sections/UnifiedEcosystemSection";
+import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
+import { ResultsSection } from "@/components/sections/ResultsSection";
+import { ProductSuiteSection } from "@/components/sections/ProductSuiteSection";
+import { FutureVisionSection } from "@/components/sections/FutureVisionSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/layout/Footer";
@@ -19,15 +18,14 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <TrustedBySection />
-        <ProblemSolutionSection />
+        <PainPointSection />
+        <AboutFusionifySection />
         <ServicesSection />
-        <EcosystemFlowSection />
-        <WhyDifferentSection />
-        <WhyFusionifySection />
-        <ProductEcosystemSection />
-        <BusinessImpactSection />
-        <AboutSection />
+        <UnifiedEcosystemSection />
+        <WhyChooseUsSection />
+        <ResultsSection />
+        <ProductSuiteSection />
+        <FutureVisionSection />
         <CTASection />
         <ContactSection />
       </main>
