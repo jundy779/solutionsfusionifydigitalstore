@@ -1,116 +1,71 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Rocket, MessageCircle, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const CTASection = () => {
   return (
-    <section className="section-padding bg-gradient-cta relative overflow-hidden">
-      {/* Cinematic background effects */}
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Center glow effect */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, hsl(217 91% 60% / 0.2) 0%, transparent 60%)",
-          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px]"
           animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.5, 0.8, 0.5],
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.05, 1],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-        />
-        <motion.div 
-          className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(265 75% 55% / 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, hsl(212 89% 45% / 0.15) 0%, hsl(265 75% 55% / 0.05) 40%, transparent 70%)",
+            filter: "blur(60px)",
           }}
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div 
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, hsl(190 95% 45% / 0.1) 0%, transparent 70%)",
-          }}
-          animate={{ x: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Floating particles */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1.5 h-1.5 rounded-full bg-primary/30"
-            style={{
-              left: `${10 + i * 12}%`,
-              top: `${20 + (i % 4) * 20}%`,
-            }}
-            animate={{
-              y: [0, -40, 0],
-              opacity: [0.2, 0.6, 0.2],
-              scale: [0.8, 1.2, 0.8],
-            }}
-            transition={{
-              duration: 5 + i * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.4,
-            }}
-          />
-        ))}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto"
         >
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-premium mb-10"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground/90">
-              Ready to Get Started?
-            </span>
-          </motion.div>
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8">
+            <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+            </div>
+            <span className="text-sm font-medium text-muted-foreground">Ready to Get Started?</span>
+          </div>
 
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-8 leading-tight">
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
             Ready to Transform Your
             <br />
-            <span className="text-gradient glow-text">Digital Business?</span>
+            <span className="text-gradient">Digital Business?</span>
           </h2>
           
-          <p className="text-muted-foreground text-lg md:text-xl mb-12 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
             Join 50+ businesses that have automated their operations, 
             scaled their systems, and accelerated growth with Fusionify.
           </p>
           
+          {/* CTA Button - Covena style */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-10"
           >
-            <Button size="lg" className="h-14 px-10 text-base glow-primary group">
-              <Rocket className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+            <Button 
+              size="lg" 
+              className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 group rounded-full"
+            >
+              <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
               <span>Start Your Project</span>
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button variant="outline" size="lg" className="h-14 px-10 text-base glass-premium border-primary/20 hover:border-primary/40">
-              <MessageCircle className="w-5 h-5 mr-2" />
-              <span>Talk to Our Team</span>
             </Button>
           </motion.div>
 
@@ -119,21 +74,16 @@ export const CTASection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-6 md:gap-8"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-5 md:gap-8"
           >
             {[
               "No commitment required",
               "Free consultation",
               "24-hour response",
-            ].map((item, index) => (
+            ].map((item) => (
               <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, delay: index * 0.3, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                </motion.div>
+                <CheckCircle className="w-4 h-4 text-green-500" />
                 <span>{item}</span>
               </div>
             ))}
