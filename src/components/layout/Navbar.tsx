@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,25 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      const navbarHeight = 80; // Account for fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    
+    setIsMobileMenuOpen(false);
+  }, []);
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -37,7 +56,11 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 md:h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2.5 group">
+          <a 
+            href="#home" 
+            onClick={(e) => scrollToSection(e, "#home")}
+            className="flex items-center gap-2.5 group"
+          >
             <motion.img 
               src={fusionifyLogo}
               alt="Fusionify Logo"
@@ -55,6 +78,7 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group py-2"
               >
                 {link.name}
@@ -98,7 +122,7 @@ export const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => scrollToSection(e, link.href)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
