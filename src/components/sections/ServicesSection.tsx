@@ -1,43 +1,37 @@
 import { motion } from "framer-motion";
 import { 
   Code2, 
-  Smartphone, 
-  TrendingUp, 
-  Palette, 
-  ShieldCheck, 
-  Headphones 
+  Bot, 
+  Settings2, 
+  Cloud, 
+  Briefcase 
 } from "lucide-react";
 
 const services = [
   {
     icon: Code2,
-    title: "Web Development",
-    description: "Website modern dan responsif dengan teknologi terkini untuk meningkatkan presence online bisnis Anda.",
+    title: "Web & App Development",
+    description: "Custom websites and mobile applications built with modern frameworks. From landing pages to complex platforms, we deliver scalable and performant digital products.",
   },
   {
-    icon: Smartphone,
-    title: "Mobile App",
-    description: "Aplikasi mobile yang intuitif untuk iOS dan Android dengan pengalaman pengguna terbaik.",
+    icon: Bot,
+    title: "Automation Bots",
+    description: "Intelligent Telegram and WhatsApp bots to automate customer service, notifications, and business workflows. Reduce manual tasks and improve response times.",
   },
   {
-    icon: TrendingUp,
-    title: "Digital Marketing",
-    description: "Strategi pemasaran digital yang efektif untuk meningkatkan visibilitas dan konversi.",
+    icon: Settings2,
+    title: "Digital Systems & Integrations",
+    description: "Seamless integration of third-party APIs, payment gateways, CRMs, and internal tools. We connect your systems for unified, efficient operations.",
   },
   {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Desain antarmuka yang menarik dan user experience yang optimal untuk produk Anda.",
+    icon: Cloud,
+    title: "Cloud & IT Support",
+    description: "Cloud infrastructure setup, maintenance, and 24/7 IT support. We ensure your systems run smoothly with reliable hosting and proactive monitoring.",
   },
   {
-    icon: ShieldCheck,
-    title: "Cyber Security",
-    description: "Solusi keamanan siber untuk melindungi data dan infrastruktur digital bisnis.",
-  },
-  {
-    icon: Headphones,
-    title: "IT Consulting",
-    description: "Konsultasi IT profesional untuk membantu transformasi digital dan optimalisasi sistem.",
+    icon: Briefcase,
+    title: "Project-based Services",
+    description: "Flexible engagement for specific projects or short-term needs. From MVP development to system audits, we provide expert solutions on your timeline.",
   },
 ];
 
@@ -90,7 +84,7 @@ export const ServicesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
         >
           {services.map((service) => (
             <motion.div
