@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   Code2, 
   Bot, 
@@ -14,30 +15,35 @@ const services = [
     title: "Web & App Development",
     description: "Modern, scalable websites and mobile applications built with cutting-edge frameworks.",
     features: ["React/Next.js", "Mobile Apps", "E-commerce", "Landing Pages"],
+    href: "/services/web-development",
   },
   {
     icon: Bot,
     title: "Automation Bots",
     description: "Intelligent WhatsApp and Telegram bots for auto order systems and workflow automation.",
     features: ["WhatsApp Bots", "Telegram Bots", "Auto Orders", "Notifications"],
+    href: "/services/automation-bots",
   },
   {
     icon: Settings2,
     title: "Digital Systems & API",
     description: "Seamless API, CRM, and payment gateway integrations for unified operations.",
     features: ["API Integration", "CRM Systems", "Payment Gateway", "ERP"],
+    href: "/services/digital-systems",
   },
   {
     icon: Cloud,
     title: "Cloud & IT Support",
     description: "Enterprise hosting, VPS, and infrastructure management with 99.9% uptime.",
     features: ["Cloud Hosting", "VPS Management", "Monitoring", "Security"],
+    href: "/services/cloud-support",
   },
   {
     icon: Briefcase,
     title: "Project-Based Services",
     description: "Custom IT and software projects tailored to your specific business needs.",
     features: ["MVP Development", "Consulting", "System Audit", "Training"],
+    href: "/services/project-services",
   },
 ];
 
@@ -96,33 +102,37 @@ export const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              className="group p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300">
-                <service.icon className="w-6 h-6 text-primary" />
-              </div>
-              
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
-              </div>
-              
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                {service.description}
-              </p>
+              <Link 
+                to={service.href}
+                className="group block h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300">
+                  <service.icon className="w-6 h-6 text-primary" />
+                </div>
+                
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
+                </div>
+                
+                <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+                  {service.description}
+                </p>
 
-              <div className="flex flex-wrap gap-1.5">
-                {service.features.map((feature) => (
-                  <span
-                    key={feature}
-                    className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground group-hover:border-primary/20 transition-colors"
-                  >
-                    {feature}
-                  </span>
-                ))}
-              </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {service.features.map((feature) => (
+                    <span
+                      key={feature}
+                      className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground group-hover:border-primary/20 transition-colors"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
