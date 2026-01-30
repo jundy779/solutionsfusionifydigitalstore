@@ -7,19 +7,13 @@ interface ClientLogo {
   name: string;
   logo_url: string;
   website_url: string | null;
-  is_partner: boolean;
 }
 
-// Fallback placeholder logos when no data in database
 const fallbackLogos = [
   { id: "1", name: "TechCorp", logo_url: "", initials: "TC" },
   { id: "2", name: "InnovateLab", logo_url: "", initials: "IL" },
   { id: "3", name: "DigitalFirst", logo_url: "", initials: "DF" },
   { id: "4", name: "CloudScale", logo_url: "", initials: "CS" },
-  { id: "5", name: "DataFlow", logo_url: "", initials: "DFL" },
-  { id: "6", name: "SmartBiz", logo_url: "", initials: "SB" },
-  { id: "7", name: "NextGen", logo_url: "", initials: "NG" },
-  { id: "8", name: "FutureTech", logo_url: "", initials: "FT" },
 ];
 
 const getInitials = (name: string): string => {
@@ -30,13 +24,14 @@ const getInitials = (name: string): string => {
   return name.substring(0, 2).toUpperCase();
 };
 
-export const LogoCarouselSection = () => {
-  const { data: logos, isLoading } = useQuery({
-    queryKey: ["client-logos"],
+export const ClientLogosSection = () => {
+  const { data: logos } = useQuery({
+    queryKey: ["client-logos-only"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("client_logos")
-        .select("id, name, logo_url, website_url, is_partner")
+        .select("id, name, logo_url, website_url")
+        .eq("is_partner", false)
         .order("display_order", { ascending: true });
       
       if (error) throw error;
@@ -44,7 +39,6 @@ export const LogoCarouselSection = () => {
     },
   });
 
-  // Use fetched logos or fallback to placeholders
   const displayLogos = logos && logos.length > 0 
     ? logos.map(logo => ({
         ...logo,
@@ -52,16 +46,17 @@ export const LogoCarouselSection = () => {
       }))
     : fallbackLogos;
 
-  // Double the array for seamless infinite scroll
   const duplicatedLogos = [...displayLogos, ...displayLogos];
 
   return (
     <section className="py-12 bg-background relative overflow-hidden">
-      {/* Fade edges */}
+      <div className="container mx-auto px-4 mb-6">
+        <p className="text-sm text-muted-foreground text-center">Dipercaya oleh Klien Kami</p>
+      </div>
+      
       <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
       
-      {/* Scrolling container */}
       <div className="flex">
         <motion.div
           className="flex gap-12 md:gap-16 items-center"
