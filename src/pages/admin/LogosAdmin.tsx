@@ -16,7 +16,8 @@ import {
   GripVertical,
   ExternalLink,
   Image as ImageIcon,
-  LogOut
+  LogOut,
+  HelpCircle
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -280,6 +281,12 @@ export default function LogosAdmin() {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link to="/admin/faq">
+              <Button variant="outline" className="gap-2">
+                <HelpCircle className="w-4 h-4" />
+                FAQ
+              </Button>
+            </Link>
             <Dialog open={isDialogOpen} onOpenChange={(open) => {
               if (!open) resetForm();
               setIsDialogOpen(open);

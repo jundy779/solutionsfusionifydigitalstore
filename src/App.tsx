@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import LogosAdmin from "./pages/admin/LogosAdmin";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminSignup from "./pages/admin/AdminSignup";
+import FAQAdmin from "./pages/admin/FAQAdmin";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,14 @@ const App = () => (
               element={
                 <ProtectedRoute requireAdmin>
                   <LogosAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/faq"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <FAQAdmin />
                 </ProtectedRoute>
               }
             />
