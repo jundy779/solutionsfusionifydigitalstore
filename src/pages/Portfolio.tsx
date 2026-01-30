@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PortfolioSkeletonLoader } from "@/components/portfolio/ProjectCardSkeleton";
 
 interface Project {
   id: string;
@@ -283,14 +284,8 @@ const Portfolio = () => {
         </section>
       )}
 
-      {/* Loading State */}
-      {isLoading && (
-        <section className="py-20">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-muted-foreground">Memuat portfolio...</p>
-          </div>
-        </section>
-      )}
+      {/* Loading State with Skeleton */}
+      {isLoading && <PortfolioSkeletonLoader />}
 
       {/* Empty State */}
       {!isLoading && projects?.length === 0 && (
