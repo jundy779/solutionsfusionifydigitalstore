@@ -9,56 +9,39 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
-const testimonials = [
-  {
-    quote:
-      "Fusionify transformed our entire business operations. The automation bots they built saved us 30+ hours per week on repetitive tasks.",
-    name: "Ahmad Rizki",
-    role: "CEO",
-    company: "TechVenture Indonesia",
-    avatar: "AR",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    quote:
-      "Professional team with exceptional delivery. Our e-commerce platform saw a 200% increase in conversions after their redesign.",
-    name: "Sarah Putri",
-    role: "Marketing Director",
-    company: "Belanja Mudah",
-    avatar: "SP",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    quote:
-      "The WhatsApp bot integration was a game-changer for our customer service. Response time dropped from hours to seconds.",
-    name: "Budi Santoso",
-    role: "Operations Manager",
-    company: "ServisKu",
-    avatar: "BS",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    quote:
-      "Fusionify's cloud solutions gave us the scalability we needed. Their 24/7 support is truly world-class.",
-    name: "Diana Wijaya",
-    role: "CTO",
-    company: "CloudFirst Solutions",
-    avatar: "DW",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-  },
-  {
-    quote:
-      "From concept to launch in just 6 weeks. The team's expertise in digital transformation is unmatched.",
-    name: "Hendro Kusuma",
-    role: "Founder",
-    company: "StartupNusantara",
-    avatar: "HK",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-  },
-];
+interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  avatar_initials: string;
+  image_url: string | null;
+  display_order: number;
+}
 
 export const TestimonialsSection = () => {
+  const { data: testimonials, isLoading } = useQuery({
+    queryKey: ["testimonials"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+
+      if (error) throw error;
+      return data as Testimonial[];
+    },
+  });
+
+  if (isLoading || !testimonials || testimonials.length === 0) {
+    return null;
+  }
+
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
       {/* Subtle background glow */}
@@ -122,9 +105,9 @@ export const TestimonialsSection = () => {
             className="w-full"
           >
             <CarouselContent className="-ml-3 md:-ml-4">
-              {testimonials.map((testimonial, index) => (
+              {testimonials.map((testimonial) => (
                 <CarouselItem
-                  key={index}
+                  key={testimonial.id}
                   className="pl-3 md:pl-4 md:basis-1/2"
                 >
                   <div className="h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
@@ -144,11 +127,11 @@ export const TestimonialsSection = () => {
                     <div className="flex items-center gap-3 pt-4 border-t border-border/30">
                       <Avatar className="w-10 h-10 ring-2 ring-primary/10">
                         <AvatarImage
-                          src={testimonial.image}
+                          src={testimonial.image_url || undefined}
                           alt={testimonial.name}
                         />
                         <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
-                          {testimonial.avatar}
+                          {testimonial.avatar_initials}
                         </AvatarFallback>
                       </Avatar>
                       <div>
