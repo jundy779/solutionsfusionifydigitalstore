@@ -12,6 +12,11 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminSignup from "./pages/admin/AdminSignup";
 import FAQAdmin from "./pages/admin/FAQAdmin";
 import TestimonialsAdmin from "./pages/admin/TestimonialsAdmin";
+import WebDevelopment from "./pages/services/WebDevelopment";
+import AutomationBots from "./pages/services/AutomationBots";
+import DigitalSystems from "./pages/services/DigitalSystems";
+import CloudSupport from "./pages/services/CloudSupport";
+import ProjectServices from "./pages/services/ProjectServices";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +29,11 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/services/web-development" element={<WebDevelopment />} />
+            <Route path="/services/automation-bots" element={<AutomationBots />} />
+            <Route path="/services/digital-systems" element={<DigitalSystems />} />
+            <Route path="/services/cloud-support" element={<CloudSupport />} />
+            <Route path="/services/project-services" element={<ProjectServices />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/signup" element={<AdminSignup />} />
             <Route
