@@ -30,7 +30,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Plus, HelpCircle } from "lucide-react";
+import { ArrowLeft, Plus, HelpCircle, Image as ImageIcon, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   DndContext,
@@ -246,15 +246,31 @@ const FAQAdmin = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Link to="/admin/logos">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">FAQ Management</h1>
-            <p className="text-muted-foreground">Kelola pertanyaan yang sering diajukan</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link to="/admin/logos">
+              <Button variant="ghost" size="icon">
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">FAQ Management</h1>
+              <p className="text-muted-foreground">Kelola pertanyaan yang sering diajukan</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link to="/admin/logos">
+              <Button variant="outline" className="gap-2">
+                <ImageIcon className="w-4 h-4" />
+                Logo
+              </Button>
+            </Link>
+            <Link to="/admin/testimonials">
+              <Button variant="outline" className="gap-2">
+                <Quote className="w-4 h-4" />
+                Testimonial
+              </Button>
+            </Link>
           </div>
         </div>
 

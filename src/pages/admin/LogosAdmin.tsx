@@ -17,7 +17,8 @@ import {
   ExternalLink,
   Image as ImageIcon,
   LogOut,
-  HelpCircle
+  HelpCircle,
+  Quote
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -285,6 +286,12 @@ export default function LogosAdmin() {
               <Button variant="outline" className="gap-2">
                 <HelpCircle className="w-4 h-4" />
                 FAQ
+              </Button>
+            </Link>
+            <Link to="/admin/testimonials">
+              <Button variant="outline" className="gap-2">
+                <Quote className="w-4 h-4" />
+                Testimonial
               </Button>
             </Link>
             <Dialog open={isDialogOpen} onOpenChange={(open) => {
