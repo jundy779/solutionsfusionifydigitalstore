@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
+import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy, useMemo } from "react";
 
 // Lazy load the World component for better performance
@@ -285,21 +286,20 @@ export const HeroSection = () => {
             </span>
           </motion.div>
 
-          {/* Main Heading - Covena typography style */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 tracking-tight text-foreground"
-          >
-            Transform your business with
-            <br />
-            <span className="text-foreground">smart </span>
-            <span className="text-gradient">automation</span>
-            <span className="text-foreground"> and</span>
-            <br />
-            <span className="text-foreground">modern digital solutions.</span>
-          </motion.h1>
+          {/* Main Heading - Text Generate Effect */}
+          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 tracking-tight">
+            <TextGenerateEffectLines
+              lines={[
+                { text: "Transform your business with", className: "text-foreground" },
+                { text: "smart automation and", className: "text-foreground [&>.word:nth-child(1)]:text-foreground [&>.word:nth-child(2)]:text-gradient" },
+                { text: "modern digital solutions.", className: "text-foreground" },
+              ]}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight"
+              filter={true}
+              duration={0.4}
+              staggerDelay={0.08}
+            />
+          </h1>
 
           {/* Subheadline - Covena style muted */}
           <motion.p
