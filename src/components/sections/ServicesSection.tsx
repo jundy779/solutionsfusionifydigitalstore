@@ -8,6 +8,7 @@ import {
   Briefcase,
   ArrowUpRight
 } from "lucide-react";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 
 const services = [
   {
@@ -16,6 +17,7 @@ const services = [
     description: "Modern, scalable websites and mobile applications built with cutting-edge frameworks.",
     features: ["React/Next.js", "Mobile Apps", "E-commerce", "Landing Pages"],
     href: "/services/web-development",
+    className: "md:col-span-2 lg:col-span-2", // Large card
   },
   {
     icon: Bot,
@@ -23,6 +25,7 @@ const services = [
     description: "Intelligent WhatsApp and Telegram bots for auto order systems and workflow automation.",
     features: ["WhatsApp Bots", "Telegram Bots", "Auto Orders", "Notifications"],
     href: "/services/automation-bots",
+    className: "md:col-span-1 lg:col-span-1", // Regular card
   },
   {
     icon: Settings2,
@@ -30,6 +33,7 @@ const services = [
     description: "Seamless API, CRM, and payment gateway integrations for unified operations.",
     features: ["API Integration", "CRM Systems", "Payment Gateway", "ERP"],
     href: "/services/digital-systems",
+    className: "md:col-span-1 lg:col-span-1", // Regular card
   },
   {
     icon: Cloud,
@@ -37,6 +41,7 @@ const services = [
     description: "Enterprise hosting, VPS, and infrastructure management with 99.9% uptime.",
     features: ["Cloud Hosting", "VPS Management", "Monitoring", "Security"],
     href: "/services/cloud-support",
+    className: "md:col-span-1 lg:col-span-1", // Regular card
   },
   {
     icon: Briefcase,
@@ -44,26 +49,45 @@ const services = [
     description: "Custom IT and software projects tailored to your specific business needs.",
     features: ["MVP Development", "Consulting", "System Audit", "Training"],
     href: "/services/project-services",
+    className: "md:col-span-1 lg:col-span-1", // Regular card
   },
 ];
 
 export const ServicesSection = () => {
   return (
     <section id="services" className="py-20 md:py-28 bg-background relative overflow-hidden">
-      {/* Subtle background glow */}
+      {/* Animated background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
-          className="absolute top-0 right-1/4 w-[400px] h-[400px]"
+          className="absolute top-0 right-1/4 w-[500px] h-[500px]"
           animate={{
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 60%)",
+            filter: "blur(80px)",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-0 left-1/4 w-[400px] h-[400px]"
+          animate={{
+            opacity: [0.15, 0.3, 0.15],
+            scale: [1, 1.15, 1],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut",
+            delay: 2,
           }}
           style={{
-            background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)",
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, transparent 60%)",
             filter: "blur(60px)",
           }}
         />
@@ -93,49 +117,41 @@ export const ServicesSection = () => {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+        {/* Bento Grid */}
+        <BentoGrid className="gap-5">
           {services.map((service, index) => (
-            <motion.div
+            <BentoGridItem
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-            >
-              <Link 
-                to={service.href}
-                className="group block h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300">
-                  <service.icon className="w-6 h-6 text-primary" />
+              index={index}
+              className={service.className}
+              icon={<service.icon className="w-6 h-6 text-primary" />}
+              title={
+                <Link 
+                  to={service.href}
+                  className="flex items-center justify-between gap-2 hover:text-primary transition-colors"
+                >
+                  <span>{service.title}</span>
+                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 group-hover:translate-x-0" />
+                </Link>
+              }
+              description={
+                <div>
+                  <p className="mb-4">{service.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {service.features.map((feature) => (
+                      <span
+                        key={feature}
+                        className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground group-hover:border-primary/20 transition-colors"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
-                </div>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                  {service.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {service.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground group-hover:border-primary/20 transition-colors"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </motion.div>
+              }
+            />
           ))}
-        </div>
+        </BentoGrid>
       </div>
     </section>
   );
