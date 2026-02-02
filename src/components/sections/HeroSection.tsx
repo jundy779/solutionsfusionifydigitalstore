@@ -236,7 +236,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="w-[100vw] h-[100vw] max-w-[900px] max-h-[900px] md:max-w-[1100px] md:max-h-[1100px] lg:max-w-[1300px] lg:max-h-[1300px]"
+          className="w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] md:max-w-[700px] md:max-h-[700px] lg:max-w-[800px] lg:max-h-[800px]"
         >
           <Suspense
             fallback={
