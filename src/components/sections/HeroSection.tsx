@@ -271,19 +271,47 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge - Covena style */}
+          {/* Badge - Staggered Animation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8 overflow-hidden"
           >
-            <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-primary" />
-            </div>
-            <span className="text-sm font-medium text-muted-foreground">
-              Digital Solutions Provider
-            </span>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.3, ease: "backOut" }}
+              className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.5, ease: "backOut" }}
+                className="w-2 h-2 rounded-full bg-primary"
+              />
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
+              className="text-sm font-medium text-muted-foreground"
+            >
+              {"Digital Solutions Provider".split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.5 + index * 0.02,
+                    ease: "easeOut",
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.span>
           </motion.div>
 
           {/* Main Heading - Text Generate Effect */}
