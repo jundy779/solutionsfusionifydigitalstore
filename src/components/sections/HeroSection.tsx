@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MovingBorderButton } from "@/components/ui/moving-border";
 import { Suspense, lazy, useMemo } from "react";
 
 // Lazy load the World component for better performance
@@ -317,19 +317,21 @@ export const HeroSection = () => {
             solusi digital modern untuk pertumbuhan bisnis.
           </motion.p>
 
-          {/* Single CTA - Covena style with arrow */}
+          {/* Single CTA - Moving Border Effect */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           >
-            <Button
-              size="lg"
-              className="h-12 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 group rounded-full"
+            <MovingBorderButton
+              as="a"
+              href="#contact"
+              containerClassName="rounded-full"
+              className="h-12 px-8 text-sm font-semibold bg-background text-foreground rounded-full"
             >
               <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
               <span>Book a consultation</span>
-            </Button>
+            </MovingBorderButton>
           </motion.div>
         </div>
       </div>

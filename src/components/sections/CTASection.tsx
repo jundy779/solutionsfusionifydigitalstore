@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MovingBorderButton } from "@/components/ui/moving-border";
 
 export const CTASection = () => {
   return (
@@ -52,7 +52,7 @@ export const CTASection = () => {
             scaled their systems, and accelerated growth with Fusionify.
           </p>
           
-          {/* CTA Button - Covena style */}
+          {/* CTA Button - Moving Border Effect */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -60,13 +60,15 @@ export const CTASection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-10"
           >
-            <Button 
-              size="lg" 
-              className="h-12 px-8 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 group rounded-full"
+            <MovingBorderButton
+              as="a"
+              href="#contact"
+              containerClassName="rounded-full"
+              className="h-12 px-8 text-sm font-semibold bg-background text-foreground rounded-full"
             >
               <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
               <span>Start Your Project</span>
-            </Button>
+            </MovingBorderButton>
           </motion.div>
 
           {/* Trust indicators */}
