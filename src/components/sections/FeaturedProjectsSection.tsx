@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 
 const projects = [
   {
@@ -76,7 +77,7 @@ export const FeaturedProjectsSection = () => {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with 3D Cards */}
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
@@ -85,55 +86,84 @@ export const FeaturedProjectsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              className="group cursor-pointer"
             >
-              <div className="rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300 overflow-hidden">
-                {/* Project Visual Header */}
-                <div className="h-36 relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-xs font-medium text-foreground">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  {/* Hover Arrow */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                      <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
-                    </div>
-                  </div>
-
-                  {/* Metrics Badge */}
-                  <div className="absolute bottom-4 right-4">
-                    <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary">
-                      {project.metrics}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5">
-                  <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground"
-                      >
-                        {tag}
+              <CardContainer containerClassName="w-full">
+                <CardBody className="rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors duration-300 overflow-hidden group cursor-pointer w-full">
+                  {/* Project Visual Header */}
+                  <CardItem
+                    translateZ={30}
+                    className="h-36 relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent w-full"
+                  >
+                    {/* Category Badge */}
+                    <CardItem
+                      translateZ={50}
+                      className="absolute top-4 left-4"
+                    >
+                      <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-xs font-medium text-foreground">
+                        {project.category}
                       </span>
-                    ))}
+                    </CardItem>
+
+                    {/* Hover Arrow */}
+                    <CardItem
+                      translateZ={60}
+                      className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                        <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
+                      </div>
+                    </CardItem>
+
+                    {/* Metrics Badge */}
+                    <CardItem
+                      translateZ={40}
+                      className="absolute bottom-4 right-4"
+                    >
+                      <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary">
+                        {project.metrics}
+                      </span>
+                    </CardItem>
+
+                    {/* Floating decoration */}
+                    <div className="absolute bottom-4 left-4 w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 blur-sm" style={{ transform: "translateZ(20px) translateX(-10px)" }} />
+                  </CardItem>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <CardItem
+                      translateZ={25}
+                      className="w-full"
+                    >
+                      <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                    </CardItem>
+                    <CardItem
+                      translateZ={15}
+                      className="w-full"
+                    >
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                        {project.description}
+                      </p>
+                    </CardItem>
+
+                    {/* Tags */}
+                    <CardItem
+                      translateZ={20}
+                      className="flex flex-wrap gap-1.5 w-full"
+                    >
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 rounded-full bg-muted/50 border border-border/30 text-xs text-muted-foreground"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </CardItem>
                   </div>
-                </div>
-              </div>
+                </CardBody>
+              </CardContainer>
             </motion.div>
           ))}
         </div>
