@@ -232,15 +232,12 @@ export const HeroSection = () => {
 
       {/* Globe Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 flex items-end justify-center">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[100vw] h-[100vw] max-w-[600px] max-h-[600px] sm:max-w-[700px] sm:max-h-[700px] md:max-w-[900px] md:max-h-[900px] lg:max-w-[1100px] lg:max-h-[1100px] xl:max-w-[1200px] xl:max-h-[1200px]"
-            style={{
-              transform: "translateY(35%)",
-            }}
+            className="w-[90vw] h-[90vw] max-w-[700px] max-h-[700px] sm:max-w-[800px] sm:max-h-[800px] md:max-w-[1000px] md:max-h-[1000px] lg:max-w-[1100px] lg:max-h-[1100px] xl:max-w-[1200px] xl:max-h-[1200px]"
           >
             <Suspense
               fallback={
