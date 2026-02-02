@@ -232,14 +232,14 @@ export const HeroSection = () => {
 
       {/* Globe Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-end justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[100vw] h-[100vw] max-w-[500px] max-h-[500px] sm:max-w-[600px] sm:max-h-[600px] md:max-w-[800px] md:max-h-[800px] lg:max-w-[1000px] lg:max-h-[1000px] xl:max-w-[1100px] xl:max-h-[1100px]"
+            className="w-[100vw] h-[100vw] max-w-[600px] max-h-[600px] sm:max-w-[700px] sm:max-h-[700px] md:max-w-[900px] md:max-h-[900px] lg:max-w-[1100px] lg:max-h-[1100px] xl:max-w-[1200px] xl:max-h-[1200px]"
             style={{
-              transform: "translateY(20%)",
+              transform: "translateY(35%)",
             }}
           >
             <Suspense
@@ -270,7 +270,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Gradient overlay to blend globe with content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 to-background/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/20 to-background/70 pointer-events-none" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
