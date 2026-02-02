@@ -209,9 +209,9 @@ export const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[700px] h-[700px] md:w-[900px] md:h-[900px] lg:w-[1000px] lg:h-[1000px]"
+            className="w-[100vw] h-[100vw] max-w-[500px] max-h-[500px] sm:max-w-[600px] sm:max-h-[600px] md:max-w-[800px] md:max-h-[800px] lg:max-w-[1000px] lg:max-h-[1000px] xl:max-w-[1100px] xl:max-h-[1100px]"
             style={{
-              transform: "translateY(15%)",
+              transform: "translateY(20%)",
             }}
           >
             <Suspense
