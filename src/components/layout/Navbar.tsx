@@ -69,10 +69,10 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isScrolled 
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50" 
-          : "bg-transparent"
+          ? "top-4 mx-4 md:mx-auto md:max-w-4xl lg:max-w-5xl rounded-2xl bg-background/70 backdrop-blur-2xl border border-border/30 shadow-lg shadow-black/5" 
+          : "top-0 bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
