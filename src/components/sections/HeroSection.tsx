@@ -242,7 +242,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Gradient overlay to blend globe with content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/30 to-background/60 pointer-events-none" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
