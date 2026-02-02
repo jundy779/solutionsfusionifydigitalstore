@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Rocket, Sparkles, Globe, Layers, Target } from "lucide-react";
+import { Rocket, Globe, Layers, Target } from "lucide-react";
+import { SparklesText } from "@/components/ui/sparkles";
 
 export const FutureVisionSection = () => {
   return (
@@ -38,7 +39,9 @@ export const FutureVisionSection = () => {
             </div>
             <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
               Building the Future of
-              <span className="text-gradient"> Digital Business</span>
+              <SparklesText className="text-gradient" sparklesCount={8}>
+                {" Digital Business"}
+              </SparklesText>
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-5 leading-relaxed">
               At Fusionify, we're not just building software – we're creating the 
@@ -56,7 +59,7 @@ export const FutureVisionSection = () => {
                 { icon: Rocket, label: "Innovation-Driven" },
                 { icon: Globe, label: "Global Reach" },
                 { icon: Layers, label: "Scalable Solutions" },
-                { icon: Sparkles, label: "Future-Ready" },
+                { icon: Target, label: "Future-Ready" },
               ].map((item, index) => (
                 <motion.div
                   key={item.label}

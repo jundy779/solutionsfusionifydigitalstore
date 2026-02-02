@@ -11,6 +11,7 @@ import { Quote } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Meteors } from "@/components/ui/meteors";
 
 interface Testimonial {
   id: string;
@@ -44,6 +45,9 @@ export const TestimonialsSection = () => {
 
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Meteors Effect */}
+      <Meteors number={15} />
+
       {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -110,7 +114,7 @@ export const TestimonialsSection = () => {
                   key={testimonial.id}
                   className="pl-3 md:pl-4 md:basis-1/2"
                 >
-                  <div className="h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
+                  <div className="h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300 relative overflow-hidden">
                     {/* Quote icon */}
                     <div className="mb-4">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">

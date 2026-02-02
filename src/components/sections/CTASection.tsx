@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export const CTASection = () => {
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Background Beams Effect */}
+      <BackgroundBeams />
+
       {/* Center glow effect */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
