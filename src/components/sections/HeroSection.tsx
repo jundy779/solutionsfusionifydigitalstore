@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Suspense, lazy, useMemo } from "react";
@@ -194,13 +194,41 @@ export const HeroSection = () => {
     []
   );
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent<HTMLDivElement>) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+      className="group relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+      onMouseMove={handleMouseMove}
     >
       {/* Pure dark background */}
       <div className="absolute inset-0 bg-background" />
+
+      {/* Spotlight Effect - follows cursor */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition duration-500 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              800px circle at ${mouseX}px ${mouseY}px,
+              hsl(212 89% 45% / 0.12),
+              transparent 80%
+            )
+          `,
+        }}
+      />
 
       {/* Globe Background */}
       <div className="absolute inset-0 overflow-hidden">
