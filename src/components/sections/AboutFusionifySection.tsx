@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Users, Code2, Clock, ArrowRight } from "lucide-react";
+import { LampContainer } from "@/components/ui/lamp";
 
 const features = [
   {
@@ -28,28 +29,29 @@ const highlights = [
 
 export const AboutFusionifySection = () => {
   return (
-    <section id="about" className="py-20 md:py-28 bg-background relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
-          className="absolute top-1/3 right-0 w-[500px] h-[500px]"
-          animate={{
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)",
-            filter: "blur(80px)",
-          }}
-        />
-      </div>
+    <section id="about" className="relative overflow-hidden bg-background">
+      {/* Lamp Effect Header */}
+      <LampContainer className="pt-20 pb-0">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+            <span className="w-2 h-2 rounded-full bg-primary" />
+            <span className="text-sm font-medium text-muted-foreground">About Fusionify</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground">
+            Your Complete
+            <span className="text-gradient"> Digital Partner</span>
+          </h2>
+        </motion.div>
+      </LampContainer>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+      {/* Content Section */}
+      <div className="container mx-auto px-4 relative z-10 -mt-40 pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
           {/* Left - Visual */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -58,7 +60,7 @@ export const AboutFusionifySection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative"
           >
-            <div className="p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden">
+            <div className="p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden backdrop-blur-sm">
               {/* Brand Visual */}
               <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent flex items-center justify-center mb-6 overflow-hidden border border-primary/10">
                 <motion.div 
@@ -108,14 +110,6 @@ export const AboutFusionifySection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              <span className="text-sm font-medium text-muted-foreground">About Fusionify</span>
-            </div>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 leading-tight text-foreground">
-              Your Complete
-              <span className="text-gradient"> Digital Partner</span>
-            </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-8 leading-relaxed">
               Fusionify Digital Solutions helps businesses transform digitally with modern, 
               scalable solutions. From automation to cloud infrastructure, we provide 
