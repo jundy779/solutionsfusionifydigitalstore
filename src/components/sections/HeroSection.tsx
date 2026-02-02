@@ -1,14 +1,199 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useMemo } from "react";
 
-// Lazy load the Cobe Globe component for better performance
-const CobeGlobe = lazy(() =>
-  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
+// Lazy load the World component for better performance
+const World = lazy(() =>
+  import("@/components/ui/globe").then((m) => ({ default: m.World }))
 );
 
 export const HeroSection = () => {
+  const globeConfig = useMemo(
+    () => ({
+      pointSize: 4,
+      globeColor: "#05101f",
+      showAtmosphere: true,
+      atmosphereColor: "#0d6cd7",
+      atmosphereAltitude: 0.15,
+      emissive: "#062056",
+      emissiveIntensity: 0.1,
+      shininess: 0.9,
+      polygonColor: "rgba(13, 108, 215, 0.4)",
+      ambientLight: "#38bdf8",
+      directionalLeftLight: "#ffffff",
+      directionalTopLight: "#ffffff",
+      pointLight: "#ffffff",
+      arcTime: 1500,
+      arcLength: 0.9,
+      rings: 1,
+      maxRings: 3,
+      initialPosition: { lat: -6.2088, lng: 106.8456 },
+      autoRotate: true,
+      autoRotateSpeed: 0.5,
+    }),
+    []
+  );
+
+  const colors = ["#0d6cd7", "#3b82f6", "#06b6d4"];
+
+  const sampleArcs = useMemo(
+    () => [
+      // Jakarta connections
+      {
+        order: 1,
+        startLat: -6.2088,
+        startLng: 106.8456,
+        endLat: 1.3521,
+        endLng: 103.8198,
+        arcAlt: 0.1,
+        color: colors[0],
+      },
+      {
+        order: 1,
+        startLat: -6.2088,
+        startLng: 106.8456,
+        endLat: 35.6762,
+        endLng: 139.6503,
+        arcAlt: 0.3,
+        color: colors[1],
+      },
+      {
+        order: 2,
+        startLat: -6.2088,
+        startLng: 106.8456,
+        endLat: 51.5072,
+        endLng: -0.1276,
+        arcAlt: 0.4,
+        color: colors[2],
+      },
+      {
+        order: 2,
+        startLat: -6.2088,
+        startLng: 106.8456,
+        endLat: 22.3193,
+        endLng: 114.1694,
+        arcAlt: 0.2,
+        color: colors[0],
+      },
+      // Singapore connections
+      {
+        order: 3,
+        startLat: 1.3521,
+        startLng: 103.8198,
+        endLat: 40.7128,
+        endLng: -74.006,
+        arcAlt: 0.5,
+        color: colors[1],
+      },
+      {
+        order: 3,
+        startLat: 1.3521,
+        startLng: 103.8198,
+        endLat: -33.8688,
+        endLng: 151.2093,
+        arcAlt: 0.2,
+        color: colors[2],
+      },
+      // Tokyo connections
+      {
+        order: 4,
+        startLat: 35.6762,
+        startLng: 139.6503,
+        endLat: 37.5665,
+        endLng: 126.978,
+        arcAlt: 0.1,
+        color: colors[0],
+      },
+      {
+        order: 4,
+        startLat: 35.6762,
+        startLng: 139.6503,
+        endLat: 34.0522,
+        endLng: -118.2437,
+        arcAlt: 0.4,
+        color: colors[1],
+      },
+      // London connections
+      {
+        order: 5,
+        startLat: 51.5072,
+        startLng: -0.1276,
+        endLat: 48.8566,
+        endLng: 2.3522,
+        arcAlt: 0.1,
+        color: colors[2],
+      },
+      {
+        order: 5,
+        startLat: 51.5072,
+        startLng: -0.1276,
+        endLat: 52.52,
+        endLng: 13.405,
+        arcAlt: 0.1,
+        color: colors[0],
+      },
+      // NYC connections
+      {
+        order: 6,
+        startLat: 40.7128,
+        startLng: -74.006,
+        endLat: 37.7749,
+        endLng: -122.4194,
+        arcAlt: 0.2,
+        color: colors[1],
+      },
+      {
+        order: 6,
+        startLat: 40.7128,
+        startLng: -74.006,
+        endLat: -22.9068,
+        endLng: -43.1729,
+        arcAlt: 0.4,
+        color: colors[2],
+      },
+      // Dubai connections
+      {
+        order: 7,
+        startLat: 25.2048,
+        startLng: 55.2708,
+        endLat: 28.6139,
+        endLng: 77.209,
+        arcAlt: 0.2,
+        color: colors[0],
+      },
+      {
+        order: 7,
+        startLat: 25.2048,
+        startLng: 55.2708,
+        endLat: -6.2088,
+        endLng: 106.8456,
+        arcAlt: 0.3,
+        color: colors[1],
+      },
+      // Additional global connections
+      {
+        order: 8,
+        startLat: 22.3193,
+        startLng: 114.1694,
+        endLat: 31.2304,
+        endLng: 121.4737,
+        arcAlt: 0.1,
+        color: colors[2],
+      },
+      {
+        order: 8,
+        startLat: -33.8688,
+        startLng: 151.2093,
+        endLat: -6.2088,
+        endLng: 106.8456,
+        arcAlt: 0.2,
+        color: colors[0],
+      },
+    ],
+    []
+  );
+
   return (
     <section
       id="home"
@@ -18,15 +203,15 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-background" />
 
       {/* Globe Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] lg:w-[900px] lg:h-[900px] pointer-events-auto"
+            className="w-[700px] h-[700px] md:w-[900px] md:h-[900px] lg:w-[1000px] lg:h-[1000px]"
             style={{
-              transform: "translateY(20%)",
+              transform: "translateY(15%)",
             }}
           >
             <Suspense
@@ -51,13 +236,13 @@ export const HeroSection = () => {
                 </div>
               }
             >
-              <CobeGlobe className="cursor-grab" />
+              <World globeConfig={globeConfig} data={sampleArcs} />
             </Suspense>
           </motion.div>
         </div>
 
         {/* Gradient overlay to blend globe with content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background/90 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background/80 pointer-events-none" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
