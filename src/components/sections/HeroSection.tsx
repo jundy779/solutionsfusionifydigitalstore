@@ -211,7 +211,7 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="group relative min-h-screen flex items-start md:items-center justify-center pt-24 md:pt-20 overflow-hidden"
+      className="group relative min-h-screen flex items-center justify-center pt-28 md:pt-20 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Pure dark background */}
