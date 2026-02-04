@@ -1,17 +1,9 @@
 import { motion } from "framer-motion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
-import Autoplay from "embla-carousel-autoplay";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Meteors } from "@/components/ui/meteors";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 interface Testimonial {
   id: string;
@@ -42,6 +34,15 @@ export const TestimonialsSection = () => {
   if (isLoading || !testimonials || testimonials.length === 0) {
     return null;
   }
+
+  // Transform testimonials data for InfiniteMovingCards
+  const cardItems = testimonials.map((t) => ({
+    quote: t.quote,
+    name: t.name,
+    title: `${t.role} • ${t.company}`,
+    image: t.image_url,
+    initials: t.avatar_initials,
+  }));
 
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
@@ -92,68 +93,27 @@ export const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="relative"
         >
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-3 md:-ml-4">
-              {testimonials.map((testimonial) => (
-                <CarouselItem
-                  key={testimonial.id}
-                  className="pl-3 md:pl-4 md:basis-1/2"
-                >
-                  <div className="h-full p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300 relative overflow-hidden">
-                    {/* Quote icon */}
-                    <div className="mb-4">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Quote className="w-4 h-4 text-primary" />
-                      </div>
-                    </div>
-
-                    {/* Quote text */}
-                    <p className="text-foreground/90 text-sm md:text-base leading-relaxed mb-5">
-                      "{testimonial.quote}"
-                    </p>
-
-                    {/* Author info */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-border/30">
-                      <Avatar className="w-10 h-10 ring-2 ring-primary/10">
-                        <AvatarImage
-                          src={testimonial.image_url || undefined}
-                          alt={testimonial.name}
-                        />
-                        <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
-                          {testimonial.avatar_initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h4 className="font-medium text-foreground text-sm">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-xs text-muted-foreground">
-                          {testimonial.role} • {testimonial.company}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-4 lg:-left-10 bg-card/80 border-border/50 hover:bg-primary/10 hover:border-primary/30" />
-            <CarouselNext className="hidden md:flex -right-4 lg:-right-10 bg-card/80 border-border/50 hover:bg-primary/10 hover:border-primary/30" />
-          </Carousel>
+          {/* First row - moving left */}
+          <InfiniteMovingCards
+            items={cardItems}
+            direction="left"
+            speed="slow"
+            pauseOnHover={true}
+          />
+          
+          {/* Second row - moving right (if enough testimonials) */}
+          {testimonials.length > 3 && (
+            <div className="mt-4">
+              <InfiniteMovingCards
+                items={[...cardItems].reverse()}
+                direction="right"
+                speed="slow"
+                pauseOnHover={true}
+              />
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
