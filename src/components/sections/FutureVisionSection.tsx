@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Rocket, Globe, Layers, Target } from "lucide-react";
 import { SparklesText } from "@/components/ui/sparkles";
+ import { TracingBeam } from "@/components/ui/tracing-beam";
 
 export const FutureVisionSection = () => {
   return (
@@ -83,9 +84,10 @@ export const FutureVisionSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
+            <div className="p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50 pl-10 md:pl-12">
               {/* Roadmap Timeline */}
-              <div className="space-y-6">
+              <TracingBeam className="px-0">
+              <div className="space-y-8">
                 {[
                   { year: "2020", title: "Founded", desc: "Started our journey", active: true },
                   { year: "2022", title: "Ecosystem", desc: "Launched product suite", active: true },
@@ -100,17 +102,7 @@ export const FutureVisionSection = () => {
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     className="flex items-start gap-4"
                   >
-                    <div className="relative flex flex-col items-center">
-                      <motion.div 
-                        className={`w-3 h-3 rounded-full ${milestone.active ? 'bg-primary' : 'bg-muted'} border-2 ${milestone.active ? 'border-primary/40' : 'border-muted/40'}`}
-                        animate={milestone.active ? { scale: [1, 1.2, 1] } : {}}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                      {index < 3 && (
-                        <div className={`w-px h-10 mt-1.5 ${milestone.active ? 'bg-gradient-to-b from-primary/50 to-primary/10' : 'bg-muted/30'}`} />
-                      )}
-                    </div>
-                    <div className="pb-1 -mt-0.5">
+                    <div className="pb-1">
                       <span className={`text-xs font-medium uppercase tracking-wider ${milestone.active ? 'text-primary' : 'text-muted-foreground'}`}>
                         {milestone.year}
                       </span>
@@ -124,6 +116,7 @@ export const FutureVisionSection = () => {
                   </motion.div>
                 ))}
               </div>
+              </TracingBeam>
             </div>
           </motion.div>
         </div>
