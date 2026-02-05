@@ -379,6 +379,20 @@
   .animate-meteor {
     animation: meteor 5s linear infinite;
   }
+ 
+   /* Aurora animation for Aceternity UI */
+   @keyframes aurora {
+     from {
+       background-position: 50% 50%, 50% 50%;
+     }
+     to {
+       background-position: 350% 50%, 350% 50%;
+     }
+   }
+ 
+   .animate-aurora {
+     animation: aurora 60s linear infinite;
+   }
 
   /* Mesh gradient background - Fusionify blue #0d6cd7 */
   .mesh-gradient {

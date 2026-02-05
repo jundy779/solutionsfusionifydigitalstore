@@ -1,35 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+ import { AuroraBackground } from "@/components/ui/aurora-background";
 
 export const CTASection = () => {
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
-      {/* Background Beams Effect */}
-      <BackgroundBeams />
-
-      {/* Center glow effect */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px]"
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            background: "radial-gradient(ellipse at center, hsl(212 89% 45% / 0.15) 0%, hsl(265 75% 55% / 0.05) 40%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
+    <AuroraBackground className="py-20 md:py-28">
+      <div className="container mx-auto px-4 relative z-10 w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,6 +73,6 @@ export const CTASection = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 };
