@@ -21,8 +21,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, Quote, Upload, X } from "lucide-react";
+ import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, Quote, Upload, X, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+ import { compressImage } from "@/lib/image-utils";
 import {
   DndContext,
   closestCenter,
@@ -206,8 +207,8 @@ const TestimonialsAdmin = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast({ title: "File terlalu besar", description: "Maksimal ukuran file 2MB", variant: "destructive" });
+      if (file.size > 5 * 1024 * 1024) {
+        toast({ title: "File terlalu besar", description: "Maksimal ukuran file 5MB", variant: "destructive" });
         return;
       }
       setPhotoFile(file);
@@ -234,11 +235,15 @@ const TestimonialsAdmin = () => {
 
       // Upload new file if selected
       if (photoFile) {
+        // Compress image before upload
+        const compressedFile = await compressImage(photoFile, 200, 200, 0.85);
+        
         // Delete old photo if updating and it's from our storage
         if (editingTestimonial?.image_url) {
-          await deletePhoto(editingTestimonial.image_url);
+          // Don't wait for delete, do it in background
+          deletePhoto(editingTestimonial.image_url).catch(console.error);
         }
-        imageUrl = await uploadPhoto(photoFile);
+        imageUrl = await uploadPhoto(compressedFile);
       }
 
       if (editingTestimonial) {
@@ -466,7 +471,7 @@ const TestimonialsAdmin = () => {
                     <Button type="submit" disabled={isUploading || createMutation.isPending || updateMutation.isPending}>
                       {isUploading ? (
                         <>
-                          <Upload className="h-4 w-4 mr-2 animate-spin" />
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                           Mengupload...
                         </>
                       ) : (

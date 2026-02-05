@@ -18,9 +18,11 @@ import {
   Image as ImageIcon,
   LogOut,
   HelpCircle,
-  Quote
+   Quote,
+   Loader2
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+ import { compressImage } from "@/lib/image-utils";
 import {
   Dialog,
   DialogContent,
@@ -217,11 +219,15 @@ export default function LogosAdmin() {
 
       // Upload new file if selected
       if (logoFile) {
+        // Compress image before upload
+        const compressedFile = await compressImage(logoFile, 400, 400, 0.85);
+        
         // Delete old file if updating
         if (editingLogo?.logo_url) {
-          await deleteLogoFile(editingLogo.logo_url);
+          // Don't wait for delete, do it in background
+          deleteLogoFile(editingLogo.logo_url).catch(console.error);
         }
-        logoUrl = await uploadLogo(logoFile);
+        logoUrl = await uploadLogo(compressedFile);
       }
 
       if (!logoUrl && !editingLogo) {
@@ -400,8 +406,14 @@ export default function LogosAdmin() {
                       Batal
                     </Button>
                     <Button type="submit" disabled={isUploading} className="flex-1 gap-2">
-                      {isUploading && <Upload className="w-4 h-4 animate-spin" />}
-                      {editingLogo ? "Update" : "Simpan"}
+                      {isUploading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        editingLogo ? "Update" : "Simpan"
+                      )}
                     </Button>
                   </div>
                 </form>
