@@ -5,24 +5,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { 
   Plus, 
   Pencil, 
   Trash2, 
-  Upload, 
   ArrowLeft,
   GripVertical,
   ExternalLink,
   Image as ImageIcon,
   LogOut,
   HelpCircle,
-   Quote,
-   Loader2
+  Quote,
+  Loader2
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
- import { compressImage } from "@/lib/image-utils";
+import { compressImage, uploadWithProgress } from "@/lib/image-utils";
 import {
   Dialog,
   DialogContent,
@@ -88,6 +88,7 @@ export default function LogosAdmin() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleSignOut = async () => {
     await signOut();
@@ -108,19 +109,25 @@ export default function LogosAdmin() {
     },
   });
 
-  // Upload file to storage
+  // Upload file to storage with progress
   const uploadLogo = async (file: File): Promise<string> => {
-    const fileExt = file.name.split(".").pop();
+    const fileExt = "webp"; // Always webp after compression
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
     
-    const { error: uploadError } = await supabase.storage
-      .from("logos")
-      .upload(fileName, file);
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     
-    if (uploadError) throw uploadError;
+    const publicUrl = await uploadWithProgress(
+      supabaseUrl,
+      accessToken,
+      "logos",
+      fileName,
+      file,
+      (progress) => setUploadProgress(progress)
+    );
     
-    const { data } = supabase.storage.from("logos").getPublicUrl(fileName);
-    return data.publicUrl;
+    return publicUrl;
   };
 
   // Delete file from storage
@@ -199,6 +206,7 @@ export default function LogosAdmin() {
     setEditingLogo(null);
     setLogoFile(null);
     setPreviewUrl("");
+    setUploadProgress(0);
     setIsDialogOpen(false);
   };
 
@@ -213,18 +221,20 @@ export default function LogosAdmin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsUploading(true);
+    setUploadProgress(0);
 
     try {
       let logoUrl = editingLogo?.logo_url || "";
 
       // Upload new file if selected
       if (logoFile) {
-        // Compress image before upload
+        // Compress image before upload (show compressing state)
+        setUploadProgress(5);
         const compressedFile = await compressImage(logoFile, 400, 400, 0.85);
+        setUploadProgress(10);
         
         // Delete old file if updating
         if (editingLogo?.logo_url) {
-          // Don't wait for delete, do it in background
           deleteLogoFile(editingLogo.logo_url).catch(console.error);
         }
         logoUrl = await uploadLogo(compressedFile);
@@ -233,8 +243,12 @@ export default function LogosAdmin() {
       if (!logoUrl && !editingLogo) {
         toast({ title: "Error", description: "Please upload a logo image", variant: "destructive" });
         setIsUploading(false);
+        setUploadProgress(0);
         return;
       }
+
+      // Show saving state
+      setUploadProgress(100);
 
       if (editingLogo) {
         await updateMutation.mutateAsync({
@@ -254,6 +268,7 @@ export default function LogosAdmin() {
       console.error(error);
     } finally {
       setIsUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -400,16 +415,29 @@ export default function LogosAdmin() {
                     </div>
                   </div>
 
+                  {/* Progress Bar */}
+                  {isUploading && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {uploadProgress < 10 ? "Mengompresi..." : uploadProgress < 100 ? "Mengupload..." : "Menyimpan..."}
+                        </span>
+                        <span className="font-medium text-primary">{uploadProgress}%</span>
+                      </div>
+                      <Progress value={uploadProgress} className="h-2" />
+                    </div>
+                  )}
+
                   {/* Submit */}
                   <div className="flex gap-2 pt-4">
-                    <Button type="button" variant="outline" onClick={resetForm} className="flex-1">
+                    <Button type="button" variant="outline" onClick={resetForm} className="flex-1" disabled={isUploading}>
                       Batal
                     </Button>
                     <Button type="submit" disabled={isUploading} className="flex-1 gap-2">
                       {isUploading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          Uploading...
+                          {uploadProgress}%
                         </>
                       ) : (
                         editingLogo ? "Update" : "Simpan"

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
@@ -21,9 +22,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
- import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, Quote, Upload, X, Loader2 } from "lucide-react";
+import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, X, Loader2, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
- import { compressImage } from "@/lib/image-utils";
+import { compressImage, uploadWithProgress } from "@/lib/image-utils";
 import {
   DndContext,
   closestCenter,
@@ -71,6 +72,7 @@ const TestimonialsAdmin = () => {
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sensors = useSensors(
@@ -93,19 +95,25 @@ const TestimonialsAdmin = () => {
     },
   });
 
-  // Upload photo to storage
+  // Upload photo to storage with progress
   const uploadPhoto = async (file: File): Promise<string> => {
-    const fileExt = file.name.split(".").pop();
+    const fileExt = "webp"; // Always webp after compression
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
     
-    const { error: uploadError } = await supabase.storage
-      .from("testimonials")
-      .upload(fileName, file);
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     
-    if (uploadError) throw uploadError;
+    const publicUrl = await uploadWithProgress(
+      supabaseUrl,
+      accessToken,
+      "testimonials",
+      fileName,
+      file,
+      (progress) => setUploadProgress(progress)
+    );
     
-    const { data } = supabase.storage.from("testimonials").getPublicUrl(fileName);
-    return data.publicUrl;
+    return publicUrl;
   };
 
   // Delete photo from storage
@@ -201,6 +209,7 @@ const TestimonialsAdmin = () => {
     setEditingTestimonial(null);
     setPhotoFile(null);
     setPhotoPreview("");
+    setUploadProgress(0);
     setIsDialogOpen(false);
   };
 
@@ -229,6 +238,7 @@ const TestimonialsAdmin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsUploading(true);
+    setUploadProgress(0);
 
     try {
       let imageUrl = formData.image_url || editingTestimonial?.image_url || "";
@@ -236,15 +246,19 @@ const TestimonialsAdmin = () => {
       // Upload new file if selected
       if (photoFile) {
         // Compress image before upload
+        setUploadProgress(5);
         const compressedFile = await compressImage(photoFile, 200, 200, 0.85);
+        setUploadProgress(10);
         
         // Delete old photo if updating and it's from our storage
         if (editingTestimonial?.image_url) {
-          // Don't wait for delete, do it in background
           deletePhoto(editingTestimonial.image_url).catch(console.error);
         }
         imageUrl = await uploadPhoto(compressedFile);
       }
+
+      // Show saving state
+      setUploadProgress(100);
 
       if (editingTestimonial) {
         await updateMutation.mutateAsync({
@@ -268,6 +282,7 @@ const TestimonialsAdmin = () => {
       console.error(error);
     } finally {
       setIsUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -464,15 +479,28 @@ const TestimonialsAdmin = () => {
                       required
                     />
                   </div>
+                  {/* Progress Bar */}
+                  {isUploading && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {uploadProgress < 10 ? "Mengompresi..." : uploadProgress < 100 ? "Mengupload..." : "Menyimpan..."}
+                        </span>
+                        <span className="font-medium text-primary">{uploadProgress}%</span>
+                      </div>
+                      <Progress value={uploadProgress} className="h-2" />
+                    </div>
+                  )}
+
                   <div className="flex justify-end gap-2">
-                    <Button type="button" variant="outline" onClick={resetForm}>
+                    <Button type="button" variant="outline" onClick={resetForm} disabled={isUploading}>
                       Batal
                     </Button>
                     <Button type="submit" disabled={isUploading || createMutation.isPending || updateMutation.isPending}>
                       {isUploading ? (
                         <>
                           <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                          Mengupload...
+                          {uploadProgress}%
                         </>
                       ) : (
                         editingTestimonial ? "Simpan Perubahan" : "Tambah"
