@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,9 @@ import {
   LogOut,
   HelpCircle,
   Quote,
-  Loader2
+  Loader2,
+  Upload,
+  X
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { compressImage, uploadWithProgress } from "@/lib/image-utils";
@@ -89,6 +91,8 @@ export default function LogosAdmin() {
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSignOut = async () => {
     await signOut();
@@ -207,14 +211,58 @@ export default function LogosAdmin() {
     setLogoFile(null);
     setPreviewUrl("");
     setUploadProgress(0);
+    setIsDragOver(false);
     setIsDialogOpen(false);
+  };
+
+  const processFile = (file: File) => {
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "File terlalu besar", description: "Maksimal ukuran file 5MB", variant: "destructive" });
+      return;
+    }
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Format tidak valid", description: "Hanya file gambar yang diperbolehkan", variant: "destructive" });
+      return;
+    }
+    setLogoFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setLogoFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
+      processFile(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
+    
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processFile(file);
+    }
+  };
+
+  const clearFile = () => {
+    setLogoFile(null);
+    setPreviewUrl(editingLogo?.logo_url || "");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -333,28 +381,82 @@ export default function LogosAdmin() {
                 </DialogHeader>
                 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Logo Upload */}
+                  {/* Logo Upload - Drag & Drop Zone */}
                   <div className="space-y-2">
                     <Label>Logo Image</Label>
-                    <div className="flex items-center gap-4">
-                      <div className="w-20 h-20 rounded-lg border border-border bg-muted/50 flex items-center justify-center overflow-hidden">
-                        {previewUrl ? (
-                          <img src={previewUrl} alt="Preview" className="w-full h-full object-contain" />
-                        ) : (
-                          <ImageIcon className="w-8 h-8 text-muted-foreground" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileChange}
-                          className="cursor-pointer"
-                        />
-                        <p className="text-xs text-muted-foreground mt-1">
-                          PNG, JPG, atau SVG. Max 2MB.
-                        </p>
-                      </div>
+                    <div
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={() => fileInputRef.current?.click()}
+                      className={`
+                        relative cursor-pointer rounded-xl border-2 border-dashed transition-all duration-200
+                        ${isDragOver 
+                          ? "border-primary bg-primary/10 scale-[1.02]" 
+                          : previewUrl 
+                            ? "border-border bg-muted/30 hover:border-primary/50" 
+                            : "border-border hover:border-primary/50 hover:bg-muted/30"
+                        }
+                      `}
+                    >
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                      
+                      {previewUrl ? (
+                        <div className="p-4 flex items-center gap-4">
+                          <div className="w-20 h-20 rounded-lg border border-border bg-background flex items-center justify-center overflow-hidden shrink-0">
+                            <img src={previewUrl} alt="Preview" className="w-full h-full object-contain" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            {logoFile && (
+                              <p className="text-sm font-medium truncate">{logoFile.name}</p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              {logoFile ? `${(logoFile.size / 1024).toFixed(1)} KB` : "Gambar saat ini"}
+                            </p>
+                            <p className="text-xs text-primary mt-1">
+                              Klik atau drop untuk ganti
+                            </p>
+                          </div>
+                          {logoFile && (
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="shrink-0 text-muted-foreground hover:text-destructive"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                clearFile();
+                              }}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="p-8 flex flex-col items-center justify-center text-center">
+                          <div className={`
+                            w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-colors
+                            ${isDragOver ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}
+                          `}>
+                            <Upload className="w-6 h-6" />
+                          </div>
+                          <p className="text-sm font-medium">
+                            {isDragOver ? "Lepaskan file di sini" : "Drag & drop logo di sini"}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            atau klik untuk memilih file
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-2">
+                            PNG, JPG, WebP, atau SVG • Max 5MB
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
 
