@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface PartnerLogo {
   id: string;
@@ -8,13 +9,6 @@ interface PartnerLogo {
   logo_url: string;
   website_url: string | null;
 }
-
-const fallbackLogos = [
-  { id: "1", name: "DataFlow", logo_url: "", initials: "DFL" },
-  { id: "2", name: "SmartBiz", logo_url: "", initials: "SB" },
-  { id: "3", name: "NextGen", logo_url: "", initials: "NG" },
-  { id: "4", name: "FutureTech", logo_url: "", initials: "FT" },
-];
 
 const getInitials = (name: string): string => {
   const words = name.split(" ");
@@ -25,26 +19,48 @@ const getInitials = (name: string): string => {
 };
 
 export const PartnerLogosSection = () => {
-  const { data: logos } = useQuery({
+  const { data: logos, isLoading, error } = useQuery({
     queryKey: ["partner-logos-only"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("client_logos")
         .select("id, name, logo_url, website_url")
         .eq("is_partner", true)
+        .eq("is_active", true)
         .order("display_order", { ascending: true });
       
       if (error) throw error;
       return data as PartnerLogo[];
     },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    retry: 2,
   });
 
-  const displayLogos = logos && logos.length > 0 
-    ? logos.map(logo => ({
-        ...logo,
-        initials: getInitials(logo.name),
-      }))
-    : fallbackLogos;
+  // Show loading skeleton
+  if (isLoading) {
+    return (
+      <section className="py-12 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4 mb-6">
+          <p className="text-sm text-muted-foreground text-center">Partner Strategis Kami</p>
+        </div>
+        <div className="flex justify-center gap-8">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-10 w-32" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Don't show section if no logos or error
+  if (error || !logos || logos.length === 0) {
+    return null;
+  }
+
+  const displayLogos = logos.map(logo => ({
+    ...logo,
+    initials: getInitials(logo.name),
+  }));
 
   const duplicatedLogos = [...displayLogos, ...displayLogos];
 

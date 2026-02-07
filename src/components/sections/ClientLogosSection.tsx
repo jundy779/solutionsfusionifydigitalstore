@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ClientLogo {
   id: string;
@@ -8,13 +9,6 @@ interface ClientLogo {
   logo_url: string;
   website_url: string | null;
 }
-
-const fallbackLogos = [
-  { id: "1", name: "TechCorp", logo_url: "", initials: "TC" },
-  { id: "2", name: "InnovateLab", logo_url: "", initials: "IL" },
-  { id: "3", name: "DigitalFirst", logo_url: "", initials: "DF" },
-  { id: "4", name: "CloudScale", logo_url: "", initials: "CS" },
-];
 
 const getInitials = (name: string): string => {
   const words = name.split(" ");
@@ -25,26 +19,48 @@ const getInitials = (name: string): string => {
 };
 
 export const ClientLogosSection = () => {
-  const { data: logos } = useQuery({
+  const { data: logos, isLoading, error } = useQuery({
     queryKey: ["client-logos-only"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("client_logos")
         .select("id, name, logo_url, website_url")
         .eq("is_partner", false)
+        .eq("is_active", true)
         .order("display_order", { ascending: true });
       
       if (error) throw error;
       return data as ClientLogo[];
     },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    retry: 2,
   });
 
-  const displayLogos = logos && logos.length > 0 
-    ? logos.map(logo => ({
-        ...logo,
-        initials: getInitials(logo.name),
-      }))
-    : fallbackLogos;
+  // Don't render section if no logos or loading/error
+  if (isLoading) {
+    return (
+      <section className="py-12 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4 mb-6">
+          <p className="text-sm text-muted-foreground text-center">Dipercaya oleh Klien Kami</p>
+        </div>
+        <div className="flex justify-center gap-8">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-10 w-32" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Don't show section if no logos or error
+  if (error || !logos || logos.length === 0) {
+    return null;
+  }
+
+  const displayLogos = logos.map(logo => ({
+    ...logo,
+    initials: getInitials(logo.name),
+  }));
 
   const duplicatedLogos = [...displayLogos, ...displayLogos];
 
