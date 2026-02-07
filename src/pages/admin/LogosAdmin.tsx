@@ -91,6 +91,7 @@ export default function LogosAdmin() {
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState<string>("");
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -211,6 +212,7 @@ export default function LogosAdmin() {
     setLogoFile(null);
     setPreviewUrl("");
     setUploadProgress(0);
+    setUploadStatus("");
     setIsDragOver(false);
     setIsDialogOpen(false);
   };
@@ -290,33 +292,53 @@ export default function LogosAdmin() {
     e.preventDefault();
     setIsUploading(true);
     setUploadProgress(0);
+    setUploadStatus("Memulai...");
 
     try {
       let logoUrl = editingLogo?.logo_url || "";
 
       // Upload new file if selected
       if (logoFile) {
-        // Compress image before upload (show compressing state)
+        // Compress image before upload
+        setUploadStatus("Mengompresi gambar...");
         setUploadProgress(5);
+        
         const compressedFile = await compressImage(logoFile, 400, 400, 0.85);
         setUploadProgress(10);
+        setUploadStatus("Mengupload...");
         
-        // Delete old file if updating
+        // Delete old file if updating (non-blocking)
         if (editingLogo?.logo_url) {
           deleteLogoFile(editingLogo.logo_url).catch(console.error);
         }
-        logoUrl = await uploadLogo(compressedFile);
+        
+        try {
+          logoUrl = await uploadLogo(compressedFile);
+        } catch (uploadError) {
+          const errorMessage = uploadError instanceof Error ? uploadError.message : "Upload gagal";
+          toast({ 
+            title: "Upload Gagal", 
+            description: errorMessage, 
+            variant: "destructive" 
+          });
+          setIsUploading(false);
+          setUploadProgress(0);
+          setUploadStatus("");
+          return;
+        }
       }
 
       if (!logoUrl && !editingLogo) {
-        toast({ title: "Error", description: "Please upload a logo image", variant: "destructive" });
+        toast({ title: "Error", description: "Silakan upload gambar logo", variant: "destructive" });
         setIsUploading(false);
         setUploadProgress(0);
+        setUploadStatus("");
         return;
       }
 
       // Show saving state
       setUploadProgress(100);
+      setUploadStatus("Menyimpan ke database...");
 
       if (editingLogo) {
         await updateMutation.mutateAsync({
@@ -333,10 +355,13 @@ export default function LogosAdmin() {
         });
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Terjadi kesalahan";
+      toast({ title: "Error", description: errorMessage, variant: "destructive" });
       console.error(error);
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
+      setUploadStatus("");
     }
   };
 
@@ -542,7 +567,7 @@ export default function LogosAdmin() {
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {uploadProgress < 10 ? "Mengompresi..." : uploadProgress < 100 ? "Mengupload..." : "Menyimpan..."}
+                          {uploadStatus || "Memproses..."}
                         </span>
                         <span className="font-medium text-primary">{uploadProgress}%</span>
                       </div>
@@ -559,7 +584,7 @@ export default function LogosAdmin() {
                       {isUploading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          {uploadProgress}%
+                          {uploadStatus ? uploadStatus.split("...")[0] : `${uploadProgress}%`}
                         </>
                       ) : (
                         editingLogo ? "Update" : "Simpan"
