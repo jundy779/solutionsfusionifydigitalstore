@@ -215,15 +215,35 @@ export default function LogosAdmin() {
     setIsDialogOpen(false);
   };
 
+  const ALLOWED_FORMATS = {
+    'image/png': 'PNG',
+    'image/jpeg': 'JPG',
+    'image/webp': 'WebP',
+    'image/svg+xml': 'SVG'
+  };
+
   const processFile = (file: File) => {
+    // Check file format first
+    if (!Object.keys(ALLOWED_FORMATS).includes(file.type)) {
+      const allowedList = Object.values(ALLOWED_FORMATS).join(', ');
+      toast({ 
+        title: "Format file tidak didukung", 
+        description: `Hanya format ${allowedList} yang diperbolehkan. File Anda: ${file.type.split('/')[1]?.toUpperCase() || 'tidak dikenal'}`, 
+        variant: "destructive" 
+      });
+      return;
+    }
+
+    // Check file size
     if (file.size > 5 * 1024 * 1024) {
-      toast({ title: "File terlalu besar", description: "Maksimal ukuran file 5MB", variant: "destructive" });
+      toast({ 
+        title: "File terlalu besar", 
+        description: `Maksimal ukuran file 5MB. File Anda: ${(file.size / (1024 * 1024)).toFixed(2)}MB`, 
+        variant: "destructive" 
+      });
       return;
     }
-    if (!file.type.startsWith("image/")) {
-      toast({ title: "Format tidak valid", description: "Hanya file gambar yang diperbolehkan", variant: "destructive" });
-      return;
-    }
+
     setLogoFile(file);
     setPreviewUrl(URL.createObjectURL(file));
   };
@@ -402,7 +422,7 @@ export default function LogosAdmin() {
                       <input
                         ref={fileInputRef}
                         type="file"
-                        accept="image/*"
+                        accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml"
                         onChange={handleFileChange}
                         className="hidden"
                       />
