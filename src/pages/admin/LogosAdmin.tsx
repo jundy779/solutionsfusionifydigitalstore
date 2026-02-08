@@ -21,7 +21,9 @@ import {
   Quote,
   Loader2,
   Upload,
-  X
+  X,
+  RefreshCw,
+  AlertCircle
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { compressImage, uploadWithProgress } from "@/lib/image-utils";
@@ -93,6 +95,8 @@ export default function LogosAdmin() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const [isDragOver, setIsDragOver] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [lastCompressedFile, setLastCompressedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSignOut = async () => {
@@ -214,6 +218,8 @@ export default function LogosAdmin() {
     setUploadProgress(0);
     setUploadStatus("");
     setIsDragOver(false);
+    setUploadError(null);
+    setLastCompressedFile(null);
     setIsDialogOpen(false);
   };
 
@@ -290,20 +296,30 @@ export default function LogosAdmin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await performUpload();
+  };
+
+  const performUpload = async (retryWithCompressed?: File) => {
     setIsUploading(true);
     setUploadProgress(0);
     setUploadStatus("Memulai...");
+    setUploadError(null);
 
     try {
       let logoUrl = editingLogo?.logo_url || "";
+      let compressedFile = retryWithCompressed || lastCompressedFile;
 
       // Upload new file if selected
-      if (logoFile) {
-        // Compress image before upload
-        setUploadStatus("Mengompresi gambar...");
-        setUploadProgress(5);
+      if (logoFile || compressedFile) {
+        // Compress image before upload (skip if retrying with already compressed file)
+        if (!compressedFile) {
+          setUploadStatus("Mengompresi gambar...");
+          setUploadProgress(5);
+          
+          compressedFile = await compressImage(logoFile!, 400, 400, 0.85);
+          setLastCompressedFile(compressedFile); // Store for retry
+        }
         
-        const compressedFile = await compressImage(logoFile, 400, 400, 0.85);
         setUploadProgress(10);
         setUploadStatus("Mengupload...");
         
@@ -314,16 +330,17 @@ export default function LogosAdmin() {
         
         try {
           logoUrl = await uploadLogo(compressedFile);
-        } catch (uploadError) {
-          const errorMessage = uploadError instanceof Error ? uploadError.message : "Upload gagal";
-          toast({ 
-            title: "Upload Gagal", 
-            description: errorMessage, 
-            variant: "destructive" 
-          });
+        } catch (uploadErr) {
+          const errorMessage = uploadErr instanceof Error ? uploadErr.message : "Upload gagal";
+          setUploadError(errorMessage);
           setIsUploading(false);
           setUploadProgress(0);
           setUploadStatus("");
+          toast({ 
+            title: "Upload Gagal", 
+            description: "Klik tombol 'Coba Lagi' untuk mengulang upload", 
+            variant: "destructive" 
+          });
           return;
         }
       }
@@ -354,6 +371,10 @@ export default function LogosAdmin() {
           logo_url: logoUrl,
         });
       }
+      
+      // Clear retry data on success
+      setLastCompressedFile(null);
+      setUploadError(null);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Terjadi kesalahan";
       toast({ title: "Error", description: errorMessage, variant: "destructive" });
@@ -362,6 +383,12 @@ export default function LogosAdmin() {
       setIsUploading(false);
       setUploadProgress(0);
       setUploadStatus("");
+    }
+  };
+
+  const handleRetry = () => {
+    if (lastCompressedFile) {
+      performUpload(lastCompressedFile);
     }
   };
 
@@ -572,6 +599,29 @@ export default function LogosAdmin() {
                         <span className="font-medium text-primary">{uploadProgress}%</span>
                       </div>
                       <Progress value={uploadProgress} className="h-2" />
+                    </div>
+                  )}
+
+                  {/* Error State with Retry */}
+                  {uploadError && !isUploading && (
+                    <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 space-y-3">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-destructive">Upload Gagal</p>
+                          <p className="text-xs text-destructive/80 mt-1">{uploadError}</p>
+                        </div>
+                      </div>
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        size="sm"
+                        onClick={handleRetry}
+                        className="w-full gap-2 border-destructive/50 text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                      >
+                        <RefreshCw className="w-4 h-4" />
+                        Coba Lagi
+                      </Button>
                     </div>
                   )}
 
