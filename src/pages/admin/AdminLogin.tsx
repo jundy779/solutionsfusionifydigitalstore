@@ -41,10 +41,9 @@ export default function AdminLogin() {
         return;
       }
 
-      // Wait a moment for the auth state to update and check admin status
-      setTimeout(() => {
-        navigate(from, { replace: true });
-      }, 500);
+      // Navigate immediately - AuthContext will handle the state update
+      // ProtectedRoute will show loading while checking admin status
+      navigate(from, { replace: true });
     } catch (error) {
       toast({
         title: "Error",
