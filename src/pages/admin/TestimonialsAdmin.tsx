@@ -22,7 +22,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, X, Loader2, Quote } from "lucide-react";
+import { Plus, ArrowLeft, Image as ImageIcon, FileQuestion, X, Loader2, Quote, AlertCircle, RefreshCw } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
 import { compressImage, uploadWithProgress } from "@/lib/image-utils";
 import {
@@ -73,6 +74,8 @@ const TestimonialsAdmin = () => {
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadError, setUploadError] = useState<string>("");
+  const [lastCompressedFile, setLastCompressedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sensors = useSensors(
@@ -210,6 +213,8 @@ const TestimonialsAdmin = () => {
     setPhotoFile(null);
     setPhotoPreview("");
     setUploadProgress(0);
+    setUploadError("");
+    setLastCompressedFile(null);
     setIsDialogOpen(false);
   };
 
@@ -235,29 +240,22 @@ const TestimonialsAdmin = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const performUpload = async (compressedFile: File | null) => {
     setIsUploading(true);
-    setUploadProgress(0);
+    setUploadError("");
 
     try {
       let imageUrl = formData.image_url || editingTestimonial?.image_url || "";
 
-      // Upload new file if selected
-      if (photoFile) {
-        // Compress image before upload
-        setUploadProgress(5);
-        const compressedFile = await compressImage(photoFile, 200, 200, 0.85);
+      if (compressedFile) {
         setUploadProgress(10);
-        
-        // Delete old photo if updating and it's from our storage
+        // Delete old photo if updating
         if (editingTestimonial?.image_url) {
           deletePhoto(editingTestimonial.image_url).catch(console.error);
         }
         imageUrl = await uploadPhoto(compressedFile);
       }
 
-      // Show saving state
       setUploadProgress(100);
 
       if (editingTestimonial) {
@@ -278,11 +276,41 @@ const TestimonialsAdmin = () => {
           image_url: imageUrl,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      setUploadError(error?.message || "Upload gagal. Silakan coba lagi.");
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setUploadProgress(0);
+    setUploadError("");
+
+    let compressedFile: File | null = null;
+
+    if (photoFile) {
+      try {
+        setIsUploading(true);
+        setUploadProgress(5);
+        compressedFile = await compressImage(photoFile, 200, 200, 0.85);
+        setLastCompressedFile(compressedFile);
+      } catch (error: any) {
+        setUploadError(error?.message || "Gagal mengompresi gambar.");
+        setIsUploading(false);
+        return;
+      }
+    }
+
+    await performUpload(compressedFile);
+  };
+
+  const handleRetry = () => {
+    if (lastCompressedFile) {
+      performUpload(lastCompressedFile);
     }
   };
 
@@ -490,6 +518,28 @@ const TestimonialsAdmin = () => {
                       </div>
                       <Progress value={uploadProgress} className="h-2" />
                     </div>
+                  )}
+
+                  {/* Retry on Error */}
+                  {uploadError && !isUploading && (
+                    <Alert variant="destructive" className="flex items-start gap-3">
+                      <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
+                      <div className="flex-1">
+                        <AlertDescription className="text-sm">{uploadError}</AlertDescription>
+                      </div>
+                      {lastCompressedFile && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={handleRetry}
+                          className="shrink-0 border-destructive/50 text-destructive hover:text-destructive hover:bg-destructive/10"
+                        >
+                          <RefreshCw className="h-3 w-3 mr-1" />
+                          Coba Lagi
+                        </Button>
+                      )}
+                    </Alert>
                   )}
 
                   <div className="flex justify-end gap-2">
