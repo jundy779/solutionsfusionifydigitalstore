@@ -2,6 +2,7 @@
  import { motion } from "framer-motion";
  import { Bot, Store, CreditCard, Shield, Network } from "lucide-react";
  import { AnimatedBeam } from "@/components/ui/animated-beam";
+ import illustrationEcosystem from "@/assets/illustration-ecosystem.png";
 
 const ecosystemSteps = [
   {
@@ -33,6 +34,16 @@ const ecosystemSteps = [
 export const UnifiedEcosystemSection = () => {
   return (
     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Background illustration */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <img 
+          src={illustrationEcosystem} 
+          alt="" 
+          className="w-full max-w-4xl opacity-[0.07] object-cover"
+          aria-hidden="true"
+        />
+      </div>
+
       {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -107,7 +118,6 @@ export const UnifiedEcosystemSection = () => {
                 </div>
               </div>
               
-              {/* Connector line */}
               {index < ecosystemSteps.length - 1 && (
                 <div className="flex justify-center py-1">
                   <div className="w-px h-4 bg-gradient-to-b from-primary/30 to-primary/10" />
@@ -141,69 +151,48 @@ export const UnifiedEcosystemSection = () => {
   );
 };
  
- const EcosystemDesktop = () => {
-   const containerRef = useRef<HTMLDivElement>(null);
-   const ref1 = useRef<HTMLDivElement>(null);
-   const ref2 = useRef<HTMLDivElement>(null);
-   const ref3 = useRef<HTMLDivElement>(null);
-   const ref4 = useRef<HTMLDivElement>(null);
- 
-   const refs = [ref1, ref2, ref3, ref4];
- 
-   return (
-     <div
-       ref={containerRef}
-       className="hidden lg:flex items-center justify-center gap-6 max-w-5xl mx-auto relative"
-     >
-       {ecosystemSteps.map((step, index) => (
-         <motion.div
-           key={step.title}
-           ref={refs[index]}
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-           className="group"
-         >
-           <div className="w-44 p-5 rounded-2xl bg-card/50 border border-border/50 text-center hover:border-primary/30 transition-all duration-300">
-             <motion.div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3 border border-primary/20 group-hover:scale-105 transition-transform">
-               <step.icon className="w-6 h-6 text-primary" />
-             </motion.div>
-             <div className="text-xs text-primary font-medium uppercase tracking-wider mb-1">
-               {step.subtitle}
-             </div>
-             <h3 className="font-display font-semibold text-base text-foreground mb-1">
-               {step.title}
-             </h3>
-             <p className="text-muted-foreground text-xs">{step.description}</p>
-           </div>
-         </motion.div>
-       ))}
- 
-       {/* Animated Beams connecting cards */}
-       <AnimatedBeam
-         containerRef={containerRef}
-         fromRef={ref1}
-         toRef={ref2}
-         curvature={-30}
-         duration={5}
-       />
-       <AnimatedBeam
-         containerRef={containerRef}
-         fromRef={ref2}
-         toRef={ref3}
-         curvature={-30}
-         delay={0.5}
-         duration={5}
-       />
-       <AnimatedBeam
-         containerRef={containerRef}
-         fromRef={ref3}
-         toRef={ref4}
-         curvature={-30}
-         delay={1}
-         duration={5}
-       />
-     </div>
-   );
- };
+  const EcosystemDesktop = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const ref1 = useRef<HTMLDivElement>(null);
+    const ref2 = useRef<HTMLDivElement>(null);
+    const ref3 = useRef<HTMLDivElement>(null);
+    const ref4 = useRef<HTMLDivElement>(null);
+  
+    const refs = [ref1, ref2, ref3, ref4];
+  
+    return (
+      <div
+        ref={containerRef}
+        className="hidden lg:flex items-center justify-center gap-6 max-w-5xl mx-auto relative"
+      >
+        {ecosystemSteps.map((step, index) => (
+          <motion.div
+            key={step.title}
+            ref={refs[index]}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+            className="group"
+          >
+            <div className="w-44 p-5 rounded-2xl bg-card/50 border border-border/50 text-center hover:border-primary/30 transition-all duration-300">
+              <motion.div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3 border border-primary/20 group-hover:scale-105 transition-transform">
+                <step.icon className="w-6 h-6 text-primary" />
+              </motion.div>
+              <div className="text-xs text-primary font-medium uppercase tracking-wider mb-1">
+                {step.subtitle}
+              </div>
+              <h3 className="font-display font-semibold text-base text-foreground mb-1">
+                {step.title}
+              </h3>
+              <p className="text-muted-foreground text-xs">{step.description}</p>
+            </div>
+          </motion.div>
+        ))}
+  
+        <AnimatedBeam containerRef={containerRef} fromRef={ref1} toRef={ref2} curvature={-30} duration={5} />
+        <AnimatedBeam containerRef={containerRef} fromRef={ref2} toRef={ref3} curvature={-30} delay={0.5} duration={5} />
+        <AnimatedBeam containerRef={containerRef} fromRef={ref3} toRef={ref4} curvature={-30} delay={1} duration={5} />
+      </div>
+    );
+  };

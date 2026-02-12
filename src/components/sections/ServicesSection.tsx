@@ -9,6 +9,7 @@ import {
   ArrowUpRight
 } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import illustrationServices from "@/assets/illustration-services.png";
 
 const services = [
   {
@@ -17,7 +18,7 @@ const services = [
     description: "Modern, scalable websites and mobile applications built with cutting-edge frameworks.",
     features: ["React/Next.js", "Mobile Apps", "E-commerce", "Landing Pages"],
     href: "/services/web-development",
-    className: "md:col-span-2 lg:col-span-2", // Large card
+    className: "md:col-span-2 lg:col-span-2",
   },
   {
     icon: Bot,
@@ -25,7 +26,7 @@ const services = [
     description: "Intelligent WhatsApp and Telegram bots for auto order systems and workflow automation.",
     features: ["WhatsApp Bots", "Telegram Bots", "Auto Orders", "Notifications"],
     href: "/services/automation-bots",
-    className: "md:col-span-1 lg:col-span-1", // Regular card
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     icon: Settings2,
@@ -33,7 +34,7 @@ const services = [
     description: "Seamless API, CRM, and payment gateway integrations for unified operations.",
     features: ["API Integration", "CRM Systems", "Payment Gateway", "ERP"],
     href: "/services/digital-systems",
-    className: "md:col-span-1 lg:col-span-1", // Regular card
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     icon: Cloud,
@@ -41,7 +42,7 @@ const services = [
     description: "Enterprise hosting, VPS, and infrastructure management with 99.9% uptime.",
     features: ["Cloud Hosting", "VPS Management", "Monitoring", "Security"],
     href: "/services/cloud-support",
-    className: "md:col-span-1 lg:col-span-1", // Regular card
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     icon: Briefcase,
@@ -49,7 +50,7 @@ const services = [
     description: "Custom IT and software projects tailored to your specific business needs.",
     features: ["MVP Development", "Consulting", "System Audit", "Training"],
     href: "/services/project-services",
-    className: "md:col-span-1 lg:col-span-1", // Regular card
+    className: "md:col-span-1 lg:col-span-1",
   },
 ];
 
@@ -94,28 +95,44 @@ export const ServicesSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-14"
-        >
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-primary" />
+        {/* Section Header with Illustration */}
+        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+              <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-primary" />
+              </div>
+              <span className="text-sm font-medium text-muted-foreground">Our Services</span>
             </div>
-            <span className="text-sm font-medium text-muted-foreground">Our Services</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            Complete Digital
-            <span className="text-gradient"> Solutions</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">
-            Everything you need to build, automate, and scale your digital presence
-          </p>
-        </motion.div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
+              Complete Digital
+              <span className="text-gradient"> Solutions</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">
+              Everything you need to build, automate, and scale your digital presence
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="hidden lg:block"
+          >
+            <img 
+              src={illustrationServices} 
+              alt="Digital development illustration" 
+              className="w-full rounded-2xl opacity-80"
+              loading="lazy"
+            />
+          </motion.div>
+        </div>
 
         {/* Bento Grid */}
         <BentoGrid className="gap-5">
