@@ -112,7 +112,13 @@ export const ClientLogosSection = () => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <section className="py-12 bg-background relative overflow-hidden">
+      <motion.section
+        className="py-12 bg-background relative overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <div className="container mx-auto px-4 mb-6">
           <p className="text-sm text-muted-foreground text-center">
             Dipercaya oleh <span className="text-foreground font-semibold">{logos.length}+</span> Klien Kami
@@ -158,7 +164,7 @@ export const ClientLogosSection = () => {
         <div className="container mx-auto px-4 mt-10">
           <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
-      </section>
+      </motion.section>
     </TooltipProvider>
   );
 };
