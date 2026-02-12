@@ -112,7 +112,13 @@ export const PartnerLogosSection = () => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <section className="py-12 bg-background relative overflow-hidden">
+      <motion.section
+        className="py-12 bg-background relative overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+      >
         <div className="container mx-auto px-4 mb-6">
           <p className="text-sm text-muted-foreground text-center">
             <span className="text-foreground font-semibold">{logos.length}+</span> Partner Strategis Kami
@@ -153,7 +159,7 @@ export const PartnerLogosSection = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </TooltipProvider>
   );
 };
