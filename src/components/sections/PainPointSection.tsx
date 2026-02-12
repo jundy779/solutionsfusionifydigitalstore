@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Cog, Clock, DollarSign, Zap } from "lucide-react";
+import illustrationPainpoint from "@/assets/illustration-painpoint.png";
 
 const painPoints = [
   {
@@ -48,25 +49,42 @@ export const PainPointSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-14"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-destructive/20 bg-destructive/5 backdrop-blur-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
-            <span className="text-sm font-medium text-destructive/80">The Challenge</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            Is Your Business
-            <span className="text-gradient"> Struggling With?</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">
-            These challenges are holding back thousands of businesses from reaching their potential
-          </p>
-        </motion.div>
+        {/* Header with illustration */}
+        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-destructive/20 bg-destructive/5 backdrop-blur-sm mb-6">
+              <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
+              <span className="text-sm font-medium text-destructive/80">The Challenge</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
+              Is Your Business
+              <span className="text-gradient"> Struggling With?</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">
+              These challenges are holding back thousands of businesses from reaching their potential
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="hidden lg:flex justify-center"
+          >
+            <img 
+              src={illustrationPainpoint} 
+              alt="Business challenges illustration" 
+              className="w-72 h-72 object-contain opacity-70 rounded-2xl"
+              loading="lazy"
+            />
+          </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {painPoints.map((point, index) => (

@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Zap, Shield, TrendingUp, Heart, Clock } from "lucide-react";
+import illustrationResults from "@/assets/illustration-results.png";
 
 const results = [
   {
@@ -78,6 +79,16 @@ export const ResultsSection = () => {
 
   return (
     <section ref={ref} className="py-20 md:py-28 bg-background relative overflow-hidden">
+      {/* Background illustration */}
+      <div className="absolute inset-0 pointer-events-none flex items-end justify-center">
+        <img 
+          src={illustrationResults} 
+          alt="" 
+          className="w-full max-w-5xl opacity-[0.06] object-cover"
+          aria-hidden="true"
+        />
+      </div>
+
       {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
