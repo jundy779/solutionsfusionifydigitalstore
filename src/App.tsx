@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import LogosAdmin from "./pages/admin/LogosAdmin";
@@ -39,8 +41,10 @@ const App = () => (
             <Route path="/services/digital-systems" element={<DigitalSystems />} />
             <Route path="/services/cloud-support" element={<CloudSupport />} />
             <Route path="/services/project-services" element={<ProjectServices />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/admin/login" element={<AdminLogin />} />
-            
+
             <Route
               path="/admin/logos"
               element={
