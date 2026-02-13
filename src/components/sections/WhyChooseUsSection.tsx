@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Layers, Code2, Rocket, Headphones, CheckCircle } from "lucide-react";
+import illustrationWhychooseus from "@/assets/illustration-whychooseus.png";
 
 const reasons = [
   {
@@ -52,25 +53,41 @@ export const WhyChooseUsSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-14"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <CheckCircle className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">Why Choose Us</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            The Fusionify
-            <span className="text-gradient"> Advantage</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">
-            What sets us apart from other digital solution providers
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">Why Choose Us</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
+              The Fusionify
+              <span className="text-gradient"> Advantage</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">
+              What sets us apart from other digital solution providers
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="hidden lg:flex justify-center"
+          >
+            <img 
+              src={illustrationWhychooseus} 
+              alt="Why choose Fusionify illustration" 
+              className="w-80 h-auto object-contain opacity-80 rounded-2xl"
+              loading="lazy"
+            />
+          </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
           {reasons.map((reason, index) => (
