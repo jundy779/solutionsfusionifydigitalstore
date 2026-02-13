@@ -11,7 +11,7 @@ import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import LogosAdmin from "./pages/admin/LogosAdmin";
 import AdminLogin from "./pages/admin/AdminLogin";
-import AdminSignup from "./pages/admin/AdminSignup";
+
 import FAQAdmin from "./pages/admin/FAQAdmin";
 import TestimonialsAdmin from "./pages/admin/TestimonialsAdmin";
 import ProjectsAdmin from "./pages/admin/ProjectsAdmin";
@@ -40,7 +40,7 @@ const App = () => (
             <Route path="/services/cloud-support" element={<CloudSupport />} />
             <Route path="/services/project-services" element={<ProjectServices />} />
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/signup" element={<AdminSignup />} />
+            
             <Route
               path="/admin/logos"
               element={
