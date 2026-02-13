@@ -121,16 +121,10 @@ export default function AdminLogin() {
           </form>
         </div>
 
-        <div className="text-center mt-6 space-y-2">
+        <div className="text-center mt-6">
           <p className="text-xs text-muted-foreground">
             Hanya administrator yang dapat mengakses panel ini.
           </p>
-          <Link
-            to="/admin/signup"
-            className="text-sm text-primary hover:underline"
-          >
-            Belum punya akun? Daftar di sini
-          </Link>
         </div>
       </div>
     </div>
