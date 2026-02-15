@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { compressImage, uploadWithProgress } from "@/lib/image-utils";
+import { Progress } from "@/components/ui/progress";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -91,6 +93,7 @@ const ProjectsAdmin = () => {
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: projects, isLoading } = useQuery({
@@ -107,17 +110,25 @@ const ProjectsAdmin = () => {
   });
 
   const uploadThumbnail = async (file: File): Promise<string> => {
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${crypto.randomUUID()}.${fileExt}`;
+    setUploadProgress(5);
+    const compressedFile = await compressImage(file, 800, 800, 0.85);
     
-    const { error: uploadError } = await supabase.storage
-      .from("projects")
-      .upload(fileName, file);
+    setUploadProgress(10);
+    const fileName = `${crypto.randomUUID()}.webp`;
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const { data: { session } } = await supabase.auth.getSession();
+    const accessToken = session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     
-    if (uploadError) throw uploadError;
+    const publicUrl = await uploadWithProgress(
+      supabaseUrl,
+      accessToken,
+      "projects",
+      fileName,
+      compressedFile,
+      (progress) => setUploadProgress(Math.max(10, progress))
+    );
     
-    const { data } = supabase.storage.from("projects").getPublicUrl(fileName);
-    return data.publicUrl;
+    return publicUrl;
   };
 
   const deleteThumbnail = async (url: string) => {
@@ -224,6 +235,7 @@ const ProjectsAdmin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsUploading(true);
+    setUploadProgress(0);
 
     try {
       let thumbnailUrl = editingProject?.thumbnail_url || null;
@@ -259,6 +271,7 @@ const ProjectsAdmin = () => {
       console.error(error);
     } finally {
       setIsUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -510,9 +523,21 @@ const ProjectsAdmin = () => {
                       Batal
                     </Button>
                     <Button type="submit" disabled={isUploading}>
-                      {isUploading ? "Menyimpan..." : (editingProject ? "Simpan Perubahan" : "Tambah")}
+                      {isUploading ? `${uploadProgress}% Menyimpan...` : (editingProject ? "Simpan Perubahan" : "Tambah")}
                     </Button>
                   </div>
+
+                  {isUploading && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {uploadProgress < 10 ? "Mengompresi..." : uploadProgress < 100 ? "Mengupload..." : "Menyimpan..."}
+                        </span>
+                        <span className="font-medium text-primary">{uploadProgress}%</span>
+                      </div>
+                      <Progress value={uploadProgress} className="h-2" />
+                    </div>
+                  )}
                 </form>
               </DialogContent>
             </Dialog>
