@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram, Facebook, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import fusionifyLogo from "@/assets/fusionify-logo.png";
 
@@ -22,10 +22,11 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/fusionifytempestore/", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/fusionify-digital-store/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/FUSIONIFY-ID", label: "GitHub" },
+  { icon: Facebook, href: "https://www.facebook.com/FusionTempestVPN", label: "Facebook" },
+  { icon: Mail, href: "mailto:fusionify_digital@vk.com", label: "Email" },
 ];
 
 export const Footer = () => {
