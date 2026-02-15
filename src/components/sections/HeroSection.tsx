@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy, useMemo } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Lazy load the World component for better performance
 const World = lazy(() =>
@@ -10,6 +11,7 @@ const World = lazy(() =>
 );
 
 export const HeroSection = () => {
+  const { t } = useLanguage();
   const globeConfig = useMemo(
     () => ({
       pointSize: 4,
@@ -297,7 +299,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
               className="text-sm font-medium text-muted-foreground"
             >
-              {"Digital Solutions Provider".split("").map((char, index) => (
+              {t("hero.badge").split("").map((char, index) => (
                 <motion.span
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
@@ -318,9 +320,9 @@ export const HeroSection = () => {
           <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 tracking-tight">
             <TextGenerateEffectLines
               lines={[
-                { text: "Transform your business with", className: "text-foreground" },
-                { text: "smart automation and", className: "text-foreground [&>.word:nth-child(1)]:text-foreground [&>.word:nth-child(2)]:text-gradient" },
-                { text: "modern digital solutions.", className: "text-foreground" },
+                { text: t("hero.line1"), className: "text-foreground" },
+                { text: t("hero.line2"), className: "text-foreground [&>.word:nth-child(1)]:text-foreground [&>.word:nth-child(2)]:text-gradient" },
+                { text: t("hero.line3"), className: "text-foreground" },
               ]}
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight"
               filter={true}
@@ -336,8 +338,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Dipercaya oleh UMKM, startup, dan perusahaan yang mengandalkan
-            solusi digital modern untuk pertumbuhan bisnis.
+            {t("hero.subtitle")}
           </motion.p>
 
           {/* Single CTA - Moving Border Effect */}
@@ -353,7 +354,7 @@ export const HeroSection = () => {
               className="h-12 px-8 text-sm font-semibold bg-background text-foreground rounded-full"
             >
               <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
-              <span>Book a consultation</span>
+              <span>{t("hero.cta")}</span>
             </MovingBorderButton>
           </motion.div>
         </div>

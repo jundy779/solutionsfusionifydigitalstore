@@ -4,20 +4,23 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import fusionifyLogo from "@/assets/fusionify-logo.png";
-
-const navLinks = [
-  { name: "Home", href: "/#home" },
-  { name: "Services", href: "/#services" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "About", href: "/#about" },
-  { name: "Contact", href: "/#contact" },
-];
+import { LanguageToggle } from "@/components/layout/LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { name: t("nav.home"), href: "/#home" },
+    { name: t("nav.services"), href: "/#services" },
+    { name: t("nav.portfolio"), href: "/portfolio" },
+    { name: t("nav.about"), href: "/#about" },
+    { name: t("nav.contact"), href: "/#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,14 +110,15 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button - Covena style with arrow */}
-          <div className="hidden md:block">
+          {/* Language Toggle + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageToggle />
             <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
               <Button 
                 className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
               >
                 <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
-                Get started
+                {t("nav.getStarted")}
               </Button>
             </a>
           </div>
@@ -158,12 +162,15 @@ export const Navbar = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: 0.25 }}
-                className="pt-3"
+                className="pt-3 flex flex-col gap-3"
               >
+                <div className="flex justify-center">
+                  <LanguageToggle />
+                </div>
                 <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
                   <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full">
                     <ArrowRight className="w-4 h-4 mr-2" />
-                    Get started
+                    {t("nav.getStarted")}
                   </Button>
                 </a>
               </motion.div>

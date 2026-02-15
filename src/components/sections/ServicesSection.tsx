@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import illustrationServices from "@/assets/illustration-services.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   {
@@ -55,6 +56,7 @@ const services = [
 ];
 
 export const ServicesSection = () => {
+  const { t } = useLanguage();
   return (
     <section id="services" className="py-20 md:py-28 bg-background relative overflow-hidden">
       {/* Animated background glows */}
@@ -107,14 +109,14 @@ export const ServicesSection = () => {
               <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-primary" />
               </div>
-              <span className="text-sm font-medium text-muted-foreground">Our Services</span>
+              <span className="text-sm font-medium text-muted-foreground">{t("services.badge")}</span>
             </div>
             <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-              Complete Digital
-              <span className="text-gradient"> Solutions</span>
+              {t("services.titlePrefix")}
+              <span className="text-gradient"> {t("services.title")}</span>
             </h2>
             <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">
-              Everything you need to build, automate, and scale your digital presence
+              {t("services.subtitle")}
             </p>
           </motion.div>
 
