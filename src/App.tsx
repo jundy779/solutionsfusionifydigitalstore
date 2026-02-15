@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -28,60 +29,62 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:slug" element={<ProjectDetail />} />
-            <Route path="/services/web-development" element={<WebDevelopment />} />
-            <Route path="/services/automation-bots" element={<AutomationBots />} />
-            <Route path="/services/digital-systems" element={<DigitalSystems />} />
-            <Route path="/services/cloud-support" element={<CloudSupport />} />
-            <Route path="/services/project-services" element={<ProjectServices />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
+      <LanguageProvider>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+              <Route path="/services/web-development" element={<WebDevelopment />} />
+              <Route path="/services/automation-bots" element={<AutomationBots />} />
+              <Route path="/services/digital-systems" element={<DigitalSystems />} />
+              <Route path="/services/cloud-support" element={<CloudSupport />} />
+              <Route path="/services/project-services" element={<ProjectServices />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
 
-            <Route
-              path="/admin/logos"
-              element={
-                <ProtectedRoute requireAdmin>
-                  <LogosAdmin />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/faq"
-              element={
-                <ProtectedRoute requireAdmin>
-                  <FAQAdmin />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/testimonials"
-              element={
-                <ProtectedRoute requireAdmin>
-                  <TestimonialsAdmin />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/projects"
-              element={
-                <ProtectedRoute requireAdmin>
-                  <ProjectsAdmin />
-                </ProtectedRoute>
-              }
-            />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+              <Route
+                path="/admin/logos"
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <LogosAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/faq"
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <FAQAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/testimonials"
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <TestimonialsAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/projects"
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <ProjectsAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

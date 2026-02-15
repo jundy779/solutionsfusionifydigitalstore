@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Instagram, Facebook, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import fusionifyLogo from "@/assets/fusionify-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const footerLinks = {
   Services: [
@@ -30,6 +31,7 @@ const socialLinks = [
 ];
 
 export const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer className="border-t border-border/30 bg-background">
       <div className="container mx-auto px-4 py-14 lg:py-16">
@@ -53,8 +55,7 @@ export const Footer = () => {
                 </span>
               </a>
               <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
-                Your trusted partner for digital transformation. Building scalable 
-                solutions for Indonesian businesses and beyond.
+                {t("footer.description")}
               </p>
               
               {/* Social Links */}
@@ -124,9 +125,9 @@ export const Footer = () => {
             © {new Date().getFullYear()} PT Fusionify Digital Store. All rights reserved.
           </p>
           <p className="text-muted-foreground text-xs flex items-center gap-1.5">
-            <span>Made with</span>
+            <span>{t("footer.madeWith")}</span>
             <span>❤️</span>
-            <span>in Indonesia</span>
+            <span>{t("footer.inIndonesia")}</span>
           </p>
         </motion.div>
       </div>
