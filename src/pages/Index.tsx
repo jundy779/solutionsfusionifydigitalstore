@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { AIChatbot } from "@/components/layout/AIChatbot";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ClientLogosSection } from "@/components/sections/ClientLogosSection";
 import { PartnerLogosSection } from "@/components/sections/PartnerLogosSection";
@@ -55,6 +56,7 @@ const Index = () => {
       </Suspense>
       <ScrollToTop />
       <WhatsAppButton />
+      <AIChatbot />
     </div>
   );
 };
