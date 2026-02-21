@@ -18,6 +18,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import FAQAdmin from "./pages/admin/FAQAdmin";
 import TestimonialsAdmin from "./pages/admin/TestimonialsAdmin";
 import ProjectsAdmin from "./pages/admin/ProjectsAdmin";
+import ConsultationsAdmin from "./pages/admin/ConsultationsAdmin";
 import WebDevelopment from "./pages/services/WebDevelopment";
 import AutomationBots from "./pages/services/AutomationBots";
 import DigitalSystems from "./pages/services/DigitalSystems";
@@ -76,6 +77,14 @@ const App = () => (
                 element={
                   <ProtectedRoute requireAdmin>
                     <ProjectsAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/consultations"
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <ConsultationsAdmin />
                   </ProtectedRoute>
                 }
               />
