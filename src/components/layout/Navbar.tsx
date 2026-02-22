@@ -1,18 +1,47 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import fusionifyLogo from "@/assets/fusionify-logo.png";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { Badge } from "@/components/ui/badge";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [newConsultationCount, setNewConsultationCount] = useState(0);
+
+  // Fetch new consultation count for admin
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    const fetchCount = async () => {
+      const { count } = await supabase
+        .from("consultation_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "new");
+      setNewConsultationCount(count || 0);
+    };
+
+    fetchCount();
+
+    const channel = supabase
+      .channel('navbar-consultation-count')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'consultation_requests' }, () => {
+        fetchCount();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin]);
 
   const navLinks = [
     { name: t("nav.home"), href: "/#home" },
@@ -110,9 +139,21 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* Language Toggle + CTA */}
+          {/* Language Toggle + Admin Bell + CTA */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageToggle />
+            {isAdmin && (
+              <Link to="/admin/consultations" className="relative">
+                <Button variant="ghost" size="icon" className="relative h-9 w-9">
+                  <Bell className="w-4 h-4" />
+                  {newConsultationCount > 0 && (
+                    <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">
+                      {newConsultationCount}
+                    </Badge>
+                  )}
+                </Button>
+              </Link>
+            )}
             <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
               <Button 
                 className="h-10 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full group"
@@ -164,8 +205,20 @@ export const Navbar = () => {
                 transition={{ duration: 0.2, delay: 0.25 }}
                 className="pt-3 flex flex-col gap-3"
               >
-                <div className="flex justify-center">
+                <div className="flex items-center justify-center gap-3">
                   <LanguageToggle />
+                  {isAdmin && (
+                    <Link to="/admin/consultations" className="relative">
+                      <Button variant="ghost" size="icon" className="relative h-9 w-9">
+                        <Bell className="w-4 h-4" />
+                        {newConsultationCount > 0 && (
+                          <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">
+                            {newConsultationCount}
+                          </Badge>
+                        )}
+                      </Button>
+                    </Link>
+                  )}
                 </div>
                 <a href="/#contact" onClick={(e) => handleNavClick(e, "/#contact")}>
                   <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full">
