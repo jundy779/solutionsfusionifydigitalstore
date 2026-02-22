@@ -84,6 +84,10 @@ const ConsultationsAdmin = () => {
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["admin-consultations"] });
           const newReq = payload.new as ConsultationRequest;
+          // Play notification sound
+          const audio = new Audio("/sounds/notification.mp3");
+          audio.volume = 0.5;
+          audio.play().catch(() => {});
           toast({
             title: "📩 Konsultasi Baru Masuk!",
             description: `${newReq.name} - ${newReq.service}`,
