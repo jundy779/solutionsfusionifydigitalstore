@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -69,6 +69,33 @@ const ConsultationsAdmin = () => {
   const queryClient = useQueryClient();
   const [selectedRequest, setSelectedRequest] = useState<ConsultationRequest | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("all");
+
+  // Realtime subscription for new consultation requests
+  useEffect(() => {
+    const channel = supabase
+      .channel('consultation-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'consultation_requests',
+        },
+        (payload) => {
+          queryClient.invalidateQueries({ queryKey: ["admin-consultations"] });
+          const newReq = payload.new as ConsultationRequest;
+          toast({
+            title: "📩 Konsultasi Baru Masuk!",
+            description: `${newReq.name} - ${newReq.service}`,
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient, toast]);
 
   const { data: requests, isLoading } = useQuery({
     queryKey: ["admin-consultations"],
