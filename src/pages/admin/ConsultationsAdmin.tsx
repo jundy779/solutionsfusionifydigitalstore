@@ -32,7 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, MessageSquare, Mail, Building2, Briefcase, DollarSign, Trash2, Eye, Image as ImageIcon, Quote, HelpCircle, FolderOpen } from "lucide-react";
+import { ArrowLeft, MessageSquare, Mail, Building2, Briefcase, DollarSign, Trash2, Eye, Image as ImageIcon, Quote, HelpCircle, FolderOpen, Volume2, VolumeX } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
@@ -69,6 +69,10 @@ const ConsultationsAdmin = () => {
   const queryClient = useQueryClient();
   const [selectedRequest, setSelectedRequest] = useState<ConsultationRequest | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
+    const saved = localStorage.getItem("admin-notification-sound");
+    return saved !== null ? saved === "true" : true;
+  });
 
   // Realtime subscription for new consultation requests
   useEffect(() => {
@@ -84,10 +88,11 @@ const ConsultationsAdmin = () => {
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["admin-consultations"] });
           const newReq = payload.new as ConsultationRequest;
-          // Play notification sound
-          const audio = new Audio("/sounds/notification.mp3");
-          audio.volume = 0.5;
-          audio.play().catch(() => {});
+          if (soundEnabled) {
+            const audio = new Audio("/sounds/notification.mp3");
+            audio.volume = 0.5;
+            audio.play().catch(() => {});
+          }
           toast({
             title: "📩 Konsultasi Baru Masuk!",
             description: `${newReq.name} - ${newReq.service}`,
@@ -99,7 +104,7 @@ const ConsultationsAdmin = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [queryClient, toast]);
+  }, [queryClient, toast, soundEnabled]);
 
   const { data: requests, isLoading } = useQuery({
     queryKey: ["admin-consultations"],
@@ -175,6 +180,19 @@ const ConsultationsAdmin = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant={soundEnabled ? "outline" : "ghost"}
+              size="sm"
+              className="gap-1.5"
+              onClick={() => {
+                const next = !soundEnabled;
+                setSoundEnabled(next);
+                localStorage.setItem("admin-notification-sound", String(next));
+              }}
+            >
+              {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+              {soundEnabled ? "Suara On" : "Suara Off"}
+            </Button>
             <Link to="/admin/logos">
               <Button variant="outline" size="sm" className="gap-1.5">
                 <ImageIcon className="w-4 h-4" /> Logo
