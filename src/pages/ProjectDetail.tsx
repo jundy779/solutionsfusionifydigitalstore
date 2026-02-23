@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Project {
   id: string;
@@ -64,8 +65,19 @@ const ProjectDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Memuat...</p>
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 pt-32 pb-16">
+          <Skeleton className="h-10 w-40 mb-8" />
+          <Skeleton className="h-8 w-32 rounded-full mb-6" />
+          <Skeleton className="h-14 w-3/4 max-w-xl mb-4" />
+          <Skeleton className="h-14 w-1/2 max-w-md mb-6" />
+          <Skeleton className="h-5 w-full max-w-lg mb-2" />
+          <Skeleton className="h-5 w-4/5 max-w-md" />
+        </div>
+        <div className="container mx-auto px-4 pb-16">
+          <Skeleton className="aspect-video max-w-4xl mx-auto rounded-2xl" />
+        </div>
       </div>
     );
   }
@@ -184,6 +196,8 @@ const ProjectDetail = () => {
                 <img 
                   src={project.thumbnail_url} 
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
