@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://solutionsfusionifydigitalstore.lovable.app/sitemap.xml
+Sitemap: https://solutions.fusionifydigital.store/sitemap.xml
