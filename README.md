@@ -35,6 +35,10 @@ Our ecosystem connects: **Automation → Store → Payment Gateway → Cloud**, 
 
 > 🌍 **Live at**: [solutionsfusionifydigitalstore.lovable.app](https://solutionsfusionifydigitalstore.lovable.app)
 
+<p align="center">
+  <img src="public/images/preview-hero.png" alt="Fusionify Website Preview" width="100%" />
+</p>
+
 ---
 
 ## 📐 Architecture
