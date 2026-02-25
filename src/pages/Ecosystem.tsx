@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, Store, CreditCard, Shield, Gauge, Mail, Video, BookOpen, ExternalLink, Github, ArrowLeft, Sparkles, Wrench, Newspaper } from "lucide-react";
+import { Bot, Store, CreditCard, Shield, Gauge, Mail, Video, Upload, BookOpen, ExternalLink, Github, ArrowLeft, Sparkles, Wrench, Newspaper, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -34,10 +34,10 @@ const Ecosystem = () => {
     },
     {
       icon: Shield,
-      title: "Fusionify Tempest VPN",
+      title: "FTV Injector & Tempest VPN",
       subtitle: "Network Security",
       description: t("eco.vpn.desc"),
-      url: null,
+      url: "https://peserta114-dm.karyakreasi.id/",
       status: t("products.available"),
       statusColor: "bg-green-500",
       gradient: "from-green-500/10 to-emerald-500/10",
@@ -76,6 +76,13 @@ const Ecosystem = () => {
       url: "https://fusiontik.vercel.app/",
       gradient: "from-rose-500/10 to-orange-500/10",
     },
+    {
+      icon: Upload,
+      title: "Media Uploader",
+      description: t("eco.uploader.desc"),
+      url: "https://uploader.fusionifydigital.my.id/",
+      gradient: "from-green-500/10 to-emerald-500/10",
+    },
   ];
 
   const media = [
@@ -92,6 +99,13 @@ const Ecosystem = () => {
       description: t("eco.github.desc"),
       url: "https://github.com/FUSIONIFY-ID",
       gradient: "from-gray-500/10 to-slate-500/10",
+    },
+    {
+      icon: Globe,
+      title: "Cessa Snack",
+      description: t("eco.cessasnack.desc"),
+      url: "https://cessasnack.vercel.app/",
+      gradient: "from-amber-500/10 to-yellow-500/10",
     },
   ];
 

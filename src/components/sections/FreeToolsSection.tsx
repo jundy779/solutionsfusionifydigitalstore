@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Gauge, Mail, Video, ExternalLink, Wrench } from "lucide-react";
+import { Gauge, Mail, Video, Upload, ExternalLink, Wrench } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
@@ -32,6 +32,14 @@ export const FreeToolsSection = () => {
       color: "from-rose-500/20 to-orange-500/20",
       borderColor: "hover:border-rose-500/30",
     },
+    {
+      icon: Upload,
+      title: "Media Uploader",
+      description: t("tools.uploader.desc"),
+      url: "https://uploader.fusionifydigital.my.id/",
+      color: "from-green-500/20 to-emerald-500/20",
+      borderColor: "hover:border-green-500/30",
+    },
   ];
 
   return (
@@ -49,7 +57,7 @@ export const FreeToolsSection = () => {
           <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">{t("tools.subtitle")}</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 max-w-5xl mx-auto">
           {tools.map((tool, index) => (
             <motion.a
               key={tool.title}
