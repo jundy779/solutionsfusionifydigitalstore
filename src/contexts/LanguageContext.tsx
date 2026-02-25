@@ -11,6 +11,7 @@ const translations: Translations = {
   "nav.home": { id: "Beranda", en: "Home" },
   "nav.services": { id: "Layanan", en: "Services" },
   "nav.portfolio": { id: "Portofolio", en: "Portfolio" },
+  "nav.ecosystem": { id: "Ekosistem", en: "Ecosystem" },
   "nav.about": { id: "Tentang", en: "About" },
   "nav.contact": { id: "Kontak", en: "Contact" },
   "nav.getStarted": { id: "Mulai Sekarang", en: "Get started" },
