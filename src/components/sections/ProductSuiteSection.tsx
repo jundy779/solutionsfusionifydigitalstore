@@ -27,12 +27,12 @@ export const ProductSuiteSection = () => {
     },
     {
       icon: Shield,
-      title: "Fusionify Tempest VPN",
+      title: "FTV Injector & Tempest VPN",
       subtitle: "Network Security",
       description: t("products.vpn.desc"),
       status: t("products.available"),
       statusColor: "bg-green-500",
-      url: null,
+      url: "https://peserta114-dm.karyakreasi.id/",
     },
     {
       icon: CreditCard,
