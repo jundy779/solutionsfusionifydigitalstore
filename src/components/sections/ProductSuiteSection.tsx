@@ -1,15 +1,48 @@
 import { motion } from "framer-motion";
-import { Bot, Store, CreditCard, Shield, ArrowUpRight } from "lucide-react";
+import { Bot, Store, CreditCard, Shield, ArrowUpRight, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 export const ProductSuiteSection = () => {
   const { t } = useLanguage();
 
   const products = [
-    { icon: Bot, title: "Fusionify Automation", subtitle: "Bot Platform", description: t("products.automation.desc"), status: t("products.available"), statusColor: "bg-green-500" },
-    { icon: Shield, title: "Fusionify VPN", subtitle: "Tempest Service", description: t("products.vpn.desc"), status: t("products.available"), statusColor: "bg-green-500" },
-    { icon: Store, title: "Fusionify Store", subtitle: "Digital Marketplace", description: t("products.store.desc"), status: t("products.available"), statusColor: "bg-green-500" },
-    { icon: CreditCard, title: "FTVPay", subtitle: "Payment Gateway", description: t("products.pay.desc"), status: t("products.comingSoon"), statusColor: "bg-amber-500" },
+    {
+      icon: Bot,
+      title: "Fusionify Bot",
+      subtitle: "Bot Platform",
+      description: t("products.automation.desc"),
+      status: t("products.available"),
+      statusColor: "bg-green-500",
+      url: "https://bot.fusionify.biz.id/",
+    },
+    {
+      icon: Store,
+      title: "Premiumify",
+      subtitle: "Digital Marketplace",
+      description: t("products.store.desc"),
+      status: t("products.available"),
+      statusColor: "bg-green-500",
+      url: "https://www.fusionifydigital.store/",
+    },
+    {
+      icon: Shield,
+      title: "Fusionify Tempest VPN",
+      subtitle: "Network Security",
+      description: t("products.vpn.desc"),
+      status: t("products.available"),
+      statusColor: "bg-green-500",
+      url: null,
+    },
+    {
+      icon: CreditCard,
+      title: "FTVPay",
+      subtitle: "Payment Gateway",
+      description: t("products.pay.desc"),
+      status: t("products.comingSoon"),
+      statusColor: "bg-amber-500",
+      url: null,
+    },
   ];
 
   return (
@@ -32,9 +65,9 @@ export const ProductSuiteSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-          {products.map((product, index) => (
-            <motion.div key={product.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }} className="group">
-              <div className="p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
+          {products.map((product, index) => {
+            const CardContent = (
+              <div className="p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300 h-full">
                 <div className="flex items-start gap-4">
                   <motion.div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                     <product.icon className="w-6 h-6 text-primary" />
@@ -45,7 +78,11 @@ export const ProductSuiteSection = () => {
                         <span className="text-xs text-primary font-medium uppercase tracking-wider">{product.subtitle}</span>
                         <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{product.title}</h3>
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
+                      {product.url ? (
+                        <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
+                      ) : (
+                        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:text-primary" />
+                      )}
                     </div>
                     <p className="text-muted-foreground text-sm mb-3 leading-relaxed">{product.description}</p>
                     <div className="flex items-center gap-2">
@@ -55,9 +92,28 @@ export const ProductSuiteSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            );
+
+            return (
+              <motion.div key={product.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }} className="group">
+                {product.url ? (
+                  <a href={product.url} target="_blank" rel="noopener noreferrer">
+                    {CardContent}
+                  </a>
+                ) : (
+                  CardContent
+                )}
+              </motion.div>
+            );
+          })}
         </div>
+
+        <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }} className="flex justify-center mt-8">
+          <Link to="/ecosystem" className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors font-medium">
+            {t("products.viewAll")}
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

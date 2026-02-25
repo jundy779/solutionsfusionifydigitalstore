@@ -15,6 +15,7 @@ const UnifiedEcosystemSection = lazy(() => import("@/components/sections/Unified
 const WhyChooseUsSection = lazy(() => import("@/components/sections/WhyChooseUsSection").then(m => ({ default: m.WhyChooseUsSection })));
 const ResultsSection = lazy(() => import("@/components/sections/ResultsSection").then(m => ({ default: m.ResultsSection })));
 const ProductSuiteSection = lazy(() => import("@/components/sections/ProductSuiteSection").then(m => ({ default: m.ProductSuiteSection })));
+const FreeToolsSection = lazy(() => import("@/components/sections/FreeToolsSection").then(m => ({ default: m.FreeToolsSection })));
 const FeaturedProjectsSection = lazy(() => import("@/components/sections/FeaturedProjectsSection").then(m => ({ default: m.FeaturedProjectsSection })));
 const TestimonialsSection = lazy(() => import("@/components/sections/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const FutureVisionSection = lazy(() => import("@/components/sections/FutureVisionSection").then(m => ({ default: m.FutureVisionSection })));
@@ -43,6 +44,7 @@ const Index = () => {
           <WhyChooseUsSection />
           <ResultsSection />
           <ProductSuiteSection />
+          <FreeToolsSection />
           <FeaturedProjectsSection />
           <TestimonialsSection />
           <FutureVisionSection />

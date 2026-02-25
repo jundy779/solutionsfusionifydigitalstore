@@ -27,6 +27,7 @@ const AutomationBots = lazy(() => import("./pages/services/AutomationBots"));
 const DigitalSystems = lazy(() => import("./pages/services/DigitalSystems"));
 const CloudSupport = lazy(() => import("./pages/services/CloudSupport"));
 const ProjectServices = lazy(() => import("./pages/services/ProjectServices"));
+const Ecosystem = lazy(() => import("./pages/Ecosystem"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/services/digital-systems" element={<DigitalSystems />} />
                 <Route path="/services/cloud-support" element={<CloudSupport />} />
                 <Route path="/services/project-services" element={<ProjectServices />} />
+                <Route path="/ecosystem" element={<Ecosystem />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
