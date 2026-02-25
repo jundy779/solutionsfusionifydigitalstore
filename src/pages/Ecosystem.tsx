@@ -107,6 +107,34 @@ const Ecosystem = () => {
       url: "https://cessasnack.vercel.app/",
       gradient: "from-amber-500/10 to-yellow-500/10",
     },
+    {
+      icon: Globe,
+      title: "Fahmi Collection",
+      description: t("eco.fahmicollection.desc"),
+      url: "https://fahmicollection.id/",
+      gradient: "from-rose-500/10 to-pink-500/10",
+    },
+    {
+      icon: Globe,
+      title: "TokyoShop ID",
+      description: t("eco.tokyoshop.desc"),
+      url: "https://tokyoshop.id/",
+      gradient: "from-blue-500/10 to-indigo-500/10",
+    },
+    {
+      icon: Globe,
+      title: "PT Quipanel",
+      description: t("eco.quipanel.desc"),
+      url: "https://precastquipanel.co.id/",
+      gradient: "from-cyan-500/10 to-teal-500/10",
+    },
+    {
+      icon: Globe,
+      title: "SMK Pionir",
+      description: t("eco.smkpionir.desc"),
+      url: "https://smkpionir.sch.id/",
+      gradient: "from-green-500/10 to-lime-500/10",
+    },
   ];
 
   return (
@@ -180,7 +208,7 @@ const Ecosystem = () => {
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <SectionHeader icon={Newspaper} label={t("eco.mediaLabel")} title={t("eco.mediaTitle")} />
-            <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
               {media.map((item, index) => (
                 <motion.a key={item.title} href={item.url} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="group">
                   <div className={`p-6 rounded-2xl bg-gradient-to-br ${item.gradient} border border-border/50 hover:border-primary/30 transition-all duration-300 h-full`}>
