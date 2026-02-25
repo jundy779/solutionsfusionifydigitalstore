@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, Store, CreditCard, Shield, Gauge, Mail, Video, Upload, BookOpen, ExternalLink, Github, ArrowLeft, Sparkles, Wrench, Newspaper, Globe } from "lucide-react";
+import { Bot, Store, CreditCard, Shield, Gauge, Mail, Video, Upload, BookOpen, ExternalLink, Github, ArrowLeft, Sparkles, Wrench, Newspaper, Globe, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -85,21 +85,7 @@ const Ecosystem = () => {
     },
   ];
 
-  const media = [
-    {
-      icon: BookOpen,
-      title: "Fusionify Blog",
-      description: t("eco.blog.desc"),
-      url: "https://fusionifydigital.blogspot.com/",
-      gradient: "from-teal-500/10 to-green-500/10",
-    },
-    {
-      icon: Github,
-      title: "GitHub Organization",
-      description: t("eco.github.desc"),
-      url: "https://github.com/FUSIONIFY-ID",
-      gradient: "from-gray-500/10 to-slate-500/10",
-    },
+  const projects = [
     {
       icon: Globe,
       title: "Cessa Snack",
@@ -134,6 +120,23 @@ const Ecosystem = () => {
       description: t("eco.smkpionir.desc"),
       url: "https://smkpionir.sch.id/",
       gradient: "from-green-500/10 to-lime-500/10",
+    },
+  ];
+
+  const media = [
+    {
+      icon: BookOpen,
+      title: "Fusionify Blog",
+      description: t("eco.blog.desc"),
+      url: "https://fusionifydigital.blogspot.com/",
+      gradient: "from-teal-500/10 to-green-500/10",
+    },
+    {
+      icon: Github,
+      title: "GitHub Organization",
+      description: t("eco.github.desc"),
+      url: "https://github.com/FUSIONIFY-ID",
+      gradient: "from-gray-500/10 to-slate-500/10",
     },
   ];
 
@@ -204,11 +207,38 @@ const Ecosystem = () => {
           </div>
         </section>
 
+        {/* Project Solutions */}
+        <section className="py-12 md:py-16">
+          <div className="container mx-auto px-4">
+            <SectionHeader icon={Briefcase} label={t("eco.projectsLabel")} title={t("eco.projectsTitle")} />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+              {projects.map((item, index) => (
+                <motion.a key={item.title} href={item.url} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="group">
+                  <div className={`p-6 rounded-2xl bg-gradient-to-br ${item.gradient} border border-border/50 hover:border-primary/30 transition-all duration-300 h-full`}>
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                        <item.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{item.title}</h3>
+                          <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Media & Community */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <SectionHeader icon={Newspaper} label={t("eco.mediaLabel")} title={t("eco.mediaTitle")} />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
               {media.map((item, index) => (
                 <motion.a key={item.title} href={item.url} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="group">
                   <div className={`p-6 rounded-2xl bg-gradient-to-br ${item.gradient} border border-border/50 hover:border-primary/30 transition-all duration-300 h-full`}>
