@@ -7,6 +7,16 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const consultationSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(255),
+  company: z.string().trim().max(100).optional().or(z.literal("")),
+  service: z.enum(["web-development", "automation-bots", "digital-systems", "cloud-support", "project-services", "other"]),
+  budget: z.string().max(20).optional().or(z.literal("")),
+  message: z.string().trim().min(1).max(1000),
+});
 
 const SERVICE_OPTIONS = [
   { value: "web-development", labelId: "Web Development", labelEn: "Web Development" },
@@ -38,12 +48,17 @@ export const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.service || !formData.message) return;
+
+    const parsed = consultationSchema.safeParse(formData);
+    if (!parsed.success) {
+      toast.error(t("contact.errorToast"));
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-consultation-email", {
-        body: formData,
+        body: parsed.data,
       });
 
       if (error) throw error;
