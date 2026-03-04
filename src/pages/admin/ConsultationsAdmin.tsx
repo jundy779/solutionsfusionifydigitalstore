@@ -94,7 +94,7 @@ const ConsultationsAdmin = () => {
             audio.play().catch(() => {});
           }
           toast({
-            title: "📩 Konsultasi Baru Masuk!",
+            title: "Konsultasi Baru Masuk!",
             description: `${newReq.name} - ${newReq.service}`,
           });
         }
