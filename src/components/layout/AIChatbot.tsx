@@ -107,8 +107,8 @@ export const AIChatbot = () => {
   };
 
   const greeting = lang === "id"
-    ? "Halo! 👋 Saya asisten virtual Fusionify. Ada yang bisa saya bantu tentang layanan kami?"
-    : "Hello! 👋 I'm Fusionify's virtual assistant. How can I help you with our services?";
+    ? "Halo! Saya asisten virtual Fusionify. Ada yang bisa saya bantu tentang layanan kami?"
+    : "Hello! I'm Fusionify's virtual assistant. How can I help you with our services?";
 
   return (
     <>

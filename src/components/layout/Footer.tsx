@@ -75,7 +75,7 @@ export const Footer = () => {
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="border-t border-border/30 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-xs">© {new Date().getFullYear()} PT Fusionify Digital Store. {t("footer.allRights")}</p>
           <p className="text-muted-foreground text-xs flex items-center gap-1.5">
-            <span>{t("footer.madeWith")}</span><span>❤️</span><span>{t("footer.inIndonesia")}</span>
+            <span>{t("footer.madeWith")}</span><span className="text-red-500">♥</span><span>{t("footer.inIndonesia")}</span>
           </p>
         </motion.div>
       </div>
