@@ -43,13 +43,14 @@
               pointer-events-none
               absolute
               -inset-[10px]
-              opacity-40
-             will-change-transform`,
-               showRadialGradient &&
-                 `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]`
-             )}
-           />
-         </div>
+              opacity-30
+              will-change-transform`,
+                showRadialGradient &&
+                  `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]`
+              )}
+            />
+          </div>
+          <div className="absolute inset-0 bg-background/60 pointer-events-none" />
          {children}
        </div>
      </main>
