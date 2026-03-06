@@ -29,6 +29,37 @@ const SectionFallback = () => (
   <div className="min-h-[200px]" />
 );
 
+const homepageJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Fusionify Digital Solutions",
+    alternateName: "PT Fusionify Digital Store",
+    url: "https://solutions.fusionifydigital.com",
+    logo: "https://solutions.fusionifydigital.com/favicon.png",
+    description: "Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support.",
+    sameAs: [
+      "https://www.instagram.com/fusionifytempestore/",
+      "https://www.linkedin.com/company/fusionify-digital-store/",
+      "https://github.com/FUSIONIFY-ID",
+      "https://www.facebook.com/FusionTempestVPN",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "fusionify_digital@vk.com",
+      contactType: "customer service",
+      availableLanguage: ["Indonesian", "English"],
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Fusionify Digital Solutions",
+    alternateName: "Fusionify",
+    url: "https://solutions.fusionifydigital.com",
+  },
+];
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -36,6 +67,7 @@ const Index = () => {
         title="Fusionify Digital Solutions | Solusi Transformasi Digital" 
         description="Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support dengan pendekatan automation-first."
         path="/"
+        jsonLd={homepageJsonLd}
       />
       <Navbar />
       <main>

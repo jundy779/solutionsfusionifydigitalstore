@@ -5,6 +5,7 @@ interface SEOHeadProps {
   description: string;
   path?: string;
   ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const BASE_URL = "https://solutions.fusionifydigital.com";
@@ -13,7 +14,8 @@ export const SEOHead = ({
   title, 
   description, 
   path = "", 
-  ogImage = "/og-image.png" 
+  ogImage = "/og-image.png",
+  jsonLd,
 }: SEOHeadProps) => {
   useEffect(() => {
     // Title
@@ -51,11 +53,27 @@ export const SEOHead = ({
     }
     canonical.setAttribute("href", canonicalUrl);
 
+    // JSON-LD structured data
+    const existingScripts = document.querySelectorAll('script[data-seo-jsonld]');
+    existingScripts.forEach(s => s.remove());
+
+    if (jsonLd) {
+      const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      items.forEach(item => {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.setAttribute("data-seo-jsonld", "true");
+        script.textContent = JSON.stringify(item);
+        document.head.appendChild(script);
+      });
+    }
+
     return () => {
-      // Reset to defaults on unmount
       document.title = "Fusionify Digital Solutions | Solusi Transformasi Digital";
+      const scripts = document.querySelectorAll('script[data-seo-jsonld]');
+      scripts.forEach(s => s.remove());
     };
-  }, [title, description, path, ogImage]);
+  }, [title, description, path, ogImage, jsonLd]);
 
   return null;
 };
