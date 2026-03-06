@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useParams, Navigate } from "react-router-dom";
+import { SEOHead } from "@/components/SEOHead";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { 
