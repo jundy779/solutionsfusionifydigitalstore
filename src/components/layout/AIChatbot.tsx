@@ -122,7 +122,7 @@ export const AIChatbot = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center"
+            className="fixed bottom-[5.5rem] sm:bottom-24 right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center"
             aria-label="Open chat"
           >
             <Bot className="w-6 h-6" />
@@ -138,7 +138,7 @@ export const AIChatbot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[calc(100vh-8rem)] rounded-2xl overflow-hidden flex flex-col border border-border/50 shadow-2xl shadow-black/30"
+            className="fixed bottom-[5.5rem] sm:bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[360px] max-w-[400px] h-[70vh] sm:h-[500px] max-h-[calc(100vh-8rem)] rounded-2xl overflow-hidden flex flex-col border border-border/50 shadow-2xl shadow-black/30"
             style={{
               background: "linear-gradient(180deg, hsl(212 48% 7%) 0%, hsl(212 50% 5%) 100%)",
             }}

@@ -34,10 +34,10 @@ export const AboutFusionifySection = () => {
         </motion.div>
       </LampContainer>
 
-      <div className="container mx-auto px-4 relative z-10 -mt-40 pb-20">
+      <div className="container mx-auto px-4 relative z-10 -mt-20 sm:-mt-28 lg:-mt-40 pb-16 md:pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
-            <div className="p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden backdrop-blur-sm">
+            <div className="p-5 sm:p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden backdrop-blur-sm">
               <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent flex items-center justify-center mb-6 overflow-hidden border border-primary/10">
                 <motion.div className="text-center" animate={{ y: [0, -4, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
                   <motion.div className="w-20 h-20 mx-auto mb-3 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20" animate={{ rotate: [0, 2, 0, -2, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}>

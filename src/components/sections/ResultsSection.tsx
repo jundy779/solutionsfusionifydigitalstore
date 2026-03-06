@@ -42,7 +42,7 @@ export const ResultsSection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section ref={ref} className="py-16 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-end justify-center">
         <img src={illustrationResults} alt="" className="w-full max-w-5xl opacity-[0.06] object-cover" aria-hidden="true" />
       </div>
@@ -63,9 +63,9 @@ export const ResultsSection = () => {
           <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">{t("results.subtitle")}</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 max-w-5xl mx-auto">
           {results.map((result, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }} className="group p-5 rounded-2xl bg-card/50 border border-border/50 text-center hover:border-primary/30 transition-all duration-300">
+            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }} className={`group p-4 sm:p-5 rounded-2xl bg-card/50 border border-border/50 text-center hover:border-primary/30 transition-all duration-300 ${index === 4 ? "col-span-2 sm:col-span-1" : ""}`}>
               <motion.div className="w-11 h-11 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                 <result.icon className="w-5 h-5 text-primary" />
               </motion.div>

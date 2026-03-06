@@ -16,7 +16,7 @@ export const UnifiedEcosystemSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
         <img src={illustrationEcosystem} alt="" className="w-full max-w-4xl opacity-[0.07] object-cover" aria-hidden="true" />
       </div>

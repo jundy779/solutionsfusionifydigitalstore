@@ -58,7 +58,7 @@ const services = [
 export const ServicesSection = () => {
   const { t } = useLanguage();
   return (
-    <section id="services" className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section id="services" className="py-16 md:py-28 bg-background relative overflow-hidden">
       {/* Animated background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 

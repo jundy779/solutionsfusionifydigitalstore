@@ -8,7 +8,7 @@ export const CTASection = () => {
   const { t } = useLanguage();
 
   return (
-    <AuroraBackground className="py-20 md:py-28">
+    <AuroraBackground className="py-16 md:py-28">
       <div className="container mx-auto px-4 relative z-10 w-full">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8">

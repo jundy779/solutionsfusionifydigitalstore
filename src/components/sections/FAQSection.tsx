@@ -33,7 +33,7 @@ export const FAQSection = () => {
   } : null;
 
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-background relative overflow-hidden">
       {faqJsonLd && (
         <script
           type="application/ld+json"

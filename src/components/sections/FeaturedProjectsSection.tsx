@@ -14,7 +14,7 @@ export const FeaturedProjectsSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-1/4 left-1/4 w-[500px] h-[500px]" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)", filter: "blur(80px)" }} />
       </div>
@@ -37,7 +37,7 @@ export const FeaturedProjectsSection = () => {
             <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}>
               <CardContainer containerClassName="w-full">
                 <CardBody className="rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors duration-300 overflow-hidden group cursor-pointer w-full">
-                  <CardItem translateZ={30} className="h-36 relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent w-full">
+                  <CardItem translateZ={30} className="h-28 sm:h-36 relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent w-full">
                     <CardItem translateZ={50} className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-xs font-medium text-foreground">{project.category}</span>
                     </CardItem>
@@ -49,7 +49,7 @@ export const FeaturedProjectsSection = () => {
                     </CardItem>
                     <div className="absolute bottom-4 left-4 w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 blur-sm" style={{ transform: "translateZ(20px) translateX(-10px)" }} />
                   </CardItem>
-                  <div className="p-5">
+                  <div className="p-4 sm:p-5">
                     <CardItem translateZ={25} className="w-full">
                       <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
                     </CardItem>
