@@ -71,6 +71,11 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Portfolio Proyek | Fusionify Digital Solutions" 
+        description="Lihat hasil karya dan proyek digital kami. Web development, automation bots, dan sistem digital untuk berbagai klien di Indonesia."
+        path="/portfolio"
+      />
       <Navbar />
       
       {/* Hero Section */}

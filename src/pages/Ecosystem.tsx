@@ -143,6 +143,11 @@ const Ecosystem = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Ekosistem Produk Digital | Fusionify Digital Solutions" 
+        description="Jelajahi ekosistem produk digital Fusionify: bot platform, marketplace, payment gateway, keamanan, dan tools produktivitas untuk bisnis Anda."
+        path="/ecosystem"
+      />
       <Navbar />
       <main className="pt-24 pb-16">
         {/* Hero */}
