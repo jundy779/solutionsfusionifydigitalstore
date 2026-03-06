@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://solutions.fusionifydigital.store/</loc>
+    <loc>https://solutions.fusionifydigital.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/portfolio</loc>
+    <loc>https://solutions.fusionifydigital.com/portfolio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/services/web-development</loc>
+    <loc>https://solutions.fusionifydigital.com/ecosystem</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/services/automation-bots</loc>
+    <loc>https://solutions.fusionifydigital.com/services/web-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/services/digital-systems</loc>
+    <loc>https://solutions.fusionifydigital.com/services/automation-bots</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/services/cloud-support</loc>
+    <loc>https://solutions.fusionifydigital.com/services/digital-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/services/project-services</loc>
+    <loc>https://solutions.fusionifydigital.com/services/cloud-support</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/privacy-policy</loc>
+    <loc>https://solutions.fusionifydigital.com/services/project-services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://solutions.fusionifydigital.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://solutions.fusionifydigital.store/terms-of-service</loc>
+    <loc>https://solutions.fusionifydigital.com/terms-of-service</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
