@@ -44,7 +44,7 @@ export const PartnerLogosSection = () => {
     const content = (
       <div className="flex items-center gap-3">
         {logo.logo_url ? (
-          <img src={logo.logo_url} alt={`${logo.name} logo`} className="h-8 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
+          <img src={logo.logo_url} alt={`${logo.name} logo`} loading="lazy" decoding="async" className="h-8 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
         ) : (
           <div className="w-9 h-9 rounded-lg bg-foreground/10 flex items-center justify-center"><span className="text-xs font-bold text-foreground/60">{logo.initials}</span></div>
         )}

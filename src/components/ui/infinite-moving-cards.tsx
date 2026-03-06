@@ -111,6 +111,8 @@ export const InfiniteMovingCards = ({
                     <img
                       src={item.image}
                       alt={item.name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10"
                     />
                   ) : (

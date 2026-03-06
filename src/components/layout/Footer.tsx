@@ -40,7 +40,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <a href="#home" className="flex items-center gap-2 mb-5 group">
-                <img src={fusionifyLogo} alt="Fusionify Digital Solutions logo" className="w-8 h-8 object-contain" />
+                <img src={fusionifyLogo} alt="Fusionify Digital Solutions logo" loading="lazy" decoding="async" className="w-8 h-8 object-contain" />
                 <span className="font-display font-semibold text-lg text-foreground">fusionify</span>
               </a>
               <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">{t("footer.description")}</p>

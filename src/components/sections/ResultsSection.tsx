@@ -44,7 +44,7 @@ export const ResultsSection = () => {
   return (
     <section ref={ref} className="py-16 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-end justify-center">
-        <img src={illustrationResults} alt="" className="w-full max-w-5xl opacity-[0.06] object-cover" aria-hidden="true" />
+        <img src={illustrationResults} alt="" className="w-full max-w-5xl opacity-[0.06] object-cover" aria-hidden="true" loading="lazy" decoding="async" />
       </div>
       <div className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]" animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)", filter: "blur(80px)" }} />
