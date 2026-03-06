@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Kebijakan Privasi | Fusionify Digital Solutions" 
+        description="Kebijakan privasi PT Fusionify Digital Store. Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+        path="/privacy-policy"
+      />
       <Navbar />
       <main className="container mx-auto px-4 pt-32 pb-20 max-w-3xl">
         <Link

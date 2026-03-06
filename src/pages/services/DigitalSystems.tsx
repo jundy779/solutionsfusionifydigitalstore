@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { SEOHead } from "@/components/SEOHead";
 import { 
   Settings2, 
   ArrowLeft, 
@@ -58,6 +59,7 @@ const benefits = [
 const DigitalSystems = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Digital Systems | Fusionify Digital Solutions" description="Integrasi sistem digital: API integration, payment gateway, database management, dan workflow automation untuk efisiensi bisnis." path="/services/digital-systems" />
       <Navbar />
       
       {/* Hero Section */}

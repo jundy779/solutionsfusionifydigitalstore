@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Syarat & Ketentuan | Fusionify Digital Solutions" 
+        description="Syarat dan ketentuan penggunaan layanan PT Fusionify Digital Store. Ketahui hak dan kewajiban Anda sebagai pengguna."
+        path="/terms-of-service"
+      />
       <Navbar />
       <main className="container mx-auto px-4 pt-32 pb-20 max-w-3xl">
         <Link

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot, Store, CreditCard, Shield, Gauge, Mail, Video, Upload, BookOpen, ExternalLink, Github, ArrowLeft, Sparkles, Wrench, Newspaper, Globe, Briefcase } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -142,6 +143,11 @@ const Ecosystem = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Ekosistem Produk Digital | Fusionify Digital Solutions" 
+        description="Jelajahi ekosistem produk digital Fusionify: bot platform, marketplace, payment gateway, keamanan, dan tools produktivitas untuk bisnis Anda."
+        path="/ecosystem"
+      />
       <Navbar />
       <main className="pt-24 pb-16">
         {/* Hero */}

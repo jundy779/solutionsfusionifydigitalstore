@@ -4,6 +4,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { AIChatbot } from "@/components/layout/AIChatbot";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { SEOHead } from "@/components/SEOHead";
 import { ClientLogosSection } from "@/components/sections/ClientLogosSection";
 import { PartnerLogosSection } from "@/components/sections/PartnerLogosSection";
 
@@ -31,6 +32,11 @@ const SectionFallback = () => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Fusionify Digital Solutions | Solusi Transformasi Digital" 
+        description="Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support dengan pendekatan automation-first."
+        path="/"
+      />
       <Navbar />
       <main>
         <HeroSection />
