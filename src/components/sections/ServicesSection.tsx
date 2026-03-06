@@ -129,7 +129,7 @@ export const ServicesSection = () => {
           >
             <img 
               src={illustrationServices} 
-              alt="Digital development illustration" 
+              alt="Ilustrasi layanan pengembangan digital Fusionify" 
               className="w-full rounded-2xl opacity-80"
               loading="lazy"
             />

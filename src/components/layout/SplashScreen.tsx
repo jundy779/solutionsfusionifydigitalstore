@@ -41,7 +41,7 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
         >
           <motion.img
             src={fusionifyLogo}
-            alt="Fusionify"
+            alt="Fusionify Digital Solutions logo"
             className="w-20 h-20 object-contain"
             initial={{ scale: 0, rotate: -180, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}

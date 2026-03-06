@@ -117,7 +117,7 @@ export const Navbar = () => {
           >
             <motion.img 
               src={fusionifyLogo}
-              alt="Fusionify"
+              alt="Fusionify Digital Solutions logo"
               className="w-8 h-8 object-contain"
               whileHover={{ scale: 1.05 }}
             />
