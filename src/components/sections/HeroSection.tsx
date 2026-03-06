@@ -317,14 +317,14 @@ export const HeroSection = () => {
           </motion.div>
 
           {/* Main Heading - Text Generate Effect */}
-          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 tracking-tight">
+          <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 tracking-tight">
             <TextGenerateEffectLines
               lines={[
                 { text: t("hero.line1"), className: "text-foreground" },
                 { text: t("hero.line2"), className: "text-foreground [&>.word:nth-child(1)]:text-foreground [&>.word:nth-child(2)]:text-gradient" },
                 { text: t("hero.line3"), className: "text-foreground" },
               ]}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight"
               filter={true}
               duration={0.4}
               staggerDelay={0.08}
