@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { SEOHead } from "@/components/SEOHead";
 import { 
   Code2, 
   ArrowLeft, 

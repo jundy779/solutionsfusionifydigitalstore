@@ -32,6 +32,11 @@ const SectionFallback = () => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Fusionify Digital Solutions | Solusi Transformasi Digital" 
+        description="Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support dengan pendekatan automation-first."
+        path="/"
+      />
       <Navbar />
       <main>
         <HeroSection />
