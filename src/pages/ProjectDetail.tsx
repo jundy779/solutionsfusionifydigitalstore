@@ -91,6 +91,12 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title={`${project.title} | Portfolio Fusionify Digital Solutions`} 
+        description={project.description}
+        path={`/portfolio/${project.slug}`}
+        ogImage={project.thumbnail_url || undefined}
+      />
       <Navbar />
       
       {/* Hero Section */}
