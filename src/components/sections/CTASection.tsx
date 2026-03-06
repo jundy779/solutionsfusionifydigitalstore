@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
-import { AuroraBackground } from "@/components/ui/aurora-background";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const CTASection = () => {
   const { t } = useLanguage();
 
   return (
-    <AuroraBackground className="py-16 md:py-28">
+    <section className="relative py-16 md:py-28 bg-gradient-cta overflow-hidden">
+      {/* Subtle static glow orbs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-primary/8 blur-[100px]" />
+      </div>
+
       <div className="container mx-auto px-4 relative z-10 w-full">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8">
@@ -16,10 +21,10 @@ export const CTASection = () => {
             <span className="text-sm font-medium text-muted-foreground">{t("cta.badge")}</span>
           </div>
 
-          <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+          <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
             {t("cta.title")}
             <br />
-            <span className="text-gradient drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">{t("cta.titleHighlight")}</span>
+            <span className="text-gradient">{t("cta.titleHighlight")}</span>
           </h2>
           
           <p className="text-muted-foreground text-base md:text-lg mb-10 leading-relaxed max-w-2xl mx-auto">{t("cta.subtitle")}</p>
@@ -41,6 +46,6 @@ export const CTASection = () => {
           </motion.div>
         </motion.div>
       </div>
-    </AuroraBackground>
+    </section>
   );
 };
