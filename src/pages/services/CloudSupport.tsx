@@ -61,6 +61,7 @@ const stats = [
 const CloudSupport = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Cloud & IT Support | Fusionify Digital Solutions" description="Layanan cloud hosting, VPS management, SSL setup, monitoring server, dan IT support untuk menjaga infrastruktur digital bisnis Anda." path="/services/cloud-support" />
       <Navbar />
       
       {/* Hero Section */}

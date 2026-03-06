@@ -57,6 +57,7 @@ const benefits = [
 const WebDevelopment = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Web Development | Fusionify Digital Solutions" description="Jasa pembuatan website profesional: landing page, company profile, e-commerce, dan web app custom. Responsive, cepat, dan SEO-friendly." path="/services/web-development" />
       <Navbar />
       
       {/* Hero Section */}

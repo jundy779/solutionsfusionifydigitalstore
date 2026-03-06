@@ -59,6 +59,7 @@ const stats = [
 const AutomationBots = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Automation & Bots | Fusionify Digital Solutions" description="Jasa pembuatan bot otomatis: WhatsApp bot, Telegram bot, Discord bot, dan chatbot AI untuk customer service dan operasional bisnis." path="/services/automation-bots" />
       <Navbar />
       
       {/* Hero Section */}

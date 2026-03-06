@@ -77,6 +77,7 @@ const projectTypes = [
 const ProjectServices = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Project Services | Fusionify Digital Solutions" description="Layanan konsultasi IT, MVP development, system audit, dan pelatihan teknologi untuk membantu bisnis Anda berkembang secara digital." path="/services/project-services" />
       <Navbar />
       
       {/* Hero Section */}
