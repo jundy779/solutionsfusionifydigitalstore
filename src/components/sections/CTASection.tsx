@@ -16,10 +16,10 @@ export const CTASection = () => {
             <span className="text-sm font-medium text-muted-foreground">{t("cta.badge")}</span>
           </div>
 
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
+          <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             {t("cta.title")}
             <br />
-            <span className="text-gradient">{t("cta.titleHighlight")}</span>
+            <span className="text-gradient drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">{t("cta.titleHighlight")}</span>
           </h2>
           
           <p className="text-muted-foreground text-base md:text-lg mb-10 leading-relaxed max-w-2xl mx-auto">{t("cta.subtitle")}</p>
