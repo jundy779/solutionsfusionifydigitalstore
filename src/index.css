@@ -14,7 +14,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+/* Fonts loaded via index.html with preload + font-display: swap */
 
 /* FUSIONIFY - Premium Cinematic SaaS Design System
    Deep navy, neon accents, smooth cinematic animations
