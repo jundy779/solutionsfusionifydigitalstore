@@ -96,7 +96,7 @@ serve(async (req) => {
         html: `
           <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
             <div style="background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 32px 24px; border-radius: 12px 12px 0 0; text-align: center;">
-              <h1 style="color: #ffffff; margin: 0; font-size: 24px;">✅ Permintaan Diterima!</h1>
+              <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Permintaan Diterima!</h1>
             </div>
             <div style="padding: 32px 24px;">
               <p style="color: #333; font-size: 16px; line-height: 1.6;">Halo <strong>${name}</strong>,</p>
@@ -114,7 +114,7 @@ serve(async (req) => {
               <p style="color: #555; font-size: 15px; line-height: 1.7;">Kami biasanya merespons dalam <strong>1×24 jam</strong> di hari kerja. Jika ada hal mendesak, silakan hubungi kami langsung melalui WhatsApp.</p>
               
               <div style="text-align: center; margin: 32px 0 16px;">
-                <a href="https://wa.me/6281234567890" style="display: inline-block; background: #25D366; color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">💬 Hubungi via WhatsApp</a>
+                <a href="https://wa.me/6281234567890" style="display: inline-block; background: #25D366; color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">Hubungi via WhatsApp</a>
               </div>
             </div>
             <div style="background: #f8f9fa; padding: 20px 24px; border-radius: 0 0 12px 12px; text-align: center; border-top: 1px solid #eee;">

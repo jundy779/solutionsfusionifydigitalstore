@@ -35,8 +35,8 @@ export const NewsletterSection = () => {
         // Duplicate email
         setErrorMsg(
           lang === "id"
-            ? "Email ini sudah terdaftar sebelumnya. 🎉"
-            : "This email is already subscribed. 🎉"
+            ? "Email ini sudah terdaftar sebelumnya."
+            : "This email is already subscribed."
         );
         setStatus("error");
       } else {
@@ -95,7 +95,7 @@ export const NewsletterSection = () => {
             >
               <CheckCircle2 className="h-10 w-10 text-primary" />
               <p className="font-semibold text-foreground">
-                {lang === "id" ? "Berhasil subscribe! 🎉" : "Successfully subscribed! 🎉"}
+                {lang === "id" ? "Berhasil subscribe!" : "Successfully subscribed!"}
               </p>
               <p className="text-sm text-muted-foreground">
                 {lang === "id"
