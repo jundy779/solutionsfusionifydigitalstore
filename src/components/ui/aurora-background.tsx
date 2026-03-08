@@ -14,7 +14,7 @@
    ...props
  }: AuroraBackgroundProps) => {
    return (
-     <main>
+     <section>
        <div
          className={cn(
            "relative flex flex-col h-full items-center justify-center bg-background text-foreground transition-bg",
