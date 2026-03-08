@@ -40,7 +40,7 @@ const Ecosystem = () => {
       description: t("eco.vpn.desc"),
       url: "https://peserta114-dm.karyakreasi.id/",
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       gradient: "from-green-500/10 to-emerald-500/10",
     },
     {
