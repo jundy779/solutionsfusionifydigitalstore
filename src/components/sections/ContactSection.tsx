@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const consultationSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -75,9 +76,7 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 md:py-28 bg-background relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div className="absolute top-1/3 right-1/4 w-[400px] h-[400px]" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(212 89% 45% / 0.1) 0%, transparent 60%)", filter: "blur(80px)" }} />
-      </div>
+      <BackgroundBeams className="opacity-40" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center mb-14">
