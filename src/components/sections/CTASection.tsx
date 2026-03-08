@@ -34,7 +34,7 @@ export const CTASection = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-5 md:gap-8">
             {[t("cta.noCommitment"), t("cta.freeConsultation"), t("cta.fastResponse")].map((item) => (
               <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-success" />
                 <span>{item}</span>
               </div>
             ))}
