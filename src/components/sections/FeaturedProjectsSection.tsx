@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SectionHeader } from "./SectionHeader";
 
 export const FeaturedProjectsSection = () => {
   const { t } = useLanguage();
