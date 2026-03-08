@@ -29,17 +29,16 @@ export const PainPointSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-destructive/20 bg-destructive/5 backdrop-blur-sm mb-6">
-              <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
-              <span className="text-sm font-medium text-destructive/80">{t("pain.badge")}</span>
-            </div>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-              {t("pain.title")}
-              <span className="text-gradient">{t("pain.titleHighlight")}</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">{t("pain.subtitle")}</p>
-          </motion.div>
+          <SectionHeader
+            badge={t("pain.badge")}
+            badgeDot
+            badgeVariant="destructive"
+            title={t("pain.title")}
+            titleHighlight={t("pain.titleHighlight")}
+            subtitle={t("pain.subtitle")}
+            align="left"
+            maxSubtitleWidth="xl"
+          />
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
             <img src={illustrationPainpoint} alt="Ilustrasi tantangan bisnis digital yang dihadapi UMKM dan perusahaan" className="w-72 h-72 object-contain opacity-70 rounded-2xl" loading="lazy" />

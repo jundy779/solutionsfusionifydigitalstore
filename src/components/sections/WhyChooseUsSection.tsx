@@ -24,17 +24,15 @@ export const WhyChooseUsSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-              <CheckCircle className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-muted-foreground">{t("why.badge")}</span>
-            </div>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-              {t("why.title")}
-              <span className="text-gradient">{t("why.titleHighlight")}</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl text-base md:text-lg leading-relaxed">{t("why.subtitle")}</p>
-          </motion.div>
+          <SectionHeader
+            badge={t("why.badge")}
+            badgeIcon={CheckCircle}
+            title={t("why.title")}
+            titleHighlight={t("why.titleHighlight")}
+            subtitle={t("why.subtitle")}
+            align="left"
+            maxSubtitleWidth="xl"
+          />
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
             <img src={illustrationWhychooseus} alt="Ilustrasi keunggulan Fusionify Digital sebagai partner transformasi digital" className="w-80 h-auto object-contain opacity-80 rounded-2xl" loading="lazy" />
