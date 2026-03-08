@@ -3,6 +3,7 @@ import { Shield, Layers, Code2, Rocket, Headphones, CheckCircle } from "lucide-r
 import illustrationWhychooseus from "@/assets/illustration-whychooseus.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
+import { SectionHeader } from "./SectionHeader";
 
 export const WhyChooseUsSection = () => {
   const { t } = useLanguage();
