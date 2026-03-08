@@ -39,7 +39,6 @@ const App = () => (
         <AuthProvider>
           <Toaster />
           <Sonner />
-          <CookieConsent />
           <BrowserRouter>
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
