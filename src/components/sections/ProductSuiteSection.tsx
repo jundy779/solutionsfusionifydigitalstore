@@ -32,7 +32,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Network Security",
       description: t("products.vpn.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://peserta114-dm.karyakreasi.id/",
     },
     {
