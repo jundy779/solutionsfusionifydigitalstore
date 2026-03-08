@@ -53,6 +53,6 @@
           <div className="absolute inset-0 bg-background/70 pointer-events-none" />
          {children}
        </div>
-     </main>
+     </section>
    );
  };
