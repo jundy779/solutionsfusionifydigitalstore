@@ -27,7 +27,7 @@ export const FeaturedProjectsSection = () => {
           title={t("projects.title")}
           titleHighlight={t("projects.titleHighlight")}
           subtitle={t("projects.subtitle")}
-          maxSubtitleWidth="2xl"
+          subtitleClassName="max-w-2xl"
         />
 
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">

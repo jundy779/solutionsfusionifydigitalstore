@@ -31,7 +31,7 @@ export const WhyChooseUsSection = () => {
             titleHighlight={t("why.titleHighlight")}
             subtitle={t("why.subtitle")}
             align="left"
-            maxSubtitleWidth="xl"
+            subtitleClassName="max-w-xl"
           />
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">

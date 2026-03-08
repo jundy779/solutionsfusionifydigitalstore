@@ -32,7 +32,7 @@ export const UnifiedEcosystemSection = () => {
           title={t("ecosystem.title")}
           titleHighlight={t("ecosystem.titleHighlight")}
           subtitle={t("ecosystem.subtitle")}
-          maxSubtitleWidth="2xl"
+          subtitleClassName="max-w-2xl"
         />
 
         <EcosystemDesktop steps={ecosystemSteps} />

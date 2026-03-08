@@ -52,7 +52,7 @@ export const FreeToolsSection = () => {
           title={t("tools.title")}
           titleHighlight={t("tools.titleHighlight")}
           subtitle={t("tools.subtitle")}
-          maxSubtitleWidth="xl"
+          subtitleClassName="max-w-xl"
         />
 
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 max-w-5xl mx-auto">

@@ -86,7 +86,7 @@ export const ContactSection = () => {
           title={t("contact.title")}
           titleHighlight={t("contact.titleHighlight")}
           subtitle={t("contact.subtitle")}
-          maxSubtitleWidth="xl"
+          subtitleClassName="max-w-xl"
         />
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto">

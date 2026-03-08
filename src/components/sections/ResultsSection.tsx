@@ -57,7 +57,7 @@ export const ResultsSection = () => {
           title={t("results.title")}
           titleHighlight={t("results.titleHighlight")}
           subtitle={t("results.subtitle")}
-          maxSubtitleWidth="xl"
+          subtitleClassName="max-w-xl"
         />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 max-w-5xl mx-auto">

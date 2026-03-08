@@ -58,7 +58,7 @@ export const ProductSuiteSection = () => {
           title={t("products.title")}
           titleHighlight={t("products.titleHighlight")}
           subtitle={t("products.subtitle")}
-          maxSubtitleWidth="xl"
+          subtitleClassName="max-w-xl"
         />
 
         <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">

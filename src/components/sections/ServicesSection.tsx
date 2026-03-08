@@ -99,7 +99,7 @@ export const ServicesSection = () => {
             titleHighlight={" " + t("services.title")}
             subtitle={t("services.subtitle")}
             align="left"
-            maxSubtitleWidth="xl"
+            subtitleClassName="max-w-xl"
           />
 
           <motion.div
