@@ -67,7 +67,7 @@ export const FeaturedProjectsSection = () => {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center mt-10">
-          <a href="#contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border/50 bg-card/30 text-foreground hover:text-primary hover:border-primary/30 transition-all duration-300 group text-sm font-medium">
+          <a href="/portfolio" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border/50 bg-card/30 text-foreground hover:text-primary hover:border-primary/30 transition-all duration-300 group text-sm font-medium">
             <span>{t("projects.viewAll")}</span>
             <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
