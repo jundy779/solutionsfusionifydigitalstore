@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Bot, Store, CreditCard, Shield, Network } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import illustrationEcosystem from "@/assets/illustration-ecosystem.png";
 import { useLanguage } from "@/contexts/LanguageContext";
