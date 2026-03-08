@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Send, Building2, Briefcase, DollarSign } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
