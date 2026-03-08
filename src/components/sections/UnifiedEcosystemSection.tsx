@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Bot, Store, CreditCard, Shield, Network } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import illustrationEcosystem from "@/assets/illustration-ecosystem.png";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -25,17 +26,14 @@ export const UnifiedEcosystemSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <Network className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">{t("ecosystem.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            {t("ecosystem.title")}
-            <span className="text-gradient">{t("ecosystem.titleHighlight")}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">{t("ecosystem.subtitle")}</p>
-        </motion.div>
+        <SectionHeader
+          badge={t("ecosystem.badge")}
+          badgeIcon={Network}
+          title={t("ecosystem.title")}
+          titleHighlight={t("ecosystem.titleHighlight")}
+          subtitle={t("ecosystem.subtitle")}
+          subtitleClassName="max-w-2xl"
+        />
 
         <EcosystemDesktop steps={ecosystemSteps} />
 

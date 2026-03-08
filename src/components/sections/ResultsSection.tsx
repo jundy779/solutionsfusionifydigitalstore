@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Zap, Shield, TrendingUp, Heart, Clock } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import illustrationResults from "@/assets/illustration-results.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -51,17 +52,13 @@ export const ResultsSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center"><div className="w-2 h-2 rounded-full bg-primary" /></div>
-            <span className="text-sm font-medium text-muted-foreground">{t("results.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            {t("results.title")}
-            <span className="text-gradient">{t("results.titleHighlight")}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">{t("results.subtitle")}</p>
-        </motion.div>
+        <SectionHeader
+          badge={t("results.badge")}
+          title={t("results.title")}
+          titleHighlight={t("results.titleHighlight")}
+          subtitle={t("results.subtitle")}
+          subtitleClassName="max-w-xl"
+        />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 max-w-5xl mx-auto">
           {results.map((result, index) => (

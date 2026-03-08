@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Send, Building2, Briefcase, DollarSign } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,17 +80,14 @@ export const ContactSection = () => {
       <BackgroundBeams className="opacity-40" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <Mail className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">{t("contact.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            {t("contact.title")}
-            <span className="text-gradient">{t("contact.titleHighlight")}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">{t("contact.subtitle")}</p>
-        </motion.div>
+        <SectionHeader
+          badge={t("contact.badge")}
+          badgeIcon={Mail}
+          title={t("contact.title")}
+          titleHighlight={t("contact.titleHighlight")}
+          subtitle={t("contact.subtitle")}
+          subtitleClassName="max-w-xl"
+        />
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
