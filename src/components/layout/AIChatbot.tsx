@@ -154,7 +154,7 @@ export const AIChatbot = () => {
                 <div>
                   <p className="text-sm font-semibold text-foreground">Fusionify AI</p>
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-success inline-block" />
                     Online
                   </p>
                 </div>

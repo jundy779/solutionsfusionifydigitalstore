@@ -14,7 +14,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Bot Platform",
       description: t("products.automation.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://bot.fusionify.biz.id/",
     },
     {
@@ -23,7 +23,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Digital Marketplace",
       description: t("products.store.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://www.fusionifydigital.store/",
     },
     {
@@ -32,7 +32,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Network Security",
       description: t("products.vpn.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://peserta114-dm.karyakreasi.id/",
     },
     {
@@ -41,7 +41,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Payment Gateway",
       description: t("products.pay.desc"),
       status: t("products.comingSoon"),
-      statusColor: "bg-amber-500",
+      statusColor: "bg-warning",
       url: null,
     },
   ];

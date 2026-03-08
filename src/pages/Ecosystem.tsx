@@ -20,7 +20,7 @@ const Ecosystem = () => {
       description: t("eco.bot.desc"),
       url: "https://bot.fusionify.biz.id/",
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       gradient: "from-blue-500/10 to-cyan-500/10",
     },
     {
@@ -30,7 +30,7 @@ const Ecosystem = () => {
       description: t("eco.premiumify.desc"),
       url: "https://www.fusionifydigital.store/",
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       gradient: "from-purple-500/10 to-pink-500/10",
     },
     {
@@ -40,7 +40,7 @@ const Ecosystem = () => {
       description: t("eco.vpn.desc"),
       url: "https://peserta114-dm.karyakreasi.id/",
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       gradient: "from-green-500/10 to-emerald-500/10",
     },
     {
@@ -50,7 +50,7 @@ const Ecosystem = () => {
       description: t("eco.ftvpay.desc"),
       url: null,
       status: t("products.comingSoon"),
-      statusColor: "bg-amber-500",
+      statusColor: "bg-warning",
       gradient: "from-amber-500/10 to-orange-500/10",
     },
   ];
