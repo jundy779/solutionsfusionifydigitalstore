@@ -52,7 +52,7 @@ export const CookieConsent = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-foreground">
-                    Preferensi Cookie 🍪
+                    Preferensi Cookie
                   </h3>
                   <p className="mt-0.5 text-sm text-muted-foreground">
                     Kami menggunakan cookie untuk meningkatkan pengalaman browsing dan menganalisis trafik situs.{" "}
