@@ -40,6 +40,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
                 <Route path="/" element={<Index />} />
