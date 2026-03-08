@@ -41,7 +41,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Payment Gateway",
       description: t("products.pay.desc"),
       status: t("products.comingSoon"),
-      statusColor: "bg-amber-500",
+      statusColor: "bg-warning",
       url: null,
     },
   ];
