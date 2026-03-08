@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Cog, Clock, DollarSign, Zap } from "lucide-react";
 import illustrationPainpoint from "@/assets/illustration-painpoint.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 export const PainPointSection = () => {
   const { t } = useLanguage();
