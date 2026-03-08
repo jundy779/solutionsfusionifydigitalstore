@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { PageSkeleton } from "@/components/layout/PageSkeleton";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 import Index from "./pages/Index";
 
 // Lazy load all non-critical pages
