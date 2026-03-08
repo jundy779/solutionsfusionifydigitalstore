@@ -23,7 +23,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Digital Marketplace",
       description: t("products.store.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://www.fusionifydigital.store/",
     },
     {
