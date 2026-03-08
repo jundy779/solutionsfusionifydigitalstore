@@ -14,7 +14,7 @@ export const ProductSuiteSection = () => {
       subtitle: "Bot Platform",
       description: t("products.automation.desc"),
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       url: "https://bot.fusionify.biz.id/",
     },
     {
