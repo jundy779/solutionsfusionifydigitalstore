@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const consultationSchema = z.object({
   name: z.string().trim().min(1).max(100),
