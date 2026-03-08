@@ -39,8 +39,8 @@ const App = () => (
         <AuthProvider>
           <Toaster />
           <Sonner />
-          <CookieConsent />
           <BrowserRouter>
+            <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
                 <Route path="/" element={<Index />} />
