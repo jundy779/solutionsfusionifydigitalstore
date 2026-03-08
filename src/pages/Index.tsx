@@ -23,6 +23,7 @@ const FutureVisionSection = lazy(() => import("@/components/sections/FutureVisio
 const FAQSection = lazy(() => import("@/components/sections/FAQSection").then(m => ({ default: m.FAQSection })));
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(m => ({ default: m.CTASection })));
 const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(m => ({ default: m.ContactSection })));
+const NewsletterSection = lazy(() => import("@/components/sections/NewsletterSection").then(m => ({ default: m.NewsletterSection })));
 const Footer = lazy(() => import("@/components/layout/Footer").then(m => ({ default: m.Footer })));
 
 const SectionFallback = () => (
@@ -88,6 +89,7 @@ const Index = () => {
           <FutureVisionSection />
           <FAQSection />
           <CTASection />
+          <NewsletterSection />
           <ContactSection />
         </Suspense>
       </main>
