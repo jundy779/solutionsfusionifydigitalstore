@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot, Store, CreditCard, Shield, ArrowUpRight, ExternalLink } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
