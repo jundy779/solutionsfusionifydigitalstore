@@ -50,7 +50,7 @@ const Ecosystem = () => {
       description: t("eco.ftvpay.desc"),
       url: null,
       status: t("products.comingSoon"),
-      statusColor: "bg-amber-500",
+      statusColor: "bg-warning",
       gradient: "from-amber-500/10 to-orange-500/10",
     },
   ];
