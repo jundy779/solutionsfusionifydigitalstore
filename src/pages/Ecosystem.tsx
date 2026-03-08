@@ -20,7 +20,7 @@ const Ecosystem = () => {
       description: t("eco.bot.desc"),
       url: "https://bot.fusionify.biz.id/",
       status: t("products.available"),
-      statusColor: "bg-green-500",
+      statusColor: "bg-success",
       gradient: "from-blue-500/10 to-cyan-500/10",
     },
     {
