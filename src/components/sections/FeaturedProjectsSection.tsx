@@ -21,17 +21,14 @@ export const FeaturedProjectsSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-muted-foreground">{t("projects.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            {t("projects.title")}
-            <span className="text-gradient">{t("projects.titleHighlight")}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">{t("projects.subtitle")}</p>
-        </motion.div>
+        <SectionHeader
+          badge={t("projects.badge")}
+          badgeDot
+          title={t("projects.title")}
+          titleHighlight={t("projects.titleHighlight")}
+          subtitle={t("projects.subtitle")}
+          maxSubtitleWidth="2xl"
+        />
 
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {projects.map((project, index) => (

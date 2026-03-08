@@ -32,16 +32,14 @@ export const TestimonialsSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <Quote className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">{t("testimonials.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
-            {t("testimonials.title")} <span className="text-gradient">{t("testimonials.titleHighlight")}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">{t("testimonials.subtitle")}</p>
-        </motion.div>
+        <SectionHeader
+          badge={t("testimonials.badge")}
+          badgeIcon={Quote}
+          title={t("testimonials.title") + " "}
+          titleHighlight={t("testimonials.titleHighlight")}
+          subtitle={t("testimonials.subtitle")}
+          maxSubtitleWidth="2xl"
+        />
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }} className="relative">
           <InfiniteMovingCards items={cardItems} direction="left" speed="slow" pauseOnHover={true} />
