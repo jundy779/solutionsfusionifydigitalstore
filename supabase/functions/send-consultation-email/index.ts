@@ -96,7 +96,7 @@ serve(async (req) => {
         html: `
           <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
             <div style="background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 32px 24px; border-radius: 12px 12px 0 0; text-align: center;">
-              <h1 style="color: #ffffff; margin: 0; font-size: 24px;">✅ Permintaan Diterima!</h1>
+              <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Permintaan Diterima!</h1>
             </div>
             <div style="padding: 32px 24px;">
               <p style="color: #333; font-size: 16px; line-height: 1.6;">Halo <strong>${name}</strong>,</p>
