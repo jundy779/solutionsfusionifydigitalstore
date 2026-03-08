@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Gauge, Mail, Video, Upload, ExternalLink, Wrench } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
