@@ -40,17 +40,20 @@ export const WhyChooseUsSection = () => {
           </motion.div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
-          {reasons.map((reason, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }} className="group p-6 rounded-2xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300">
-                <reason.icon className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{reason.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{reason.description}</p>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-6xl mx-auto">
+          <HoverEffect
+            className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            items={reasons.map((reason) => ({
+              icon: (
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                  <reason.icon className="w-6 h-6 text-primary" />
+                </div>
+              ),
+              title: reason.title,
+              description: reason.description,
+            }))}
+          />
+        </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }} className="text-center mt-12">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-border/50 bg-card/30">

@@ -41,6 +41,6 @@ export const CTASection = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 };
