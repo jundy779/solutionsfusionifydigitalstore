@@ -5,8 +5,6 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import illustrationServices from "@/assets/illustration-services.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
-import illustrationServices from "@/assets/illustration-services.png";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   {
