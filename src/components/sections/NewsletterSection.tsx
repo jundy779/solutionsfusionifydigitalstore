@@ -35,8 +35,8 @@ export const NewsletterSection = () => {
         // Duplicate email
         setErrorMsg(
           lang === "id"
-            ? "Email ini sudah terdaftar sebelumnya. 🎉"
-            : "This email is already subscribed. 🎉"
+            ? "Email ini sudah terdaftar sebelumnya."
+            : "This email is already subscribed."
         );
         setStatus("error");
       } else {
