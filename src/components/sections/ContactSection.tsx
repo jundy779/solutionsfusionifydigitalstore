@@ -183,7 +183,7 @@ export const ContactSection = () => {
 
             <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.4 }} className="p-5 rounded-2xl bg-card/50 border border-border/50">
               <div className="flex items-center gap-3 mb-2">
-                <motion.span className="w-2 h-2 rounded-full bg-[hsl(var(--success))]" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+                <motion.span className="w-2 h-2 rounded-full bg-success" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
                 <span className="text-sm font-medium text-foreground">{t("contact.quickResponse")}</span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">{t("contact.quickResponseDesc")}</p>
