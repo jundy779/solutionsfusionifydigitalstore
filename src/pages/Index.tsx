@@ -89,6 +89,7 @@ const Index = () => {
           <FutureVisionSection />
           <FAQSection />
           <CTASection />
+          <NewsletterSection />
           <ContactSection />
         </Suspense>
       </main>
