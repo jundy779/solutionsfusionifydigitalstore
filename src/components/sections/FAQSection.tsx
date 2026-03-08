@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
