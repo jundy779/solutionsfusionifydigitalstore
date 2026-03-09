@@ -146,7 +146,7 @@ export const Navbar = () => {
             <LanguageToggle />
             {isAdmin && (
               <Link to="/admin/consultations" className="relative">
-                <Button variant="ghost" size="icon" className="relative h-9 w-9">
+                <Button variant="ghost" size="icon" className="relative h-9 w-9" aria-label="Notification konsultasi baru">
                   <Bell className="w-4 h-4" />
                   {newConsultationCount > 0 && (
                     <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">
