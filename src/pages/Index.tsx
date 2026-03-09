@@ -75,25 +75,53 @@ const Index = () => {
         <HeroSection />
         <ClientLogosSection />
         <PartnerLogosSection />
-        <Suspense fallback={<SectionFallback />}>
+        <Suspense fallback={<SectionFallback height="600px" />}>
           <PainPointSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
           <AboutFusionifySection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="700px" />}>
           <ServicesSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
           <UnifiedEcosystemSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="600px" />}>
           <WhyChooseUsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
           <ResultsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="600px" />}>
           <ProductSuiteSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="400px" />}>
           <FreeToolsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="700px" />}>
           <FeaturedProjectsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
           <TestimonialsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
           <FutureVisionSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="600px" />}>
           <FAQSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="400px" />}>
           <CTASection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="300px" />}>
           <NewsletterSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="600px" />}>
           <ContactSection />
         </Suspense>
       </main>
-      <Suspense fallback={<SectionFallback />}>
+      <Suspense fallback={<SectionFallback height="300px" />}>
         <Footer />
       </Suspense>
       <ScrollToTop />
