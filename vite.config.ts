@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
           "vendor-react": ["react", "react-dom", "react-router-dom"],
           "vendor-motion": ["framer-motion"],
           "vendor-query": ["@tanstack/react-query"],
-          "vendor-three": ["three", "@react-three/fiber", "@react-three/drei", "three-globe", "cobe"],
+          "vendor-cobe": ["cobe"],
           "vendor-radix": [
             "@radix-ui/react-accordion",
             "@radix-ui/react-dialog",
