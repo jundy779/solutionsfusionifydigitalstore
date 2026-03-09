@@ -49,7 +49,7 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* Globe Background */}
+      {/* Globe Background - Cobe (lightweight 2D canvas, no Three.js) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -60,26 +60,17 @@ export const HeroSection = () => {
           <Suspense
             fallback={
               <div className="w-full h-full flex items-center justify-center">
-                <motion.div
-                  className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full"
-                  animate={{
-                    opacity: [0.2, 0.4, 0.2],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                <div
+                  className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full animate-pulse"
                   style={{
                     background:
-                      "radial-gradient(circle, hsl(212 89% 45% / 0.3) 0%, transparent 70%)",
-                    filter: "blur(40px)",
+                      "radial-gradient(circle, hsl(212 89% 45% / 0.15) 0%, hsl(212 89% 45% / 0.05) 50%, transparent 70%)",
                   }}
                 />
               </div>
             }
           >
-            <World globeConfig={globeConfig} data={sampleArcs} />
+            <CobeGlobe className="w-full h-full cursor-grab" />
           </Suspense>
         </motion.div>
       </div>
