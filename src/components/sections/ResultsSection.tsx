@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { Zap, Shield, TrendingUp, Heart, Clock } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import illustrationResults from "@/assets/illustration-results.png";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const AnimatedCounter = ({ value, suffix, isInView }: { value: number; suffix: string; isInView: boolean }) => {
