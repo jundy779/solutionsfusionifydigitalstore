@@ -99,6 +99,7 @@ export const Navbar = () => {
 
   return (
     <motion.nav
+      aria-label="Main navigation"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -145,7 +146,7 @@ export const Navbar = () => {
             <LanguageToggle />
             {isAdmin && (
               <Link to="/admin/consultations" className="relative">
-                <Button variant="ghost" size="icon" className="relative h-9 w-9">
+                <Button variant="ghost" size="icon" className="relative h-9 w-9" aria-label="Notification konsultasi baru">
                   <Bell className="w-4 h-4" />
                   {newConsultationCount > 0 && (
                     <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">
@@ -170,6 +171,8 @@ export const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-foreground"
             whileTap={{ scale: 0.95 }}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </motion.button>

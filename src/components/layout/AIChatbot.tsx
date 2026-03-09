@@ -162,6 +162,7 @@ export const AIChatbot = () => {
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 rounded-lg hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground"
+                aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
               </button>
