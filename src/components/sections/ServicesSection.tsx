@@ -110,11 +110,11 @@ export const ServicesSection = () => {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             className="hidden lg:block"
           >
-            <img 
+            <OptimizedImage 
               src={illustrationServices} 
               alt="Ilustrasi layanan pengembangan digital Fusionify" 
               className="w-full rounded-2xl opacity-80"
-              loading="lazy"
+              sizes="(max-width: 1024px) 0px, 50vw"
             />
           </motion.div>
         </div>

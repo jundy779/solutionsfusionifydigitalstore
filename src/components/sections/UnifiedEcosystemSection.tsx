@@ -20,7 +20,7 @@ export const UnifiedEcosystemSection = () => {
   return (
     <section className="py-16 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <img src={illustrationEcosystem} alt="" className="w-full max-w-4xl opacity-[0.07] object-cover" aria-hidden="true" loading="lazy" decoding="async" />
+        <OptimizedImage src={illustrationEcosystem} alt="" className="w-full max-w-4xl opacity-[0.07] object-cover" aria-hidden="true" sizes="100vw" />
       </div>
       <div className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]" animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(212 89% 45% / 0.12) 0%, transparent 60%)", filter: "blur(80px)" }} />

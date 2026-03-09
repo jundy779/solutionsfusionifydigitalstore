@@ -42,7 +42,7 @@ export const PainPointSection = () => {
           />
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
-            <img src={illustrationPainpoint} alt="Ilustrasi tantangan bisnis digital yang dihadapi UMKM dan perusahaan" className="w-72 h-72 object-contain opacity-70 rounded-2xl" loading="lazy" />
+            <OptimizedImage src={illustrationPainpoint} alt="Ilustrasi tantangan bisnis digital yang dihadapi UMKM dan perusahaan" className="w-72 h-72 object-contain opacity-70 rounded-2xl" sizes="(max-width: 1024px) 0px, 288px" />
           </motion.div>
         </div>
 

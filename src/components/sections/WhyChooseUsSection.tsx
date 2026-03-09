@@ -36,7 +36,7 @@ export const WhyChooseUsSection = () => {
           />
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
-            <img src={illustrationWhychooseus} alt="Ilustrasi keunggulan Fusionify Digital sebagai partner transformasi digital" className="w-80 h-auto object-contain opacity-80 rounded-2xl" loading="lazy" />
+            <OptimizedImage src={illustrationWhychooseus} alt="Ilustrasi keunggulan Fusionify Digital sebagai partner transformasi digital" className="w-80 h-auto object-contain opacity-80 rounded-2xl" sizes="(max-width: 1024px) 0px, 320px" />
           </motion.div>
         </div>
 
