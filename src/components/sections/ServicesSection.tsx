@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Code2, Bot, Settings2, Cloud, Briefcase, ArrowUpRight } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import illustrationServices from "@/assets/illustration-services.png";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
 
