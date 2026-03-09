@@ -26,8 +26,8 @@ const ContactSection = lazy(() => import("@/components/sections/ContactSection")
 const NewsletterSection = lazy(() => import("@/components/sections/NewsletterSection").then(m => ({ default: m.NewsletterSection })));
 const Footer = lazy(() => import("@/components/layout/Footer").then(m => ({ default: m.Footer })));
 
-const SectionFallback = () => (
-  <div className="min-h-[200px]" />
+const SectionFallback = ({ height = "400px" }: { height?: string }) => (
+  <div style={{ minHeight: height }} />
 );
 
 const homepageJsonLd = [
