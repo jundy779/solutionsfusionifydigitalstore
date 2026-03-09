@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Cog, Clock, DollarSign, Zap } from "lucide-react";
 import illustrationPainpoint from "@/assets/illustration-painpoint.png";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { SectionHeader } from "./SectionHeader";
