@@ -4,6 +4,7 @@ import { Bot, Store, CreditCard, Shield, Network } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import illustrationEcosystem from "@/assets/illustration-ecosystem.png";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const UnifiedEcosystemSection = () => {
