@@ -55,6 +55,7 @@ const App = () => (
                 <Route path="/ecosystem" element={<Ecosystem />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
 
                 <Route
