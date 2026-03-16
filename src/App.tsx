@@ -15,6 +15,7 @@ import Index from "./pages/Index";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const ThankYou = lazy(() => import("./pages/ThankYou"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -54,6 +55,7 @@ const App = () => (
                 <Route path="/ecosystem" element={<Ecosystem />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
 
                 <Route

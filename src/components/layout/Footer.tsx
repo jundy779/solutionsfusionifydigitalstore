@@ -72,11 +72,28 @@ export const Footer = () => {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="border-t border-border/30 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-xs">© {new Date().getFullYear()} PT Fusionify Digital Store. {t("footer.allRights")}</p>
-          <p className="text-muted-foreground text-xs flex items-center gap-1.5">
-            <span>{t("footer.madeWith")}</span><span className="text-red-500">♥</span><span>{t("footer.inIndonesia")}</span>
-          </p>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="border-t border-border/30 mt-12 pt-6 space-y-3">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+              <p className="text-muted-foreground text-xs">© {new Date().getFullYear()} PT Fusionify Digital Store. {t("footer.allRights")}</p>
+              <span className="hidden sm:inline text-border/50 text-xs">•</span>
+              <p className="text-muted-foreground text-xs">
+                NIB: <span className="font-medium text-muted-foreground/80">0605240040082</span>
+              </p>
+              <span className="hidden sm:inline text-border/50 text-xs">•</span>
+              <p className="text-muted-foreground text-xs">
+                NPWP: <span className="font-medium text-muted-foreground/80">99.493.897.1-424.000</span>
+              </p>
+            </div>
+            <p className="text-muted-foreground text-xs flex items-center gap-1.5">
+              <span>{t("footer.madeWith")}</span><span className="text-red-500">♥</span><span>{t("footer.inIndonesia")}</span>
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
+            <p className="text-muted-foreground/60 text-[11px]">Terdaftar di OSS-RBA Kementerian Investasi RI</p>
+            <span className="text-border/40 text-[11px]">•</span>
+            <p className="text-muted-foreground/60 text-[11px]">Klasifikasi KBLI: 62010 – Aktivitas Pemrograman Komputer</p>
+          </div>
         </motion.div>
       </div>
     </footer>

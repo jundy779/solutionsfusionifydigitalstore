@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy } from "react";
@@ -163,6 +163,31 @@ export const HeroSection = () => {
               <ArrowRight className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
               <span>{t("hero.cta")}</span>
             </MovingBorderButton>
+          </motion.div>
+
+          {/* Trust badges strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
+            className="flex flex-wrap justify-center gap-3 mt-8"
+          >
+            {[
+              { icon: ShieldCheck, labelId: "Proses Aman & Terpercaya", labelEn: "Secure & Trusted Process" },
+              { icon: Zap, labelId: "Respon < 24 Jam", labelEn: "Response < 24 Hours" },
+              { icon: Users, labelId: "50+ Klien Puas", labelEn: "50+ Happy Clients" },
+            ].map((badge, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.6 + i * 0.07 }}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border/40 bg-card/40 backdrop-blur-sm text-xs text-muted-foreground"
+              >
+                <badge.icon className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                {t(`hero.badge${i}`)}
+              </motion.span>
+            ))}
           </motion.div>
         </div>
       </div>
