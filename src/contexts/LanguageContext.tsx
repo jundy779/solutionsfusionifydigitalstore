@@ -18,6 +18,9 @@ const translations: Translations = {
 
   // Hero
   "hero.badge": { id: "Penyedia Solusi Digital", en: "Digital Solutions Provider" },
+  "hero.badge0": { id: "Proses Aman & Terpercaya", en: "Secure & Trusted Process" },
+  "hero.badge1": { id: "Respon < 24 Jam", en: "Response < 24 Hours" },
+  "hero.badge2": { id: "50+ Klien Puas", en: "50+ Happy Clients" },
   "hero.line1": { id: "Transformasi bisnis Anda dengan", en: "Transform your business with" },
   "hero.line2": { id: "otomasi cerdas dan", en: "smart automation and" },
   "hero.line3": { id: "solusi digital modern.", en: "modern digital solutions." },
