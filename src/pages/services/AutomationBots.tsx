@@ -10,6 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ServiceBreadcrumb } from "@/components/services/ServiceBreadcrumb";
+import { RelatedServices } from "@/components/services/RelatedServices";
 
 const problems = [
   { icon: MessageSquare, text: "CS kewalahan jawab pertanyaan yang sama berulang-ulang" },
