@@ -167,6 +167,38 @@ export const HeroSection = () => {
             </MovingBorderButton>
           </motion.div>
 
+          {/* Service quick links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+            className="flex flex-wrap justify-center gap-2 mt-6"
+          >
+            {[
+              { icon: Code2, label: "Web Dev", href: "/services/web-development", color: "hsl(212 89% 45%)" },
+              { icon: Bot, label: "Automation Bots", href: "/services/automation-bots", color: "hsl(265 75% 55%)" },
+              { icon: Settings2, label: "Digital Systems", href: "/services/digital-systems", color: "hsl(142 70% 45%)" },
+              { icon: Cloud, label: "Cloud Support", href: "/services/cloud-support", color: "hsl(200 90% 50%)" },
+              { icon: Briefcase, label: "Project Services", href: "/services/project-services", color: "hsl(30 90% 55%)" },
+            ].map((service, i) => (
+              <motion.div
+                key={service.href}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.5 + i * 0.06 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+              >
+                <Link
+                  to={service.href}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border/40 bg-card/40 backdrop-blur-sm text-xs font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
+                >
+                  <service.icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: service.color }} />
+                  {service.label}
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+
           {/* Trust badges strip */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
