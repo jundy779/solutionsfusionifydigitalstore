@@ -1,4 +1,6 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
