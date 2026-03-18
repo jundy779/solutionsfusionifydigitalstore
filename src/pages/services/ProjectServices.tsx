@@ -187,11 +187,7 @@ const ProjectServices = () => {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <Link to="/#services">
-            <Button variant="ghost" className="mb-8 gap-2 text-muted-foreground hover:text-foreground">
-              <ArrowLeft className="w-4 h-4" /> Kembali ke Services
-            </Button>
-          </Link>
+          <ServiceBreadcrumb currentService="Project Services" />
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
