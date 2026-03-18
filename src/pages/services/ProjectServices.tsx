@@ -421,6 +421,7 @@ const ProjectServices = () => {
         </div>
       </section>
 
+      <RelatedServices currentHref="/services/project-services" />
       <Footer />
     </div>
   );

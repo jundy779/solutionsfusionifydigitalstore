@@ -422,6 +422,7 @@ const DigitalSystems = () => {
         </div>
       </section>
 
+      <RelatedServices currentHref="/services/digital-systems" />
       <Footer />
     </div>
   );

@@ -414,6 +414,7 @@ const AutomationBots = () => {
         </div>
       </section>
 
+      <RelatedServices currentHref="/services/automation-bots" />
       <Footer />
     </div>
   );
