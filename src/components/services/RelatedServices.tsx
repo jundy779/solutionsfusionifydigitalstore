@@ -62,7 +62,7 @@ export const RelatedServices = ({ currentHref }: RelatedServicesProps) => {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
           {related.map((service, i) => (
             <motion.div
               key={service.href}
