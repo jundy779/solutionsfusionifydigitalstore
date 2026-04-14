@@ -250,6 +250,7 @@ const AutomationBots = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Problem section */}

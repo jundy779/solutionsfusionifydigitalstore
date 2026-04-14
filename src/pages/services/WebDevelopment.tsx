@@ -266,6 +266,7 @@ const WebDevelopment = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Stats */}

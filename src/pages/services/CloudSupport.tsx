@@ -219,6 +219,7 @@ const CloudSupport = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Stats */}

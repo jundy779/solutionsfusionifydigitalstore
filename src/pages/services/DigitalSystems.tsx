@@ -254,6 +254,7 @@ const DigitalSystems = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Stats */}

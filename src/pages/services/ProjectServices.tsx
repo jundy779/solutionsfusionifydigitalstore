@@ -247,6 +247,7 @@ const ProjectServices = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Stats */}
