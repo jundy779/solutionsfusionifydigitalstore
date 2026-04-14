@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ServiceBreadcrumb } from "@/components/services/ServiceBreadcrumb";
+import { ScrollIndicator } from "@/components/services/ScrollIndicator";
 import { RelatedServices } from "@/components/services/RelatedServices";
 
 const features = [
@@ -254,6 +255,7 @@ const DigitalSystems = () => {
             </motion.div>
           </div>
         </div>
+        <ScrollIndicator />
       </section>
 
       {/* Stats */}
