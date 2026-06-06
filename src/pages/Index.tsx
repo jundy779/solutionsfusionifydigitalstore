@@ -36,8 +36,8 @@ const homepageJsonLd = [
     "@type": "Organization",
     name: "Fusionify Digital Solutions",
     alternateName: "PT Fusionify Digital Store",
-    url: "https://solutions.fusionifydigital.com",
-    logo: "https://solutions.fusionifydigital.com/favicon.png",
+    url: "https://solutions.fusionifydigital.store",
+    logo: "https://solutions.fusionifydigital.store/favicon.png",
     description: "Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support.",
     sameAs: [
       "https://www.instagram.com/fusionifytempestore/",
@@ -57,7 +57,7 @@ const homepageJsonLd = [
     "@type": "WebSite",
     name: "Fusionify Digital Solutions",
     alternateName: "Fusionify",
-    url: "https://solutions.fusionifydigital.com",
+    url: "https://solutions.fusionifydigital.store",
   },
 ];
 
@@ -67,9 +67,9 @@ const Index = () => {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:text-sm focus:font-medium">
         Skip to main content
       </a>
-      <SEOHead 
-        title="Fusionify Digital Solutions | Solusi Transformasi Digital" 
-        description="Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support dengan pendekatan automation-first."
+      <SEOHead
+        title="Fusionify Digital Solutions | Solusi Transformasi Digital"
+        description="Partner transformasi digital untuk UMKM, startup & enterprise. Web development, automation bots, digital systems, cloud support — automation-first."
         path="/"
         jsonLd={homepageJsonLd}
       />
