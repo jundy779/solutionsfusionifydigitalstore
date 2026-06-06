@@ -8,7 +8,7 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const BASE_URL = "https://solutions.fusionifydigital.com";
+const BASE_URL = "https://solutions.fusionifydigital.store";
 
 export const SEOHead = ({ 
   title, 

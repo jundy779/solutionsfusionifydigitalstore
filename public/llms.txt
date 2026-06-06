@@ -1,0 +1,32 @@
+# Fusionify Digital Solutions
+
+> Partner transformasi digital untuk UMKM, startup, dan enterprise di Indonesia. Web development, automation bots, digital systems, cloud support, dan project services dengan pendekatan automation-first.
+
+Fusionify Digital Solutions (PT Fusionify Digital Store) membangun solusi end-to-end: website modern, bot WhatsApp/Telegram, sistem internal terintegrasi, infrastruktur cloud, dan layanan project on-demand.
+
+## Pages
+
+- [Beranda](/): Ringkasan layanan, portofolio, dan ekosistem produk Fusionify.
+- [Portfolio](/portfolio): Studi kasus proyek nyata untuk klien UMKM dan enterprise.
+- [Ekosistem Produk](/ecosystem): Produk dan komunitas yang dibangun Fusionify.
+
+## Services
+
+- [Web Development](/services/web-development): Landing page, company profile, e-commerce, dan custom web app.
+- [Automation & Bots](/services/automation-bots): Bot WhatsApp, Telegram, dan workflow automation untuk operasional.
+- [Digital Systems](/services/digital-systems): Sistem internal (CRM, ERP ringan, dashboard) terintegrasi.
+- [Cloud Support](/services/cloud-support): Setup, migrasi, dan maintenance infrastruktur cloud.
+- [Project Services](/services/project-services): Layanan project on-demand untuk kebutuhan teknis lainnya.
+
+## Portfolio highlights
+
+- [SMK Pionir](/portfolio/smk-pionir): Website sekolah modern.
+- [Cessa Snack](/portfolio/cessa-snack): E-commerce produk makanan.
+- [TokyoShop ID](/portfolio/tokyoshop-id): Toko online lintas kategori.
+- [Servisku WhatsApp Bot](/portfolio/servisku-whatsapp-bot): Automasi layanan pelanggan via WhatsApp.
+- [TechVenture CRM](/portfolio/techventure-crm-integration): Integrasi CRM kustom.
+
+## Optional
+
+- [Privacy Policy](/privacy-policy): Kebijakan privasi.
+- [Terms of Service](/terms-of-service): Syarat dan ketentuan layanan.
