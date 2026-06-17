@@ -427,8 +427,6 @@ const FAQAdmin = () => {
                   { widthClass: "w-20", align: "right" },
                 ]}
               />
-            ) : null}
-            {isLoading ? null : (
             ) : faqs?.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 Belum ada FAQ. Klik "Tambah FAQ" untuk menambahkan.
