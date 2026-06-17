@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { compressImage, uploadWithProgress } from "@/lib/image-utils";
+import { AdminTableSkeleton } from "@/components/admin/AdminTableSkeleton";
 import {
   Dialog,
   DialogContent,
@@ -655,7 +656,21 @@ export default function LogosAdmin() {
       {/* Content */}
       <main className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <div className="text-center py-12 text-muted-foreground">Loading...</div>
+          <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden p-4">
+            <AdminTableSkeleton
+              rows={5}
+              withLeadingThumb
+              columns={[
+                { widthClass: "w-6" },
+                { widthClass: "w-12" },
+                { widthClass: "w-32" },
+                { widthClass: "w-16" },
+                { widthClass: "w-16" },
+                { widthClass: "w-12" },
+                { widthClass: "w-20", align: "right" },
+              ]}
+            />
+          </div>
         ) : logos && logos.length > 0 ? (
           <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden">
             <Table>
