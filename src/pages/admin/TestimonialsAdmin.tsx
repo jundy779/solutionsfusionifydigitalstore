@@ -42,6 +42,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableTestimonialRow } from "@/components/admin/SortableTestimonialRow";
+import { AdminPageSkeleton } from "@/components/admin/AdminTableSkeleton";
 
 interface Testimonial {
   id: string;
