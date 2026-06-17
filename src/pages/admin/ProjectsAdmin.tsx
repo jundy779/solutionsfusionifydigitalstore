@@ -44,6 +44,7 @@ import {
   Star
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AdminPageSkeleton } from "@/components/admin/AdminTableSkeleton";
 
 interface Project {
   id: string;
