@@ -48,6 +48,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableFAQRow } from "@/components/admin/SortableFAQRow";
+import { AdminTableSkeleton } from "@/components/admin/AdminTableSkeleton";
 
 interface FAQ {
   id: string;
@@ -418,7 +419,15 @@ const FAQAdmin = () => {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="text-center py-8 text-muted-foreground">Memuat data...</div>
+              <AdminTableSkeleton
+                rows={5}
+                columns={[
+                  { widthClass: "w-6" },
+                  { widthClass: "w-64" },
+                  { widthClass: "w-16" },
+                  { widthClass: "w-20", align: "right" },
+                ]}
+              />
             ) : faqs?.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 Belum ada FAQ. Klik "Tambah FAQ" untuk menambahkan.

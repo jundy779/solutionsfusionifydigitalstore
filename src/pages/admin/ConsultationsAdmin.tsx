@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -32,10 +34,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, MessageSquare, Mail, Building2, Briefcase, DollarSign, Trash2, Eye, Image as ImageIcon, Quote, HelpCircle, FolderOpen, Volume2, VolumeX } from "lucide-react";
+import {
+  ArrowLeft,
+  MessageSquare,
+  Mail,
+  Building2,
+  Briefcase,
+  DollarSign,
+  Trash2,
+  Eye,
+  Image as ImageIcon,
+  Quote,
+  HelpCircle,
+  FolderOpen,
+  Volume2,
+  VolumeX,
+  StickyNote,
+  Send,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
+import { AdminTableSkeleton } from "@/components/admin/AdminTableSkeleton";
 
 interface ConsultationRequest {
   id: string;
@@ -50,12 +70,28 @@ interface ConsultationRequest {
   updated_at: string;
 }
 
-const STATUS_OPTIONS = [
-  { value: "new", label: "Baru", variant: "default" as const },
-  { value: "contacted", label: "Dihubungi", variant: "secondary" as const },
-  { value: "in_progress", label: "Dalam Proses", variant: "outline" as const },
-  { value: "completed", label: "Selesai", variant: "default" as const },
-  { value: "cancelled", label: "Dibatalkan", variant: "destructive" as const },
+interface ConsultationNote {
+  id: string;
+  consultation_id: string;
+  author_id: string | null;
+  author_email: string | null;
+  note: string;
+  created_at: string;
+}
+
+type BadgeVariant = "default" | "secondary" | "outline" | "destructive";
+
+const STATUS_OPTIONS: Array<{
+  value: string;
+  label: string;
+  variant: BadgeVariant;
+}> = [
+  { value: "new", label: "New", variant: "default" },
+  { value: "contacted", label: "Contacted", variant: "secondary" },
+  { value: "qualified", label: "Qualified", variant: "secondary" },
+  { value: "proposal_sent", label: "Proposal Sent", variant: "outline" },
+  { value: "closed_won", label: "Closed Won", variant: "default" },
+  { value: "closed_lost", label: "Closed Lost", variant: "destructive" },
 ];
 
 const getStatusBadge = (status: string) => {
@@ -67,8 +103,10 @@ const getStatusBadge = (status: string) => {
 const ConsultationsAdmin = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { user } = useAuth();
   const [selectedRequest, setSelectedRequest] = useState<ConsultationRequest | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [noteDraft, setNoteDraft] = useState("");
   const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
     const saved = localStorage.getItem("admin-notification-sound");
     return saved !== null ? saved === "true" : true;
@@ -77,14 +115,10 @@ const ConsultationsAdmin = () => {
   // Realtime subscription for new consultation requests
   useEffect(() => {
     const channel = supabase
-      .channel('consultation-realtime')
+      .channel("consultation-realtime")
       .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'consultation_requests',
-        },
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "consultation_requests" },
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["admin-consultations"] });
           const newReq = payload.new as ConsultationRequest;
@@ -118,6 +152,21 @@ const ConsultationsAdmin = () => {
     },
   });
 
+  // Notes for currently selected lead
+  const { data: notes, isLoading: notesLoading } = useQuery({
+    queryKey: ["consultation-notes", selectedRequest?.id],
+    enabled: !!selectedRequest?.id,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("consultation_notes")
+        .select("*")
+        .eq("consultation_id", selectedRequest!.id)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data as ConsultationNote[];
+    },
+  });
+
   const updateStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
       const { error } = await supabase
@@ -128,7 +177,7 @@ const ConsultationsAdmin = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-consultations"] });
-      toast({ title: "Status berhasil diperbarui" });
+      toast({ title: "Status pipeline diperbarui" });
     },
     onError: (error: Error) => {
       toast({ title: "Gagal memperbarui status", description: error.message, variant: "destructive" });
@@ -150,6 +199,38 @@ const ConsultationsAdmin = () => {
     },
   });
 
+  const addNoteMutation = useMutation({
+    mutationFn: async (note: string) => {
+      if (!selectedRequest) throw new Error("No lead selected");
+      const { error } = await supabase.from("consultation_notes").insert({
+        consultation_id: selectedRequest.id,
+        author_id: user?.id ?? null,
+        author_email: user?.email ?? null,
+        note: note.trim(),
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["consultation-notes", selectedRequest?.id] });
+      setNoteDraft("");
+      toast({ title: "Catatan ditambahkan" });
+    },
+    onError: (error: Error) => {
+      toast({ title: "Gagal menambah catatan", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const deleteNoteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("consultation_notes").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["consultation-notes", selectedRequest?.id] });
+      toast({ title: "Catatan dihapus" });
+    },
+  });
+
   const filtered = filterStatus === "all"
     ? requests
     : requests?.filter((r) => r.status === filterStatus);
@@ -157,6 +238,8 @@ const ConsultationsAdmin = () => {
   const counts = {
     all: requests?.length || 0,
     new: requests?.filter((r) => r.status === "new").length || 0,
+    open: requests?.filter((r) => !["closed_won", "closed_lost"].includes(r.status)).length || 0,
+    won: requests?.filter((r) => r.status === "closed_won").length || 0,
   };
 
   return (
@@ -170,9 +253,9 @@ const ConsultationsAdmin = () => {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Konsultasi</h1>
+              <h1 className="text-3xl font-bold text-foreground">Lead Pipeline</h1>
               <p className="text-muted-foreground">
-                Kelola permintaan konsultasi masuk
+                Kelola permintaan konsultasi & follow-up
                 {counts.new > 0 && (
                   <Badge variant="destructive" className="ml-2">{counts.new} baru</Badge>
                 )}
@@ -216,6 +299,34 @@ const ConsultationsAdmin = () => {
           </div>
         </div>
 
+        {/* Pipeline summary */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground">Total</p>
+              <p className="text-2xl font-bold">{counts.all}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground">Baru</p>
+              <p className="text-2xl font-bold text-primary">{counts.new}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground">Open Pipeline</p>
+              <p className="text-2xl font-bold">{counts.open}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground">Closed Won</p>
+              <p className="text-2xl font-bold text-green-500">{counts.won}</p>
+            </CardContent>
+          </Card>
+        </div>
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
@@ -226,7 +337,7 @@ const ConsultationsAdmin = () => {
               <CardDescription>{counts.all} total permintaan</CardDescription>
             </div>
             <Select value={filterStatus} onValueChange={setFilterStatus}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Filter status" />
               </SelectTrigger>
               <SelectContent>
@@ -239,7 +350,16 @@ const ConsultationsAdmin = () => {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="text-center py-8 text-muted-foreground">Memuat data...</div>
+              <AdminTableSkeleton
+                rows={5}
+                columns={[
+                  { widthClass: "w-32" },
+                  { widthClass: "w-40" },
+                  { widthClass: "w-32" },
+                  { widthClass: "w-24" },
+                  { widthClass: "w-16", align: "right" },
+                ]}
+              />
             ) : !filtered?.length ? (
               <div className="text-center py-8 text-muted-foreground">
                 Belum ada permintaan konsultasi.
@@ -268,7 +388,25 @@ const ConsultationsAdmin = () => {
                         </div>
                       </TableCell>
                       <TableCell className="text-sm">{req.service}</TableCell>
-                      <TableCell>{getStatusBadge(req.status)}</TableCell>
+                      <TableCell>
+                        <Select
+                          value={req.status}
+                          onValueChange={(value) =>
+                            updateStatusMutation.mutate({ id: req.id, status: value })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-[150px] text-xs">
+                            <SelectValue>{getStatusBadge(req.status)}</SelectValue>
+                          </SelectTrigger>
+                          <SelectContent>
+                            {STATUS_OPTIONS.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
                           <Button variant="ghost" size="icon" onClick={() => setSelectedRequest(req)}>
@@ -297,10 +435,18 @@ const ConsultationsAdmin = () => {
         </Card>
 
         {/* Detail Dialog */}
-        <Dialog open={!!selectedRequest} onOpenChange={(open) => !open && setSelectedRequest(null)}>
-          <DialogContent className="max-w-lg">
+        <Dialog
+          open={!!selectedRequest}
+          onOpenChange={(open) => {
+            if (!open) {
+              setSelectedRequest(null);
+              setNoteDraft("");
+            }
+          }}
+        >
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Detail Konsultasi</DialogTitle>
+              <DialogTitle>Detail Lead</DialogTitle>
             </DialogHeader>
             {selectedRequest && (
               <div className="space-y-4">
@@ -336,9 +482,10 @@ const ConsultationsAdmin = () => {
                   <p className="text-xs text-muted-foreground mb-1">Pesan</p>
                   <p className="text-sm bg-muted/50 p-3 rounded-lg leading-relaxed">{selectedRequest.message}</p>
                 </div>
+
                 <div className="flex items-center justify-between pt-2 border-t">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Status:</span>
+                    <span className="text-sm text-muted-foreground">Pipeline:</span>
                     <Select
                       value={selectedRequest.status}
                       onValueChange={(value) => {
@@ -346,7 +493,7 @@ const ConsultationsAdmin = () => {
                         setSelectedRequest({ ...selectedRequest, status: value });
                       }}
                     >
-                      <SelectTrigger className="w-[160px] h-8">
+                      <SelectTrigger className="w-[180px] h-8">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -367,6 +514,76 @@ const ConsultationsAdmin = () => {
                   >
                     <Trash2 className="h-4 w-4 mr-1" /> Hapus
                   </Button>
+                </div>
+
+                {/* Notes section */}
+                <div className="border-t pt-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <StickyNote className="w-4 h-4 text-muted-foreground" />
+                    <h3 className="text-sm font-semibold">Catatan Lead</h3>
+                    {notes && notes.length > 0 && (
+                      <Badge variant="outline" className="text-xs">{notes.length}</Badge>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 mb-3">
+                    <Textarea
+                      value={noteDraft}
+                      onChange={(e) => setNoteDraft(e.target.value)}
+                      placeholder="Tambahkan catatan follow-up, hasil call, dll..."
+                      rows={2}
+                      maxLength={5000}
+                      className="text-sm"
+                    />
+                    <Button
+                      size="sm"
+                      className="self-start gap-1"
+                      disabled={!noteDraft.trim() || addNoteMutation.isPending}
+                      onClick={() => addNoteMutation.mutate(noteDraft)}
+                    >
+                      <Send className="w-3 h-3" /> Simpan
+                    </Button>
+                  </div>
+
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {notesLoading ? (
+                      <p className="text-xs text-muted-foreground">Memuat catatan...</p>
+                    ) : !notes?.length ? (
+                      <p className="text-xs text-muted-foreground italic">Belum ada catatan.</p>
+                    ) : (
+                      notes.map((n) => (
+                        <div
+                          key={n.id}
+                          className="bg-muted/40 rounded-lg p-3 text-sm border border-border/50"
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-xs text-muted-foreground">
+                              <span className="font-medium text-foreground">
+                                {n.author_email ?? "Admin"}
+                              </span>
+                              {" · "}
+                              {format(new Date(n.created_at), "dd MMM yyyy, HH:mm", { locale: idLocale })}
+                            </p>
+                            {n.author_id === user?.id && (
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-6 w-6 text-destructive hover:text-destructive"
+                                onClick={() => {
+                                  if (confirm("Hapus catatan ini?")) {
+                                    deleteNoteMutation.mutate(n.id);
+                                  }
+                                }}
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </Button>
+                            )}
+                          </div>
+                          <p className="whitespace-pre-wrap leading-relaxed">{n.note}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
               </div>
             )}
