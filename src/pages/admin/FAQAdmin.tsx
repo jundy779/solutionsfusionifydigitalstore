@@ -48,6 +48,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableFAQRow } from "@/components/admin/SortableFAQRow";
+import { AdminTableSkeleton } from "@/components/admin/AdminTableSkeleton";
 
 interface FAQ {
   id: string;

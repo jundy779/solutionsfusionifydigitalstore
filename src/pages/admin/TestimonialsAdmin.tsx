@@ -352,9 +352,17 @@ const TestimonialsAdmin = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Memuat...</p>
-      </div>
+      <AdminPageSkeleton
+        rows={5}
+        withLeadingThumb
+        columns={[
+          { widthClass: "w-12" },
+          { widthClass: "w-40" },
+          { widthClass: "w-48" },
+          { widthClass: "w-20" },
+          { widthClass: "w-24", align: "right" },
+        ]}
+      />
     );
   }
 
