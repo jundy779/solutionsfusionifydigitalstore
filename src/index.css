@@ -451,3 +451,55 @@
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--background));
 }
+
+/* ============================================
+   Performance & Animation Smoothness
+   ============================================ */
+
+/* GPU-accelerate transforms/opacity, avoid layout thrash */
+.animate-fade-in,
+.animate-scale-in,
+.animate-slide-in-right,
+.animate-enter,
+[data-animate] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Reduce paint area for offscreen sections (CLS-safe via contain-intrinsic-size) */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* Stable media sizing prevents layout shift before assets load */
+img, video, iframe {
+  height: auto;
+}
+
+/* Mobile: lighten heavy animations to keep 60fps on low-end devices */
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation-duration: calc(var(--animation-duration, 40s) * 1.5);
+  }
+  .hover-scale {
+    transition-duration: 150ms;
+  }
+}
+
+/* Respect user system preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-scroll {
+    animation: none !important;
+  }
+}
+
