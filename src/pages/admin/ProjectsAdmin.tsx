@@ -170,7 +170,7 @@ const ProjectsAdmin = () => {
         .order("display_order", { ascending: true });
 
       if (error) throw error;
-      return data as Project[];
+      return data as unknown as Project[];
     },
   });
 
@@ -314,6 +314,15 @@ const ProjectsAdmin = () => {
         completion_date: formData.completion_date || null,
         is_featured: formData.is_featured,
         thumbnail_url: thumbnailUrl,
+        challenge: formData.challenge || null,
+        solution: formData.solution || null,
+        process_steps: parseProcessSteps(formData.process_steps),
+        metrics: parseMetrics(formData.metrics),
+        before_image_url: formData.before_image_url || null,
+        after_image_url: formData.after_image_url || null,
+        testimonial_quote: formData.testimonial_quote || null,
+        testimonial_author_name: formData.testimonial_author_name || null,
+        testimonial_author_role: formData.testimonial_author_role || null,
       };
 
       if (editingProject) {
@@ -343,10 +352,20 @@ const ProjectsAdmin = () => {
       live_url: project.live_url || "",
       completion_date: project.completion_date || "",
       is_featured: project.is_featured,
+      challenge: project.challenge || "",
+      solution: project.solution || "",
+      process_steps: stringifyProcessSteps(project.process_steps),
+      metrics: stringifyMetrics(project.metrics),
+      before_image_url: project.before_image_url || "",
+      after_image_url: project.after_image_url || "",
+      testimonial_quote: project.testimonial_quote || "",
+      testimonial_author_name: project.testimonial_author_name || "",
+      testimonial_author_role: project.testimonial_author_role || "",
     });
     setThumbnailPreview(project.thumbnail_url || "");
     setIsDialogOpen(true);
   };
+
 
   const handleToggleActive = (project: Project) => {
     updateMutation.mutate({ id: project.id, data: { is_active: !project.is_active } });
