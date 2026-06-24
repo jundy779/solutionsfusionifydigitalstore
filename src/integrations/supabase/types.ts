@@ -195,6 +195,9 @@ export type Database = {
       }
       projects: {
         Row: {
+          after_image_url: string | null
+          before_image_url: string | null
+          challenge: string | null
           client_logo_url: string | null
           client_name: string | null
           completion_date: string | null
@@ -207,15 +210,24 @@ export type Database = {
           is_active: boolean
           is_featured: boolean
           live_url: string | null
+          metrics: Json
+          process_steps: Json
           results: string[] | null
           service_category: string
           slug: string
+          solution: string | null
           technologies: string[] | null
+          testimonial_author_name: string | null
+          testimonial_author_role: string | null
+          testimonial_quote: string | null
           thumbnail_url: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          after_image_url?: string | null
+          before_image_url?: string | null
+          challenge?: string | null
           client_logo_url?: string | null
           client_name?: string | null
           completion_date?: string | null
@@ -228,15 +240,24 @@ export type Database = {
           is_active?: boolean
           is_featured?: boolean
           live_url?: string | null
+          metrics?: Json
+          process_steps?: Json
           results?: string[] | null
           service_category: string
           slug: string
+          solution?: string | null
           technologies?: string[] | null
+          testimonial_author_name?: string | null
+          testimonial_author_role?: string | null
+          testimonial_quote?: string | null
           thumbnail_url?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          after_image_url?: string | null
+          before_image_url?: string | null
+          challenge?: string | null
           client_logo_url?: string | null
           client_name?: string | null
           completion_date?: string | null
@@ -249,10 +270,16 @@ export type Database = {
           is_active?: boolean
           is_featured?: boolean
           live_url?: string | null
+          metrics?: Json
+          process_steps?: Json
           results?: string[] | null
           service_category?: string
           slug?: string
+          solution?: string | null
           technologies?: string[] | null
+          testimonial_author_name?: string | null
+          testimonial_author_role?: string | null
+          testimonial_quote?: string | null
           thumbnail_url?: string | null
           title?: string
           updated_at?: string
