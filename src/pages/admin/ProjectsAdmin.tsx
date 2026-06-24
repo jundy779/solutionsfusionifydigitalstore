@@ -46,6 +46,17 @@ import {
 import { Link } from "react-router-dom";
 import { AdminPageSkeleton } from "@/components/admin/AdminTableSkeleton";
 
+interface ProcessStep {
+  title: string;
+  description?: string;
+}
+
+interface Metric {
+  label: string;
+  value: string;
+  sublabel?: string;
+}
+
 interface Project {
   id: string;
   title: string;
@@ -63,6 +74,15 @@ interface Project {
   is_featured: boolean;
   is_active: boolean;
   created_at: string;
+  challenge: string | null;
+  solution: string | null;
+  process_steps: ProcessStep[] | null;
+  metrics: Metric[] | null;
+  before_image_url: string | null;
+  after_image_url: string | null;
+  testimonial_quote: string | null;
+  testimonial_author_name: string | null;
+  testimonial_author_role: string | null;
 }
 
 const serviceCategories = [
@@ -73,29 +93,73 @@ const serviceCategories = [
   "Project-Based Services",
 ];
 
+const emptyForm = {
+  title: "",
+  slug: "",
+  description: "",
+  full_description: "",
+  client_name: "",
+  service_category: "Web & App Development",
+  technologies: "",
+  results: "",
+  live_url: "",
+  completion_date: "",
+  is_featured: false,
+  challenge: "",
+  solution: "",
+  process_steps: "", // "Title | Description" per line
+  metrics: "", // "value | label | sublabel" per line
+  before_image_url: "",
+  after_image_url: "",
+  testimonial_quote: "",
+  testimonial_author_name: "",
+  testimonial_author_role: "",
+};
+
+const parseProcessSteps = (raw: string): ProcessStep[] =>
+  raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [title, ...rest] = line.split("|").map((s) => s.trim());
+      return { title, description: rest.join(" | ") || undefined };
+    });
+
+const parseMetrics = (raw: string): Metric[] =>
+  raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [value, label, sublabel] = line.split("|").map((s) => s.trim());
+      return { value: value || "", label: label || "", sublabel: sublabel || undefined };
+    })
+    .filter((m) => m.value && m.label);
+
+const stringifyProcessSteps = (steps: ProcessStep[] | null | undefined) =>
+  (steps || [])
+    .map((s) => (s.description ? `${s.title} | ${s.description}` : s.title))
+    .join("\n");
+
+const stringifyMetrics = (metrics: Metric[] | null | undefined) =>
+  (metrics || [])
+    .map((m) => [m.value, m.label, m.sublabel].filter(Boolean).join(" | "))
+    .join("\n");
+
+
 const ProjectsAdmin = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    description: "",
-    full_description: "",
-    client_name: "",
-    service_category: "Web & App Development",
-    technologies: "",
-    results: "",
-    live_url: "",
-    completion_date: "",
-    is_featured: false,
-  });
+  const [formData, setFormData] = useState({ ...emptyForm });
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
 
   const { data: projects, isLoading } = useQuery({
     queryKey: ["admin-projects"],
@@ -106,7 +170,7 @@ const ProjectsAdmin = () => {
         .order("display_order", { ascending: true });
 
       if (error) throw error;
-      return data as Project[];
+      return data as unknown as Project[];
     },
   });
 
@@ -193,24 +257,13 @@ const ProjectsAdmin = () => {
   });
 
   const resetForm = () => {
-    setFormData({
-      title: "",
-      slug: "",
-      description: "",
-      full_description: "",
-      client_name: "",
-      service_category: "Web & App Development",
-      technologies: "",
-      results: "",
-      live_url: "",
-      completion_date: "",
-      is_featured: false,
-    });
+    setFormData({ ...emptyForm });
     setEditingProject(null);
     setThumbnailFile(null);
     setThumbnailPreview("");
     setIsDialogOpen(false);
   };
+
 
   const generateSlug = (title: string) => {
     return title
@@ -261,6 +314,15 @@ const ProjectsAdmin = () => {
         completion_date: formData.completion_date || null,
         is_featured: formData.is_featured,
         thumbnail_url: thumbnailUrl,
+        challenge: formData.challenge || null,
+        solution: formData.solution || null,
+        process_steps: parseProcessSteps(formData.process_steps),
+        metrics: parseMetrics(formData.metrics),
+        before_image_url: formData.before_image_url || null,
+        after_image_url: formData.after_image_url || null,
+        testimonial_quote: formData.testimonial_quote || null,
+        testimonial_author_name: formData.testimonial_author_name || null,
+        testimonial_author_role: formData.testimonial_author_role || null,
       };
 
       if (editingProject) {
@@ -290,10 +352,20 @@ const ProjectsAdmin = () => {
       live_url: project.live_url || "",
       completion_date: project.completion_date || "",
       is_featured: project.is_featured,
+      challenge: project.challenge || "",
+      solution: project.solution || "",
+      process_steps: stringifyProcessSteps(project.process_steps),
+      metrics: stringifyMetrics(project.metrics),
+      before_image_url: project.before_image_url || "",
+      after_image_url: project.after_image_url || "",
+      testimonial_quote: project.testimonial_quote || "",
+      testimonial_author_name: project.testimonial_author_name || "",
+      testimonial_author_role: project.testimonial_author_role || "",
     });
     setThumbnailPreview(project.thumbnail_url || "");
     setIsDialogOpen(true);
   };
+
 
   const handleToggleActive = (project: Project) => {
     updateMutation.mutate({ id: project.id, data: { is_active: !project.is_active } });
@@ -527,6 +599,116 @@ const ProjectsAdmin = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* ============ CASE STUDY FIELDS ============ */}
+                  <div className="pt-4 border-t border-border/50">
+                    <h3 className="font-semibold text-foreground mb-1">Case Study (opsional)</h3>
+                    <p className="text-xs text-muted-foreground mb-4">
+                      Isi untuk menampilkan halaman detail berformat narrative case study.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="challenge">Tantangan</Label>
+                        <Textarea
+                          id="challenge"
+                          value={formData.challenge}
+                          onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
+                          placeholder="Apa masalah utama klien sebelum project ini?"
+                          rows={4}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="solution">Solusi</Label>
+                        <Textarea
+                          id="solution"
+                          value={formData.solution}
+                          onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
+                          placeholder="Pendekatan dan solusi yang kami berikan."
+                          rows={4}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="process_steps">Proses Pengerjaan</Label>
+                      <Textarea
+                        id="process_steps"
+                        value={formData.process_steps}
+                        onChange={(e) => setFormData({ ...formData, process_steps: e.target.value })}
+                        placeholder={"Format: Judul | Deskripsi (satu langkah per baris)\nDiscovery & Riset | Wawancara stakeholder dan audit sistem lama\nDesign & Prototyping | Wireframe dan UI design dengan revisi 2x"}
+                        rows={4}
+                      />
+                      <p className="text-xs text-muted-foreground">Satu baris = satu step. Pisahkan judul dan deskripsi dengan `|`.</p>
+                    </div>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="metrics">Metrik Hasil (angka besar di atas halaman)</Label>
+                      <Textarea
+                        id="metrics"
+                        value={formData.metrics}
+                        onChange={(e) => setFormData({ ...formData, metrics: e.target.value })}
+                        placeholder={"Format: value | label | sublabel\n+250% | Konversi | dalam 3 bulan\n-60% | Waktu Respons | otomatisasi WA\n4.9/5 | Rating Klien |"}
+                        rows={3}
+                      />
+                      <p className="text-xs text-muted-foreground">Satu baris = satu metrik. Format `value | label | sublabel`.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="before_image_url">URL Gambar "Sebelum"</Label>
+                        <Input
+                          id="before_image_url"
+                          value={formData.before_image_url}
+                          onChange={(e) => setFormData({ ...formData, before_image_url: e.target.value })}
+                          placeholder="https://..."
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="after_image_url">URL Gambar "Sesudah"</Label>
+                        <Input
+                          id="after_image_url"
+                          value={formData.after_image_url}
+                          onChange={(e) => setFormData({ ...formData, after_image_url: e.target.value })}
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground -mt-2">Isi keduanya untuk menampilkan comparison slider sebelum/sesudah.</p>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="testimonial_quote">Testimoni Klien</Label>
+                      <Textarea
+                        id="testimonial_quote"
+                        value={formData.testimonial_quote}
+                        onChange={(e) => setFormData({ ...formData, testimonial_quote: e.target.value })}
+                        placeholder="Tim Fusionify sangat responsif dan hasilnya melampaui ekspektasi..."
+                        rows={3}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="testimonial_author_name">Nama Pemberi Testimoni</Label>
+                        <Input
+                          id="testimonial_author_name"
+                          value={formData.testimonial_author_name}
+                          onChange={(e) => setFormData({ ...formData, testimonial_author_name: e.target.value })}
+                          placeholder="Budi Santoso"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="testimonial_author_role">Jabatan / Perusahaan</Label>
+                        <Input
+                          id="testimonial_author_role"
+                          value={formData.testimonial_author_role}
+                          onChange={(e) => setFormData({ ...formData, testimonial_author_role: e.target.value })}
+                          placeholder="Founder, PT Contoh"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+
 
                   <div className="flex justify-end gap-2 pt-4">
                     <Button type="button" variant="outline" onClick={resetForm}>
