@@ -600,6 +600,116 @@ const ProjectsAdmin = () => {
                     </div>
                   </div>
 
+                  {/* ============ CASE STUDY FIELDS ============ */}
+                  <div className="pt-4 border-t border-border/50">
+                    <h3 className="font-semibold text-foreground mb-1">Case Study (opsional)</h3>
+                    <p className="text-xs text-muted-foreground mb-4">
+                      Isi untuk menampilkan halaman detail berformat narrative case study.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="challenge">Tantangan</Label>
+                        <Textarea
+                          id="challenge"
+                          value={formData.challenge}
+                          onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
+                          placeholder="Apa masalah utama klien sebelum project ini?"
+                          rows={4}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="solution">Solusi</Label>
+                        <Textarea
+                          id="solution"
+                          value={formData.solution}
+                          onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
+                          placeholder="Pendekatan dan solusi yang kami berikan."
+                          rows={4}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="process_steps">Proses Pengerjaan</Label>
+                      <Textarea
+                        id="process_steps"
+                        value={formData.process_steps}
+                        onChange={(e) => setFormData({ ...formData, process_steps: e.target.value })}
+                        placeholder={"Format: Judul | Deskripsi (satu langkah per baris)\nDiscovery & Riset | Wawancara stakeholder dan audit sistem lama\nDesign & Prototyping | Wireframe dan UI design dengan revisi 2x"}
+                        rows={4}
+                      />
+                      <p className="text-xs text-muted-foreground">Satu baris = satu step. Pisahkan judul dan deskripsi dengan `|`.</p>
+                    </div>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="metrics">Metrik Hasil (angka besar di atas halaman)</Label>
+                      <Textarea
+                        id="metrics"
+                        value={formData.metrics}
+                        onChange={(e) => setFormData({ ...formData, metrics: e.target.value })}
+                        placeholder={"Format: value | label | sublabel\n+250% | Konversi | dalam 3 bulan\n-60% | Waktu Respons | otomatisasi WA\n4.9/5 | Rating Klien |"}
+                        rows={3}
+                      />
+                      <p className="text-xs text-muted-foreground">Satu baris = satu metrik. Format `value | label | sublabel`.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="before_image_url">URL Gambar "Sebelum"</Label>
+                        <Input
+                          id="before_image_url"
+                          value={formData.before_image_url}
+                          onChange={(e) => setFormData({ ...formData, before_image_url: e.target.value })}
+                          placeholder="https://..."
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="after_image_url">URL Gambar "Sesudah"</Label>
+                        <Input
+                          id="after_image_url"
+                          value={formData.after_image_url}
+                          onChange={(e) => setFormData({ ...formData, after_image_url: e.target.value })}
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground -mt-2">Isi keduanya untuk menampilkan comparison slider sebelum/sesudah.</p>
+
+                    <div className="space-y-2 mt-4">
+                      <Label htmlFor="testimonial_quote">Testimoni Klien</Label>
+                      <Textarea
+                        id="testimonial_quote"
+                        value={formData.testimonial_quote}
+                        onChange={(e) => setFormData({ ...formData, testimonial_quote: e.target.value })}
+                        placeholder="Tim Fusionify sangat responsif dan hasilnya melampaui ekspektasi..."
+                        rows={3}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="testimonial_author_name">Nama Pemberi Testimoni</Label>
+                        <Input
+                          id="testimonial_author_name"
+                          value={formData.testimonial_author_name}
+                          onChange={(e) => setFormData({ ...formData, testimonial_author_name: e.target.value })}
+                          placeholder="Budi Santoso"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="testimonial_author_role">Jabatan / Perusahaan</Label>
+                        <Input
+                          id="testimonial_author_role"
+                          value={formData.testimonial_author_role}
+                          onChange={(e) => setFormData({ ...formData, testimonial_author_role: e.target.value })}
+                          placeholder="Founder, PT Contoh"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+
+
                   <div className="flex justify-end gap-2 pt-4">
                     <Button type="button" variant="outline" onClick={resetForm}>
                       Batal
