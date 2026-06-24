@@ -46,6 +46,17 @@ import {
 import { Link } from "react-router-dom";
 import { AdminPageSkeleton } from "@/components/admin/AdminTableSkeleton";
 
+interface ProcessStep {
+  title: string;
+  description?: string;
+}
+
+interface Metric {
+  label: string;
+  value: string;
+  sublabel?: string;
+}
+
 interface Project {
   id: string;
   title: string;
@@ -63,6 +74,15 @@ interface Project {
   is_featured: boolean;
   is_active: boolean;
   created_at: string;
+  challenge: string | null;
+  solution: string | null;
+  process_steps: ProcessStep[] | null;
+  metrics: Metric[] | null;
+  before_image_url: string | null;
+  after_image_url: string | null;
+  testimonial_quote: string | null;
+  testimonial_author_name: string | null;
+  testimonial_author_role: string | null;
 }
 
 const serviceCategories = [
@@ -73,24 +93,61 @@ const serviceCategories = [
   "Project-Based Services",
 ];
 
-const ProjectsAdmin = () => {
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    description: "",
-    full_description: "",
-    client_name: "",
-    service_category: "Web & App Development",
-    technologies: "",
-    results: "",
-    live_url: "",
-    completion_date: "",
-    is_featured: false,
-  });
+const emptyForm = {
+  title: "",
+  slug: "",
+  description: "",
+  full_description: "",
+  client_name: "",
+  service_category: "Web & App Development",
+  technologies: "",
+  results: "",
+  live_url: "",
+  completion_date: "",
+  is_featured: false,
+  challenge: "",
+  solution: "",
+  process_steps: "", // "Title | Description" per line
+  metrics: "", // "value | label | sublabel" per line
+  before_image_url: "",
+  after_image_url: "",
+  testimonial_quote: "",
+  testimonial_author_name: "",
+  testimonial_author_role: "",
+};
+
+const parseProcessSteps = (raw: string): ProcessStep[] =>
+  raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [title, ...rest] = line.split("|").map((s) => s.trim());
+      return { title, description: rest.join(" | ") || undefined };
+    });
+
+const parseMetrics = (raw: string): Metric[] =>
+  raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [value, label, sublabel] = line.split("|").map((s) => s.trim());
+      return { value: value || "", label: label || "", sublabel: sublabel || undefined };
+    })
+    .filter((m) => m.value && m.label);
+
+const stringifyProcessSteps = (steps: ProcessStep[] | null | undefined) =>
+  (steps || [])
+    .map((s) => (s.description ? `${s.title} | ${s.description}` : s.title))
+    .join("\n");
+
+const stringifyMetrics = (metrics: Metric[] | null | undefined) =>
+  (metrics || [])
+    .map((m) => [m.value, m.label, m.sublabel].filter(Boolean).join(" | "))
+    .join("\n");
+
+
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
