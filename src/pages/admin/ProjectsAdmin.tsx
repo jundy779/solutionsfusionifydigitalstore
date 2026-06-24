@@ -148,11 +148,18 @@ const stringifyMetrics = (metrics: Metric[] | null | undefined) =>
     .join("\n");
 
 
+const ProjectsAdmin = () => {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [formData, setFormData] = useState({ ...emptyForm });
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
 
   const { data: projects, isLoading } = useQuery({
     queryKey: ["admin-projects"],
@@ -250,24 +257,13 @@ const stringifyMetrics = (metrics: Metric[] | null | undefined) =>
   });
 
   const resetForm = () => {
-    setFormData({
-      title: "",
-      slug: "",
-      description: "",
-      full_description: "",
-      client_name: "",
-      service_category: "Web & App Development",
-      technologies: "",
-      results: "",
-      live_url: "",
-      completion_date: "",
-      is_featured: false,
-    });
+    setFormData({ ...emptyForm });
     setEditingProject(null);
     setThumbnailFile(null);
     setThumbnailPreview("");
     setIsDialogOpen(false);
   };
+
 
   const generateSlug = (title: string) => {
     return title
