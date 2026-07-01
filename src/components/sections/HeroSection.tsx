@@ -4,13 +4,8 @@ import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
-import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-// Lazy load Cobe globe (much lighter than Three.js globe)
-const CobeGlobe = lazy(() =>
-  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
-);
+import heroSpaceEarth from "@/assets/hero-space-earth.jpg.asset.json";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -51,31 +46,35 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* Globe Background - Cobe (lightweight 2D canvas, no Three.js) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+      {/* Space + Earth photographic background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.img
+          src={heroSpaceEarth.url}
+          alt="Planet Earth from space with glowing city lights"
+          width={1920}
+          height={1088}
+          fetchPriority="high"
+          decoding="async"
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] md:max-w-[700px] md:max-h-[700px] lg:max-w-[800px] lg:max-h-[800px]"
-        >
-          <Suspense
-            fallback={
-              <div className="w-full h-full flex items-center justify-center">
-                <div
-                  className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full animate-pulse"
-                  style={{
-                    background:
-                      "radial-gradient(circle, hsl(212 89% 45% / 0.15) 0%, hsl(212 89% 45% / 0.05) 50%, transparent 70%)",
-                  }}
-                />
-              </div>
-            }
-          >
-            <CobeGlobe className="w-full h-full cursor-grab" />
-          </Suspense>
-        </motion.div>
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="absolute inset-0 w-full h-full object-cover object-right"
+        />
+        {/* Subtle twinkling star overlay */}
+        <div
+          className="absolute inset-0 opacity-60 mix-blend-screen"
+          style={{
+            backgroundImage:
+              "radial-gradient(1px 1px at 20% 30%, hsl(0 0% 100% / 0.8), transparent), radial-gradient(1px 1px at 60% 70%, hsl(0 0% 100% / 0.6), transparent), radial-gradient(1.5px 1.5px at 40% 80%, hsl(212 89% 70% / 0.7), transparent), radial-gradient(1px 1px at 80% 20%, hsl(0 0% 100% / 0.5), transparent), radial-gradient(1px 1px at 10% 60%, hsl(0 0% 100% / 0.6), transparent)",
+            backgroundSize: "600px 600px",
+          }}
+        />
       </div>
+
+      {/* Left-side dark gradient to keep text readable over Earth */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none z-[2]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/80 pointer-events-none z-[2]" />
+
 
       {/* Gradient overlay to blend globe with content */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/60 pointer-events-none" />
