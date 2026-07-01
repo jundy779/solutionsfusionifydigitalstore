@@ -4,13 +4,8 @@ import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
-import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-// Lazy load Cobe globe (much lighter than Three.js globe)
-const CobeGlobe = lazy(() =>
-  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
-);
+import heroSpaceEarth from "@/assets/hero-space-earth.jpg.asset.json";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
