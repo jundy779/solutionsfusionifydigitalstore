@@ -1,12 +1,13 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Link } from "react-router-dom";
-import { lazy, Suspense } from "react";
 import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
+import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Lazy load Cobe globe (much lighter than Three.js globe)
 const CobeGlobe = lazy(() =>
   import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
 );
@@ -50,65 +51,31 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* Deep space background with stars */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Base deep-space gradient */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 70% 40%, hsl(212 60% 12%) 0%, hsl(230 50% 6%) 40%, hsl(230 50% 3%) 100%)",
-          }}
-        />
-        {/* Dense multi-layer starfield */}
-        <div
-          className="absolute inset-0 opacity-90"
-          style={{
-            backgroundImage: [
-              "radial-gradient(1px 1px at 10% 20%, #fff, transparent)",
-              "radial-gradient(1px 1px at 25% 65%, #fff, transparent)",
-              "radial-gradient(1.5px 1.5px at 40% 30%, #cfe6ff, transparent)",
-              "radial-gradient(1px 1px at 55% 80%, #fff, transparent)",
-              "radial-gradient(2px 2px at 70% 15%, #fff, transparent)",
-              "radial-gradient(1px 1px at 85% 50%, #cfe6ff, transparent)",
-              "radial-gradient(1px 1px at 90% 85%, #fff, transparent)",
-              "radial-gradient(1.5px 1.5px at 15% 90%, #fff, transparent)",
-              "radial-gradient(1px 1px at 50% 5%, #fff, transparent)",
-              "radial-gradient(1px 1px at 33% 45%, #fff, transparent)",
-              "radial-gradient(1px 1px at 78% 72%, #cfe6ff, transparent)",
-              "radial-gradient(2px 2px at 5% 55%, #fff, transparent)",
-            ].join(", "),
-            backgroundSize: "700px 700px",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-70 animate-pulse"
-          style={{
-            backgroundImage: [
-              "radial-gradient(1px 1px at 12% 40%, #fff, transparent)",
-              "radial-gradient(1px 1px at 62% 25%, #fff, transparent)",
-              "radial-gradient(1.5px 1.5px at 88% 70%, #a8d0ff, transparent)",
-              "radial-gradient(1px 1px at 30% 85%, #fff, transparent)",
-              "radial-gradient(1px 1px at 45% 55%, #fff, transparent)",
-            ].join(", "),
-            backgroundSize: "400px 400px",
-            animationDuration: "4s",
-          }}
-        />
-
-        {/* Rotating Cobe globe on the right */}
-        <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[90vw] max-w-[900px] aspect-square opacity-90">
-          <Suspense fallback={null}>
-            <CobeGlobe className="w-full h-full" />
+      {/* Globe Background - Cobe (lightweight 2D canvas, no Three.js) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] md:max-w-[700px] md:max-h-[700px] lg:max-w-[800px] lg:max-h-[800px]"
+        >
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex items-center justify-center">
+                <div
+                  className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full animate-pulse"
+                  style={{
+                    background:
+                      "radial-gradient(circle, hsl(212 89% 45% / 0.15) 0%, hsl(212 89% 45% / 0.05) 50%, transparent 70%)",
+                  }}
+                />
+              </div>
+            }
+          >
+            <CobeGlobe className="w-full h-full cursor-grab" />
           </Suspense>
-        </div>
+        </motion.div>
       </div>
-
-      {/* Left-side dark gradient to keep text readable over globe */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none z-[2]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 pointer-events-none z-[2]" />
-
-
 
       {/* Gradient overlay to blend globe with content */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/60 pointer-events-none" />
