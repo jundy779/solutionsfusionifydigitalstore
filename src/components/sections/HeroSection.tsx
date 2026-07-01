@@ -1,11 +1,15 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Link } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { useLanguage } from "@/contexts/LanguageContext";
-import heroSpaceEarth from "@/assets/hero-space-earth.jpg.asset.json";
+
+const CobeGlobe = lazy(() =>
+  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
+);
 
 export const HeroSection = () => {
   const { t } = useLanguage();
