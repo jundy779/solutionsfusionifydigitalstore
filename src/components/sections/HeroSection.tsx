@@ -1,11 +1,15 @@
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Link } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { Code2, Bot, Settings2, Cloud, Briefcase } from "lucide-react";
 import { ArrowRight, ShieldCheck, Zap, Users } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { useLanguage } from "@/contexts/LanguageContext";
-import heroSpaceEarth from "@/assets/hero-space-earth.jpg.asset.json";
+
+const CobeGlobe = lazy(() =>
+  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
+);
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -46,34 +50,64 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* Space + Earth photographic background */}
+      {/* Deep space background with stars */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.img
-          src={heroSpaceEarth.url}
-          alt="Planet Earth from space with glowing city lights"
-          width={1920}
-          height={1088}
-          fetchPriority="high"
-          decoding="async"
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0 w-full h-full object-cover object-right"
-        />
-        {/* Subtle twinkling star overlay */}
+        {/* Base deep-space gradient */}
         <div
-          className="absolute inset-0 opacity-60 mix-blend-screen"
+          className="absolute inset-0"
           style={{
-            backgroundImage:
-              "radial-gradient(1px 1px at 20% 30%, hsl(0 0% 100% / 0.8), transparent), radial-gradient(1px 1px at 60% 70%, hsl(0 0% 100% / 0.6), transparent), radial-gradient(1.5px 1.5px at 40% 80%, hsl(212 89% 70% / 0.7), transparent), radial-gradient(1px 1px at 80% 20%, hsl(0 0% 100% / 0.5), transparent), radial-gradient(1px 1px at 10% 60%, hsl(0 0% 100% / 0.6), transparent)",
-            backgroundSize: "600px 600px",
+            background:
+              "radial-gradient(ellipse at 70% 40%, hsl(212 60% 12%) 0%, hsl(230 50% 6%) 40%, hsl(230 50% 3%) 100%)",
           }}
         />
+        {/* Dense multi-layer starfield */}
+        <div
+          className="absolute inset-0 opacity-90"
+          style={{
+            backgroundImage: [
+              "radial-gradient(1px 1px at 10% 20%, #fff, transparent)",
+              "radial-gradient(1px 1px at 25% 65%, #fff, transparent)",
+              "radial-gradient(1.5px 1.5px at 40% 30%, #cfe6ff, transparent)",
+              "radial-gradient(1px 1px at 55% 80%, #fff, transparent)",
+              "radial-gradient(2px 2px at 70% 15%, #fff, transparent)",
+              "radial-gradient(1px 1px at 85% 50%, #cfe6ff, transparent)",
+              "radial-gradient(1px 1px at 90% 85%, #fff, transparent)",
+              "radial-gradient(1.5px 1.5px at 15% 90%, #fff, transparent)",
+              "radial-gradient(1px 1px at 50% 5%, #fff, transparent)",
+              "radial-gradient(1px 1px at 33% 45%, #fff, transparent)",
+              "radial-gradient(1px 1px at 78% 72%, #cfe6ff, transparent)",
+              "radial-gradient(2px 2px at 5% 55%, #fff, transparent)",
+            ].join(", "),
+            backgroundSize: "700px 700px",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-70 animate-pulse"
+          style={{
+            backgroundImage: [
+              "radial-gradient(1px 1px at 12% 40%, #fff, transparent)",
+              "radial-gradient(1px 1px at 62% 25%, #fff, transparent)",
+              "radial-gradient(1.5px 1.5px at 88% 70%, #a8d0ff, transparent)",
+              "radial-gradient(1px 1px at 30% 85%, #fff, transparent)",
+              "radial-gradient(1px 1px at 45% 55%, #fff, transparent)",
+            ].join(", "),
+            backgroundSize: "400px 400px",
+            animationDuration: "4s",
+          }}
+        />
+
+        {/* Rotating Cobe globe on the right */}
+        <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[90vw] max-w-[900px] aspect-square opacity-90">
+          <Suspense fallback={null}>
+            <CobeGlobe className="w-full h-full" />
+          </Suspense>
+        </div>
       </div>
 
-      {/* Left-side dark gradient to keep text readable over Earth */}
+      {/* Left-side dark gradient to keep text readable over globe */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none z-[2]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/80 pointer-events-none z-[2]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 pointer-events-none z-[2]" />
+
 
 
       {/* Gradient overlay to blend globe with content */}
