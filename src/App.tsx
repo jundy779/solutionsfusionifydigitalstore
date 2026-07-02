@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { PageSkeleton } from "@/components/layout/PageSkeleton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { SpaceBackground } from "@/components/ui/space-background";
 import Index from "./pages/Index";
 
 // Lazy load all non-critical pages
@@ -42,6 +43,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <SpaceBackground />
             <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>

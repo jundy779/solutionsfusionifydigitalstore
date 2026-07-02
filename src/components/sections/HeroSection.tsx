@@ -7,9 +7,9 @@ import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Lazy load Cobe globe (much lighter than Three.js globe)
-const CobeGlobe = lazy(() =>
-  import("@/components/ui/cobe-globe").then((m) => ({ default: m.CobeGlobe }))
+// Lazy load full-cinematic NASA Earth (Three.js)
+const NasaGlobe = lazy(() =>
+  import("@/components/ui/nasa-globe").then((m) => ({ default: m.NasaGlobe }))
 );
 
 export const HeroSection = () => {
@@ -72,7 +72,7 @@ export const HeroSection = () => {
               </div>
             }
           >
-            <CobeGlobe className="w-full h-full cursor-grab" />
+            <NasaGlobe className="w-full h-full cursor-grab" />
           </Suspense>
         </motion.div>
       </div>
