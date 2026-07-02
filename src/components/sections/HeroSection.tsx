@@ -72,7 +72,7 @@ export const HeroSection = () => {
               </div>
             }
           >
-            <CobeGlobe className="w-full h-full cursor-grab" />
+            <NasaGlobe className="w-full h-full cursor-grab" />
           </Suspense>
         </motion.div>
       </div>
