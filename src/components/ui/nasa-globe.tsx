@@ -124,25 +124,31 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     }
 
 
-    // Load textures async
+    // Load textures async — resolution driven by device tier
     let disposed = false;
+    const res = q.textureRes;
     (async () => {
-      const [dayMap, normalMap, specMap, cloudMap] = await Promise.all([
-        load("earth_atmos_2048.jpg"),
-        load("earth_normal_2048.jpg"),
-        load("earth_specular_2048.jpg"),
-        load("earth_clouds_1024.png"),
-      ]);
+      const surfaceTasks: Promise<THREE.Texture>[] = [
+        load(`earth_atmos_${res}.jpg`),
+        load(`earth_clouds_1024.png`),
+      ];
+      // Only load normal + specular on medium/high — big memory savings on low
+      if (q.tier !== "low") {
+        surfaceTasks.push(load(`earth_normal_${res}.jpg`));
+        surfaceTasks.push(load(`earth_specular_${res}.jpg`));
+      }
+      const [dayMap, cloudMap, normalMap, specMap] = await Promise.all(surfaceTasks);
       if (disposed) return;
       earthMat.map = dayMap;
-      earthMat.normalMap = normalMap;
-      earthMat.specularMap = specMap;
+      if (normalMap) earthMat.normalMap = normalMap;
+      if (specMap) earthMat.specularMap = specMap;
       earthMat.needsUpdate = true;
       cloudMat.map = cloudMap;
       cloudMat.alphaMap = cloudMap;
       cloudMat.needsUpdate = true;
       mount.style.opacity = "1";
     })();
+
 
     // Drag interaction
     let isPointerDown = false;
