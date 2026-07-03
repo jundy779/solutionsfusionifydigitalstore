@@ -66,8 +66,9 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
         );
       });
 
-    // Earth
-    const earthGeom = new THREE.SphereGeometry(1, 64, 64);
+    // Earth — geometry segments driven by device tier
+    const earthGeom = new THREE.SphereGeometry(1, q.earthSegments, q.earthSegments);
+
     const earthMat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       specular: new THREE.Color(0x333344),
