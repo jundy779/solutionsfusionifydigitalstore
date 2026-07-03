@@ -84,10 +84,11 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
       depthWrite: false,
     });
     const clouds = new THREE.Mesh(
-      new THREE.SphereGeometry(1.012, 48, 48),
+      new THREE.SphereGeometry(1.012, q.cloudSegments, q.cloudSegments),
       cloudMat
     );
     scene.add(clouds);
+
 
     // Atmosphere glow (backside sphere with Fresnel-like shader)
     const atmoMat = new THREE.ShaderMaterial({
