@@ -63,9 +63,10 @@ export const SpaceBackground = () => {
       return new THREE.Points(geo, mat);
     };
 
-    const farStars = makeStars(isMobile ? 1200 : 2500, 800, 1.3, 0xbfd6ff);
-    const midStars = makeStars(isMobile ? 500 : 1000, 400, 1.8, 0xffffff);
-    const nearStars = makeStars(isMobile ? 150 : 300, 200, 2.6, 0xdbeaff);
+    const farStars = makeStars(q.stars[0], 800, 1.3, 0xbfd6ff);
+    const midStars = makeStars(q.stars[1], 400, 1.8, 0xffffff);
+    const nearStars = makeStars(q.stars[2], 200, 2.6, 0xdbeaff);
+
     scene.add(farStars, midStars, nearStars);
 
     // Nebula: large soft additive plane behind everything
