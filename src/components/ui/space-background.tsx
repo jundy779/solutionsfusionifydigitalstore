@@ -15,11 +15,7 @@ export const SpaceBackground = () => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const prefersReduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const isMobile = window.innerWidth < 768;
+    const q = getQualityProfile();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -31,9 +27,10 @@ export const SpaceBackground = () => {
     const renderer = new THREE.WebGLRenderer({
       antialias: false,
       alpha: true,
-      powerPreference: "high-performance",
+      powerPreference: q.tier === "low" ? "low-power" : "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setPixelRatio(q.dpr);
+
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
