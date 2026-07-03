@@ -83,25 +83,28 @@ export const SpaceBackground = () => {
     const nebulaTex = new THREE.CanvasTexture(nebulaCanvas);
 
     const nebulas: THREE.Sprite[] = [];
-    const nebulaConfigs = [
-      { x: -300, y: 120, z: -600, s: 900, o: 0.6 },
-      { x: 320, y: -180, z: -500, s: 700, o: 0.45 },
-      { x: 60, y: 260, z: -700, s: 800, o: 0.5 },
-    ];
-    for (const cfg of nebulaConfigs) {
-      const mat = new THREE.SpriteMaterial({
-        map: nebulaTex,
-        transparent: true,
-        opacity: cfg.o,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      });
-      const spr = new THREE.Sprite(mat);
-      spr.position.set(cfg.x, cfg.y, cfg.z);
-      spr.scale.set(cfg.s, cfg.s, 1);
-      scene.add(spr);
-      nebulas.push(spr);
+    if (q.nebulas) {
+      const nebulaConfigs = [
+        { x: -300, y: 120, z: -600, s: 900, o: 0.6 },
+        { x: 320, y: -180, z: -500, s: 700, o: 0.45 },
+        { x: 60, y: 260, z: -700, s: 800, o: 0.5 },
+      ];
+      for (const cfg of nebulaConfigs) {
+        const mat = new THREE.SpriteMaterial({
+          map: nebulaTex,
+          transparent: true,
+          opacity: cfg.o,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        });
+        const spr = new THREE.Sprite(mat);
+        spr.position.set(cfg.x, cfg.y, cfg.z);
+        spr.scale.set(cfg.s, cfg.s, 1);
+        scene.add(spr);
+        nebulas.push(spr);
+      }
     }
+
 
     // Distant planets as sprites (procedural circles with color)
     const makePlanet = (color: string, glow: string) => {
