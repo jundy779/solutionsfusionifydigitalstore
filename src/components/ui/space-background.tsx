@@ -122,11 +122,13 @@ export const SpaceBackground = () => {
       return new THREE.CanvasTexture(c);
     };
 
-    const planetConfigs = [
-      { tex: makePlanet("#d97757", "rgba(217,119,87,0.25)"), x: -420, y: 180, z: -400, s: 55 },
-      { tex: makePlanet("#7aa8ff", "rgba(122,168,255,0.25)"), x: 480, y: -220, z: -350, s: 40 },
-      { tex: makePlanet("#c9a2ff", "rgba(201,162,255,0.25)"), x: 300, y: 320, z: -550, s: 70 },
-    ];
+    const planetConfigs = q.planets
+      ? [
+          { tex: makePlanet("#d97757", "rgba(217,119,87,0.25)"), x: -420, y: 180, z: -400, s: 55 },
+          { tex: makePlanet("#7aa8ff", "rgba(122,168,255,0.25)"), x: 480, y: -220, z: -350, s: 40 },
+          { tex: makePlanet("#c9a2ff", "rgba(201,162,255,0.25)"), x: 300, y: 320, z: -550, s: 70 },
+        ]
+      : [];
     const planets: THREE.Sprite[] = [];
     for (const p of planetConfigs) {
       const mat = new THREE.SpriteMaterial({
@@ -141,6 +143,7 @@ export const SpaceBackground = () => {
       scene.add(spr);
       planets.push(spr);
     }
+
 
     // Resize
     const onResize = () => {
