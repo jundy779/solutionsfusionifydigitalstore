@@ -171,15 +171,19 @@ export const SpaceBackground = () => {
 
     const tick = () => {
       if (!running) return;
-      farStars.rotation.y += 0.00008 * speed;
-      midStars.rotation.y += 0.00015 * speed;
-      nearStars.rotation.y += 0.00025 * speed;
-      farStars.rotation.x += 0.00004 * speed;
-      midStars.rotation.x += 0.00007 * speed;
-      renderer.render(scene, camera);
+      frame++;
+      if (frame % frameSkip === 0) {
+        farStars.rotation.y += 0.00008 * speed * frameSkip;
+        midStars.rotation.y += 0.00015 * speed * frameSkip;
+        nearStars.rotation.y += 0.00025 * speed * frameSkip;
+        farStars.rotation.x += 0.00004 * speed * frameSkip;
+        midStars.rotation.x += 0.00007 * speed * frameSkip;
+        renderer.render(scene, camera);
+      }
       raf = requestAnimationFrame(tick);
     };
     tick();
+
 
     return () => {
       cancelAnimationFrame(raf);
