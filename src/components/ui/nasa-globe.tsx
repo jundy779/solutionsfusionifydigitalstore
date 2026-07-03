@@ -188,19 +188,40 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     const ro = new ResizeObserver(onResize);
     ro.observe(mount);
 
-    // Animate
+    // Animate — pause when hidden or offscreen, frame-skip on low-tier
     let raf = 0;
+    let running = true;
+    const onVis = () => {
+      running = !document.hidden;
+      if (running) tick();
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        running = entries[0]?.isIntersecting ?? true;
+        if (running) tick();
+      },
+      { threshold: 0 }
+    );
+    io.observe(mount);
+
+    const frameSkip = q.tier === "low" ? 2 : 1;
+    let frame = 0;
     const tick = () => {
-      if (!isPointerDown && !prefersReduced) rotationY += velocityY;
+      if (!running) return;
+      frame++;
+      if (!isPointerDown && !prefersReduced) rotationY += velocityY * frameSkip;
       earth.rotation.y = rotationY;
       earth.rotation.x = rotationX;
       clouds.rotation.y = rotationY * 1.05;
       clouds.rotation.x = rotationX;
-      atmosphere.rotation.copy(earth.rotation);
-      renderer.render(scene, camera);
+      if (atmosphere) atmosphere.rotation.copy(earth.rotation);
+      if (frame % frameSkip === 0) renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
     };
     tick();
+
 
     return () => {
       disposed = true;
