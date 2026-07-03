@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { getQualityProfile } from "@/lib/device-quality";
+
 
 interface NasaGlobeProps {
   className?: string;
