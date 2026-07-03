@@ -47,7 +47,7 @@ export const ProductSuiteSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-transparent relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-1/3 right-0 w-[400px] h-[400px]" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(265 75% 55% / 0.08) 0%, transparent 60%)", filter: "blur(80px)" }} />
       </div>
