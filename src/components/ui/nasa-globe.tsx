@@ -90,36 +90,39 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     scene.add(clouds);
 
 
-    // Atmosphere glow (backside sphere with Fresnel-like shader)
-    const atmoMat = new THREE.ShaderMaterial({
-      uniforms: {
-        glowColor: { value: new THREE.Color(0x2a7dd8) },
-      },
-      vertexShader: `
-        varying vec3 vNormal;
-        void main() {
-          vNormal = normalize(normalMatrix * normal);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vNormal;
-        uniform vec3 glowColor;
-        void main() {
-          float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-          gl_FragColor = vec4(glowColor, 1.0) * intensity;
-        }
-      `,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-      depthWrite: false,
-    });
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1.15, 48, 48),
-      atmoMat
-    );
-    scene.add(atmosphere);
+    // Atmosphere glow (skipped on low-tier devices)
+    let atmosphere: THREE.Mesh | null = null;
+    let atmoMat: THREE.ShaderMaterial | null = null;
+    if (q.atmosphere) {
+      atmoMat = new THREE.ShaderMaterial({
+        uniforms: { glowColor: { value: new THREE.Color(0x2a7dd8) } },
+        vertexShader: `
+          varying vec3 vNormal;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vNormal;
+          uniform vec3 glowColor;
+          void main() {
+            float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
+            gl_FragColor = vec4(glowColor, 1.0) * intensity;
+          }
+        `,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true,
+        depthWrite: false,
+      });
+      atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(1.15, Math.max(24, q.cloudSegments), Math.max(24, q.cloudSegments)),
+        atmoMat
+      );
+      scene.add(atmosphere);
+    }
+
 
     // Load textures async
     let disposed = false;
