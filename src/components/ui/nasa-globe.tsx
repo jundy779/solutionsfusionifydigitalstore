@@ -18,9 +18,9 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const prefersReduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const q = getQualityProfile();
+    const prefersReduced = q.prefersReduced;
+
 
     const width = mount.clientWidth;
     const height = mount.clientHeight;
