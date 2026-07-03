@@ -227,18 +227,21 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
       disposed = true;
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointermove", onPointerMove);
       earthGeom.dispose();
       earthMat.dispose();
       cloudMat.dispose();
-      atmoMat.dispose();
+      atmoMat?.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === mount) {
         mount.removeChild(renderer.domElement);
       }
     };
+
   }, []);
 
   return (
