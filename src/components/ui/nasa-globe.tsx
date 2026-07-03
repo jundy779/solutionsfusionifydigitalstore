@@ -30,11 +30,12 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     camera.position.set(0, 0, 4.2);
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: q.tier !== "low",
       alpha: true,
-      powerPreference: "high-performance",
+      powerPreference: q.tier === "low" ? "low-power" : "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(q.dpr);
+
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
