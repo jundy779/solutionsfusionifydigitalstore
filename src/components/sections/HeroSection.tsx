@@ -34,8 +34,7 @@ export const HeroSection = () => {
       className="group relative min-h-screen flex items-center justify-center pt-28 md:pt-20 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Pure dark background */}
-      <div className="absolute inset-0 bg-background" />
+      {/* Transparent — lets global SpaceBackground (galaxy) show through */}
 
       {/* Spotlight Effect - follows cursor */}
       <motion.div
