@@ -164,7 +164,11 @@ export const SpaceBackground = () => {
     };
     document.addEventListener("visibilitychange", onVis);
 
-    const speed = prefersReduced ? 0 : 1;
+    const speed = q.prefersReduced ? 0 : q.tier === "low" ? 0.5 : 1;
+    // Frame-skip on low tier to halve GPU load
+    const frameSkip = q.tier === "low" ? 2 : 1;
+    let frame = 0;
+
     const tick = () => {
       if (!running) return;
       farStars.rotation.y += 0.00008 * speed;
