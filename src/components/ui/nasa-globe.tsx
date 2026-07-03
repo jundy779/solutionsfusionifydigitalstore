@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { getQualityProfile } from "@/lib/device-quality";
+
 
 interface NasaGlobeProps {
   className?: string;
@@ -16,9 +18,9 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const prefersReduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const q = getQualityProfile();
+    const prefersReduced = q.prefersReduced;
+
 
     const width = mount.clientWidth;
     const height = mount.clientHeight;
@@ -28,11 +30,12 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     camera.position.set(0, 0, 4.2);
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: q.tier !== "low",
       alpha: true,
-      powerPreference: "high-performance",
+      powerPreference: q.tier === "low" ? "low-power" : "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(q.dpr);
+
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -63,8 +66,9 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
         );
       });
 
-    // Earth
-    const earthGeom = new THREE.SphereGeometry(1, 64, 64);
+    // Earth — geometry segments driven by device tier
+    const earthGeom = new THREE.SphereGeometry(1, q.earthSegments, q.earthSegments);
+
     const earthMat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       specular: new THREE.Color(0x333344),
@@ -80,61 +84,71 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
       depthWrite: false,
     });
     const clouds = new THREE.Mesh(
-      new THREE.SphereGeometry(1.012, 48, 48),
+      new THREE.SphereGeometry(1.012, q.cloudSegments, q.cloudSegments),
       cloudMat
     );
     scene.add(clouds);
 
-    // Atmosphere glow (backside sphere with Fresnel-like shader)
-    const atmoMat = new THREE.ShaderMaterial({
-      uniforms: {
-        glowColor: { value: new THREE.Color(0x2a7dd8) },
-      },
-      vertexShader: `
-        varying vec3 vNormal;
-        void main() {
-          vNormal = normalize(normalMatrix * normal);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vNormal;
-        uniform vec3 glowColor;
-        void main() {
-          float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-          gl_FragColor = vec4(glowColor, 1.0) * intensity;
-        }
-      `,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-      depthWrite: false,
-    });
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1.15, 48, 48),
-      atmoMat
-    );
-    scene.add(atmosphere);
 
-    // Load textures async
+    // Atmosphere glow (skipped on low-tier devices)
+    let atmosphere: THREE.Mesh | null = null;
+    let atmoMat: THREE.ShaderMaterial | null = null;
+    if (q.atmosphere) {
+      atmoMat = new THREE.ShaderMaterial({
+        uniforms: { glowColor: { value: new THREE.Color(0x2a7dd8) } },
+        vertexShader: `
+          varying vec3 vNormal;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vNormal;
+          uniform vec3 glowColor;
+          void main() {
+            float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
+            gl_FragColor = vec4(glowColor, 1.0) * intensity;
+          }
+        `,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true,
+        depthWrite: false,
+      });
+      atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(1.15, Math.max(24, q.cloudSegments), Math.max(24, q.cloudSegments)),
+        atmoMat
+      );
+      scene.add(atmosphere);
+    }
+
+
+    // Load textures async — resolution driven by device tier
     let disposed = false;
+    const res = q.textureRes;
     (async () => {
-      const [dayMap, normalMap, specMap, cloudMap] = await Promise.all([
-        load("earth_atmos_2048.jpg"),
-        load("earth_normal_2048.jpg"),
-        load("earth_specular_2048.jpg"),
-        load("earth_clouds_1024.png"),
-      ]);
+      const surfaceTasks: Promise<THREE.Texture>[] = [
+        load(`earth_atmos_${res}.jpg`),
+        load(`earth_clouds_1024.png`),
+      ];
+      // Only load normal + specular on medium/high — big memory savings on low
+      if (q.tier !== "low") {
+        surfaceTasks.push(load(`earth_normal_${res}.jpg`));
+        surfaceTasks.push(load(`earth_specular_${res}.jpg`));
+      }
+      const [dayMap, cloudMap, normalMap, specMap] = await Promise.all(surfaceTasks);
       if (disposed) return;
       earthMat.map = dayMap;
-      earthMat.normalMap = normalMap;
-      earthMat.specularMap = specMap;
+      if (normalMap) earthMat.normalMap = normalMap;
+      if (specMap) earthMat.specularMap = specMap;
       earthMat.needsUpdate = true;
       cloudMat.map = cloudMap;
       cloudMat.alphaMap = cloudMap;
       cloudMat.needsUpdate = true;
       mount.style.opacity = "1";
     })();
+
 
     // Drag interaction
     let isPointerDown = false;
@@ -174,36 +188,60 @@ export const NasaGlobe = ({ className }: NasaGlobeProps) => {
     const ro = new ResizeObserver(onResize);
     ro.observe(mount);
 
-    // Animate
+    // Animate — pause when hidden or offscreen, frame-skip on low-tier
     let raf = 0;
+    let running = true;
+    const onVis = () => {
+      running = !document.hidden;
+      if (running) tick();
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        running = entries[0]?.isIntersecting ?? true;
+        if (running) tick();
+      },
+      { threshold: 0 }
+    );
+    io.observe(mount);
+
+    const frameSkip = q.tier === "low" ? 2 : 1;
+    let frame = 0;
     const tick = () => {
-      if (!isPointerDown && !prefersReduced) rotationY += velocityY;
+      if (!running) return;
+      frame++;
+      if (!isPointerDown && !prefersReduced) rotationY += velocityY * frameSkip;
       earth.rotation.y = rotationY;
       earth.rotation.x = rotationX;
       clouds.rotation.y = rotationY * 1.05;
       clouds.rotation.x = rotationX;
-      atmosphere.rotation.copy(earth.rotation);
-      renderer.render(scene, camera);
+      if (atmosphere) atmosphere.rotation.copy(earth.rotation);
+      if (frame % frameSkip === 0) renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
     };
     tick();
+
 
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointermove", onPointerMove);
       earthGeom.dispose();
       earthMat.dispose();
       cloudMat.dispose();
-      atmoMat.dispose();
+      atmoMat?.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === mount) {
         mount.removeChild(renderer.domElement);
       }
     };
+
   }, []);
 
   return (

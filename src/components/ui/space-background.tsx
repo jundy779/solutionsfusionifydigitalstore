@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { getQualityProfile } from "@/lib/device-quality";
+
 
 /**
  * Cinematic galaxy background: layered starfield + slow drifting nebula +
@@ -13,11 +15,7 @@ export const SpaceBackground = () => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const prefersReduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const isMobile = window.innerWidth < 768;
+    const q = getQualityProfile();
 
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -29,9 +27,10 @@ export const SpaceBackground = () => {
     const renderer = new THREE.WebGLRenderer({
       antialias: false,
       alpha: true,
-      powerPreference: "high-performance",
+      powerPreference: q.tier === "low" ? "low-power" : "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setPixelRatio(q.dpr);
+
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
@@ -64,9 +63,10 @@ export const SpaceBackground = () => {
       return new THREE.Points(geo, mat);
     };
 
-    const farStars = makeStars(isMobile ? 1200 : 2500, 800, 1.3, 0xbfd6ff);
-    const midStars = makeStars(isMobile ? 500 : 1000, 400, 1.8, 0xffffff);
-    const nearStars = makeStars(isMobile ? 150 : 300, 200, 2.6, 0xdbeaff);
+    const farStars = makeStars(q.stars[0], 800, 1.3, 0xbfd6ff);
+    const midStars = makeStars(q.stars[1], 400, 1.8, 0xffffff);
+    const nearStars = makeStars(q.stars[2], 200, 2.6, 0xdbeaff);
+
     scene.add(farStars, midStars, nearStars);
 
     // Nebula: large soft additive plane behind everything
@@ -83,25 +83,28 @@ export const SpaceBackground = () => {
     const nebulaTex = new THREE.CanvasTexture(nebulaCanvas);
 
     const nebulas: THREE.Sprite[] = [];
-    const nebulaConfigs = [
-      { x: -300, y: 120, z: -600, s: 900, o: 0.6 },
-      { x: 320, y: -180, z: -500, s: 700, o: 0.45 },
-      { x: 60, y: 260, z: -700, s: 800, o: 0.5 },
-    ];
-    for (const cfg of nebulaConfigs) {
-      const mat = new THREE.SpriteMaterial({
-        map: nebulaTex,
-        transparent: true,
-        opacity: cfg.o,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      });
-      const spr = new THREE.Sprite(mat);
-      spr.position.set(cfg.x, cfg.y, cfg.z);
-      spr.scale.set(cfg.s, cfg.s, 1);
-      scene.add(spr);
-      nebulas.push(spr);
+    if (q.nebulas) {
+      const nebulaConfigs = [
+        { x: -300, y: 120, z: -600, s: 900, o: 0.6 },
+        { x: 320, y: -180, z: -500, s: 700, o: 0.45 },
+        { x: 60, y: 260, z: -700, s: 800, o: 0.5 },
+      ];
+      for (const cfg of nebulaConfigs) {
+        const mat = new THREE.SpriteMaterial({
+          map: nebulaTex,
+          transparent: true,
+          opacity: cfg.o,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        });
+        const spr = new THREE.Sprite(mat);
+        spr.position.set(cfg.x, cfg.y, cfg.z);
+        spr.scale.set(cfg.s, cfg.s, 1);
+        scene.add(spr);
+        nebulas.push(spr);
+      }
     }
+
 
     // Distant planets as sprites (procedural circles with color)
     const makePlanet = (color: string, glow: string) => {
@@ -119,11 +122,13 @@ export const SpaceBackground = () => {
       return new THREE.CanvasTexture(c);
     };
 
-    const planetConfigs = [
-      { tex: makePlanet("#d97757", "rgba(217,119,87,0.25)"), x: -420, y: 180, z: -400, s: 55 },
-      { tex: makePlanet("#7aa8ff", "rgba(122,168,255,0.25)"), x: 480, y: -220, z: -350, s: 40 },
-      { tex: makePlanet("#c9a2ff", "rgba(201,162,255,0.25)"), x: 300, y: 320, z: -550, s: 70 },
-    ];
+    const planetConfigs = q.planets
+      ? [
+          { tex: makePlanet("#d97757", "rgba(217,119,87,0.25)"), x: -420, y: 180, z: -400, s: 55 },
+          { tex: makePlanet("#7aa8ff", "rgba(122,168,255,0.25)"), x: 480, y: -220, z: -350, s: 40 },
+          { tex: makePlanet("#c9a2ff", "rgba(201,162,255,0.25)"), x: 300, y: 320, z: -550, s: 70 },
+        ]
+      : [];
     const planets: THREE.Sprite[] = [];
     for (const p of planetConfigs) {
       const mat = new THREE.SpriteMaterial({
@@ -138,6 +143,7 @@ export const SpaceBackground = () => {
       scene.add(spr);
       planets.push(spr);
     }
+
 
     // Resize
     const onResize = () => {
@@ -158,18 +164,26 @@ export const SpaceBackground = () => {
     };
     document.addEventListener("visibilitychange", onVis);
 
-    const speed = prefersReduced ? 0 : 1;
+    const speed = q.prefersReduced ? 0 : q.tier === "low" ? 0.5 : 1;
+    // Frame-skip on low tier to halve GPU load
+    const frameSkip = q.tier === "low" ? 2 : 1;
+    let frame = 0;
+
     const tick = () => {
       if (!running) return;
-      farStars.rotation.y += 0.00008 * speed;
-      midStars.rotation.y += 0.00015 * speed;
-      nearStars.rotation.y += 0.00025 * speed;
-      farStars.rotation.x += 0.00004 * speed;
-      midStars.rotation.x += 0.00007 * speed;
-      renderer.render(scene, camera);
+      frame++;
+      if (frame % frameSkip === 0) {
+        farStars.rotation.y += 0.00008 * speed * frameSkip;
+        midStars.rotation.y += 0.00015 * speed * frameSkip;
+        nearStars.rotation.y += 0.00025 * speed * frameSkip;
+        farStars.rotation.x += 0.00004 * speed * frameSkip;
+        midStars.rotation.x += 0.00007 * speed * frameSkip;
+        renderer.render(scene, camera);
+      }
       raf = requestAnimationFrame(tick);
     };
     tick();
+
 
     return () => {
       cancelAnimationFrame(raf);
