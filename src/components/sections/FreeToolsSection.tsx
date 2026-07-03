@@ -44,7 +44,7 @@ export const FreeToolsSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           badge={t("tools.badge")}

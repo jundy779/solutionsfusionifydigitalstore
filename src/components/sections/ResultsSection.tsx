@@ -44,7 +44,7 @@ export const ResultsSection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16 md:py-28 bg-background relative overflow-hidden">
+    <section ref={ref} className="py-16 md:py-28 bg-transparent relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-end justify-center">
         <OptimizedImage src={illustrationResults} alt="" className="w-full max-w-5xl opacity-[0.06] object-cover" aria-hidden="true" sizes="100vw" />
       </div>

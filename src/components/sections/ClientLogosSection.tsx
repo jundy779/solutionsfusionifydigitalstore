@@ -28,7 +28,7 @@ export const ClientLogosSection = () => {
 
   if (isLoading) {
     return (
-      <section className="py-12 bg-background relative overflow-hidden">
+      <section className="py-12 bg-transparent relative overflow-hidden">
         <div className="container mx-auto px-4 mb-6">
           <p className="text-sm text-muted-foreground text-center">{t("clients.title")} {t("clients.suffix")}</p>
         </div>
@@ -62,7 +62,7 @@ export const ClientLogosSection = () => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <motion.section className="py-12 bg-background relative overflow-hidden" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: "easeOut" }}>
+      <motion.section className="py-12 bg-transparent relative overflow-hidden" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: "easeOut" }}>
         <div className="container mx-auto px-4 mb-6">
           <p className="text-sm text-muted-foreground text-center">
             {t("clients.title")} <span className="text-foreground font-semibold">{logos.length}+</span> {t("clients.suffix")}
