@@ -174,11 +174,11 @@ export const HeroSection = () => {
             className="flex flex-wrap justify-center gap-2 mt-6"
           >
             {[
-              { icon: Code2, label: "Web Dev", href: "/services/web-development", color: "hsl(212 89% 45%)" },
-              { icon: Bot, label: "Automation Bots", href: "/services/automation-bots", color: "hsl(265 75% 55%)" },
-              { icon: Settings2, label: "Digital Systems", href: "/services/digital-systems", color: "hsl(142 70% 45%)" },
-              { icon: Cloud, label: "Cloud Support", href: "/services/cloud-support", color: "hsl(200 90% 50%)" },
-              { icon: Briefcase, label: "Project Services", href: "/services/project-services", color: "hsl(30 90% 55%)" },
+              { icon: Code2, label: "Website UMKM", href: "/services/web-development", color: "hsl(212 89% 45%)" },
+              { icon: Bot, label: "WhatsApp Automation", href: "/services/automation-bots", color: "hsl(265 75% 55%)" },
+              { icon: Settings2, label: "Sistem Sederhana", href: "/services/digital-systems", color: "hsl(142 70% 45%)" },
+              { icon: Cloud, label: "Domain & Hosting", href: "/services/cloud-support", color: "hsl(200 90% 50%)" },
+              { icon: Briefcase, label: "Website Sekolah", href: "/services/project-services", color: "hsl(30 90% 55%)" },
             ].map((service, i) => (
               <motion.div
                 key={service.href}
