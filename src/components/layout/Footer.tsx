@@ -17,14 +17,15 @@ export const Footer = () => {
 
   const footerLinks = {
     [t("footer.services")]: [
-      { name: "Web & App Development", href: "#services" },
-      { name: "Automation Bots", href: "#services" },
-      { name: "Digital Systems", href: "#services" },
-      { name: "Cloud & IT Solutions", href: "#services" },
+      { name: "Website UMKM & Landing Page", href: "/services/web-development" },
+      { name: "Automasi WhatsApp & Bot", href: "/services/automation-bots" },
+      { name: "Sistem Digital Sederhana", href: "/services/digital-systems" },
+      { name: "Domain, Hosting & Email", href: "/services/cloud-support" },
+      { name: "Website Sekolah & Komunitas", href: "/services/project-services" },
     ],
     [t("footer.company")]: [
       { name: t("footer.aboutUs"), href: "#about" },
-      { name: t("footer.portfolio"), href: "#projects" },
+      { name: t("footer.portfolio"), href: "/portfolio" },
       { name: t("footer.contact"), href: "#contact" },
     ],
     [t("footer.legal")]: [
