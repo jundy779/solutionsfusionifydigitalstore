@@ -38,7 +38,7 @@ const homepageJsonLd = [
     alternateName: "PT Fusionify Digital Store",
     url: "https://solutions.fusionifydigital.store",
     logo: "https://solutions.fusionifydigital.store/favicon.png",
-    description: "Partner transformasi digital untuk UMKM, startup, dan perusahaan. Web development, automation bots, digital systems, cloud support.",
+    description: "Bengkel digital praktis untuk UMKM, sekolah, dan komunitas. Website, landing page, automasi WhatsApp, hosting, dan sistem digital sederhana yang benar-benar jalan.",
     sameAs: [
       "https://www.instagram.com/fusionifytempestore/",
       "https://www.linkedin.com/company/fusionify-digital-store/",
@@ -68,8 +68,8 @@ const Index = () => {
         Skip to main content
       </a>
       <SEOHead
-        title="Fusionify Digital Solutions | Solusi Transformasi Digital"
-        description="Partner transformasi digital untuk UMKM, startup & enterprise. Web development, automation bots, digital systems, cloud support — automation-first."
+        title="Fusionify | Bengkel Digital untuk UMKM, Sekolah & Komunitas"
+        description="Website, landing page, katalog online, automasi WhatsApp, dan hosting untuk UMKM, sekolah, dan komunitas. Solusi digital sederhana yang benar-benar jalan — tanpa jargon."
         path="/"
         jsonLd={homepageJsonLd}
       />
