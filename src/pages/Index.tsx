@@ -75,53 +75,70 @@ const Index = () => {
       />
       <Navbar />
       <main id="main-content">
+        {/* 1. Hero konkret */}
         <HeroSection />
-        <ClientLogosSection />
-        <PartnerLogosSection />
+
+        {/* 2. Pain points */}
         <Suspense fallback={<SectionFallback height="600px" />}>
           <PainPointSection />
         </Suspense>
-        <Suspense fallback={<SectionFallback height="500px" />}>
-          <AboutFusionifySection />
-        </Suspense>
+
+        {/* 3. Layanan berbasis use-case */}
         <Suspense fallback={<SectionFallback height="700px" />}>
           <ServicesSection />
         </Suspense>
-        <Suspense fallback={<SectionFallback height="500px" />}>
-          <UnifiedEcosystemSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback height="600px" />}>
-          <WhyChooseUsSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback height="500px" />}>
-          <ResultsSection />
-        </Suspense>
+
+        {/* 4. Paket inti / produk utama */}
         <Suspense fallback={<SectionFallback height="600px" />}>
           <ProductSuiteSection />
         </Suspense>
         <Suspense fallback={<SectionFallback height="400px" />}>
           <FreeToolsSection />
         </Suspense>
+
+        {/* 5. Portofolio (bukti kerja) */}
         <Suspense fallback={<SectionFallback height="700px" />}>
           <FeaturedProjectsSection />
+        </Suspense>
+
+        {/* 6. Cara kerja / ekosistem */}
+        <Suspense fallback={<SectionFallback height="500px" />}>
+          <UnifiedEcosystemSection />
+        </Suspense>
+
+        {/* 7. Alasan percaya */}
+        <Suspense fallback={<SectionFallback height="600px" />}>
+          <WhyChooseUsSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="500px" />}>
+          <ResultsSection />
         </Suspense>
         <Suspense fallback={<SectionFallback height="500px" />}>
           <TestimonialsSection />
         </Suspense>
+        <ClientLogosSection />
+        <PartnerLogosSection />
+        <Suspense fallback={<SectionFallback height="500px" />}>
+          <AboutFusionifySection />
+        </Suspense>
         <Suspense fallback={<SectionFallback height="500px" />}>
           <FutureVisionSection />
         </Suspense>
+
+        {/* 8. FAQ */}
         <Suspense fallback={<SectionFallback height="600px" />}>
           <FAQSection />
         </Suspense>
+
+        {/* 9. CTA WhatsApp */}
         <Suspense fallback={<SectionFallback height="400px" />}>
           <CTASection />
         </Suspense>
-        <Suspense fallback={<SectionFallback height="300px" />}>
-          <NewsletterSection />
-        </Suspense>
         <Suspense fallback={<SectionFallback height="600px" />}>
           <ContactSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback height="300px" />}>
+          <NewsletterSection />
         </Suspense>
       </main>
       <Suspense fallback={<SectionFallback height="300px" />}>
