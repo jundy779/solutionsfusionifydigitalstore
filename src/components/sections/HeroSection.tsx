@@ -86,13 +86,13 @@ export const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8 overflow-hidden"
+            className="inline-flex max-w-[92vw] items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8"
           >
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.4, delay: 0.3, ease: "backOut" }}
-              className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center"
+              className="w-5 h-5 shrink-0 rounded-full bg-primary/20 flex items-center justify-center"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -105,23 +105,11 @@ export const HeroSection = () => {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
-              className="text-sm font-medium text-muted-foreground"
+              className="text-xs sm:text-sm font-medium text-muted-foreground text-center leading-snug"
             >
-              {t("hero.badge").split("").map((char, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.3,
-                    delay: 0.5 + index * 0.02,
-                    ease: "easeOut",
-                  }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              {t("hero.badge")}
             </motion.span>
+
           </motion.div>
 
           {/* Main Heading - Text Generate Effect */}
