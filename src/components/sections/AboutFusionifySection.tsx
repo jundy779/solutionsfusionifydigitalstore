@@ -21,7 +21,20 @@ export const AboutFusionifySection = () => {
 
   return (
     <section id="about" className="relative overflow-hidden bg-transparent">
-      <LampContainer className="pt-20 pb-0">
+      <div className="container mx-auto px-4 pt-16 pb-10 md:hidden">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+            <span className="w-2 h-2 rounded-full bg-primary" />
+            <span className="text-sm font-medium text-muted-foreground">{t("about.badge")}</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl leading-tight text-foreground">
+            {t("about.titlePrefix")}
+            <span className="block text-gradient pt-1">{t("about.title")}</span>
+          </h2>
+        </motion.div>
+      </div>
+
+      <LampContainer className="hidden pt-20 pb-0 md:flex">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-center">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
             <span className="w-2 h-2 rounded-full bg-primary" />
@@ -34,7 +47,7 @@ export const AboutFusionifySection = () => {
         </motion.div>
       </LampContainer>
 
-      <div className="container mx-auto px-4 relative z-10 -mt-20 sm:-mt-28 lg:-mt-40 pb-16 md:pb-20">
+      <div className="container mx-auto px-4 relative z-10 pb-16 md:-mt-28 lg:-mt-40 md:pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
             <div className="p-5 sm:p-8 rounded-2xl bg-card/50 border border-border/50 overflow-hidden backdrop-blur-sm">
