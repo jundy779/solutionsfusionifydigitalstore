@@ -34,6 +34,8 @@ const DigitalSystems = lazy(() => import("./pages/services/DigitalSystems"));
 const CloudSupport = lazy(() => import("./pages/services/CloudSupport"));
 const ProjectServices = lazy(() => import("./pages/services/ProjectServices"));
 const Ecosystem = lazy(() => import("./pages/Ecosystem"));
+const CaraKerja = lazy(() => import("./pages/CaraKerja"));
+const KeamananData = lazy(() => import("./pages/KeamananData"));
 const BiayaPembuatanWebsite = lazy(() => import("./pages/blog/BiayaPembuatanWebsite"));
 
 const queryClient = new QueryClient();
@@ -62,6 +64,8 @@ const App = () => (
                 <Route path="/services/cloud-support" element={<CloudSupport />} />
                 <Route path="/services/project-services" element={<ProjectServices />} />
                 <Route path="/ecosystem" element={<Ecosystem />} />
+                <Route path="/cara-kerja" element={<CaraKerja />} />
+                <Route path="/keamanan-data" element={<KeamananData />} />
                 <Route path="/blog/biaya-pembuatan-website" element={<BiayaPembuatanWebsite />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
