@@ -45,10 +45,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Suspense fallback={null}>
-              <SpaceBackground />
-            </Suspense>
-
             <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
