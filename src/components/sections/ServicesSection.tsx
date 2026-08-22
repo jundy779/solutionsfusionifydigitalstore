@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Code2, Bot, Settings2, Cloud, Briefcase, ArrowUpRight } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import illustrationServices from "@/assets/illustration-services.png";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
@@ -53,7 +52,7 @@ const services = [
 export const ServicesSection = () => {
   const { t } = useLanguage();
   return (
-    <section id="services" className="py-16 md:py-28 bg-transparent relative overflow-hidden">
+    <section id="services" className="py-16 md:py-28 bg-background relative overflow-hidden">
       {/* Animated background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -93,30 +92,15 @@ export const ServicesSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with Illustration */}
-        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+        <div className="mb-14">
           <SectionHeader
             badge={t("services.badge")}
             title={t("services.titlePrefix")}
             titleHighlight={" " + t("services.title")}
             subtitle={t("services.subtitle")}
             align="left"
-            subtitleClassName="max-w-xl"
+            subtitleClassName="max-w-2xl"
           />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            className="hidden lg:block"
-          >
-            <OptimizedImage 
-              src={illustrationServices} 
-              alt="Ilustrasi layanan pengembangan digital Fusionify" 
-              className="w-full rounded-2xl opacity-80"
-              sizes="(max-width: 1024px) 0px, 50vw"
-            />
-          </motion.div>
         </div>
 
         {/* Bento Grid */}

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Shield, Layers, Code2, Rocket, Headphones, CheckCircle } from "lucide-react";
-import illustrationWhychooseus from "@/assets/illustration-whychooseus.png";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
@@ -18,13 +17,13 @@ export const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-28 bg-transparent relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-card/30 border-y border-border/40 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-1/3 left-1/4 w-[400px] h-[400px]" animate={{ opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} style={{ background: "radial-gradient(circle, hsl(265 75% 55% / 0.08) 0%, transparent 60%)", filter: "blur(80px)" }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+        <div className="mb-14">
           <SectionHeader
             badge={t("why.badge")}
             badgeIcon={CheckCircle}
@@ -32,12 +31,8 @@ export const WhyChooseUsSection = () => {
             titleHighlight={t("why.titleHighlight")}
             subtitle={t("why.subtitle")}
             align="left"
-            subtitleClassName="max-w-xl"
+            subtitleClassName="max-w-2xl"
           />
-
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
-            <OptimizedImage src={illustrationWhychooseus} alt="Ilustrasi keunggulan Fusionify Digital sebagai partner transformasi digital" className="w-80 h-auto object-contain opacity-80 rounded-2xl" sizes="(max-width: 1024px) 0px, 320px" />
-          </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-6xl mx-auto">

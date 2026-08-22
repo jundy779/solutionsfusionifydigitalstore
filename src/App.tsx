@@ -9,9 +9,6 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { PageSkeleton } from "@/components/layout/PageSkeleton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
-const SpaceBackground = lazy(() =>
-  import("@/components/ui/space-background").then((m) => ({ default: m.SpaceBackground }))
-);
 
 import Index from "./pages/Index";
 
@@ -48,10 +45,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Suspense fallback={null}>
-              <SpaceBackground />
-            </Suspense>
-
             <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
