@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { Cog, Clock, DollarSign, Zap } from "lucide-react";
-import illustrationPainpoint from "@/assets/illustration-painpoint.png";
-import { OptimizedImage } from "@/components/ui/optimized-image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { SectionHeader } from "./SectionHeader";
@@ -29,7 +27,7 @@ export const PainPointSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 items-center mb-14">
+        <div className="mb-14">
           <SectionHeader
             badge={t("pain.badge")}
             badgeDot
@@ -38,12 +36,8 @@ export const PainPointSection = () => {
             titleHighlight={t("pain.titleHighlight")}
             subtitle={t("pain.subtitle")}
             align="left"
-            subtitleClassName="max-w-xl"
+            subtitleClassName="max-w-2xl"
           />
-
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }} className="hidden lg:flex justify-center">
-            <OptimizedImage src={illustrationPainpoint} alt="Ilustrasi tantangan bisnis digital yang dihadapi UMKM dan perusahaan" className="w-72 h-72 object-contain opacity-70 rounded-2xl" sizes="(max-width: 1024px) 0px, 288px" />
-          </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-6xl mx-auto">
