@@ -161,7 +161,7 @@ export const ContactSection = () => {
     }`;
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-transparent relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-28 bg-background relative overflow-hidden">
       <BackgroundBeams className="opacity-40" />
 
       <div className="container mx-auto px-4 relative z-10">

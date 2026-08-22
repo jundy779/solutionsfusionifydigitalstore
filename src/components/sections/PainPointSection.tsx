@@ -17,7 +17,7 @@ export const PainPointSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-28 bg-transparent relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-card/30 border-y border-border/40 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 

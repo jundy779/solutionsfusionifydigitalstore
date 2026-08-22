@@ -20,7 +20,7 @@ export const AboutFusionifySection = () => {
   ];
 
   return (
-    <section id="about" className="relative scroll-mt-28 overflow-hidden bg-transparent">
+    <section id="about" className="relative scroll-mt-28 overflow-hidden bg-background">
       <div className="container mx-auto px-4 pt-28 pb-10 md:hidden">
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">

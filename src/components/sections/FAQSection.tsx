@@ -34,7 +34,7 @@ export const FAQSection = () => {
   } : null;
 
   return (
-    <section className="py-16 md:py-28 bg-transparent relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-card/30 border-y border-border/40 relative overflow-hidden">
       {faqJsonLd && (
         <script
           type="application/ld+json"
