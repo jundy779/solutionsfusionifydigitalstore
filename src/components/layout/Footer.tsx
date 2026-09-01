@@ -35,7 +35,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-border/30 bg-background/40 backdrop-blur-md">
+    <footer className="border-t border-border/30 bg-card">
       <div className="container mx-auto px-4 py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 max-w-6xl mx-auto">
           <div className="lg:col-span-2">

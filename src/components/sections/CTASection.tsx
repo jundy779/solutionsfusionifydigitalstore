@@ -19,7 +19,7 @@ export const CTASection = () => {
           <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
             {t("cta.title")}
             <br />
-            <span className="text-gradient">{t("cta.titleHighlight")}</span>
+            <span className="text-primary">{t("cta.titleHighlight")}</span>
           </h2>
           
           <p className="text-muted-foreground text-base md:text-lg mb-10 leading-relaxed max-w-2xl mx-auto">{t("cta.subtitle")}</p>
