@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Rocket, Globe, Layers, Target } from "lucide-react";
-import { SparklesText } from "@/components/ui/sparkles";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -36,7 +35,7 @@ export const FutureVisionSection = () => {
             </div>
             <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight text-foreground">
               {t("vision.title")}
-              <SparklesText className="text-gradient" sparklesCount={8}>{" " + t("vision.titleHighlight").trim()}</SparklesText>
+              <span className="text-foreground/90">{" " + t("vision.titleHighlight").trim()}</span>
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-5 leading-relaxed">{t("vision.desc1")}</p>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">{t("vision.desc2")}</p>

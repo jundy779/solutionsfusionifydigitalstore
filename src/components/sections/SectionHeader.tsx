@@ -76,7 +76,7 @@ export const SectionHeader = ({
       {/* Title */}
       <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-5 text-foreground">
         {title}
-        {titleHighlight && <span className="text-gradient">{titleHighlight}</span>}
+        {titleHighlight && <span className="text-foreground/90">{titleHighlight}</span>}
       </h2>
 
       {/* Subtitle */}
