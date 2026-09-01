@@ -20,32 +20,20 @@ export const AboutFusionifySection = () => {
   ];
 
   return (
-    <section id="about" className="relative scroll-mt-28 overflow-hidden bg-background">
-      <div className="container mx-auto px-4 pt-28 pb-10 md:hidden">
-        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span className="text-sm font-medium text-muted-foreground">{t("about.badge")}</span>
-          </div>
-          <h2 className="font-display font-bold text-3xl leading-tight text-foreground">
-            {t("about.titlePrefix")}
-            <span className="block text-gradient pt-1">{t("about.title")}</span>
-          </h2>
-        </motion.div>
-      </div>
-
-      <LampContainer className="hidden pt-20 pb-0 md:flex">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }} className="text-center">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-6">
+    <section id="about" className="relative scroll-mt-28 bg-background">
+      <div className="container mx-auto px-4 pt-20 pb-10 md:pt-24">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 mb-6">
             <span className="w-2 h-2 rounded-full bg-primary" />
             <span className="text-sm font-medium text-muted-foreground">{t("about.badge")}</span>
           </div>
           <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground">
             {t("about.titlePrefix")}
-            <span className="text-gradient"> {t("about.title")}</span>
+            <span className="block pt-1 text-foreground/90">{t("about.title")}</span>
           </h2>
         </motion.div>
-      </LampContainer>
+      </div>
+
 
       <div className="container mx-auto px-4 relative z-10 pb-16 md:-mt-28 lg:-mt-40 md:pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
