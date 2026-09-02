@@ -14,6 +14,7 @@ const ACCENT = new THREE.Color("#4da3ff");
 
 function Globe({ quality }: { quality: QualityProfile }) {
   const group = useRef<THREE.Group>(null);
+  const spin = useRef(0);
   const seg = quality.earthSegments;
 
   const nodePositions = useMemo(
