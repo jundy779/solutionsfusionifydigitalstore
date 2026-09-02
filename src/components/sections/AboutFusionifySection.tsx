@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Users, Code2, Clock, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import fusionifyLogo from "@/assets/fusionify-logo.png";
+
 
 export const AboutFusionifySection = () => {
   const { t } = useLanguage();
@@ -40,9 +42,10 @@ export const AboutFusionifySection = () => {
             <div className="p-5 sm:p-8 rounded-2xl bg-card border border-border/60 overflow-hidden">
               <div className="aspect-video rounded-xl bg-muted/40 flex items-center justify-center mb-6 overflow-hidden border border-primary/10">
                 <motion.div className="text-center" animate={{ y: [0, -4, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-                  <motion.div className="w-20 h-20 mx-auto mb-3 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20" animate={{ rotate: [0, 2, 0, -2, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}>
-                    <span className="text-4xl font-bold text-primary">F</span>
+                  <motion.div className="w-20 h-20 mx-auto mb-3 flex items-center justify-center" animate={{ rotate: [0, 2, 0, -2, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}>
+                    <img src={fusionifyLogo} alt="Logo Fusionify" width={80} height={80} className="w-20 h-20 object-contain" loading="lazy" />
                   </motion.div>
+
                   <h3 className="font-display font-bold text-xl text-foreground mb-1">FUSIONIFY</h3>
                   <p className="text-sm text-muted-foreground">{t("about.digitalSolutions")}</p>
                 </motion.div>
