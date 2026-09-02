@@ -169,7 +169,7 @@ const Ecosystem = () => {
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-5 text-foreground">
                 {t("eco.title")}
-                <span className="text-gradient">{t("eco.titleHighlight")}</span>
+                {t("eco.titleHighlight")}
               </h1>
               <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">{t("eco.subtitle")}</p>
             </motion.div>

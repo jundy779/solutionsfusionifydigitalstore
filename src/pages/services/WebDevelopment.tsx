@@ -189,7 +189,7 @@ const WebDevelopment = () => {
                 <span className="text-sm font-medium text-muted-foreground">Web & App Development</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                Website yang <span className="text-gradient">Menjual</span>,<br />Bukan Hanya Tampil
+                Website yang Menjual,<br />Bukan Hanya Tampil
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Kami bangun produk digital yang convert — dari landing page hingga SaaS platform — dengan teknologi modern, performa tinggi, dan desain yang memukau.
@@ -289,7 +289,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Apa yang <span className="text-gradient">Kami Bangun</span>
+              Apa yang Kami Bangun
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Solusi web development lengkap dari frontend hingga backend</p>
           </motion.div>
@@ -320,7 +320,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Tech <span className="text-gradient">Stack</span>
+              Tech Stack
             </h2>
             <p className="text-muted-foreground">Teknologi modern dan battle-tested yang kami gunakan</p>
           </motion.div>
@@ -362,7 +362,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket & <span className="text-gradient">Harga</span>
+              Paket & Harga
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Harga transparan tanpa biaya tersembunyi. Semua bisa dikustomisasi sesuai kebutuhan.</p>
           </motion.div>
@@ -416,7 +416,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
 

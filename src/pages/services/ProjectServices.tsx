@@ -197,7 +197,7 @@ const ProjectServices = () => {
                 <span className="text-sm font-medium text-muted-foreground">Project-Based Services</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                IT Partner yang <span className="text-gradient">Bicara Bisnis</span>
+                IT Partner yang Bicara Bisnis
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Bukan hanya vendor teknologi — kami jadi partner strategis yang memahami bisnis Anda, lalu merancang solusi teknis yang benar-benar impact.
@@ -270,7 +270,7 @@ const ProjectServices = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Layanan <span className="text-gradient">Project</span>
+              Layanan Project
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Dari konsultasi hingga eksekusi — kami handle semuanya</p>
           </motion.div>
@@ -295,7 +295,7 @@ const ProjectServices = () => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <Target className="w-5 h-5 text-primary" />
               <h2 className="font-display font-bold text-3xl md:text-4xl text-foreground">
-                Cara <span className="text-gradient">Kerja</span> Kami
+                Cara Kerja Kami
               </h2>
             </div>
             <p className="text-muted-foreground max-w-xl mx-auto">Metodologi teruji yang memastikan project selesai tepat waktu dan sesuai ekspektasi</p>
@@ -323,7 +323,7 @@ const ProjectServices = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Model <span className="text-gradient">Engagement</span>
+              Model Engagement
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Pilih cara kerja sama yang paling sesuai dengan kebutuhan Anda.</p>
           </motion.div>
@@ -365,7 +365,7 @@ const ProjectServices = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
           <div className="space-y-3">

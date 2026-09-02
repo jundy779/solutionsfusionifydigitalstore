@@ -113,7 +113,7 @@ const Portfolio = () => {
             
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground">
               Project yang Telah
-              <span className="text-gradient"> Kami Kerjakan</span>
+               Kami Kerjakan
             </h1>
             
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">

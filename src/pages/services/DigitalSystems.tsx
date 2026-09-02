@@ -196,7 +196,7 @@ const DigitalSystems = () => {
                 <span className="text-sm font-medium text-muted-foreground">Digital Systems & API</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                Semua Sistem <span className="text-gradient">Terhubung</span>,<br />Zero Input Manual
+                Semua Sistem Terhubung,<br />Zero Input Manual
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Kami integrasikan semua tools bisnis Anda — marketplace, payment, CRM, ERP — sehingga data mengalir otomatis dan tim Anda fokus pada hal yang bernilai.
@@ -277,7 +277,7 @@ const DigitalSystems = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Layanan <span className="text-gradient">Integrasi</span>
+              Layanan Integrasi
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Semua yang Anda butuhkan untuk sistem bisnis yang terhubung sempurna</p>
           </motion.div>
@@ -300,7 +300,7 @@ const DigitalSystems = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Platform yang <span className="text-gradient">Didukung</span>
+              Platform yang Didukung
             </h2>
             <p className="text-muted-foreground">Berpengalaman mengintegrasikan 30+ platform populer di Indonesia dan global</p>
           </motion.div>
@@ -324,7 +324,7 @@ const DigitalSystems = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket & <span className="text-gradient">Harga</span>
+              Paket & Harga
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Pilih paket yang sesuai dengan jumlah integrasi yang Anda butuhkan.</p>
           </motion.div>
@@ -366,7 +366,7 @@ const DigitalSystems = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
           <div className="space-y-3">

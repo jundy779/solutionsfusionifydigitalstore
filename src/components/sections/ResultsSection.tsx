@@ -25,7 +25,7 @@ const AnimatedCounter = ({ value, suffix, isInView }: { value: number; suffix: s
     ? `${(count / 1000).toFixed(count >= value ? 0 : 1)}K`
     : Number.isInteger(value) ? Math.floor(count) : count.toFixed(1);
   
-  return <span className="text-gradient">{displayValue}{suffix}</span>;
+  return {displayValue}{suffix};
 };
 
 export const ResultsSection = () => {

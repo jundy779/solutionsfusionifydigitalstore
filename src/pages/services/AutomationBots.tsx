@@ -183,7 +183,7 @@ const AutomationBots = () => {
                 <span className="text-sm font-medium text-muted-foreground">Automation Bots</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                CS Tidur, Bot Tetap <span className="text-gradient">Kerja</span>
+                CS Tidur, Bot Tetap Kerja
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Otomasi WhatsApp & Telegram bisnis Anda agar bisa melayani pelanggan, proses order, dan broadcast promo — 24/7 tanpa perlu tambah staff.
@@ -292,7 +292,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Solusi <span className="text-gradient">Automation</span> Kami
+              Solusi Automation Kami
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Berbagai jenis bot dan automasi untuk setiap kebutuhan bisnis</p>
           </motion.div>
@@ -316,7 +316,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket <span className="text-gradient">Bot</span>
+              Paket Bot
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Investasi sekali, bot aktif selamanya.</p>
           </motion.div>
@@ -358,7 +358,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
           <div className="space-y-3">
