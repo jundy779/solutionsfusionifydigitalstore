@@ -73,7 +73,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
       uTime: { value: 0 },
       uSpeed: { value: 0.16 },
       uRepeat: { value: 1.0 },
-      uBase: { value: 0.18 },
+      uBase: { value: 0.3 },
     }),
     [],
   );
@@ -87,7 +87,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
     nodePositions.forEach((p, i) => {
       const hub = NETWORK_NODES[i].hub;
       pos.push(p.x, p.y, p.z);
-      size.push(hub ? 26 : 14);
+      size.push(hub ? 42 : 22);
       phase.push(i * 1.31);
       const c = hub ? HOT : ACCENT;
       color.push(c.r, c.g, c.b);
@@ -107,7 +107,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
   const packetGeometry = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute(new Float32Array(packetCount * 3), 3));
-    const size = new Float32Array(packetCount).fill(22);
+    const size = new Float32Array(packetCount).fill(30);
     const phase = new Float32Array(packetCount);
     const color = new Float32Array(packetCount * 3);
     for (let i = 0; i < packetCount; i++) {
@@ -180,7 +180,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
     // routes speed up as the story escalates
     routeUniforms.uTime.value = t;
     routeUniforms.uSpeed.value = 0.14 + p * 0.42 + scrollState.energy * 0.3;
-    routeUniforms.uBase.value = 0.14 + p * 0.16;
+    routeUniforms.uBase.value = 0.26 + p * 0.18;
 
     const arr = packetGeometry.attributes.position.array as Float32Array;
     for (let i = 0; i < packetCount; i++) {
@@ -337,8 +337,9 @@ const CAM_STAGES: [number, number, number][] = [
 ];
 
 function CameraRig() {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const target = useMemo(() => new THREE.Vector3(), []);
+  const fit = Math.max(1, 1.5 / Math.max(size.width / size.height, 0.4));
 
   useFrame((state, rawDelta) => {
     const delta = Math.min(rawDelta, 0.05);
@@ -353,7 +354,7 @@ function CameraRig() {
     target.set(
       THREE.MathUtils.lerp(a[0], b[0], e) + scrollState.pointerX * 0.18 + Math.sin(t * 0.23) * 0.07,
       THREE.MathUtils.lerp(a[1], b[1], e) + scrollState.pointerY * 0.12 + Math.cos(t * 0.19) * 0.05,
-      THREE.MathUtils.lerp(a[2], b[2], e),
+      THREE.MathUtils.lerp(a[2], b[2], e) * fit,
     );
     camera.position.lerp(target, 1 - Math.exp(-3.2 * delta));
     camera.lookAt(0, 0, 0);
