@@ -6,7 +6,6 @@ import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import fusionifyLogo from "@/assets/fusionify-logo.png";
 
 
 // Lazy load full-cinematic NASA Earth (Three.js)
@@ -83,19 +82,8 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Brand mark */}
-          <motion.img
-            src={fusionifyLogo}
-            alt="Logo Fusionify Digital Solutions"
-            width={80}
-            height={80}
-            className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto mb-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-
           {/* Badge - Staggered Animation */}
+
 
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
