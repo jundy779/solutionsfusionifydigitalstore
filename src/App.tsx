@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { PageSkeleton } from "@/components/layout/PageSkeleton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { ScrollRestoration } from "@/components/layout/ScrollRestoration";
 
 import Index from "./pages/Index";
 
@@ -46,6 +47,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollRestoration />
             <CookieConsent />
             <Suspense fallback={<PageSkeleton />}>
               <Routes>

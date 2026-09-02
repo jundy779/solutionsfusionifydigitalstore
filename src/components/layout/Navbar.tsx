@@ -67,29 +67,30 @@ export const Navbar = () => {
     // Check if it's a hash link (section on homepage)
     if (href.startsWith("/#")) {
       const targetId = href.replace("/#", "");
-      
-      // If we're not on the homepage, navigate first then scroll
-      if (location.pathname !== "/") {
-        navigate("/");
-        // Wait for navigation then scroll
-        setTimeout(() => {
-          const element = document.getElementById(targetId);
-          if (element) {
-            const navbarHeight = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-          }
-        }, 100);
-      } else {
-        // We're on homepage, just scroll
+
+      const scrollToTarget = () => {
         const element = document.getElementById(targetId);
-        if (element) {
-          const navbarHeight = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-        }
+        if (!element) return false;
+        const navbarHeight = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        return true;
+      };
+
+      const attemptScroll = (retries = 30) => {
+        if (scrollToTarget()) return;
+        if (retries <= 0) return;
+        requestAnimationFrame(() => attemptScroll(retries - 1));
+      };
+
+      if (location.pathname !== "/") {
+        // Navigate to homepage first, then retry scrolling until the lazy
+        // section chunk has mounted.
+        navigate("/", { state: { scrollTo: targetId } });
+        setTimeout(() => attemptScroll(40), 50);
+      } else {
+        attemptScroll();
       }
     } else {
       // Regular link navigation
