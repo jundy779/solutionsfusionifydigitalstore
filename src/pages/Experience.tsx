@@ -243,11 +243,12 @@ const Experience = () => {
       {/* Scroll content */}
       <div ref={wrapper} className="relative z-10">
         {/* Hero */}
-        <section className="min-h-[100svh] flex flex-col justify-end px-5 md:px-10 pb-20 md:pb-28" data-chapter>
+        <section className="min-h-[100svh] flex flex-col justify-end px-5 md:px-10 pt-28 md:pt-32 pb-20 md:pb-28" data-chapter>
           <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-primary mb-6">
             Fusionify Interactive Case Study
           </p>
-          <h1 className="font-display font-bold text-4xl sm:text-6xl lg:text-8xl leading-[0.95] max-w-4xl text-white">
+          <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-7xl leading-[0.95] max-w-4xl text-white">
+
             <span className="block overflow-hidden pb-1">
               {headline.split("").map((c, i) => (
                 <span key={`a${i}`} data-char className="inline-block whitespace-pre">
