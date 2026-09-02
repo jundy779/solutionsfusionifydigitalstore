@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Users, Code2, Clock, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import fusionifyLogo from "@/assets/fusionify-logo.png";
+
 
 export const AboutFusionifySection = () => {
   const { t } = useLanguage();
