@@ -113,7 +113,7 @@ const packages = [
       "Integrasi ERP/CRM/payment",
       "Multi-agent handoff ke CS",
       "Analytics & reporting",
-      "SLA support 24/7",
+      "Prioritas support di jam kerja",
     ],
     cta: "Diskusi Kebutuhan",
     highlight: false,
@@ -146,8 +146,8 @@ const faqs = [
 const stats = [
   { value: "24/7", label: "Bot Aktif" },
   { value: "< 1s", label: "Response Time" },
-  { value: "80%", label: "Hemat Biaya CS" },
-  { value: "∞", label: "Chat Bersamaan" },
+  { value: "3–5 hari", label: "Rilis Bot Basic" },
+  { value: "Paralel", label: "Chat Bersamaan" },
 ];
 
 const AutomationBots = () => {
@@ -210,22 +210,22 @@ const AutomationBots = () => {
             >
               <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl max-w-sm mx-auto">
                 {/* Chat header */}
-                <div className="flex items-center gap-3 px-4 py-3 bg-green-600/20 border-b border-border/50">
-                  <div className="w-9 h-9 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-green-400" />
+                <div className="flex items-center gap-3 px-4 py-3 bg-primary/15 border-b border-border/50">
+                  <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">Fusionify Bot</p>
-                    <p className="text-xs text-green-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" /> Online</p>
+                    <p className="text-xs text-primary flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" /> Online</p>
                   </div>
                 </div>
                 {/* Messages */}
                 <div className="p-4 space-y-3 bg-card/50 min-h-[200px]">
                   {[
                     { from: "user", text: "Halo, mau pesan produk A" },
-                    { from: "bot", text: "Halo! 👋 Produk A tersedia. Ukuran apa yang kamu mau?" },
+                    { from: "bot", text: "Halo, Produk A tersedia. Ukuran apa yang kamu mau?" },
                     { from: "user", text: "Size M, 2 pcs" },
-                    { from: "bot", text: "✅ Order tercatat!\n• Produk A size M × 2\n• Total: Rp 150.000\n\nKirim bukti transfer ke rekening ini ya 👇" },
+                    { from: "bot", text: "Order tercatat.\n• Produk A size M × 2\n• Total: Rp 150.000\n\nKirim bukti transfer ke rekening berikut." },
                   ].map((msg, i) => (
                     <motion.div
                       key={i}

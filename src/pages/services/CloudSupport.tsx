@@ -95,11 +95,11 @@ const packages = [
     description: "Infrastruktur enterprise dengan SLA ketat dan support prioritas.",
     features: [
       "Server unlimited",
-      "24/7 NOC monitoring",
+      "Monitoring otomatis + alert WhatsApp",
       "HA / Load balancing setup",
       "Disaster recovery tested",
       "Dedicated DevOps engineer",
-      "SLA 99.9% uptime guarantee",
+      "Target uptime disepakati di kontrak",
     ],
     cta: "Diskusi Kebutuhan",
     highlight: false,
@@ -130,10 +130,10 @@ const faqs = [
 ];
 
 const stats = [
-  { value: "99.9%", label: "Uptime SLA" },
+  { value: "Target", label: "Uptime di Kontrak" },
   { value: "24/7", label: "Monitoring Aktif" },
   { value: "< 15 min", label: "Incident Response" },
-  { value: "100+", label: "Server Dikelola" },
+  { value: "Grafana", label: "Dashboard Monitoring" },
 ];
 
 const CloudSupport = () => {

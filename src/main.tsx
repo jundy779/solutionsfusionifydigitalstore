@@ -15,7 +15,7 @@ if (import.meta.env.PROD) {
     if ((e.ctrlKey || e.metaKey) && e.key === "u") { e.preventDefault(); return; }
   });
 
-  console.log("%c⚠ STOP!", "color: #FF3B30; font-size: 48px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
+  console.log("%cSTOP", "color: #FF3B30; font-size: 48px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
   console.log("%cThis browser feature is intended for developers. If someone told you to copy-paste something here, it is a scam.", "color: #FF9500; font-size: 16px;");
   console.log("%c© Fusionify Digital Solutions — Unauthorized access is prohibited.", "color: #8E8E93; font-size: 12px;");
 }

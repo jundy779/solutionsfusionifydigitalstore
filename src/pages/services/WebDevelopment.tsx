@@ -218,19 +218,19 @@ const WebDevelopment = () => {
                 <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl">
                   <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border/50">
                     <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-muted-foreground/40" />
+                    <div className="w-3 h-3 rounded-full bg-primary/60" />
                     <span className="ml-2 text-xs text-muted-foreground font-mono">App.tsx</span>
                   </div>
                   <div className="p-5 font-mono text-sm space-y-1">
                     {[
-                      { indent: 0, code: <><span className="text-primary">export</span> <span className="text-accent">const</span> <span className="text-green-400">App</span> = () =&gt; {"{"}</> },
+                      { indent: 0, code: <><span className="text-primary">export</span> <span className="text-accent">const</span> <span className="text-accent">App</span> = () =&gt; {"{"}</> },
                       { indent: 1, code: <><span className="text-primary">return</span> (</> },
-                      { indent: 2, code: <><span className="text-yellow-400">&lt;div</span> className=<span className="text-green-400">"app"</span><span className="text-yellow-400">&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;Hero</span> <span className="text-accent">animated</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;Features</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;CTA</span> <span className="text-accent">variant</span>=<span className="text-green-400">"premium"</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 2, code: <><span className="text-yellow-400">&lt;/div&gt;</span></> },
+                      { indent: 2, code: <><span className="text-primary">&lt;div</span> className=<span className="text-accent">"app"</span><span className="text-primary">&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;Hero</span> <span className="text-accent">animated</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;Features</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;CTA</span> <span className="text-accent">variant</span>=<span className="text-accent">"premium"</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 2, code: <><span className="text-primary">&lt;/div&gt;</span></> },
                       { indent: 1, code: <>);</> },
                       { indent: 0, code: <>{"}"}</> },
                     ].map((line, i) => (
@@ -259,7 +259,7 @@ const WebDevelopment = () => {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-foreground">Ready to Launch</p>
-                      <p className="text-xs text-muted-foreground">Production build ✓</p>
+                      <p className="text-xs text-muted-foreground">Production build siap</p>
                     </div>
                   </div>
                 </motion.div>

@@ -31,7 +31,7 @@ const Ecosystem = () => {
       url: "https://www.fusionifydigital.store/",
       status: t("products.available"),
       statusColor: "bg-success",
-      gradient: "from-purple-500/10 to-pink-500/10",
+      gradient: "from-primary/10 to-primary/5",
     },
     {
       icon: Shield,
@@ -68,7 +68,7 @@ const Ecosystem = () => {
       title: "TMail Generator",
       description: t("eco.tmail.desc"),
       url: "https://tmail.fusionifydigital.my.id/",
-      gradient: "from-purple-500/10 to-pink-500/10",
+      gradient: "from-primary/10 to-primary/5",
     },
     {
       icon: Video,
@@ -99,7 +99,7 @@ const Ecosystem = () => {
       title: "Fahmi Collection",
       description: t("eco.fahmicollection.desc"),
       url: "https://fahmicollection.id/",
-      gradient: "from-rose-500/10 to-pink-500/10",
+      gradient: "from-primary/8 to-primary/5",
     },
     {
       icon: Globe,

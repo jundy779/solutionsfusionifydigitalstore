@@ -87,7 +87,7 @@ export const Footer = () => {
               </p>
             </div>
             <p className="text-muted-foreground text-xs flex items-center gap-1.5">
-              <span>{t("footer.madeWith")}</span><span className="text-red-500">♥</span><span>{t("footer.inIndonesia")}</span>
+              <span>{t("footer.madeWith")}</span><span className="text-primary" aria-hidden="true">/</span><span>{t("footer.inIndonesia")}</span>
             </p>
           </div>
           <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
