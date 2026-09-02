@@ -100,7 +100,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
     return g;
   }, [nodePositions]);
 
-  const hubUniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: -30 } }), []);
+  const hubUniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: 1.7 } }), []);
 
   /* ---- travelling packets (positions updated each frame) */
   const packetCount = arcs.length * (low ? 1 : 2);
@@ -122,7 +122,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
     return g;
   }, [packetCount]);
 
-  const packetUniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: -30 } }), []);
+  const packetUniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: 1.5 } }), []);
 
   const shellUniforms = useMemo(
     () => ({
@@ -275,7 +275,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
 
 function StarField({ count }: { count: number }) {
   const points = useRef<THREE.Points>(null);
-  const uniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: -34 } }), []);
+  const uniforms = useMemo(() => ({ uTime: { value: 0 }, uScale: { value: 1.1 } }), []);
 
   const geometry = useMemo(() => {
     const pos = new Float32Array(count * 3);

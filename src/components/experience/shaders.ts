@@ -138,7 +138,7 @@ export const pointVert = /* glsl */ `
     vColor = aColor;
     vTwinkle = 0.55 + 0.45 * sin(uTime * 1.7 + aPhase);
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = aSize * uScale * vTwinkle * (1.0 / -mv.z);
+    gl_PointSize = aSize * uScale * vTwinkle / max(-mv.z, 0.001);
     gl_Position = projectionMatrix * mv;
   }
 `;
