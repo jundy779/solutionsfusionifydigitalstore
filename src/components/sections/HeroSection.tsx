@@ -6,7 +6,6 @@ import { MovingBorderButton } from "@/components/ui/moving-border";
 import { TextGenerateEffectLines } from "@/components/ui/text-generate-effect";
 import { Suspense, lazy } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import fusionifyLogo from "@/assets/fusionify-logo.png";
 
 
 // Lazy load full-cinematic NASA Earth (Three.js)
