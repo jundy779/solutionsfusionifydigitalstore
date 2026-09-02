@@ -64,7 +64,7 @@ function Globe({ quality }: { quality: QualityProfile }) {
         const u = (t * 0.12 + arc.offset) % 1;
         const pos = arc.curve.getPoint(u);
         dummy.position.copy(pos);
-        const s = 0.012 + Math.sin(u * Math.PI) * 0.012;
+        const s = 0.008 + Math.sin(u * Math.PI) * 0.009;
         dummy.scale.setScalar(s);
         dummy.updateMatrix();
         pulses.current!.setMatrixAt(i, dummy.matrix);
@@ -76,8 +76,8 @@ function Globe({ quality }: { quality: QualityProfile }) {
       const t = state.clock.elapsedTime;
       nodePositions.forEach((pos, i) => {
         const hub = NETWORK_NODES[i].hub;
-        const base = hub ? 0.018 : 0.011;
-        const s = base + Math.sin(t * 1.6 + i) * (hub ? 0.005 : 0.002);
+        const base = hub ? 0.013 : 0.008;
+        const s = base + Math.sin(t * 1.6 + i) * (hub ? 0.004 : 0.0015);
         dummy.position.copy(pos);
         dummy.scale.setScalar(s);
         dummy.updateMatrix();
@@ -179,11 +179,11 @@ function StarField({ count }: { count: number }) {
 /* --------------------------------------------------------------- camera */
 
 const CAM_STAGES: [number, number, number][] = [
-  [0, 0.25, 3.35],
-  [0.9, 0.4, 2.75],
-  [-0.7, -0.25, 2.35],
-  [0.2, 1.1, 3.0],
-  [0, 0.15, 4.1],
+  [0, 0.3, 4.6],
+  [1.1, 0.5, 4.0],
+  [-0.9, -0.3, 3.4],
+  [0.3, 1.3, 4.2],
+  [0, 0.2, 5.4],
 ];
 
 function CameraRig() {
@@ -218,7 +218,7 @@ export const NetworkGlobeScene = ({ quality }: { quality: QualityProfile }) => {
   return (
     <Canvas
       dpr={quality.dpr}
-      camera={{ position: [0, 0.25, 3.35], fov: 45 }}
+      camera={{ position: [0, 0.3, 4.6], fov: 42 }}
       gl={{ antialias: quality.tier !== "low", powerPreference: "high-performance" }}
     >
       <color attach="background" args={["#03060d"]} />
