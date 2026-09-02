@@ -40,8 +40,8 @@ function Globe({ quality }: { quality: QualityProfile }) {
     const p = scrollState.progress;
     if (group.current) {
       // Continuous slow spin + scroll-driven rotation and tilt
-      group.current.rotation.y += delta * 0.06;
-      const targetY = group.current.rotation.y + p * Math.PI * 1.4;
+      spin.current += delta * 0.06;
+      group.current.rotation.y = spin.current + p * Math.PI * 1.4;
       group.current.rotation.x = THREE.MathUtils.damp(
         group.current.rotation.x,
         -0.18 + Math.sin(p * Math.PI) * 0.42 + scrollState.pointerY * 0.12,
@@ -54,7 +54,6 @@ function Globe({ quality }: { quality: QualityProfile }) {
         4,
         delta,
       );
-      group.current.rotation.y = targetY - p * Math.PI * 1.4 + p * Math.PI * 1.4;
     }
 
     // Travelling pulses along arcs
