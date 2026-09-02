@@ -44,11 +44,11 @@ const categoryIcons: Record<string, typeof Code2> = {
 };
 
 const categoryColors: Record<string, string> = {
-  "Web & App Development": "from-blue-500/20 to-blue-600/5",
-  "Automation Bots": "from-purple-500/20 to-purple-600/5",
-  "Digital Systems & API": "from-green-500/20 to-green-600/5",
-  "Cloud & IT Support": "from-cyan-500/20 to-cyan-600/5",
-  "Project-Based Services": "from-orange-500/20 to-orange-600/5",
+  "Web & App Development": "from-primary/20 to-primary/5",
+  "Automation Bots": "from-primary/16 to-primary/5",
+  "Digital Systems & API": "from-primary/12 to-primary/5",
+  "Cloud & IT Support": "from-primary/10 to-primary/5",
+  "Project-Based Services": "from-primary/8 to-primary/5",
 };
 
 const Portfolio = () => {
@@ -113,7 +113,7 @@ const Portfolio = () => {
             
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground">
               Project yang Telah
-              <span className="text-gradient"> Kami Kerjakan</span>
+               Kami Kerjakan
             </h1>
             
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">

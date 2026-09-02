@@ -58,7 +58,7 @@ export const RelatedServices = ({ currentHref }: RelatedServicesProps) => {
         >
           <p className="text-xs font-semibold tracking-widest text-primary uppercase mb-2">Layanan Lainnya</p>
           <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground">
-            Jelajahi <span className="text-gradient">Layanan Kami</span>
+            Jelajahi Layanan Kami
           </h2>
         </motion.div>
 

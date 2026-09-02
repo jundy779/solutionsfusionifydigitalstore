@@ -113,7 +113,7 @@ const packages = [
       "Integrasi ERP/CRM/payment",
       "Multi-agent handoff ke CS",
       "Analytics & reporting",
-      "SLA support 24/7",
+      "Prioritas support di jam kerja",
     ],
     cta: "Diskusi Kebutuhan",
     highlight: false,
@@ -146,8 +146,8 @@ const faqs = [
 const stats = [
   { value: "24/7", label: "Bot Aktif" },
   { value: "< 1s", label: "Response Time" },
-  { value: "80%", label: "Hemat Biaya CS" },
-  { value: "∞", label: "Chat Bersamaan" },
+  { value: "3–5 hari", label: "Rilis Bot Basic" },
+  { value: "Paralel", label: "Chat Bersamaan" },
 ];
 
 const AutomationBots = () => {
@@ -183,7 +183,7 @@ const AutomationBots = () => {
                 <span className="text-sm font-medium text-muted-foreground">Automation Bots</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                CS Tidur, Bot Tetap <span className="text-gradient">Kerja</span>
+                CS Tidur, Bot Tetap Kerja
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Otomasi WhatsApp & Telegram bisnis Anda agar bisa melayani pelanggan, proses order, dan broadcast promo — 24/7 tanpa perlu tambah staff.
@@ -210,22 +210,22 @@ const AutomationBots = () => {
             >
               <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl max-w-sm mx-auto">
                 {/* Chat header */}
-                <div className="flex items-center gap-3 px-4 py-3 bg-green-600/20 border-b border-border/50">
-                  <div className="w-9 h-9 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-green-400" />
+                <div className="flex items-center gap-3 px-4 py-3 bg-primary/15 border-b border-border/50">
+                  <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">Fusionify Bot</p>
-                    <p className="text-xs text-green-400 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" /> Online</p>
+                    <p className="text-xs text-primary flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" /> Online</p>
                   </div>
                 </div>
                 {/* Messages */}
                 <div className="p-4 space-y-3 bg-card/50 min-h-[200px]">
                   {[
                     { from: "user", text: "Halo, mau pesan produk A" },
-                    { from: "bot", text: "Halo! 👋 Produk A tersedia. Ukuran apa yang kamu mau?" },
+                    { from: "bot", text: "Halo, Produk A tersedia. Ukuran apa yang kamu mau?" },
                     { from: "user", text: "Size M, 2 pcs" },
-                    { from: "bot", text: "✅ Order tercatat!\n• Produk A size M × 2\n• Total: Rp 150.000\n\nKirim bukti transfer ke rekening ini ya 👇" },
+                    { from: "bot", text: "Order tercatat.\n• Produk A size M × 2\n• Total: Rp 150.000\n\nKirim bukti transfer ke rekening berikut." },
                   ].map((msg, i) => (
                     <motion.div
                       key={i}
@@ -292,7 +292,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Solusi <span className="text-gradient">Automation</span> Kami
+              Solusi Automation Kami
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Berbagai jenis bot dan automasi untuk setiap kebutuhan bisnis</p>
           </motion.div>
@@ -316,7 +316,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket <span className="text-gradient">Bot</span>
+              Paket Bot
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Investasi sekali, bot aktif selamanya.</p>
           </motion.div>
@@ -358,7 +358,7 @@ const AutomationBots = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
           <div className="space-y-3">

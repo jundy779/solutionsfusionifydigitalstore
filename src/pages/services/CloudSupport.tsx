@@ -95,11 +95,11 @@ const packages = [
     description: "Infrastruktur enterprise dengan SLA ketat dan support prioritas.",
     features: [
       "Server unlimited",
-      "24/7 NOC monitoring",
+      "Monitoring otomatis + alert WhatsApp",
       "HA / Load balancing setup",
       "Disaster recovery tested",
       "Dedicated DevOps engineer",
-      "SLA 99.9% uptime guarantee",
+      "Target uptime disepakati di kontrak",
     ],
     cta: "Diskusi Kebutuhan",
     highlight: false,
@@ -130,10 +130,10 @@ const faqs = [
 ];
 
 const stats = [
-  { value: "99.9%", label: "Uptime SLA" },
+  { value: "Target", label: "Uptime di Kontrak" },
   { value: "24/7", label: "Monitoring Aktif" },
   { value: "< 15 min", label: "Incident Response" },
-  { value: "100+", label: "Server Dikelola" },
+  { value: "Grafana", label: "Dashboard Monitoring" },
 ];
 
 const CloudSupport = () => {
@@ -169,7 +169,7 @@ const CloudSupport = () => {
                 <span className="text-sm font-medium text-muted-foreground">Cloud & IT Support</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                Server Handal, <span className="text-gradient">Bisnis Tenang</span>
+                Server Handal, Bisnis Tenang
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Serahkan urusan server, hosting, dan infrastruktur IT kepada kami. Anda fokus ke bisnis, kami jaga sistem Anda tetap online 24/7.
@@ -242,7 +242,7 @@ const CloudSupport = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Layanan <span className="text-gradient">Cloud & IT</span>
+              Layanan Cloud & IT
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Solusi infrastruktur lengkap agar bisnis Anda always-on</p>
           </motion.div>
@@ -265,7 +265,7 @@ const CloudSupport = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket <span className="text-gradient">Managed Care</span>
+              Paket Managed Care
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Langganan bulanan yang lebih hemat dari hire IT staff sendiri.</p>
           </motion.div>
@@ -307,7 +307,7 @@ const CloudSupport = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
           <div className="space-y-3">

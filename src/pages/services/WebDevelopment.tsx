@@ -189,7 +189,7 @@ const WebDevelopment = () => {
                 <span className="text-sm font-medium text-muted-foreground">Web & App Development</span>
               </div>
               <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-foreground leading-tight">
-                Website yang <span className="text-gradient">Menjual</span>,<br />Bukan Hanya Tampil
+                Website yang Menjual,<br />Bukan Hanya Tampil
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 Kami bangun produk digital yang convert — dari landing page hingga SaaS platform — dengan teknologi modern, performa tinggi, dan desain yang memukau.
@@ -218,19 +218,19 @@ const WebDevelopment = () => {
                 <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm overflow-hidden shadow-2xl">
                   <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border/50">
                     <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-muted-foreground/40" />
+                    <div className="w-3 h-3 rounded-full bg-primary/60" />
                     <span className="ml-2 text-xs text-muted-foreground font-mono">App.tsx</span>
                   </div>
                   <div className="p-5 font-mono text-sm space-y-1">
                     {[
-                      { indent: 0, code: <><span className="text-primary">export</span> <span className="text-accent">const</span> <span className="text-green-400">App</span> = () =&gt; {"{"}</> },
+                      { indent: 0, code: <><span className="text-primary">export</span> <span className="text-accent">const</span> <span className="text-accent">App</span> = () =&gt; {"{"}</> },
                       { indent: 1, code: <><span className="text-primary">return</span> (</> },
-                      { indent: 2, code: <><span className="text-yellow-400">&lt;div</span> className=<span className="text-green-400">"app"</span><span className="text-yellow-400">&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;Hero</span> <span className="text-accent">animated</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;Features</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 3, code: <><span className="text-yellow-400">&lt;CTA</span> <span className="text-accent">variant</span>=<span className="text-green-400">"premium"</span> <span className="text-yellow-400">/&gt;</span></> },
-                      { indent: 2, code: <><span className="text-yellow-400">&lt;/div&gt;</span></> },
+                      { indent: 2, code: <><span className="text-primary">&lt;div</span> className=<span className="text-accent">"app"</span><span className="text-primary">&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;Hero</span> <span className="text-accent">animated</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;Features</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 3, code: <><span className="text-primary">&lt;CTA</span> <span className="text-accent">variant</span>=<span className="text-accent">"premium"</span> <span className="text-primary">/&gt;</span></> },
+                      { indent: 2, code: <><span className="text-primary">&lt;/div&gt;</span></> },
                       { indent: 1, code: <>);</> },
                       { indent: 0, code: <>{"}"}</> },
                     ].map((line, i) => (
@@ -259,7 +259,7 @@ const WebDevelopment = () => {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-foreground">Ready to Launch</p>
-                      <p className="text-xs text-muted-foreground">Production build ✓</p>
+                      <p className="text-xs text-muted-foreground">Production build siap</p>
                     </div>
                   </div>
                 </motion.div>
@@ -289,7 +289,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Apa yang <span className="text-gradient">Kami Bangun</span>
+              Apa yang Kami Bangun
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Solusi web development lengkap dari frontend hingga backend</p>
           </motion.div>
@@ -320,7 +320,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Tech <span className="text-gradient">Stack</span>
+              Tech Stack
             </h2>
             <p className="text-muted-foreground">Teknologi modern dan battle-tested yang kami gunakan</p>
           </motion.div>
@@ -362,7 +362,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Paket & <span className="text-gradient">Harga</span>
+              Paket & Harga
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Harga transparan tanpa biaya tersembunyi. Semua bisa dikustomisasi sesuai kebutuhan.</p>
           </motion.div>
@@ -416,7 +416,7 @@ const WebDevelopment = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl md:text-4xl mb-4 text-foreground">
-              Pertanyaan <span className="text-gradient">Umum</span>
+              Pertanyaan Umum
             </h2>
           </motion.div>
 

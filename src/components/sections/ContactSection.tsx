@@ -378,12 +378,6 @@ export const ContactSection = () => {
               <p className="text-xs text-muted-foreground leading-relaxed">{t("contact.quickResponseDesc")}</p>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.5 }} className="p-5 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10">
-              <div className="text-center">
-                <motion.div className="text-3xl font-bold text-gradient mb-1">50+</motion.div>
-                <p className="text-xs text-muted-foreground">{t("contact.satisfiedClients")}</p>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>
