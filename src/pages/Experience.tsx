@@ -47,7 +47,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     index: "04",
-    title: "Presisi di setimeter terakhir",
+    title: "Presisi di kilometer terakhir",
     body: "Kilometer pertama mudah. Yang menentukan pengalaman pelanggan adalah seratus meter terakhir menuju pintu.",
     stats: [
       { value: "99.2%", label: "On-time delivery" },
