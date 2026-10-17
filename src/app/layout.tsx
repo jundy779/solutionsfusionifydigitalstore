@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { MotionRoot } from "@/components/motion/MotionRoot";
 import { graph, orgSchema, websiteSchema } from "@/lib/schema";
 import { ogImage, site } from "@/content/site";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="isi">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <MotionRoot />
         <JsonLd data={graph(orgSchema(), websiteSchema())} />
       </body>
     </html>

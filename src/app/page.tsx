@@ -4,6 +4,9 @@ import { FlowDiagram } from "@/components/FlowDiagram";
 import { ArrowRight, Chat, Check, FileText, Handover, Key, Mail, Target } from "@/components/Icons";
 import { AiDemo, HeroStage, ServiceVisual } from "@/components/Mockups";
 import { JsonLd } from "@/components/JsonLd";
+import { HeroScene } from "@/components/motion/HeroScene";
+import { SplitWords } from "@/components/motion/SplitWords";
+import { Tilt } from "@/components/motion/Tilt";
 import { ProjectCover } from "@/components/ProjectCover";
 import { faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { faqs, process } from "@/content/company";
@@ -51,17 +54,20 @@ export default function Home() {
   return (
     <>
       <section className="hero">
+        <HeroScene />
         <div className="wrap hero-grid">
           <div>
-            <span className="hero-pill">
+            <span className="hero-pill enter" style={{ animationDelay: "0.05s" }}>
               <b>Sejak 2025</b> AI workflow kini bagian dari layanan kami
             </span>
-            <h1 className="display">Punya kebutuhan digital? Kita bantu bikin sampai jalan.</h1>
-            <p className="lead">
+            <h1 className="display">
+              <SplitWords text="Punya kebutuhan digital? Kita bantu bikin sampai jalan." start={0.15} step={0.055} />
+            </h1>
+            <p className="lead enter" style={{ animationDelay: "0.65s" }}>
               Website, automation, bot, sistem internal, integrasi API, sampai AI workflow. Kami
               mengubah kebutuhan jadi solusi yang benar-benar dipakai setiap hari.
             </p>
-            <div className="actions">
+            <div className="actions enter" style={{ animationDelay: "0.8s" }}>
               <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
                 <Chat /> Diskusikan kebutuhan
               </a>
@@ -69,7 +75,7 @@ export default function Home() {
                 Lihat project kami
               </Link>
             </div>
-            <div className="hero-proof">
+            <div className="hero-proof enter" style={{ animationDelay: "0.95s" }}>
               <span>
                 <Check /> Tidak perlu brief teknis
               </span>
@@ -81,7 +87,11 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <HeroStage />
+          <div className="enter-stage">
+            <Tilt>
+              <HeroStage />
+            </Tilt>
+          </div>
         </div>
       </section>
 
@@ -105,7 +115,7 @@ export default function Home() {
       <section className="section" id="layanan" aria-labelledby="h-layanan">
         <div className="wrap">
           <div className="head-row">
-            <div className="section-head">
+            <div className="section-head" data-reveal>
               <h2 id="h-layanan">Satu tim untuk website, automation, sampai AI.</h2>
               <p>Kebanyakan kebutuhan nyata menyentuh lebih dari satu layanan. Kami kerjakan rangkaiannya sampai tersambung.</p>
             </div>
@@ -115,7 +125,7 @@ export default function Home() {
           </div>
           <div className="bento">
             {services.map((s) => (
-              <Link key={s.slug} href={`/layanan/${s.slug}/`} className={`tile ${tileClass[s.slug]}`}>
+              <Link key={s.slug} href={`/layanan/${s.slug}/`} className={`tile ${tileClass[s.slug]}`} data-spot data-reveal>
                 {s.since && <span className="tile-tag">Sejak {s.since}</span>}
                 <div className="tile-body">
                   <h3>{s.name}</h3>
@@ -135,7 +145,7 @@ export default function Home() {
 
       <section className="section" style={{ paddingTop: 0 }} aria-labelledby="h-siapa">
         <div className="wrap switcher">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <h2 id="h-siapa">Datang dari mana pun, alurnya sama: pahami dulu, baru bangun.</h2>
             <p>
               UMKM, sekolah, startup, komunitas, atau developer yang lagi buntu. Pilih yang paling
@@ -147,14 +157,16 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <FlowDiagram />
+          <div data-reveal>
+            <FlowDiagram />
+          </div>
         </div>
       </section>
 
       <section className="section work-band" aria-labelledby="h-work">
         <div className="wrap">
           <div className="head-row">
-            <div className="section-head">
+            <div className="section-head" data-reveal>
               <h2 id="h-work">Project yang sudah berjalan.</h2>
               <p>Project client kami tandai terpisah dari produk yang kami bangun sendiri di ekosistem FUSIONIFY.</p>
             </div>
@@ -163,7 +175,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <Link className="showcase" href={`/portfolio/${featured.slug}/`}>
+          <Link className="showcase" href={`/portfolio/${featured.slug}/`} data-spot data-reveal>
             <ProjectCover project={featured} />
             <div className="showcase-body">
               <div className="chips">
@@ -184,8 +196,8 @@ export default function Home() {
 
           <ul className="work-grid">
             {rest.map((p) => (
-              <li key={p.slug}>
-                <Link className="work-card" href={`/portfolio/${p.slug}/`}>
+              <li key={p.slug} data-reveal>
+                <Link className="work-card" href={`/portfolio/${p.slug}/`} data-spot>
                   <ProjectCover project={p} />
                   <div className="work-card-body">
                     <span className="chip own">Produk FUSIONIFY</span>
@@ -201,11 +213,11 @@ export default function Home() {
 
       <section className="section" id="cara-kerja" aria-labelledby="h-cara">
         <div className="wrap">
-          <div className="section-head center">
+          <div className="section-head center" data-reveal>
             <h2 id="h-cara">Dari cerita pertama sampai sistem diserahkan.</h2>
             <p>Tujuh tahap yang sama untuk project kecil maupun besar. Anda selalu tahu sedang di tahap mana.</p>
           </div>
-          <ol className="steps">
+          <ol className="steps" data-reveal>
             {process.map((step) => (
               <li key={step.title}>
                 <div>
@@ -221,7 +233,7 @@ export default function Home() {
       <section className="section" style={{ paddingTop: 0 }} aria-labelledby="h-why">
         <div className="wrap why">
           <div>
-            <div className="section-head">
+            <div className="section-head" data-reveal>
               <h2 id="h-why">Tim kecil yang sanggup mengerjakan project serius.</h2>
               <p>
                 Tanpa berpura-pura jadi konsultan raksasa. Kalau kebutuhan Anda di luar kapasitas
@@ -229,19 +241,19 @@ export default function Home() {
               </p>
             </div>
             <div className="facts">
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <b>2022</b>
                 <span>Mulai berjalan, {site.since}</span>
               </div>
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <b>7</b>
                 <span>Kelompok layanan, dari web sampai AI</span>
               </div>
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <b>2025</b>
                 <span>Mulai mengerjakan AI workflow</span>
               </div>
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <b>Milik Anda</b>
                 <span>Domain, akun, dan aset atas nama client</span>
               </div>
@@ -254,7 +266,7 @@ export default function Home() {
           </div>
           <div className="pillars">
             {pillars.map(({ icon: Icon, title, body }) => (
-              <div className="pillar" key={title}>
+              <div className="pillar" key={title} data-reveal>
                 <span className="pillar-icon">
                   <Icon />
                 </span>
@@ -270,7 +282,7 @@ export default function Home() {
 
       <section className="section" style={{ paddingTop: 0 }} aria-labelledby="h-ai">
         <div className="wrap">
-          <div className="ai-card">
+          <div className="ai-card" data-reveal>
             <div className="ai-copy">
               <span className="kicker">AI Solutions, sejak 2025</span>
               <h2 id="h-ai">AI yang masuk ke workflow, bukan cuma chatbox.</h2>
@@ -300,7 +312,7 @@ export default function Home() {
 
       <section className="section" style={{ paddingTop: 0 }} id="faq" aria-labelledby="h-faq">
         <div className="wrap faq-layout">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <h2 id="h-faq">Pertanyaan yang sering muncul.</h2>
             <p>
               <Link className="link" href="/faq/">
@@ -325,7 +337,7 @@ export default function Home() {
 
       <section className="section" style={{ paddingTop: 0, paddingBottom: 0 }} id="kontak" aria-labelledby="h-kontak">
         <div className="wrap">
-          <div className="cta">
+          <div className="cta" data-reveal>
             <div>
               <h2 id="h-kontak">Ada pekerjaan digital yang belum selesai?</h2>
               <p className="lead">

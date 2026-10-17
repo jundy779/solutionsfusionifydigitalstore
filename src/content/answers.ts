@@ -299,6 +299,7 @@ export const getAudiencePage = (slug: string) => audiencePages.find((a) => a.slu
 // Short, quotable facts for the About page and llms.txt.
 export const keyFacts: { label: string; value: string }[] = [
   { label: "Nama", value: "FUSIONIFY SOLUTIONS (Fusionify Solutions)" },
+  { label: "Badan hukum", value: "PT Fusionify Digital Store" },
   { label: "Induk", value: "FUSIONIFY, lini layanan teknologi" },
   { label: "Mulai berjalan", value: "22 Desember 2022" },
   { label: "Layanan AI", value: "Sejak 2025" },

@@ -23,7 +23,7 @@ export function Footer() {
               <a href={site.masterBrand} target="_blank" rel="noopener noreferrer">
                 FUSIONIFY
               </a>
-              . Membantu kebutuhan digital sejak {site.since}.
+              , dikelola oleh {site.legalName}. Membantu kebutuhan digital sejak {site.since}.
             </p>
           </div>
 
@@ -90,9 +90,9 @@ export function Footer() {
 
         <div className="footer-base">
           <span>
-            © {year} {site.name}
+            © {year} {site.legalName}. Hak cipta dilindungi.
           </span>
-          <span>Bagian dari ekosistem FUSIONIFY</span>
+          <span>{site.name} adalah lini layanan teknologi dari FUSIONIFY</span>
         </div>
       </div>
     </footer>

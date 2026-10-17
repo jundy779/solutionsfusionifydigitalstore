@@ -22,7 +22,8 @@ export default function AboutPage() {
         <div className="wrap">
           <h1 className="display">Dari ide, masalah, sampai solusi yang bisa dipakai.</h1>
           <p className="lead">
-            Fusionify Solutions adalah lini layanan teknologi dari FUSIONIFY. Kami membantu individu,
+            Fusionify Solutions adalah lini layanan teknologi dari FUSIONIFY, dikelola oleh{" "}
+            {site.legalName}. Kami membantu individu,
             UMKM, sekolah, komunitas, organisasi, dan bisnis menyelesaikan kebutuhan digital secara
             praktis.
           </p>

@@ -25,6 +25,9 @@ export default function PrivacyPage() {
             </div>
             <div className="prose">
             <p>
+              Website ini dikelola oleh {site.legalName} untuk lini layanan {site.name}.
+            </p>
+            <p>
               Form di website ini tidak mengirim data ke server kami. Saat Anda menekan tombol kirim,
               isi form dirangkai menjadi pesan lalu dibuka di WhatsApp atau aplikasi email Anda
               sendiri. Anda yang memutuskan apakah pesan itu dikirim.

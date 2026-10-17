@@ -1,6 +1,7 @@
 export const site = {
   name: "FUSIONIFY SOLUTIONS",
   shortName: "Fusionify Solutions",
+  legalName: "PT Fusionify Digital Store",
   url: "https://solutions.fusionify.id",
   tagline: "Solusi teknologi praktis untuk kebutuhan nyata.",
   description:

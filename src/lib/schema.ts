@@ -18,6 +18,7 @@ export function orgSchema() {
     "@type": ["Organization", "ProfessionalService"],
     "@id": ids.org,
     name: site.name,
+    legalName: site.legalName,
     alternateName: ["Fusionify Solutions", "Fusionify"],
     url: site.url,
     logo: { "@type": "ImageObject", url: abs("/images/fusionify-mark.png"), width: 256, height: 256 },
@@ -29,7 +30,13 @@ export function orgSchema() {
     telephone: "+62-831-1138-0628",
     areaServed: { "@type": "Country", name: "Indonesia" },
     knowsLanguage: ["id", "en"],
-    parentOrganization: { "@type": "Organization", "@id": ids.parent, name: "FUSIONIFY", url: site.masterBrand },
+    parentOrganization: {
+      "@type": "Organization",
+      "@id": ids.parent,
+      name: "FUSIONIFY",
+      legalName: site.legalName,
+      url: site.masterBrand,
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",

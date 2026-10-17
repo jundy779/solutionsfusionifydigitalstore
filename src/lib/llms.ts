@@ -51,7 +51,7 @@ export function buildLlmsFullTxt() {
   const out: string[] = [];
   const push = (...l: string[]) => out.push(...l);
 
-  push(`# ${site.name}`, "", `> ${site.description}`, "", `Sumber resmi: ${site.url}`, "");
+  push(`# ${site.name}`, "", `> ${site.description}`, "", `Dikelola oleh: ${site.legalName}`, `Sumber resmi: ${site.url}`, "");
   push("## Fakta singkat", "", ...keyFacts.map((f) => `- ${f.label}: ${f.value}`), "");
 
   push("## Tentang", "");
