@@ -4,12 +4,17 @@ export const site = {
   url: "https://solutions.fusionify.id",
   tagline: "Solusi teknologi praktis untuk kebutuhan nyata.",
   description:
-    "Fusionify Solutions membantu UMKM, sekolah, startup, komunitas, dan individu membangun website, automation, bot, integrasi API, sistem internal, dan AI workflow yang benar-benar bisa dipakai.",
+    "Website, automation, bot, integrasi API, sistem internal, dan AI workflow untuk UMKM, sekolah, startup, dan komunitas. Dibangun sampai benar-benar dipakai.",
   since: "22 Desember 2022",
   email: "hello@fusionify.id",
   whatsapp: "6283111380628",
   whatsappDisplay: "0831-1138-0628",
   masterBrand: "https://fusionify.id",
+  // Profil resmi yang mewakili Fusionify Solutions (Instagram, LinkedIn,
+  // Google Business Profile, GitHub organisasi, dll). Diisi URL lengkap.
+  // Ini sinyal penting untuk Entity SEO: Google dan AI mencocokkan
+  // website dengan profil-profil ini sebagai satu entitas.
+  sameAs: [] as string[],
 };
 
 export const ogImage = {

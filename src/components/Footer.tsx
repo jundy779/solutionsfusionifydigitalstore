@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { audiencePages } from "@/content/answers";
 import { services } from "@/content/services";
 import { site, waLink } from "@/content/site";
 
@@ -38,6 +39,17 @@ export function Footer() {
           </div>
 
           <div>
+            <h2>Solusi untuk</h2>
+            <ul>
+              {audiencePages.map((a) => (
+                <li key={a.slug}>
+                  <Link href={`/untuk/${a.slug}/`}>{a.title.replace(/^.*untuk /i, "").replace(/^./, (c) => c.toUpperCase())}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
             <h2>Fusionify Solutions</h2>
             <ul>
               <li>
@@ -50,7 +62,7 @@ export function Footer() {
                 <Link href="/#cara-kerja">Cara kerja</Link>
               </li>
               <li>
-                <Link href="/#faq">FAQ</Link>
+                <Link href="/faq/">FAQ</Link>
               </li>
               <li>
                 <Link href="/privasi/">Privasi</Link>

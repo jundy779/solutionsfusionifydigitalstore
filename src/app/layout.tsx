@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { graph, orgSchema, websiteSchema } from "@/lib/schema";
 import { ogImage, site } from "@/content/site";
 import "./globals.css";
 
@@ -25,35 +27,16 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: [ogImage.url] },
   formatDetection: { telephone: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  category: "technology",
 };
 
 export const viewport: Viewport = {
   themeColor: "#f6f7f5",
-};
-
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${site.url}/#org`,
-  name: site.name,
-  alternateName: "Fusionify Solutions",
-  url: site.url,
-  logo: `${site.url}/images/fusionify-mark.png`,
-  description: site.description,
-  email: site.email,
-  telephone: "+62 831-1138-0628",
-  foundingDate: "2022-12-22",
-  areaServed: { "@type": "Country", name: "Indonesia" },
-  parentOrganization: { "@type": "Organization", name: "FUSIONIFY", url: site.masterBrand },
-  knowsAbout: [
-    "Web development",
-    "Automation",
-    "Telegram bot",
-    "WhatsApp bot",
-    "API integration",
-    "AI integration",
-    "Cloud deployment",
-  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -67,10 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="isi">{children}</main>
         <Footer />
         <WhatsAppFloat />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
+        <JsonLd data={graph(orgSchema(), websiteSchema())} />
       </body>
     </html>
   );

@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chat } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { serviceExtras } from "@/content/answers";
+import { services } from "@/content/services";
+import { breadcrumbSchema, graph, projectSchema, webPageSchema } from "@/lib/schema";
 import { getProject, projects } from "@/content/projects";
 import { ogImage, waLink } from "@/content/site";
 
@@ -38,14 +42,16 @@ export default async function ProjectPage({ params }: Props) {
   const p = getProject(slug);
   if (!p) notFound();
   const others = projects.filter((o) => o.slug !== p.slug);
+  const relatedServices = services.filter((sv) => serviceExtras[sv.slug].projects.includes(p.slug));
+  const path = `/portfolio/${p.slug}/`;
 
   return (
     <>
       <header className="page-hero">
         <div className="wrap">
-          <p className="crumb">
+          <nav className="crumb" aria-label="Breadcrumb">
             <Link href="/portfolio/">Portfolio</Link> / {p.name}
-          </p>
+          </nav>
           <h1 className="display">{p.name}</h1>
           <p className="lead">{p.summary}</p>
         </div>
@@ -119,6 +125,26 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
+      {relatedServices.length > 0 && (
+        <section className="section" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="section-head">
+              <h2>Layanan yang dipakai</h2>
+            </div>
+            <ul className="related">
+              {relatedServices.map((sv) => (
+                <li key={sv.slug}>
+                  <Link href={`/layanan/${sv.slug}/`}>
+                    {sv.name}
+                    <span>{sv.summary}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="section-head">
@@ -136,6 +162,16 @@ export default async function ProjectPage({ params }: Props) {
           </ul>
         </div>
       </section>
+      <JsonLd
+        data={graph(
+          webPageSchema({ path, name: p.name, description: p.summary }),
+          projectSchema(p),
+          breadcrumbSchema([
+            { name: "Portfolio", path: "/portfolio/" },
+            { name: p.name, path },
+          ]),
+        )}
+      />
     </>
   );
 }

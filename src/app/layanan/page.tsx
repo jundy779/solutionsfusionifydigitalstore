@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Chat } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
 import { ServiceVisual } from "@/components/Mockups";
+import { abs, breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import { services } from "@/content/services";
 import { ogImage, waLink } from "@/content/site";
 
@@ -61,6 +63,23 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+      <JsonLd
+        data={graph(
+          {
+            ...webPageSchema({ path: "/layanan/", name: "Layanan Fusionify Solutions", description: "Tujuh layanan teknologi Fusionify Solutions.", type: "CollectionPage" }),
+            mainEntity: {
+              "@type": "ItemList",
+              itemListElement: services.map((s, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                url: abs(`/layanan/${s.slug}/`),
+                name: s.name,
+              })),
+            },
+          },
+          breadcrumbSchema([{ name: "Layanan", path: "/layanan/" }]),
+        )}
+      />
     </>
   );
 }

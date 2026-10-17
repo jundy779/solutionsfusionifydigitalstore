@@ -3,7 +3,9 @@ import { ContactForm } from "@/components/ContactForm";
 import { FlowDiagram } from "@/components/FlowDiagram";
 import { ArrowRight, Chat, Check, FileText, Handover, Key, Mail, Target } from "@/components/Icons";
 import { AiDemo, HeroStage, ServiceVisual } from "@/components/Mockups";
+import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { faqs, process } from "@/content/company";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
@@ -46,16 +48,6 @@ const homeFaqs = [0, 2, 4, 6, 7, 8].map((i) => faqs[i]);
 
 export default function Home() {
   const [featured, ...rest] = projects;
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
     <>
       <section className="hero">
@@ -311,9 +303,12 @@ export default function Home() {
           <div className="section-head">
             <h2 id="h-faq">Pertanyaan yang sering muncul.</h2>
             <p>
-              Belum terjawab?{" "}
+              <Link className="link" href="/faq/">
+                Lihat semua FAQ
+              </Link>{" "}
+              atau{" "}
               <a className="link" href={waLink("Halo Fusionify Solutions, saya mau tanya dulu.")} target="_blank" rel="noopener noreferrer">
-                Tanya langsung lewat WhatsApp
+                tanya langsung lewat WhatsApp
               </a>
             </p>
           </div>
@@ -363,7 +358,12 @@ export default function Home() {
         </div>
       </section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <JsonLd
+        data={graph(
+          webPageSchema({ path: "/", name: site.name, description: site.description }),
+          faqSchema(homeFaqs, "/"),
+        )}
+      />
     </>
   );
 }

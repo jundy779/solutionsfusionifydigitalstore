@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { audiences } from "@/content/company";
 
@@ -82,7 +83,10 @@ export function FlowDiagram() {
           </ol>
         </div>
         <p className="flow-caption">
-          <strong>{current.name}.</strong> {current.description}
+          <strong>{current.name}.</strong> {current.description}{" "}
+          <Link className="link" href={`/untuk/${current.id}/`}>
+            Selengkapnya
+          </Link>
         </p>
       </div>
     </div>

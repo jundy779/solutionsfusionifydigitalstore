@@ -39,11 +39,17 @@ Semua teks ada di `src/content/`, tidak perlu menyentuh komponen:
 | `site.ts` | Nama, domain, email, nomor WhatsApp |
 | `services.ts` | Tujuh layanan beserta cakupannya |
 | `projects.ts` | Portfolio dan case study |
+| `answers.ts` | Jawaban langsung per layanan, FAQ per layanan, halaman per audiens, fakta singkat |
 | `company.ts` | Audiens, cara kerja, prinsip, batasan, model kerja sama, sejarah, teknologi, FAQ |
 
 Menambah project baru cukup tambahkan objek di `projects.ts`. Halaman detail,
 sitemap, dan daftar portfolio ikut terbuat otomatis. Gambar taruh di
 `public/images/` dalam format `.webp`.
+
+## SEO dan AI search
+
+SEO teknis, structured data, `llms.txt`, dan halaman untuk AI search sudah
+terpasang. Detail dan langkah lanjutan di luar kode ada di `SEO-AI-GUIDE.md`.
 
 ## Struktur
 

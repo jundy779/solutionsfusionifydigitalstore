@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { abs, breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import { projects } from "@/content/projects";
 import { ogImage } from "@/content/site";
 
@@ -68,6 +70,23 @@ export default function PortfolioPage() {
           </ul>
         </div>
       </section>
+      <JsonLd
+        data={graph(
+          {
+            ...webPageSchema({ path: "/portfolio/", name: "Portfolio Fusionify Solutions", description: "Project client dan produk yang dibangun Fusionify Solutions.", type: "CollectionPage" }),
+            mainEntity: {
+              "@type": "ItemList",
+              itemListElement: projects.map((p, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                url: abs(`/portfolio/${p.slug}/`),
+                name: p.name,
+              })),
+            },
+          },
+          breadcrumbSchema([{ name: "Portfolio", path: "/portfolio/" }]),
+        )}
+      />
     </>
   );
 }

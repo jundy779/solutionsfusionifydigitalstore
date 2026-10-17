@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { Chat, Mail } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import { ogImage, site, waLink } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -45,6 +47,12 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </div>
+      <JsonLd
+        data={graph(
+          webPageSchema({ path: "/kontak/", name: "Kontak Fusionify Solutions", description: "Hubungi Fusionify Solutions lewat WhatsApp atau email.", type: "ContactPage" }),
+          breadcrumbSchema([{ name: "Kontak", path: "/kontak/" }]),
+        )}
+      />
     </section>
   );
 }

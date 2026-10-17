@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Chat, XCircle } from "@/components/Icons";
+import { JsonLd } from "@/components/JsonLd";
+import { keyFacts } from "@/content/answers";
+import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import { boundaries, capabilities, engagements, history, principles } from "@/content/company";
 import { ogImage, site, waLink } from "@/content/site";
 
@@ -56,6 +59,25 @@ export default function AboutPage() {
                 project.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }} id="fakta">
+        <div className="wrap">
+          <div className="panel panel-grid">
+            <div>
+              <h2>Fakta singkat</h2>
+              <p>Ringkasan resmi tentang Fusionify Solutions.</p>
+            </div>
+            <dl className="facts-list">
+              {keyFacts.map((f) => (
+                <div key={f.label}>
+                  <dt>{f.label}</dt>
+                  <dd>{f.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
@@ -164,6 +186,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <JsonLd
+        data={graph(
+          webPageSchema({ path: "/tentang/", name: "Tentang Fusionify Solutions", description: "Profil, sejarah, prinsip kerja, dan batasan Fusionify Solutions.", type: "AboutPage" }),
+          breadcrumbSchema([{ name: "Tentang", path: "/tentang/" }]),
+        )}
+      />
     </>
   );
 }
