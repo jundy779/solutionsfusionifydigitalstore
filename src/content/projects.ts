@@ -6,6 +6,8 @@ export type Project = {
   status?: string;
   location?: string;
   image?: { src: string; alt: string; width: number; height: number };
+  domain?: string;
+  cover?: "chat" | "people" | "warehouse" | "store";
   summary: string;
   problem: string;
   solution: string;
@@ -38,6 +40,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fusionify-bot",
+    cover: "chat",
     name: "FUSIONIFY BOT",
     category: "Automation, Commerce",
     origin: "fusionify",
@@ -50,6 +53,7 @@ export const projects: Project[] = [
   },
   {
     slug: "studydate",
+    cover: "people",
     name: "StudyDate.id",
     category: "Platform Development",
     origin: "fusionify",
@@ -62,6 +66,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lumbung",
+    cover: "warehouse",
     name: "Lumbung",
     category: "Eksperimen, Interactive System",
     origin: "fusionify",
@@ -75,6 +80,7 @@ export const projects: Project[] = [
   },
   {
     slug: "premiumify",
+    cover: "store",
     name: "Premiumify",
     category: "Digital Commerce",
     origin: "fusionify",

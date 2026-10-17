@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight, Chat } from "@/components/Icons";
+import { ServiceVisual } from "@/components/Mockups";
 import { services } from "@/content/services";
 import { ogImage, waLink } from "@/content/site";
 
@@ -11,39 +13,51 @@ export const metadata: Metadata = {
   openGraph: { title: "Layanan | FUSIONIFY SOLUTIONS", url: "/layanan/", images: [ogImage] },
 };
 
+const tileClass: Record<string, string> = {
+  "web-development": "t-web",
+  "automation-bots": "t-auto",
+  "ai-solutions": "t-ai",
+  "digital-systems": "t-sys",
+  "cloud-deployment": "t-cloud",
+  "project-assistance": "t-assist",
+  "consulting-documentation": "t-consult",
+};
+
 export default function ServicesPage() {
   return (
     <>
-      <header className="page-head">
+      <header className="page-hero">
         <div className="wrap">
-          <h1 className="display">Layanan</h1>
+          <h1 className="display">Tujuh layanan yang saling bersambung.</h1>
           <p className="lead">
-            Tujuh kelompok pekerjaan yang sering saling bersambung. Website butuh form, form butuh
-            database, database butuh notifikasi. Kami mengerjakan rangkaian itu sampai jalan.
+            Website butuh form, form butuh database, database butuh notifikasi. Kami mengerjakan
+            rangkaian itu sampai benar-benar jalan.
           </p>
+          <div className="actions">
+            <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <Chat /> Diskusikan kebutuhan
+            </a>
+          </div>
         </div>
       </header>
-      <section className="section">
+      <section className="section" style={{ paddingTop: "1rem" }}>
         <div className="wrap">
-          <ul className="service-index">
+          <div className="bento">
             {services.map((s) => (
-              <li key={s.slug}>
-                <Link className="service-row" href={`/layanan/${s.slug}/`}>
-                  <h2 style={{ fontStretch: "112%", fontSize: "var(--t-md)" }}>{s.name}</h2>
+              <Link key={s.slug} href={`/layanan/${s.slug}/`} className={`tile ${tileClass[s.slug]}`}>
+                {s.since && <span className="tile-tag">Sejak {s.since}</span>}
+                <div className="tile-body">
+                  <h2 style={{ fontSize: "var(--t-lg)", fontStretch: "108%" }}>{s.name}</h2>
                   <p>{s.summary}</p>
-                  {s.since ? <span className="tag">Sejak {s.since}</span> : <span className="open">Detail</span>}
-                </Link>
-              </li>
+                  <span className="tile-more">
+                    Lihat cakupan <ArrowRight />
+                  </span>
+                </div>
+                <div className="tile-visual">
+                  <ServiceVisual slug={s.slug} />
+                </div>
+              </Link>
             ))}
-          </ul>
-          <div className="callout">
-            <p>
-              Kebutuhan Anda tidak cocok dengan satu kategori pun? Itu wajar.{" "}
-              <a href={waLink()} target="_blank" rel="noopener noreferrer">
-                Ceritakan saja dulu
-              </a>
-              , nanti kami bantu petakan.
-            </p>
           </div>
         </div>
       </section>

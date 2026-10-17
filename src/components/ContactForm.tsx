@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { services } from "@/content/services";
 import { site, waLink } from "@/content/site";
+import { Chat } from "./Icons";
 
 type Errors = Partial<Record<"name" | "story", string>>;
 
@@ -54,27 +55,29 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
       onSubmit={onSubmit}
       onChange={(e) => refreshMail(e.currentTarget)}
     >
-      <div className="field">
-        <label htmlFor="f-name">Nama</label>
-        <input
-          id="f-name"
-          name="name"
-          autoComplete="name"
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? "e-name" : undefined}
-        />
-        {errors.name && (
-          <p className="field-error" id="e-name">
-            {errors.name}
-          </p>
-        )}
-      </div>
+      <div className="form-row">
+        <div className="field">
+          <label htmlFor="f-name">Nama</label>
+          <input
+            id="f-name"
+            name="name"
+            autoComplete="name"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "e-name" : undefined}
+          />
+          {errors.name && (
+            <p className="field-error" id="e-name">
+              {errors.name}
+            </p>
+          )}
+        </div>
 
-      <div className="field">
-        <label htmlFor="f-org">
-          Bisnis, sekolah, atau organisasi <span className="hint">(opsional)</span>
-        </label>
-        <input id="f-org" name="org" autoComplete="organization" />
+        <div className="field">
+          <label htmlFor="f-org">
+            Usaha atau instansi <span className="hint">(opsional)</span>
+          </label>
+          <input id="f-org" name="org" autoComplete="organization" />
+        </div>
       </div>
 
       <div className="field">
@@ -111,9 +114,11 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
 
       <div className="form-foot">
         <button type="submit" className="btn btn-primary">
-          Kirim lewat WhatsApp
+          <Chat /> Kirim lewat WhatsApp
         </button>
-        <a href={mailHref}>atau kirim lewat email</a>
+        <a className="link" href={mailHref}>
+          atau kirim lewat email
+        </a>
       </div>
       <p className="form-note">
         Pesan dibuka di WhatsApp atau aplikasi email Anda. Website ini tidak menyimpan isi form.

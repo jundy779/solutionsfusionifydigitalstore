@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { ogImage } from "@/content/site";
-import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "@/components/Icons";
+import { ProjectCover } from "@/components/ProjectCover";
 import { projects } from "@/content/projects";
+import { ogImage } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -18,63 +19,49 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <header className="page-head">
+      <header className="page-hero">
         <div className="wrap">
-          <h1 className="display">Portfolio</h1>
+          <h1 className="display">Project yang sudah berjalan.</h1>
           <p className="lead">
-            Setiap project ditulis dengan format yang sama: masalah, solusi, dan scope. Project
-            client dan produk ekosistem FUSIONIFY kami pisahkan supaya jelas siapa pemiliknya.
+            Setiap project ditulis dengan format yang sama: masalah, solusi, dan scope. Project client
+            dan produk ekosistem FUSIONIFY kami pisahkan supaya jelas siapa pemiliknya.
           </p>
         </div>
       </header>
 
-      <section className="section">
+      <section className="section" style={{ paddingTop: "1rem" }}>
         <div className="wrap">
-          <h2 style={{ fontSize: "var(--t-lg)", marginBottom: "1.75rem" }}>Project client</h2>
-          {clients.map((p) => (
-            <Link key={p.slug} className="case-feature" href={`/portfolio/${p.slug}/`}>
-              {p.image && (
-                <div className="case-shot">
-                  <Image
-                    src={p.image.src}
-                    alt={p.image.alt}
-                    width={p.image.width}
-                    height={p.image.height}
-                    sizes="(max-width: 860px) 100vw, 55vw"
-                    priority
-                  />
+          {clients.map((p, i) => (
+            <Link key={p.slug} className="showcase" href={`/portfolio/${p.slug}/`}>
+              <ProjectCover project={p} priority={i === 0} />
+              <div className="showcase-body">
+                <div className="chips">
+                  <span className="chip client">Project client</span>
+                  {p.status && <span className="chip live">{p.status}</span>}
                 </div>
-              )}
-              <div>
-                <div className="case-meta">
-                  <span>{p.category}</span>
-                  {p.status && <span className="live">{p.status}</span>}
-                </div>
-                <h3>{p.name}</h3>
+                <h2 style={{ fontSize: "var(--t-xl)", fontStretch: "112%", marginTop: "1rem" }}>{p.name}</h2>
                 <p>{p.summary}</p>
+                <span className="tile-more">
+                  Baca case study <ArrowRight />
+                </span>
               </div>
             </Link>
           ))}
-        </div>
-      </section>
 
-      <section className="section">
-        <div className="wrap">
-          <h2 style={{ fontSize: "var(--t-lg)" }}>Produk dan eksperimen FUSIONIFY</h2>
-          <p className="muted" style={{ marginTop: "0.6rem", maxWidth: "38em" }}>
-            Dibangun di dalam ekosistem FUSIONIFY. Ini tempat kami menguji pendekatan sebelum
-            dipakai di project client.
-          </p>
-          <ul className="case-grid">
+          <div className="section-head" style={{ marginTop: "clamp(4rem, 3rem + 4vw, 6rem)", marginBottom: "2rem" }}>
+            <h2>Produk dan eksperimen FUSIONIFY</h2>
+            <p>Dibangun di dalam ekosistem FUSIONIFY. Di sini kami menguji pendekatan sebelum dipakai di project client.</p>
+          </div>
+          <ul className="work-grid">
             {internal.map((p) => (
               <li key={p.slug}>
-                <Link className="case-tile" href={`/portfolio/${p.slug}/`}>
-                  <div className="case-meta">
-                    <span>{p.category}</span>
+                <Link className="work-card" href={`/portfolio/${p.slug}/`}>
+                  <ProjectCover project={p} />
+                  <div className="work-card-body">
+                    <span className="chip own">{p.category}</span>
+                    <h3>{p.name}</h3>
+                    <p>{p.summary}</p>
                   </div>
-                  <h3>{p.name}</h3>
-                  <p>{p.summary}</p>
-                  <p className="scope">{p.scope.join(", ")}</p>
                 </Link>
               </li>
             ))}

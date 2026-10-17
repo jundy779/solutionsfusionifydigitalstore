@@ -9,7 +9,7 @@ export default function NotFound() {
         <Link className="btn btn-primary" href="/">
           Ke beranda
         </Link>
-        <Link className="btn btn-ghost" href="/layanan/">
+        <Link className="btn btn-secondary" href="/layanan/">
           Lihat layanan
         </Link>
       </div>

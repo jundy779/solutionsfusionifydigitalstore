@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Chat } from "@/components/Icons";
+import { ProjectCover } from "@/components/ProjectCover";
 import { getProject, projects } from "@/content/projects";
 import { ogImage, waLink } from "@/content/site";
 
@@ -25,7 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: p.name,
       description: p.summary,
       url: `/portfolio/${p.slug}/`,
-      ...(p.image ? { images: [{ url: p.image.src.replace(".webp", "-og.jpg"), width: 1200, height: 630 }] } : { images: [ogImage] }),
+      ...(p.image
+        ? { images: [{ url: p.image.src.replace(".webp", "-og.jpg"), width: 1200, height: 630 }] }
+        : { images: [ogImage] }),
     },
   };
 }
@@ -38,7 +41,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <header className="page-head">
+      <header className="page-hero">
         <div className="wrap">
           <p className="crumb">
             <Link href="/portfolio/">Portfolio</Link> / {p.name}
@@ -48,20 +51,11 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </header>
 
-      <section className="section" style={{ paddingTop: "clamp(2rem, 1rem + 3vw, 3.5rem)" }}>
-        <div className="wrap">
-          {p.image && (
-            <div className="case-shot case-hero-shot">
-              <Image
-                src={p.image.src}
-                alt={p.image.alt}
-                width={p.image.width}
-                height={p.image.height}
-                sizes="100vw"
-                priority
-              />
-            </div>
-          )}
+      <section className="section" style={{ paddingTop: "0.5rem" }}>
+        <div className="wrap" style={{ display: "grid", gap: "1rem" }}>
+          <div className="case-shot">
+            <ProjectCover project={p} priority />
+          </div>
 
           <dl className="case-facts">
             <div>
@@ -86,35 +80,38 @@ export default async function ProjectPage({ params }: Props) {
             )}
           </dl>
 
-          <div className="split">
-            <div className="split-head">
-              <h2 style={{ fontSize: "var(--t-lg)" }}>Ringkasan project</h2>
+          <div className="ps-grid">
+            <div className="panel">
+              <span className="ps-label">Masalah</span>
+              <h2>Yang perlu diselesaikan</h2>
+              <p>{p.problem}</p>
             </div>
-            <div className="case-body">
-              <div>
-                <h2>Masalah</h2>
-                <p className="prose">{p.problem}</p>
-              </div>
-              <div>
-                <h2>Solusi</h2>
-                <p className="prose">{p.solution}</p>
-              </div>
-              <div>
-                <h2>Scope</h2>
-                <ul className="scope-list">
-                  {p.scope.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="actions">
+            <div className="panel" style={{ marginTop: 0 }}>
+              <span className="ps-label">Solusi</span>
+              <h2>Yang kami bangun</h2>
+              <p>{p.solution}</p>
+            </div>
+          </div>
+
+          <div className="panel panel-grid">
+            <div>
+              <h2>Scope</h2>
+              <p>Bagian yang dikerjakan dalam project ini.</p>
+            </div>
+            <div>
+              <ul className="scope-tags">
+                {p.scope.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ul>
+              <div className="actions" style={{ marginTop: "2rem" }}>
                 <a
                   className="btn btn-primary"
                   href={waLink(`Halo Fusionify Solutions, saya lihat project ${p.name} dan punya kebutuhan serupa.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Punya kebutuhan serupa?
+                  <Chat /> Punya kebutuhan serupa?
                 </a>
               </div>
             </div>
@@ -122,12 +119,12 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="section">
-        <div className="wrap split">
-          <div className="split-head">
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="section-head">
             <h2>Project lain</h2>
           </div>
-          <ul className="next-links">
+          <ul className="related">
             {others.map((o) => (
               <li key={o.slug}>
                 <Link href={`/portfolio/${o.slug}/`}>

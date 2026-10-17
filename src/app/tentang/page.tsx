@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { boundaries, history, principles } from "@/content/company";
+import { Chat, XCircle } from "@/components/Icons";
+import { boundaries, capabilities, engagements, history, principles } from "@/content/company";
 import { ogImage, site, waLink } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -14,97 +15,152 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <header className="page-head">
+      <header className="page-hero">
         <div className="wrap">
           <h1 className="display">Dari ide, masalah, sampai solusi yang bisa dipakai.</h1>
+          <p className="lead">
+            Fusionify Solutions adalah lini layanan teknologi dari FUSIONIFY. Kami membantu individu,
+            UMKM, sekolah, komunitas, organisasi, dan bisnis menyelesaikan kebutuhan digital secara
+            praktis.
+          </p>
         </div>
       </header>
 
-      <section className="section">
-        <div className="wrap split">
-          <div className="split-head">
-            <h2>Cerita singkat</h2>
-          </div>
-          <div className="prose" style={{ fontSize: "var(--t-md)", lineHeight: 1.6 }}>
-            <p>
-              Fusionify Solutions lahir sebagai bagian dari perjalanan{" "}
-              <a href={site.masterBrand} target="_blank" rel="noopener noreferrer">
-                FUSIONIFY
-              </a>{" "}
-              pada {site.since}. Awalnya layanan ini berkembang dari kebutuhan project assistance,
-              pembelajaran teknis, pengembangan software, dan berbagai bentuk kolaborasi.
-            </p>
-            <p>
-              Seiring waktu, cakupannya meluas menjadi layanan teknologi yang lebih lengkap: website
-              dan web application, automation, bot, sistem digital, integrasi API, cloud dan
-              deployment support, hingga konsultasi dan custom development.
-            </p>
-            <p>
-              Sejak 2025, Fusionify Solutions juga menangani kebutuhan berbasis AI seperti AI
-              integration, intelligent automation, assistant, chatbot, dan workflow berbasis AI.
-            </p>
-            <p>
-              Kami tidak berusaha menjual teknologi yang paling kompleks. Fokus kami memilih
-              pendekatan yang sesuai dengan kebutuhan, skala, budget, dan kondisi nyata setiap
-              project.
-            </p>
+      <section className="section" style={{ paddingTop: "1rem" }}>
+        <div className="wrap">
+          <div className="panel panel-grid">
+            <div>
+              <h2>Cerita singkat</h2>
+            </div>
+            <div className="prose" style={{ fontSize: "1.1rem", color: "var(--ink-2)" }}>
+              <p>
+                Fusionify Solutions lahir sebagai bagian dari perjalanan{" "}
+                <a className="link" href={site.masterBrand} target="_blank" rel="noopener noreferrer">
+                  FUSIONIFY
+                </a>{" "}
+                pada {site.since}. Awalnya layanan ini tumbuh dari kebutuhan project assistance,
+                pembelajaran teknis, pengembangan software, dan berbagai bentuk kolaborasi.
+              </p>
+              <p>
+                Seiring waktu, cakupannya meluas: website dan web application, automation, bot, sistem
+                digital, integrasi API, cloud dan deployment support, sampai konsultasi dan custom
+                development.
+              </p>
+              <p>
+                Sejak 2025 kami juga menangani kebutuhan berbasis AI seperti AI integration,
+                intelligent automation, assistant, chatbot, dan workflow berbasis AI.
+              </p>
+              <p>
+                Kami tidak berusaha menjual teknologi yang paling kompleks. Fokus kami memilih
+                pendekatan yang sesuai dengan kebutuhan, skala, budget, dan kondisi nyata setiap
+                project.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <h2 style={{ fontSize: "var(--t-xl)", marginBottom: "3rem" }}>Perjalanan</h2>
+          <div className="section-head">
+            <h2>Perjalanan sejak 2022</h2>
+          </div>
           <ol className="timeline">
             {history.map((h) => (
               <li key={h.year}>
                 <span className="year">{h.year}</span>
                 <h3>{h.title}</h3>
-                <p>
-                  {h.date ? `${h.date}. ` : ""}
-                  {h.body}
-                </p>
+                <p>{h.body}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="section">
-        <div className="wrap split">
-          <div className="split-head">
+      <section className="section" style={{ paddingTop: 0 }} id="prinsip">
+        <div className="wrap">
+          <div className="section-head">
             <h2>Prinsip kerja</h2>
+            <p>Delapan hal yang kami pegang di setiap project, besar atau kecil.</p>
           </div>
-          <dl className="principles">
+          <div className="cols-2">
             {principles.map((p) => (
-              <div key={p.title}>
-                <dt>{p.title}</dt>
-                <dd>{p.body}</dd>
+              <div className="principle" key={p.title}>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="wrap split">
-          <div className="split-head">
-            <h2>Batasan kami</h2>
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="section-head">
+            <h2>Model kerja sama</h2>
+            <p>
+              Harga ditentukan berdasarkan scope, kompleksitas, integrasi, timeline, dan kebutuhan
+              support. Estimasi tertulis selalu dikirim sebelum pekerjaan dimulai.
+            </p>
           </div>
-          <div>
-            <ul className="boundaries">
-              {boundaries.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-            <div className="actions" style={{ marginTop: "2.5rem" }}>
-              <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
-                Diskusikan kebutuhan
-              </a>
-              <Link className="btn btn-ghost" href="/layanan/">
-                Lihat layanan
-              </Link>
-            </div>
+          <div className="models">
+            {engagements.map((m) => (
+              <div className="model" key={m.name}>
+                <h3>{m.name}</h3>
+                <p>{m.fit}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }} id="batasan">
+        <div className="wrap">
+          <div className="section-head">
+            <h2>Yang tidak kami kerjakan</h2>
+            <p>
+              Jika kebutuhan berada di luar kemampuan atau kapasitas kami, kami sampaikan sejak awal
+              daripada menjanjikan sesuatu yang tidak realistis.
+            </p>
+          </div>
+          <ul className="no-list">
+            {boundaries.map((b) => (
+              <li key={b}>
+                <XCircle />
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="section-head">
+            <h2>Teknologi yang kami pakai</h2>
+            <p>Dipilih sesuai kebutuhan project, bukan karena sedang ramai.</p>
+          </div>
+          <div className="caps">
+            {capabilities.map((c) => (
+              <div className="cap" key={c.group}>
+                <h3>{c.group}</h3>
+                <div className="chips">
+                  {c.items.map((item) => (
+                    <span className="chip" key={item}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="actions" style={{ marginTop: "3rem" }}>
+            <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <Chat /> Diskusikan kebutuhan
+            </a>
+            <Link className="btn btn-secondary" href="/layanan/">
+              Lihat layanan
+            </Link>
           </div>
         </div>
       </section>
