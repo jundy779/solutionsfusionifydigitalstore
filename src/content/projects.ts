@@ -4,6 +4,8 @@ export type Project = {
   category: string;
   origin: "client" | "fusionify";
   status?: string;
+  statusTone?: "go" | "beta" | "wip" | "plan";
+  url?: string;
   location?: string;
   image?: { src: string; alt: string; width: number; height: number };
   domain?: string;
@@ -24,6 +26,7 @@ export const projects: Project[] = [
     category: "Pendidikan, Web Development",
     origin: "client",
     status: "Production",
+    statusTone: "go",
     location: "Bojonggede, Bogor",
     image: {
       src: "/images/smk-pionir.webp",
@@ -53,16 +56,35 @@ export const projects: Project[] = [
   },
   {
     slug: "studydate",
-    cover: "people",
     name: "StudyDate.id",
-    category: "Platform Development",
+    category: "Platform Development, Komunitas Kampus",
     origin: "fusionify",
-    summary: "Platform komunitas dan networking untuk pelajar dengan sistem yang mengutamakan privasi.",
+    status: "Akses awal",
+    statusTone: "beta",
+    url: "https://studydate.id",
+    domain: "studydate.id",
+    image: {
+      src: "/images/studydate.webp",
+      alt: "Halaman depan StudyDate.id dengan judul Temukan teman baru lewat hal yang kamu suka dan contoh profil mahasiswa tanpa nama asli",
+      width: 1440,
+      height: 810,
+    },
+    summary:
+      "Platform untuk mahasiswa dan alumni Indonesia mencari teman belajar, gabung circle, dan menemukan acara kampus tanpa langsung membuka nama atau kontak.",
     problem:
-      "Pelajar butuh ruang untuk saling terhubung dan membangun jaringan, tanpa harus mengorbankan data pribadi.",
+      "Mahasiswa butuh cara berkenalan lewat minat yang sama, tapi platform sosial biasa memaksa membuka nama, foto, dan kontak sejak awal. Itu membuat banyak orang ragu untuk mulai.",
     solution:
-      "Platform sosial dengan autentikasi dan pengaturan privasi yang dirancang sejak awal, bukan ditambal belakangan.",
-    scope: ["Komunitas pelajar", "Networking", "Authentication", "Privacy-first system", "Social platform"],
+      "Alur kenalan bertahap: lihat profil tanpa nama asli, kirim perkenalan singkat, ngobrol setelah diterima, lalu identitas dibuka pelan-pelan kalau kedua pihak setuju. Dilengkapi circle belajar 3 sampai 30 orang dan daftar acara kampus.",
+    scope: [
+      "Cari teman berdasarkan minat dan kampus",
+      "Circle belajar",
+      "Acara kampus dan tiket",
+      "Profil tanpa nama asli",
+      "Persetujuan dua arah sebelum kontak dibagikan",
+      "Block, report, dan akhiri ruang",
+      "Pendaftaran akses awal",
+    ],
+    technology: ["Next.js"],
   },
   {
     slug: "lumbung",

@@ -86,6 +86,7 @@ export function buildLlmsFullTxt() {
       `Jenis: ${p.origin === "client" ? "Project client" : "Produk FUSIONIFY"}`,
       `Kategori: ${p.category}`,
       ...(p.status ? [`Status: ${p.status}`] : []),
+      ...(p.url ? [`Situs: ${p.url}`] : []),
       ...(p.location ? [`Lokasi: ${p.location}`] : []),
       "",
       `Masalah: ${p.problem}`,

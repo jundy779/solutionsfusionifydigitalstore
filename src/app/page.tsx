@@ -10,6 +10,7 @@ import { HeroScene } from "@/components/motion/HeroScene";
 import { SplitWords } from "@/components/motion/SplitWords";
 import { Tilt } from "@/components/motion/Tilt";
 import { ProjectCover } from "@/components/ProjectCover";
+import { StatusChip } from "@/components/StatusChip";
 import { faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { faqs, process } from "@/content/company";
 import { projects } from "@/content/projects";
@@ -186,7 +187,7 @@ export default function Home() {
             <div className="showcase-body">
               <div className="chips">
                 <span className="chip client">Project client</span>
-                {featured.status && <span className="chip live">{featured.status}</span>}
+                <StatusChip project={featured} />
               </div>
               <h3>{featured.name}</h3>
               <p>{featured.summary}</p>
@@ -206,7 +207,10 @@ export default function Home() {
                 <Link className="work-card" href={`/portfolio/${p.slug}/`} data-spot>
                   <ProjectCover project={p} />
                   <div className="work-card-body">
-                    <span className="chip own">Produk FUSIONIFY</span>
+                    <div className="chips">
+                      <span className="chip own">Produk FUSIONIFY</span>
+                      <StatusChip project={p} />
+                    </div>
                     <h3>{p.name}</h3>
                     <p>{p.summary}</p>
                   </div>

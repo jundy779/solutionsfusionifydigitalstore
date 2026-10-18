@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Chat } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { StatusChip } from "@/components/StatusChip";
 import { serviceExtras } from "@/content/answers";
 import { services } from "@/content/services";
 import { breadcrumbSchema, graph, projectSchema, webPageSchema } from "@/lib/schema";
@@ -56,6 +57,13 @@ export default async function ProjectPage({ params }: Props) {
           </nav>
           <h1 className="display">{p.name}</h1>
           <p className="lead">{p.summary}</p>
+          {p.url && (
+            <div className="actions">
+              <a className="btn btn-secondary" href={p.url} target="_blank" rel="noopener noreferrer">
+                Kunjungi {p.domain ?? p.name}
+              </a>
+            </div>
+          )}
         </div>
       </header>
 
@@ -77,7 +85,9 @@ export default async function ProjectPage({ params }: Props) {
             {p.status && (
               <div>
                 <dt>Status</dt>
-                <dd>{p.status}</dd>
+                <dd>
+                  <StatusChip project={p} />
+                </dd>
               </div>
             )}
             {p.location && (

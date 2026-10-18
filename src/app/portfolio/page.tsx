@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { StatusChip } from "@/components/StatusChip";
 import { abs, breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import { projects } from "@/content/projects";
 import { ogImage } from "@/content/site";
@@ -43,7 +44,7 @@ export default function PortfolioPage() {
               <div className="showcase-body">
                 <div className="chips">
                   <span className="chip client">Project client</span>
-                  {p.status && <span className="chip live">{p.status}</span>}
+                  <StatusChip project={p} />
                 </div>
                 <h2 style={{ fontSize: "var(--t-xl)", marginTop: "1rem" }}>{p.name}</h2>
                 <p>{p.summary}</p>
@@ -64,7 +65,10 @@ export default function PortfolioPage() {
                 <Link className="work-card" href={`/portfolio/${p.slug}/`}>
                   <ProjectCover project={p} />
                   <div className="work-card-body">
-                    <span className="chip own">{p.category}</span>
+                    <div className="chips">
+                      <span className="chip own">{p.category}</span>
+                      <StatusChip project={p} />
+                    </div>
                     <h3>{p.name}</h3>
                     <p>{p.summary}</p>
                   </div>

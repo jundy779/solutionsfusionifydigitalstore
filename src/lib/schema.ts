@@ -147,6 +147,8 @@ export function projectSchema(p: Project) {
     keywords: p.scope.join(", "),
     creator: { "@id": ids.org },
     ...(p.image ? { image: abs(p.image.src) } : {}),
+    ...(p.url ? { sameAs: p.url } : {}),
+    ...(p.status ? { creativeWorkStatus: p.status } : {}),
     ...(p.origin === "client" ? {} : { publisher: { "@id": ids.parent } }),
   };
 }

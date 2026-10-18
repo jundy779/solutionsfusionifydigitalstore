@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Chat, Circle } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
 import { ProjectCover } from "@/components/ProjectCover";
+import { StatusChip } from "@/components/StatusChip";
 import { audiencePages, getAudiencePage } from "@/content/answers";
 import { audiences } from "@/content/company";
 import { getProject } from "@/content/projects";
@@ -125,9 +126,12 @@ export default async function AudiencePage({ params }: Props) {
                     <Link className="work-card" href={`/portfolio/${p.slug}/`}>
                       <ProjectCover project={p} />
                       <div className="work-card-body">
-                        <span className={p.origin === "client" ? "chip client" : "chip own"}>
-                          {p.origin === "client" ? "Project client" : "Produk FUSIONIFY"}
-                        </span>
+                        <div className="chips">
+                          <span className={p.origin === "client" ? "chip client" : "chip own"}>
+                            {p.origin === "client" ? "Project client" : "Produk FUSIONIFY"}
+                          </span>
+                          <StatusChip project={p} />
+                        </div>
                         <h3>{p.name}</h3>
                         <p>{p.summary}</p>
                       </div>
