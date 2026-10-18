@@ -55,7 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Langsung ke isi
         </a>
         <Header />
-        <main id="isi">{children}</main>
+        <main id="isi" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <WhatsAppFloat />
         <MotionRoot />

@@ -3,17 +3,45 @@ import Link from "next/link";
 import { audiencePages } from "@/content/answers";
 import { services } from "@/content/services";
 import { site, waLink } from "@/content/site";
+import { BackToTop } from "./BackToTop";
+import { Chat, Mail } from "./Icons";
 import { Wordmark } from "./Wordmark";
+
+const company = [
+  { href: "/portfolio/", label: "Portfolio" },
+  { href: "/tentang/", label: "Tentang dan sejarah" },
+  { href: "/#cara-kerja", label: "Cara kerja" },
+  { href: "/faq/", label: "FAQ" },
+  { href: "/kontak/", label: "Kontak" },
+];
+
+const audienceLabel = (title: string) =>
+  title.replace(/^.*untuk /i, "").replace(/^./, (c) => c.toUpperCase());
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="site-footer">
       <div className="wrap">
+        <div className="footer-cta">
+          <div>
+            <p className="footer-cta__label">Mulai project</p>
+            <h2 className="footer-cta__title">Ada kebutuhan digital yang mau dibereskan?</h2>
+          </div>
+          <div className="footer-cta__actions">
+            <a className="btn btn-white" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <Chat /> Chat WhatsApp
+            </a>
+            <a className="btn btn-outline-light" href={`mailto:${site.email}`}>
+              <Mail /> Kirim email
+            </a>
+          </div>
+        </div>
+
         <div className="footer-grid">
           <div className="footer-about">
-            <Link href="/" className="brand">
-              <Image src="/images/fusionify-mark.png" alt="" width={34} height={34} />
+            <Link href="/" className="brand" aria-label="Fusionify Solutions, ke beranda">
+              <Image src="/images/fusionify-mark.png" alt="" width={36} height={36} />
               <span className="brand-word">
                 <strong>FUSIONIFY</strong>
                 <span>SOLUTIONS</span>
@@ -24,11 +52,23 @@ export function Footer() {
               <a href={site.masterBrand} target="_blank" rel="noopener noreferrer">
                 FUSIONIFY
               </a>
-              , dikelola oleh {site.legalName}. Membantu kebutuhan digital sejak {site.since}.
+              . Membantu website, automation, sistem, dan AI sejak {site.since}.
             </p>
+            <ul className="footer-contact">
+              <li>
+                <a href={`mailto:${site.email}`}>
+                  <Mail /> {site.email}
+                </a>
+              </li>
+              <li>
+                <a href={waLink()} target="_blank" rel="noopener noreferrer">
+                  <Chat /> {site.whatsappDisplay}
+                </a>
+              </li>
+            </ul>
           </div>
 
-          <div>
+          <nav aria-label="Layanan">
             <h2>Layanan</h2>
             <ul>
               {services.map((s) => (
@@ -37,65 +77,43 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div>
+          <nav aria-label="Solusi untuk">
             <h2>Solusi untuk</h2>
             <ul>
               {audiencePages.map((a) => (
                 <li key={a.slug}>
-                  <Link href={`/untuk/${a.slug}/`}>{a.title.replace(/^.*untuk /i, "").replace(/^./, (c) => c.toUpperCase())}</Link>
+                  <Link href={`/untuk/${a.slug}/`}>{audienceLabel(a.title)}</Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div>
-            <h2>Fusionify Solutions</h2>
+          <nav aria-label="Perusahaan">
+            <h2>Perusahaan</h2>
             <ul>
-              <li>
-                <Link href="/portfolio/">Portfolio</Link>
-              </li>
-              <li>
-                <Link href="/tentang/">Tentang dan sejarah</Link>
-              </li>
-              <li>
-                <Link href="/#cara-kerja">Cara kerja</Link>
-              </li>
-              <li>
-                <Link href="/faq/">FAQ</Link>
-              </li>
-              <li>
-                <Link href="/privasi/">Privasi</Link>
-              </li>
+              {company.map((c) => (
+                <li key={c.href}>
+                  <Link href={c.href}>{c.label}</Link>
+                </li>
+              ))}
             </ul>
-          </div>
-
-          <div>
-            <h2>Kontak</h2>
-            <ul>
-              <li>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-              </li>
-              <li>
-                <a href={waLink()} target="_blank" rel="noopener noreferrer">
-                  WhatsApp {site.whatsappDisplay}
-                </a>
-              </li>
-              <li>
-                <Link href="/kontak/">Form kebutuhan</Link>
-              </li>
-            </ul>
-          </div>
+          </nav>
         </div>
 
         <Wordmark />
 
         <div className="footer-base">
-          <span>
+          <p>
             © {year} {site.legalName} ({site.legalForm}), {site.city}
-          </span>
-          <span>{site.name} adalah lini layanan teknologi dari FUSIONIFY</span>
+          </p>
+          <div className="footer-base__links">
+            <Link href="/privasi/">Privasi</Link>
+            <a href="/llms.txt">llms.txt</a>
+            <a href="/sitemap.xml">Sitemap</a>
+            <BackToTop />
+          </div>
         </div>
       </div>
     </footer>
