@@ -117,8 +117,8 @@ export const principles = [
     body: "Scope, timeline, revisi, ownership, dan biaya dibahas sebelum development.",
   },
   {
-    title: "Client ownership",
-    body: "Domain, akun, konten, dan aset client tetap milik client sesuai kesepakatan.",
+    title: "Fleksibilitas source code",
+    body: "Kepemilikan source code, domain, akun, dan aset ditentukan bersama sesuai model project, dan dicatat sejak awal.",
   },
   { title: "Build for handover", body: "Sistem tidak boleh cuma dimengerti oleh developer-nya." },
   {

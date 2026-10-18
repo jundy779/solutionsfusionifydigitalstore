@@ -40,8 +40,8 @@ const pillars = [
   },
   {
     icon: Key,
-    title: "Semua aset tetap milik kamu",
-    body: "Domain, akun, konten, dan aset didaftarkan atas nama client sesuai kesepakatan.",
+    title: "Fleksibilitas source code dan aset",
+    body: "Kepemilikan source code, domain, dan akun disepakati sejak awal sesuai model project, lalu diserahkan lengkap dengan dokumentasinya.",
   },
   {
     icon: Handover,
@@ -87,7 +87,7 @@ export default function Home() {
                 <Check /> Estimasi tertulis sebelum mulai
               </span>
               <span>
-                <Check /> Domain dan akun atas nama kamu
+                <Check /> Fleksibilitas source code
               </span>
             </div>
           </div>
@@ -266,8 +266,8 @@ export default function Home() {
                 <span>Mulai mengerjakan AI workflow</span>
               </div>
               <div className="fact" data-reveal>
-                <b>Milik kamu</b>
-                <span>Domain, akun, dan aset atas nama client</span>
+                <b>Fleksibel</b>
+                <span>Kepemilikan source code dan aset sesuai kesepakatan</span>
               </div>
             </div>
             <p style={{ marginTop: "1.75rem" }}>

@@ -1,5 +1,4 @@
-@import "@fontsource-variable/plus-jakarta-sans/wght.css";
-@import "@fontsource-variable/space-grotesk/wght.css";
+@import "@fontsource-variable/exo-2/wght.css";
 @import "@fontsource/jetbrains-mono/latin-500.css";
 
 /* ==================================================================
@@ -86,11 +85,11 @@
   --amber-50: var(--beta-bg);
 
   /* type */
-  --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Arial Black", system-ui, sans-serif;
-  --font-sans: "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Exo 2 Variable", "Exo 2", "Arial Black", system-ui, sans-serif;
+  --font-sans: "Exo 2 Variable", "Exo 2", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --font: var(--font-sans);
-  --tracking-tight: -0.035em;
+  --tracking-tight: -0.02em;
   --tracking-label: 0.14em;
 
   --t-xs: 0.75rem;

@@ -10,13 +10,12 @@ Dipakai dengan izin. Panduan lengkap ada di `docs/DESIGN.md`.
 
 ## Font
 
-Ketiga font berikut dilisensikan di bawah SIL Open Font License 1.1 dan
-di-host sendiri lewat paket Fontsource (file lisensi ikut di dalam
+Font berikut dilisensikan di bawah SIL Open Font License 1.1 dan di-host
+sendiri lewat paket Fontsource (file lisensi ikut di dalam
 `node_modules/@fontsource*/`):
 
-- Plus Jakarta Sans, Tokotype
-- Space Grotesk, Florian Karsten
-- JetBrains Mono, JetBrains
+- Exo 2, Natanael Gama (judul dan teks isi)
+- JetBrains Mono, JetBrains (label, tombol, chip)
 
 ## Library
 

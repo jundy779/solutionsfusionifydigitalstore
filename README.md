@@ -48,8 +48,10 @@ sitemap, dan daftar portfolio ikut terbuat otomatis. Gambar taruh di
 
 ## Sistem desain
 
-Tampilan mengikuti FUSIONIFY Design System di `docs/DESIGN.md`. Kredit dan
-lisensi ada di `THIRD_PARTY_NOTICES.md`.
+Tampilan mengikuti FUSIONIFY Design System di `docs/DESIGN.md`, dengan satu
+pengecualian: judul dan teks isi memakai Exo 2 (bukan Plus Jakarta Sans dan
+Space Grotesk). Label dan tombol tetap JetBrains Mono. Kredit dan lisensi ada
+di `THIRD_PARTY_NOTICES.md`.
 
 ## SEO dan AI search
 
