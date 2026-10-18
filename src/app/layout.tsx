@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MotionRoot } from "@/components/motion/MotionRoot";
+import { themeInitScript } from "@/components/ThemeToggle";
 import { graph, orgSchema, websiteSchema } from "@/lib/schema";
 import { ogImage, site } from "@/content/site";
 import "./globals.css";
@@ -37,12 +38,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f7f5",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#0d6cd7" },
+    { media: "(prefers-color-scheme: dark)", color: "#13264b" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <a href="#isi" className="skip">
           Langsung ke isi

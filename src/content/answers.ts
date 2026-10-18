@@ -117,7 +117,7 @@ export const serviceExtras: Record<string, ServiceExtra> = {
     faqs: [
       {
         q: "Apakah Fusionify Solutions menerima joki tugas kuliah?",
-        a: "Tidak. Yang kami tawarkan adalah learning support: mentoring, penjelasan teknis, guided coding, dan debugging bersama supaya Anda memahami dan menyelesaikan pekerjaan sendiri.",
+        a: "Tidak. Yang kami tawarkan adalah learning support: mentoring, penjelasan teknis, guided coding, dan debugging bersama supaya kamu memahami dan menyelesaikan pekerjaan sendiri.",
       },
       {
         q: "Apakah bisa minta bantuan debugging untuk satu masalah saja?",
@@ -165,7 +165,7 @@ export const audiencePages: AudiencePage[] = [
     slug: "umkm",
     audienceId: "umkm",
     title: "Solusi digital untuk UMKM",
-    headline: "Order rapi, admin tidak kewalahan, pelanggan mudah menemukan Anda.",
+    headline: "Order rapi, admin tidak kewalahan, pelanggan mudah menemukan kamu.",
     intro:
       "Fusionify Solutions membantu UMKM dan bisnis lokal membangun website, katalog digital, sistem order, bot WhatsApp, integrasi pembayaran, dan sistem operasional sederhana. Fokusnya pada solusi yang sesuai skala dan budget, bukan teknologi yang dibuat rumit.",
     needs: [
@@ -299,7 +299,7 @@ export const getAudiencePage = (slug: string) => audiencePages.find((a) => a.slu
 // Short, quotable facts for the About page and llms.txt.
 export const keyFacts: { label: string; value: string }[] = [
   { label: "Nama", value: "FUSIONIFY SOLUTIONS (Fusionify Solutions)" },
-  { label: "Badan hukum", value: "PT Fusionify Digital Store" },
+  { label: "Badan hukum", value: "PT FUSIONIFY DIGITAL STORE (Perseroan Perorangan), Bogor" },
   { label: "Induk", value: "FUSIONIFY, lini layanan teknologi" },
   { label: "Mulai berjalan", value: "22 Desember 2022" },
   { label: "Layanan AI", value: "Sejak 2025" },

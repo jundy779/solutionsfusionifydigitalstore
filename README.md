@@ -46,6 +46,11 @@ Menambah project baru cukup tambahkan objek di `projects.ts`. Halaman detail,
 sitemap, dan daftar portfolio ikut terbuat otomatis. Gambar taruh di
 `public/images/` dalam format `.webp`.
 
+## Sistem desain
+
+Tampilan mengikuti FUSIONIFY Design System di `docs/DESIGN.md`. Kredit dan
+lisensi ada di `THIRD_PARTY_NOTICES.md`.
+
 ## SEO dan AI search
 
 SEO teknis, structured data, `llms.txt`, dan halaman untuk AI search sudah
@@ -61,10 +66,3 @@ src/
 public/images/    logo dan screenshot project
 ```
 
-## Sistem desain
-
-- Font: Archivo (variabel, self-hosted). Judul memakai lebar 118% supaya senada
-  dengan wordmark FUSIONIFY.
-- Warna: Paper `#f6f7f5`, Ink `#14202e`, Muted `#5b6573`, Rule `#d9dde2`,
-  Fusion Blue `#0b63ce`, Sky `#dce9f9`.
-- Semua token ada di bagian atas `src/app/globals.css`.

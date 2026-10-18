@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
+import { Sheet } from "@/components/Sheet";
 import { ContactForm } from "@/components/ContactForm";
 import { Chat, Mail } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
@@ -7,7 +9,7 @@ import { ogImage, site, waLink } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Kontak",
-  description: "Ceritakan kebutuhan digital Anda ke Fusionify Solutions lewat WhatsApp atau email.",
+  description: "Ceritakan kebutuhan digital kamu ke Fusionify Solutions lewat WhatsApp atau email.",
   alternates: { canonical: "/kontak/" },
   openGraph: { title: "Kontak | FUSIONIFY SOLUTIONS", url: "/kontak/", images: [ogImage] },
 };
@@ -15,9 +17,11 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <section className="page-hero">
+        <Clouds count={3} />
       <div className="wrap">
         <div className="cta" style={{ background: "transparent", boxShadow: "none", padding: 0 }}>
           <div>
+            <Sheet onSky>Kontak</Sheet>
             <h1 className="display">Ceritakan kebutuhannya dulu.</h1>
             <p className="lead">
               Tidak harus punya brief teknis lengkap. Kami pelajari dulu konteksnya, lalu mengirim

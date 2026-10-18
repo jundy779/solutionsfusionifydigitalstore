@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
+import { Sheet } from "@/components/Sheet";
 import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
@@ -22,7 +24,9 @@ export default function PortfolioPage() {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap">
+          <Sheet onSky>Portfolio</Sheet>
           <h1 className="display">Project yang sudah berjalan.</h1>
           <p className="lead">
             Setiap project ditulis dengan format yang sama: masalah, solusi, dan scope. Project client
@@ -41,7 +45,7 @@ export default function PortfolioPage() {
                   <span className="chip client">Project client</span>
                   {p.status && <span className="chip live">{p.status}</span>}
                 </div>
-                <h2 style={{ fontSize: "var(--t-xl)", fontStretch: "112%", marginTop: "1rem" }}>{p.name}</h2>
+                <h2 style={{ fontSize: "var(--t-xl)", marginTop: "1rem" }}>{p.name}</h2>
                 <p>{p.summary}</p>
                 <span className="tile-more">
                   Baca case study <ArrowRight />

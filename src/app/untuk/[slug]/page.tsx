@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Chat, Circle } from "@/components/Icons";
@@ -44,6 +45,7 @@ export default async function AudiencePage({ params }: Props) {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap page-hero-grid">
           <div>
             <nav className="crumb" aria-label="Breadcrumb">

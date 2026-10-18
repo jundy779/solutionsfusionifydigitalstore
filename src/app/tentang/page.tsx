@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
+import { Sheet } from "@/components/Sheet";
 import Link from "next/link";
 import { Chat, XCircle } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
@@ -19,7 +21,9 @@ export default function AboutPage() {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap">
+          <Sheet onSky>Tentang</Sheet>
           <h1 className="display">Dari ide, masalah, sampai solusi yang bisa dipakai.</h1>
           <p className="lead">
             Fusionify Solutions adalah lini layanan teknologi dari FUSIONIFY, dikelola oleh{" "}

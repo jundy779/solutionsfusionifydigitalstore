@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
+import { Sheet } from "@/components/Sheet";
 import Link from "next/link";
 import { Chat } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
@@ -26,11 +28,13 @@ export default function FaqPage() {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap">
+          <Sheet onSky>FAQ</Sheet>
           <h1 className="display">Pertanyaan yang sering ditanyakan.</h1>
           <p className="lead">
             {all.length} jawaban tentang cara kerja, biaya, layanan, dan batasan Fusionify Solutions.
-            Tidak menemukan yang Anda cari? Tanya langsung saja.
+            Tidak menemukan yang kamu cari? Tanya langsung saja.
           </p>
           <div className="actions">
             <a className="btn btn-primary" href={waLink("Halo Fusionify Solutions, saya mau tanya dulu.")} target="_blank" rel="noopener noreferrer">

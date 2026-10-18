@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /*
-  The hero's 3D layer: a network of systems (nodes) with data packets
+  The hero's 3D layer, drawn in white on the FUSIONIFY sky: a network of systems (nodes) with data packets
   travelling along their connections. It is the literal picture of what
   Fusionify Solutions builds: separate tools that talk to each other.
 
@@ -52,7 +52,6 @@ export function HeroScene() {
       host.appendChild(canvas);
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0xf6f8fb, 11, 24);
       const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 60);
       camera.position.set(0, 0, 15);
 
@@ -74,10 +73,10 @@ export function HeroScene() {
       const hub = pts.map((_, i) => i % 7 === 0);
 
       const sphere = new THREE.SphereGeometry(1, 18, 14);
-      const nodeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, fog: true });
+      const nodeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
       const nodes = new THREE.InstancedMesh(sphere, nodeMat, count);
-      const blue = new THREE.Color(0x0b63ce);
-      const sky = new THREE.Color(0x7fb3ec);
+      const blue = new THREE.Color(0xffffff);
+      const sky = new THREE.Color(0x9fd3fa);
       const baseScale = pts.map((_, i) => (hub[i] ? 0.17 : 0.06 + rand() * 0.05));
       pts.forEach((_, i) => nodes.setColorAt(i, hub[i] ? blue : sky.clone().lerp(blue, rand() * 0.35)));
       world.add(nodes);
@@ -88,9 +87,9 @@ export function HeroScene() {
         c.width = c.height = 64;
         const g = c.getContext("2d")!;
         const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-        grd.addColorStop(0, "rgba(11,99,206,0.55)");
-        grd.addColorStop(0.4, "rgba(11,99,206,0.16)");
-        grd.addColorStop(1, "rgba(11,99,206,0)");
+        grd.addColorStop(0, "rgba(255,255,255,0.55)");
+        grd.addColorStop(0.4, "rgba(205,238,255,0.18)");
+        grd.addColorStop(1, "rgba(205,238,255,0)");
         g.fillStyle = grd;
         g.fillRect(0, 0, 64, 64);
         return new THREE.CanvasTexture(c);
@@ -98,7 +97,7 @@ export function HeroScene() {
       const halos: InstanceType<typeof THREE.Sprite>[] = [];
       pts.forEach((p, i) => {
         if (!hub[i]) return;
-        const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloTex, depthWrite: false, transparent: true, fog: true }));
+        const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloTex, depthWrite: false, transparent: true }));
         s.position.copy(p);
         s.scale.setScalar(1.6);
         halos.push(s);
@@ -129,7 +128,7 @@ export function HeroScene() {
       });
       const lineGeo = new THREE.BufferGeometry();
       lineGeo.setAttribute("position", new THREE.BufferAttribute(linePos, 3));
-      const lineMat = new THREE.LineBasicMaterial({ color: 0x8fb6ea, transparent: true, opacity: 0, fog: true });
+      const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
       world.add(new THREE.LineSegments(lineGeo, lineMat));
 
       // Adjacency for packets to keep travelling through the graph
@@ -146,8 +145,8 @@ export function HeroScene() {
         const g = c.getContext("2d")!;
         const grd = g.createRadialGradient(16, 16, 0, 16, 16, 16);
         grd.addColorStop(0, "rgba(255,255,255,1)");
-        grd.addColorStop(0.35, "rgba(90,160,232,1)");
-        grd.addColorStop(1, "rgba(11,99,206,0)");
+        grd.addColorStop(0.35, "rgba(205,238,255,0.9)");
+        grd.addColorStop(1, "rgba(205,238,255,0)");
         g.fillStyle = grd;
         g.fillRect(0, 0, 32, 32);
         return new THREE.CanvasTexture(c);
@@ -168,7 +167,6 @@ export function HeroScene() {
         depthWrite: false,
         sizeAttenuation: true,
         opacity: 0,
-        fog: true,
       });
       world.add(new THREE.Points(packetGeo, packetMat));
 
@@ -218,7 +216,7 @@ export function HeroScene() {
 
         setNodes(grow);
         const fadeIn = Math.min(1, Math.max(0, (grow - 0.5) / 0.8));
-        lineMat.opacity = 0.5 * fadeIn;
+        lineMat.opacity = 0.32 * fadeIn;
         packetMat.opacity = fadeIn;
         halos.forEach((h, i) => {
           const pulse = reduced ? 1 : 1 + Math.sin(age * 1.6 + i) * 0.12;

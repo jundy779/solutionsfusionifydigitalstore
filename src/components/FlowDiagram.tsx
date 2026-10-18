@@ -36,7 +36,7 @@ export function FlowDiagram() {
   return (
     <div className="flow" data-changed={run > 0}>
       <p className="flow-question" id="flow-label">
-        Kebutuhan Anda datang dari mana?
+        Kebutuhan kamu datang dari mana?
       </p>
       <div className="flow-tabs" role="tablist" aria-labelledby="flow-label">
         {audiences.map((a, i) => (

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
+import { Sheet } from "@/components/Sheet";
 import Link from "next/link";
 import { ArrowRight, Chat } from "@/components/Icons";
 import { JsonLd } from "@/components/JsonLd";
@@ -29,7 +31,9 @@ export default function ServicesPage() {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap">
+          <Sheet onSky>Layanan</Sheet>
           <h1 className="display">Tujuh layanan yang saling bersambung.</h1>
           <p className="lead">
             Website butuh form, form butuh database, database butuh notifikasi. Kami mengerjakan
@@ -49,7 +53,7 @@ export default function ServicesPage() {
               <Link key={s.slug} href={`/layanan/${s.slug}/`} className={`tile ${tileClass[s.slug]}`}>
                 {s.since && <span className="tile-tag">Sejak {s.since}</span>}
                 <div className="tile-body">
-                  <h2 style={{ fontSize: "var(--t-lg)", fontStretch: "108%" }}>{s.name}</h2>
+                  <h2 style={{ fontSize: "var(--t-lg)" }}>{s.name}</h2>
                   <p>{s.summary}</p>
                   <span className="tile-more">
                     Lihat cakupan <ArrowRight />

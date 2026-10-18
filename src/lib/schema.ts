@@ -29,6 +29,7 @@ export function orgSchema() {
     email: site.email,
     telephone: "+62-831-1138-0628",
     areaServed: { "@type": "Country", name: "Indonesia" },
+    address: { "@type": "PostalAddress", addressLocality: site.city, addressRegion: "Jawa Barat", addressCountry: "ID" },
     knowsLanguage: ["id", "en"],
     parentOrganization: {
       "@type": "Organization",

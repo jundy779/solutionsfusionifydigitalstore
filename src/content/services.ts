@@ -16,7 +16,7 @@ export const services: Service[] = [
     slug: "web-development",
     name: "Web Development",
     summary: "Website dan web app yang terhubung dengan proses bisnis.",
-    headline: "Website yang tersambung ke cara kerja Anda.",
+    headline: "Website yang tersambung ke cara kerja kamu.",
     body: [
       "Website dan web application kami bangun sesuai kebutuhan, bukan template satu ukuran untuk semua.",
       "Yang kami kejar bukan sekadar halaman yang tampil bagus. Form yang diisi pelanggan bisa masuk ke database, memicu email atau WhatsApp, lalu muncul di dashboard admin. Website jadi bagian dari operasional, bukan brosur digital.",
@@ -192,7 +192,7 @@ export const services: Service[] = [
     headline: "Tidak semua kebutuhan cocok dimasukkan ke paket.",
     body: [
       "Untuk kebutuhan custom, project assistance, pembelajaran, troubleshooting, eksperimen, atau kolaborasi, Fusionify Solutions dapat bekerja secara fleksibel berdasarkan scope yang disepakati.",
-      "Learning support di sini artinya mendampingi Anda memahami dan menyelesaikan pekerjaan sendiri. Kami tidak menerima joki tugas atau pekerjaan yang diakui sebagai karya orang lain.",
+      "Learning support di sini artinya mendampingi kamu memahami dan menyelesaikan pekerjaan sendiri. Kami tidak menerima joki tugas atau pekerjaan yang diakui sebagai karya orang lain.",
     ],
     scope: [
       {

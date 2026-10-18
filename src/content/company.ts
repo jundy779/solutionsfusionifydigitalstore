@@ -86,7 +86,7 @@ export const process = [
   },
   {
     title: "Proposal",
-    body: "Anda mendapat gambaran solusi, deliverables, timeline, biaya, jumlah revisi, dan maintenance bila ada.",
+    body: "Kamu mendapat gambaran solusi, deliverables, timeline, biaya, jumlah revisi, dan maintenance bila ada.",
   },
   {
     title: "Development",
@@ -94,7 +94,7 @@ export const process = [
   },
   {
     title: "Testing & review",
-    body: "Fitur diuji, lalu Anda melakukan review atau UAT sesuai scope.",
+    body: "Fitur diuji, lalu kamu melakukan review atau UAT sesuai scope.",
   },
   {
     title: "Deployment & handover",
@@ -218,7 +218,7 @@ export const faqs = [
   },
   {
     q: "Berapa biayanya?",
-    a: "Harga ditentukan berdasarkan scope, kompleksitas, integrasi, timeline, dan kebutuhan support. Anda akan menerima estimasi tertulis sebelum memutuskan apa pun.",
+    a: "Harga ditentukan berdasarkan scope, kompleksitas, integrasi, timeline, dan kebutuhan support. Kamu akan menerima estimasi tertulis sebelum memutuskan apa pun.",
   },
   {
     q: "Apakah menggunakan AI?",

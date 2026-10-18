@@ -3,7 +3,9 @@ import { ContactForm } from "@/components/ContactForm";
 import { FlowDiagram } from "@/components/FlowDiagram";
 import { ArrowRight, Chat, Check, FileText, Handover, Key, Mail, Target } from "@/components/Icons";
 import { AiDemo, HeroStage, ServiceVisual } from "@/components/Mockups";
+import { Clouds } from "@/components/Clouds";
 import { JsonLd } from "@/components/JsonLd";
+import { Sheet } from "@/components/Sheet";
 import { HeroScene } from "@/components/motion/HeroScene";
 import { SplitWords } from "@/components/motion/SplitWords";
 import { Tilt } from "@/components/motion/Tilt";
@@ -37,7 +39,7 @@ const pillars = [
   },
   {
     icon: Key,
-    title: "Semua aset tetap milik Anda",
+    title: "Semua aset tetap milik kamu",
     body: "Domain, akun, konten, dan aset didaftarkan atas nama client sesuai kesepakatan.",
   },
   {
@@ -54,6 +56,7 @@ export default function Home() {
   return (
     <>
       <section className="hero">
+        <Clouds />
         <HeroScene />
         <div className="wrap hero-grid">
           <div>
@@ -83,7 +86,7 @@ export default function Home() {
                 <Check /> Estimasi tertulis sebelum mulai
               </span>
               <span>
-                <Check /> Domain dan akun atas nama Anda
+                <Check /> Domain dan akun atas nama kamu
               </span>
             </div>
           </div>
@@ -116,6 +119,7 @@ export default function Home() {
         <div className="wrap">
           <div className="head-row">
             <div className="section-head" data-reveal>
+              <Sheet no="01 / 08">Layanan</Sheet>
               <h2 id="h-layanan">Satu tim untuk website, automation, sampai AI.</h2>
               <p>Kebanyakan kebutuhan nyata menyentuh lebih dari satu layanan. Kami kerjakan rangkaiannya sampai tersambung.</p>
             </div>
@@ -146,14 +150,15 @@ export default function Home() {
       <section className="section" style={{ paddingTop: 0 }} aria-labelledby="h-siapa">
         <div className="wrap switcher">
           <div className="section-head" data-reveal>
+            <Sheet no="02 / 08">Untuk siapa</Sheet>
             <h2 id="h-siapa">Datang dari mana pun, alurnya sama: pahami dulu, baru bangun.</h2>
             <p>
               UMKM, sekolah, startup, komunitas, atau developer yang lagi buntu. Pilih yang paling
-              mirip situasi Anda dan lihat contoh alurnya.
+              mirip situasi kamu dan lihat contoh alurnya.
             </p>
             <div className="actions" style={{ marginTop: "2rem" }}>
               <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
-                <Chat /> Ceritakan situasi Anda
+                <Chat /> Ceritakan situasi kamu
               </a>
             </div>
           </div>
@@ -167,6 +172,7 @@ export default function Home() {
         <div className="wrap">
           <div className="head-row">
             <div className="section-head" data-reveal>
+              <Sheet no="03 / 08">Portfolio</Sheet>
               <h2 id="h-work">Project yang sudah berjalan.</h2>
               <p>Project client kami tandai terpisah dari produk yang kami bangun sendiri di ekosistem FUSIONIFY.</p>
             </div>
@@ -214,8 +220,9 @@ export default function Home() {
       <section className="section" id="cara-kerja" aria-labelledby="h-cara">
         <div className="wrap">
           <div className="section-head center" data-reveal>
+            <Sheet no="04 / 08">Cara kerja</Sheet>
             <h2 id="h-cara">Dari cerita pertama sampai sistem diserahkan.</h2>
-            <p>Tujuh tahap yang sama untuk project kecil maupun besar. Anda selalu tahu sedang di tahap mana.</p>
+            <p>Tujuh tahap yang sama untuk project kecil maupun besar. Kamu selalu tahu sedang di tahap mana.</p>
           </div>
           <ol className="steps" data-reveal>
             {process.map((step) => (
@@ -234,9 +241,10 @@ export default function Home() {
         <div className="wrap why">
           <div>
             <div className="section-head" data-reveal>
+              <Sheet no="05 / 08">Kenapa kami</Sheet>
               <h2 id="h-why">Tim kecil yang sanggup mengerjakan project serius.</h2>
               <p>
-                Tanpa berpura-pura jadi konsultan raksasa. Kalau kebutuhan Anda di luar kapasitas
+                Tanpa berpura-pura jadi konsultan raksasa. Kalau kebutuhan kamu di luar kapasitas
                 kami, kami bilang dari awal.
               </p>
             </div>
@@ -254,7 +262,7 @@ export default function Home() {
                 <span>Mulai mengerjakan AI workflow</span>
               </div>
               <div className="fact" data-reveal>
-                <b>Milik Anda</b>
+                <b>Milik kamu</b>
                 <span>Domain, akun, dan aset atas nama client</span>
               </div>
             </div>
@@ -284,11 +292,13 @@ export default function Home() {
         <div className="wrap">
           <div className="ai-card" data-reveal>
             <div className="ai-copy">
-              <span className="kicker">AI Solutions, sejak 2025</span>
+              <Sheet no="06 / 08" onSky>
+                AI Solutions, sejak 2025
+              </Sheet>
               <h2 id="h-ai">AI yang masuk ke workflow, bukan cuma chatbox.</h2>
               <p>
                 Assistant internal, chatbot berbasis knowledge, pemrosesan dokumen, klasifikasi
-                data, sampai automation yang menggabungkan AI dengan API dan database Anda.
+                data, sampai automation yang menggabungkan AI dengan API dan database kamu.
               </p>
               <p>Kalau masalahnya bisa selesai lebih sederhana tanpa AI, kami juga akan bilang begitu.</p>
               <div className="actions">
@@ -313,6 +323,7 @@ export default function Home() {
       <section className="section" style={{ paddingTop: 0 }} id="faq" aria-labelledby="h-faq">
         <div className="wrap faq-layout">
           <div className="section-head" data-reveal>
+            <Sheet no="07 / 08">FAQ</Sheet>
             <h2 id="h-faq">Pertanyaan yang sering muncul.</h2>
             <p>
               <Link className="link" href="/faq/">
@@ -339,6 +350,7 @@ export default function Home() {
         <div className="wrap">
           <div className="cta" data-reveal>
             <div>
+              <Sheet no="08 / 08">Kontak</Sheet>
               <h2 id="h-kontak">Ada pekerjaan digital yang belum selesai?</h2>
               <p className="lead">
                 Ceritakan kebutuhannya. Tidak harus punya brief teknis lengkap, kami bantu menentukan

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { audiencePages } from "@/content/answers";
 import { services } from "@/content/services";
 import { site, waLink } from "@/content/site";
+import { Wordmark } from "./Wordmark";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -88,9 +89,11 @@ export function Footer() {
           </div>
         </div>
 
+        <Wordmark />
+
         <div className="footer-base">
           <span>
-            © {year} {site.legalName}. Hak cipta dilindungi.
+            © {year} {site.legalName} ({site.legalForm}), {site.city}
           </span>
           <span>{site.name} adalah lini layanan teknologi dari FUSIONIFY</span>
         </div>

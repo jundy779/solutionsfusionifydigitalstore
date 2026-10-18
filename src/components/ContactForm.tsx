@@ -39,7 +39,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
     const { name, story, text } = compose(e.currentTarget);
     const next: Errors = {};
     if (!name) next.name = "Isi nama supaya kami tahu harus menyapa siapa.";
-    if (story.length < 10) next.story = "Ceritakan kebutuhan Anda minimal satu kalimat.";
+    if (story.length < 10) next.story = "Ceritakan kebutuhan kamu minimal satu kalimat.";
     setErrors(next);
     if (Object.keys(next).length) {
       document.getElementById(next.name ? "f-name" : "f-story")?.focus();
@@ -121,7 +121,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
         </a>
       </div>
       <p className="form-note">
-        Pesan dibuka di WhatsApp atau aplikasi email Anda. Website ini tidak menyimpan isi form.
+        Pesan dibuka di WhatsApp atau aplikasi email kamu. Website ini tidak menyimpan isi form.
       </p>
     </form>
   );

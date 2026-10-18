@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Clouds } from "@/components/Clouds";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chat } from "@/components/Icons";
@@ -48,6 +49,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <>
       <header className="page-hero">
+        <Clouds count={3} />
         <div className="wrap">
           <nav className="crumb" aria-label="Breadcrumb">
             <Link href="/portfolio/">Portfolio</Link> / {p.name}
