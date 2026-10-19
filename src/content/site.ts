@@ -35,5 +35,6 @@ export const nav = [
   { href: "/layanan/", label: "Layanan" },
   { href: "/portfolio/", label: "Portfolio" },
   { href: "/#cara-kerja", label: "Cara kerja" },
+  { href: "/partnership/", label: "Partnership" },
   { href: "/tentang/", label: "Tentang" },
 ];

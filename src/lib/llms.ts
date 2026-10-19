@@ -1,5 +1,6 @@
 import { audiencePages, keyFacts, serviceExtras } from "@/content/answers";
 import { boundaries, engagements, faqs, history, principles, process } from "@/content/company";
+import { partnerFaqs, partnerTypes, sponsorTracks } from "@/content/partnership";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
@@ -33,6 +34,7 @@ export function buildLlmsTxt() {
     "## Halaman penting",
     "",
     `- [Tentang dan fakta singkat](${u("/tentang/")}): sejarah sejak 22 Desember 2022, prinsip kerja, batasan, model kerja sama`,
+    `- [Partnership dan sponsorship](${u("/partnership/")}): kerja sama untuk agency (white-label), kampus dan komunitas, penyedia teknologi; sponsorship dua arah`,
     `- [FAQ](${u("/faq/")}): jawaban tentang biaya, maintenance, source code, AI, dan keamanan data`,
     `- [Kontak](${u("/kontak/")}): ${site.email}, WhatsApp ${site.whatsappDisplay}`,
     "",
@@ -95,6 +97,12 @@ export function buildLlmsFullTxt() {
       "",
     );
   }
+
+  push("## Partnership", "", `URL: ${u("/partnership/")}`, "");
+  for (const t of partnerTypes) push(`### ${t.title}`, "", t.who, `Yang ditawarkan: ${t.offer.join("; ")}.`, ...(t.example ? [t.example] : []), "");
+  push("## Sponsorship", "");
+  for (const t of sponsorTracks) push(`### ${t.label}`, "", t.body, `Bentuk dukungan: ${t.forms.join("; ")}.`, `Yang perlu dikirim: ${t.send.join("; ")}.`, t.note, "");
+  for (const f of partnerFaqs) push(`T: ${f.q}`, `J: ${f.a}`, "");
 
   push("## Cara kerja", "", ...process.map((s, i) => `${i + 1}. ${s.title}: ${s.body}`), "");
   push("## Prinsip kerja", "", ...principles.map((p) => `- ${p.title}: ${p.body}`), "");

@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ...(p.image ? { images: [u(p.image.src)] } : {}),
     })),
     { url: u("/faq/"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: u("/partnership/"), lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: u("/tentang/"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: u("/kontak/"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: u("/privasi/"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },

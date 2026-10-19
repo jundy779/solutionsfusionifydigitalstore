@@ -10,6 +10,8 @@ import { Wordmark } from "./Wordmark";
 const company = [
   { href: "/portfolio/", label: "Portfolio" },
   { href: "/tentang/", label: "Tentang dan sejarah" },
+  { href: "/partnership/", label: "Partnership" },
+  { href: "/partnership/#sponsorship", label: "Sponsorship" },
   { href: "/#cara-kerja", label: "Cara kerja" },
   { href: "/faq/", label: "FAQ" },
   { href: "/kontak/", label: "Kontak" },

@@ -14,6 +14,7 @@ import { StatusChip } from "@/components/StatusChip";
 import { faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { faqs, process } from "@/content/company";
 import { projects } from "@/content/projects";
+import { TrustedBy } from "@/components/TrustedBy";
 import { services } from "@/content/services";
 import { site, waLink } from "@/content/site";
 
@@ -181,6 +182,8 @@ export default function Home() {
               Semua project
             </Link>
           </div>
+
+          <TrustedBy compact />
 
           <Link className="showcase" href={`/portfolio/${featured.slug}/`} data-spot data-reveal>
             <ProjectCover project={featured} />
