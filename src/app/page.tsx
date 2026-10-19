@@ -201,14 +201,16 @@ export default function Home() {
             </div>
           </Link>
 
-          <ul className="work-grid">
+          <ul className="work-grid work-grid--home">
             {rest.map((p) => (
               <li key={p.slug} data-reveal>
                 <Link className="work-card" href={`/portfolio/${p.slug}/`} data-spot>
                   <ProjectCover project={p} />
                   <div className="work-card-body">
                     <div className="chips">
-                      <span className="chip own">Produk FUSIONIFY</span>
+                      <span className={p.origin === "client" ? "chip client" : "chip own"}>
+                        {p.origin === "client" ? "Project client" : "Produk FUSIONIFY"}
+                      </span>
                       <StatusChip project={p} />
                     </div>
                     <h3>{p.name}</h3>

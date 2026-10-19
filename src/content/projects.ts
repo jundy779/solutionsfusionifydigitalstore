@@ -42,14 +42,47 @@ export const projects: Project[] = [
     scope: ["Digital presence", "Informasi sekolah", "Web platform", "Informasi PPDB"],
   },
   {
+    slug: "hadyva-interior",
+    name: "HADYVA INTERIOR",
+    category: "Interior, Web Development",
+    origin: "client",
+    status: "Production",
+    statusTone: "go",
+    url: "https://hadyvainterior.com",
+    domain: "hadyvainterior.com",
+    location: "Bojonggede, Bogor",
+    image: {
+      src: "/images/hadyva-interior.webp",
+      alt: "Halaman depan website HADYVA INTERIOR dengan judul Custom Kitchen Set Specialist di atas foto dapur bernuansa gelap dan lampu hangat",
+      width: 1440,
+      height: 810,
+    },
+    summary:
+      "Website company profile dan katalog untuk spesialis kitchen set dan interior custom yang melayani Bogor dan Jabodetabek.",
+    problem:
+      "Bisnis interior custom dijual lewat kepercayaan: calon pembeli ingin melihat hasil kerja nyata, pilihan material, dan kisaran harga sebelum berani minta survei. Tanpa website sendiri, semua itu tercecer di chat dan media sosial.",
+    solution:
+      "Website dengan nuansa premium yang menampilkan layanan, katalog kitchen set per kelas lengkap dengan harga per meter, portfolio proyek, testimoni, alur kerja dari konsultasi sampai serah terima, dan tombol konsultasi langsung ke WhatsApp. Ditambah blog artikel dan FAQ supaya mudah ditemukan lewat pencarian lokal.",
+    scope: [
+      "Company profile",
+      "Katalog produk dan harga",
+      "Portfolio proyek",
+      "Testimoni klien",
+      "Blog dan artikel SEO",
+      "FAQ",
+      "Konsultasi via WhatsApp",
+      "Mode gelap",
+    ],
+  },
+  {
     slug: "fusionify-bot",
     name: "FUSIONIFY BOT",
     category: "Automation, Commerce",
     origin: "fusionify",
     status: "Beroperasi",
     statusTone: "go",
-    url: "https://bot.fusionifydigital.com",
-    domain: "bot.fusionifydigital.com",
+    url: "https://bot.fusionify.id",
+    domain: "bot.fusionify.id",
     image: {
       src: "/images/fusionify-bot.webp",
       alt: "Halaman depan FUSIONIFY Bot dengan judul Punya Bot Jualan Otomatis di Telegram dan contoh percakapan bot memilih produk",
@@ -140,16 +173,35 @@ export const projects: Project[] = [
   },
   {
     slug: "premiumify",
-    cover: "store",
     name: "Premiumify",
     category: "Digital Commerce",
     origin: "fusionify",
-    summary: "Storefront produk digital dengan ekosistem seller, membership, dan PWA.",
+    status: "Beroperasi",
+    statusTone: "go",
+    url: "https://premiumify.my.id",
+    domain: "premiumify.my.id",
+    image: {
+      src: "/images/premiumify.webp",
+      alt: "Halaman depan Premiumify dengan judul Berhenti bayar empat langganan cukup satu harga dan perbandingan harga langganan",
+      width: 1440,
+      height: 810,
+    },
+    summary:
+      "Toko produk digital premium dengan pembayaran QRIS dan pengiriman akun otomatis ke email, ditambah fitur member, referral, dan lacak pesanan.",
     problem:
-      "Toko produk digital kecil butuh etalase yang rapi, bisa dipasang di HP seperti aplikasi, dan mudah dikelola.",
+      "Toko produk digital yang melayani pesanan lewat chat cepat kewalahan: setiap order harus dicek pembayarannya, lalu akunnya dikirim manual. Pembeli juga sulit memastikan pesanan mereka sudah sampai di tahap mana.",
     solution:
-      "Storefront dengan ekosistem seller, membership, serta manajemen konten dan produk, dikemas sebagai PWA.",
-    scope: ["Storefront", "Seller ecosystem", "PWA", "Membership", "Content dan product management"],
+      "Storefront dengan katalog yang bisa dicari dan difilter, bundle produk, pembayaran QRIS tanpa kartu kredit, dan pengiriman akun otomatis ke email begitu pembayaran masuk. Pembeli bisa melacak pesanan sendiri, sementara fitur member dan referral membantu pelanggan kembali belanja. Bisa dipasang di layar HP seperti aplikasi, dan terhubung dengan FUSIONIFY BOT.",
+    scope: [
+      "Katalog, pencarian, dan filter harga",
+      "Bundle produk",
+      "Pembayaran QRIS",
+      "Pengiriman otomatis ke email",
+      "Lacak pesanan",
+      "Member dan referral",
+      "Mode gelap",
+      "Web app untuk HP",
+    ],
   },
 ];
 

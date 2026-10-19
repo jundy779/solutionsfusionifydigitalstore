@@ -4671,3 +4671,17 @@ main:focus {
   padding-inline: 0.08em;
   margin-inline: -0.08em;
 }
+
+/* Beranda: lima project, dua lebar di atas dan tiga di bawah */
+.work-grid--home{grid-template-columns:repeat(6,minmax(0,1fr))}
+.work-grid--home>li{grid-column:span 2}
+.work-grid--home>li:nth-child(-n+2){grid-column:span 3}
+@media (max-width:1080px){
+  .work-grid--home{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work-grid--home>li,.work-grid--home>li:nth-child(-n+2){grid-column:span 1}
+  .work-grid--home>li:first-child{grid-column:span 2}
+}
+@media (max-width:520px){
+  .work-grid--home{grid-template-columns:1fr}
+  .work-grid--home>li:first-child{grid-column:auto}
+}

@@ -32,7 +32,7 @@ export const serviceExtras: Record<string, ServiceExtra> = {
       },
     ],
     audiences: ["umkm", "sekolah", "startup", "komunitas"],
-    projects: ["smk-pionir", "premiumify", "studydate"],
+    projects: ["smk-pionir", "hadyva-interior", "premiumify"],
   },
   "automation-bots": {
     seoTitle: "Jasa Bot WhatsApp, Telegram, dan Automation",
@@ -176,7 +176,7 @@ export const audiencePages: AudiencePage[] = [
       "Rekap penjualan masih pakai catatan terpisah",
     ],
     services: ["web-development", "automation-bots", "digital-systems", "cloud-deployment"],
-    projects: ["fusionify-bot", "premiumify"],
+    projects: ["hadyva-interior", "fusionify-bot", "premiumify"],
     faqs: [
       {
         q: "Apakah Fusionify Solutions menerima project UMKM yang kecil?",

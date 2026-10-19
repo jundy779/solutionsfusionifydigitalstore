@@ -13,7 +13,7 @@ import { ogImage } from "@/content/site";
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "Project client dan produk yang dibangun Fusionify Solutions: SMK Pionir Bojonggede, FUSIONIFY BOT, StudyDate.id, Lumbung, dan Premiumify.",
+    "Project client dan produk yang dibangun Fusionify Solutions: SMK Pionir Bojonggede, HADYVA INTERIOR, FUSIONIFY BOT, StudyDate.id, Lumbung, dan Premiumify.",
   alternates: { canonical: "/portfolio/" },
   openGraph: { title: "Portfolio | FUSIONIFY SOLUTIONS", url: "/portfolio/", images: [ogImage] },
 };
