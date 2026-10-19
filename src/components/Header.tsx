@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, waLink } from "@/content/site";
+import { WhatsApp } from "./Icons";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
@@ -60,8 +61,8 @@ export function Header() {
                 );
               })}
             </ul>
-            <a className="btn btn-primary btn-sm" href={waLink()} target="_blank" rel="noopener noreferrer">
-              Diskusikan kebutuhan
+            <a className="btn btn-wa btn-sm" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <WhatsApp /> Diskusikan kebutuhan
             </a>
           </nav>
 

@@ -56,7 +56,7 @@ export default async function AudiencePage({ params }: Props) {
             <p className="lead">{a.intro}</p>
             <div className="actions">
               <a
-                className="btn btn-primary"
+                className="btn btn-wa"
                 href={waLink(`Halo Fusionify Solutions, saya dari ${a.title.replace(/^.*untuk /i, "")} dan mau diskusi kebutuhan.`)}
                 target="_blank"
                 rel="noopener noreferrer"

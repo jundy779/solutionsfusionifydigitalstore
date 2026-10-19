@@ -31,7 +31,7 @@ export function Footer() {
             <h2 className="footer-cta__title">Ada kebutuhan digital yang mau dibereskan?</h2>
           </div>
           <div className="footer-cta__actions">
-            <a className="btn btn-white" href={waLink()} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
               <Chat /> Chat WhatsApp
             </a>
             <a className="btn btn-outline-light" href={`mailto:${site.email}`}>

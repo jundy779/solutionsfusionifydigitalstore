@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: Props) {
               </ul>
               <div className="actions" style={{ marginTop: "2rem" }}>
                 <a
-                  className="btn btn-primary"
+                  className="btn btn-wa"
                   href={waLink(`Halo Fusionify Solutions, saya lihat project ${p.name} dan punya kebutuhan serupa.`)}
                   target="_blank"
                   rel="noopener noreferrer"

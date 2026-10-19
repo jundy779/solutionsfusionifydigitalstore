@@ -37,7 +37,7 @@ export default function FaqPage() {
             Tidak menemukan yang kamu cari? Tanya langsung saja.
           </p>
           <div className="actions">
-            <a className="btn btn-primary" href={waLink("Halo Fusionify Solutions, saya mau tanya dulu.")} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink("Halo Fusionify Solutions, saya mau tanya dulu.")} target="_blank" rel="noopener noreferrer">
               <Chat /> Tanya lewat WhatsApp
             </a>
           </div>

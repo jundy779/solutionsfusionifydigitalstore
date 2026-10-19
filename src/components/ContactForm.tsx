@@ -113,7 +113,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
       </div>
 
       <div className="form-foot">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-wa">
           <Chat /> Kirim lewat WhatsApp
         </button>
         <a className="link" href={mailHref}>

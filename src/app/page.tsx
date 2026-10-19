@@ -73,7 +73,7 @@ export default function Home() {
               mengubah kebutuhan jadi solusi yang benar-benar dipakai setiap hari.
             </p>
             <div className="actions enter" style={{ animationDelay: "0.8s" }}>
-              <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
                 <Chat /> Diskusikan kebutuhan
               </a>
               <Link className="btn btn-secondary" href="/portfolio/">
@@ -159,7 +159,7 @@ export default function Home() {
               mirip situasi kamu dan lihat contoh alurnya.
             </p>
             <div className="actions" style={{ marginTop: "2rem" }}>
-              <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
                 <Chat /> Ceritakan situasi kamu
               </a>
             </div>
@@ -228,7 +228,7 @@ export default function Home() {
 
       <section className="section" id="cara-kerja" aria-labelledby="h-cara">
         <div className="wrap">
-          <div className="section-head center" data-reveal>
+          <div className="section-head" data-reveal>
             <Sheet no="04 / 08">Cara kerja</Sheet>
             <h2 id="h-cara">Dari cerita pertama sampai sistem diserahkan.</h2>
             <p>Tujuh tahap yang sama untuk project kecil maupun besar. Kamu selalu tahu sedang di tahap mana.</p>
@@ -315,7 +315,7 @@ export default function Home() {
                   Lihat layanan AI
                 </Link>
                 <a
-                  className="btn btn-outline-light"
+                  className="btn btn-wa"
                   href={waLink("Halo Fusionify Solutions, saya mau diskusi soal implementasi AI.")}
                   target="_blank"
                   rel="noopener noreferrer"

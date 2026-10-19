@@ -36,7 +36,7 @@ export default function PartnershipPage() {
             brand yang sejalan.
           </p>
           <div className="actions">
-            <a className="btn btn-white" href={waLink("Halo Fusionify Solutions, saya mau diskusi partnership.")} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink("Halo Fusionify Solutions, saya mau diskusi partnership.")} target="_blank" rel="noopener noreferrer">
               <Chat /> Diskusi partnership
             </a>
             <a className="btn btn-outline-light" href="#sponsorship">
@@ -167,7 +167,7 @@ export default function PartnershipPage() {
             </div>
           </div>
           <div className="actions" style={{ marginTop: "2.5rem" }}>
-            <a className="btn btn-primary" href={waLink("Halo Fusionify Solutions, saya mau diskusi partnership.")} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink("Halo Fusionify Solutions, saya mau diskusi partnership.")} target="_blank" rel="noopener noreferrer">
               <Chat /> Chat WhatsApp
             </a>
             <a className="btn btn-secondary" href={mail("Partnership")}>

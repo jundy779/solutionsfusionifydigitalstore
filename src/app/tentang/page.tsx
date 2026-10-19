@@ -182,7 +182,7 @@ export default function AboutPage() {
             ))}
           </div>
           <div className="actions" style={{ marginTop: "3rem" }}>
-            <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
               <Chat /> Diskusikan kebutuhan
             </a>
             <Link className="btn btn-secondary" href="/layanan/">

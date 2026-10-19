@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { waLink } from "@/content/site";
-import { Chat } from "./Icons";
+import { WhatsApp } from "./Icons";
 
 // Appears only after the hero, so it never covers the opening content.
 export function WhatsAppFloat() {
@@ -22,8 +22,10 @@ export function WhatsAppFloat() {
       rel="noopener noreferrer"
       tabIndex={show ? 0 : -1}
       aria-hidden={!show}
+      aria-label="Chat WhatsApp"
     >
-      <Chat /> Chat WhatsApp
+      <WhatsApp />
+      <span className="wa-float__label">Chat WhatsApp</span>
     </a>
   );
 }

@@ -61,7 +61,7 @@ export default async function ServicePage({ params }: Props) {
             </div>
             <div className="actions">
               <a
-                className="btn btn-primary"
+                className="btn btn-wa"
                 href={waLink(`Halo Fusionify Solutions, saya mau diskusi soal ${s.name}.`)}
                 target="_blank"
                 rel="noopener noreferrer"

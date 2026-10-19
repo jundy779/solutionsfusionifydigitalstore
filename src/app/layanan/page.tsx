@@ -40,7 +40,7 @@ export default function ServicesPage() {
             rangkaian itu sampai benar-benar jalan.
           </p>
           <div className="actions">
-            <a className="btn btn-primary" href={waLink()} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-wa" href={waLink()} target="_blank" rel="noopener noreferrer">
               <Chat /> Diskusikan kebutuhan
             </a>
           </div>
