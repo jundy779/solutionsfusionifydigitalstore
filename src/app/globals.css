@@ -4786,3 +4786,12 @@ main:focus {
 }
 @media (min-width:641px){.trusted .trusted__label,.partners .trusted__label{width:9.5rem;min-width:0}}
 @media (min-width:641px){.trusted__list,.trusted--compact .trusted__list{grid-template-columns:repeat(auto-fill,minmax(20rem,1fr))}}
+/* Beranda: lebar dua kartu pertama hanya kalau jumlahnya menyisakan dua */
+.work-grid--home>li:nth-child(-n+2){grid-column:span 2}
+.work-grid--home>li:first-child:nth-last-child(3n+2),.work-grid--home>li:first-child:nth-last-child(3n+2)+li{grid-column:span 3}
+@media (max-width:1080px){
+  .work-grid--home>li,.work-grid--home>li:nth-child(-n+2),.work-grid--home>li:first-child:nth-last-child(3n+2)+li{grid-column:span 1}
+  .work-grid--home>li:first-child:nth-last-child(odd){grid-column:span 2}
+  .work-grid--home>li:first-child:nth-last-child(even){grid-column:span 1}
+}
+@media (max-width:520px){.work-grid--home>li,.work-grid--home>li:first-child:nth-last-child(odd){grid-column:auto}}

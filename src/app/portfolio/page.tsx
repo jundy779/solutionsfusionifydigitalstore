@@ -13,7 +13,7 @@ import { ogImage } from "@/content/site";
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "Project client dan produk yang dibangun Fusionify Solutions: SMK Pionir Bojonggede, HADYVA INTERIOR, FUSIONIFY BOT, StudyDate.id, Lumbung, dan Premiumify.",
+    "Project client dan produk Fusionify Solutions: SMK Pionir, HADYVA INTERIOR, FUSIONIFY BOT, StudyDate.id, Fusion Tempest VPN, Lumbung, dan Premiumify.",
   alternates: { canonical: "/portfolio/" },
   openGraph: { title: "Portfolio | FUSIONIFY SOLUTIONS", url: "/portfolio/", images: [ogImage] },
 };
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
             <h2>Produk dan eksperimen FUSIONIFY</h2>
             <p>Dibangun di dalam ekosistem FUSIONIFY. Di sini kami menguji pendekatan sebelum dipakai di project client.</p>
           </div>
-          <ul className="work-grid">
+          <ul className="work-grid work-grid--home">
             {internal.map((p) => (
               <li key={p.slug}>
                 <Link className="work-card" href={`/portfolio/${p.slug}/`}>

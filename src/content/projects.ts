@@ -9,6 +9,7 @@ export type Project = {
   location?: string;
   image?: { src: string; alt: string; width: number; height: number };
   logo?: { src: string; width: number; height: number };
+  links?: { label: string; url: string }[];
   domain?: string;
   cover?: "chat" | "people" | "warehouse" | "store";
   summary: string;
@@ -140,6 +141,44 @@ export const projects: Project[] = [
       "Pendaftaran akses awal",
     ],
     technology: ["Next.js"],
+  },
+  {
+    slug: "fusion-tempest",
+    name: "Fusion Tempest VPN",
+    category: "Aplikasi Android, Networking",
+    origin: "fusionify",
+    status: "Google Play",
+    statusTone: "go",
+    url: "https://play.google.com/store/apps/details?id=fusion.tempest",
+    domain: "Google Play",
+    image: {
+      src: "/images/fusion-tempest.webp",
+      alt: "Ikon tiga aplikasi Fusion Tempest, FTV Injector, dan Fusionify Injector bersama tampilan layar aplikasinya di Android",
+      width: 1440,
+      height: 810,
+    },
+    summary:
+      "Rangkaian aplikasi VPN Android yang dirilis di Google Play: Fusion Tempest, FTV Injector, dan Fusionify Injector, dengan total lebih dari 11 ribu unduhan.",
+    problem:
+      "Pengguna Android butuh koneksi yang terenkripsi dan stabil, tapi banyak aplikasi VPN menuntut pengaturan teknis yang rumit sebelum bisa dipakai. Di sisi lain, pengguna yang lebih paham teknis justru butuh kontrol penuh atas protokol dan konfigurasinya.",
+    solution:
+      "Tiga aplikasi untuk dua jenis pengguna. Fusion Tempest dibuat sesederhana mungkin: pilih konfigurasi, tekan satu tombol, lalu tersambung lewat SSH. FTV Injector menambahkan pilihan SSH, UDP, dan V2Ray dengan log koneksi yang bisa dipantau. Fusionify Injector ditujukan untuk pengguna teknis, dengan dukungan HTTP Proxy dan SSH, SSL/TLS, DNS tunnel, payload generator, serta ekspor dan impor konfigurasi, semuanya tanpa root. Ketiganya dirilis dan dikelola langsung di Google Play, termasuk pembaruan dan formulir keamanan data.",
+    scope: [
+      "Aplikasi Android",
+      "Klien VPN multi-protokol",
+      "SSH, SSL/TLS, DNS tunnel, V2Ray, UDP",
+      "Koneksi satu ketukan",
+      "Log koneksi",
+      "Ekspor dan impor konfigurasi",
+      "Tanpa root",
+      "Rilis dan pembaruan di Google Play",
+    ],
+    technology: ["Android", "SSH", "SSL/TLS", "V2Ray"],
+    links: [
+      { label: "Fusion Tempest · 10 rb+ unduhan", url: "https://play.google.com/store/apps/details?id=fusion.tempest" },
+      { label: "FTV Injector · 1 rb+ unduhan", url: "https://play.google.com/store/apps/details?id=com.ftv.injector" },
+      { label: "Fusionify Injector · 500+ unduhan", url: "https://play.google.com/store/apps/details?id=com.fusionify.injector" },
+    ],
   },
   {
     slug: "lumbung",

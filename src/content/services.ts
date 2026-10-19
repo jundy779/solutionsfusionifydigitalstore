@@ -35,6 +35,7 @@ export const services: Service[] = [
           "SaaS dan web platform",
           "Admin panel",
           "Backend dan API",
+          "Aplikasi Android dan rilis ke Google Play",
           "Maintenance website",
           "Perbaikan website yang sudah ada",
         ],

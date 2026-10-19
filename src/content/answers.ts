@@ -27,12 +27,16 @@ export const serviceExtras: Record<string, ServiceExtra> = {
         a: "Bisa. Perbaikan website yang sudah ada dan maintenance website termasuk dalam layanan ini, setelah kami meninjau kode, teknologi, dan akses yang tersedia.",
       },
       {
+        q: "Apakah Fusionify Solutions bisa membuat aplikasi Android?",
+        a: "Bisa. Kami sudah membangun dan merilis aplikasi Android sendiri di Google Play, salah satunya rangkaian aplikasi Fusion Tempest VPN dengan total lebih dari 11 ribu unduhan. Untuk project client, kami bisa membantu dari pengembangan sampai rilis di Google Play.",
+      },
+      {
         q: "Teknologi apa yang dipakai untuk membuat website?",
         a: "Umumnya React, Next.js, TypeScript, dan Node.js, dengan PostgreSQL atau Supabase untuk data, lalu di-deploy ke Vercel atau VPS. Pilihan akhirnya disesuaikan dengan kebutuhan dan skala project.",
       },
     ],
     audiences: ["umkm", "sekolah", "startup", "komunitas"],
-    projects: ["smk-pionir", "hadyva-interior", "premiumify"],
+    projects: ["smk-pionir", "hadyva-interior", "premiumify", "fusion-tempest"],
   },
   "automation-bots": {
     seoTitle: "Jasa Bot WhatsApp, Telegram, dan Automation",
