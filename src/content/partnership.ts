@@ -125,3 +125,21 @@ export const partnerFaqs: QA[] = [
     a: "Kirim email atau WhatsApp dengan profil singkat dan bentuk kerja sama yang diinginkan. Untuk sponsorship, lampirkan proposal acara atau program.",
   },
 ];
+
+export type Partner = {
+  name: string;
+  type: string;
+  url: string;
+  body: string;
+  logo: { src: string; width: number; height: number };
+};
+
+export const partners: Partner[] = [
+  {
+    name: "AutoGoPay",
+    type: "Teknologi dan integrasi",
+    url: "https://autogopay.site",
+    body: "Payment gateway untuk menerima QRIS GoPay, ShopeePay, dan OVO lewat satu API, dengan webhook otomatis saat pembayaran lunas.",
+    logo: { src: "/images/logos/autogopay.png", width: 168, height: 50 },
+  },
+];

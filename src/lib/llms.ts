@@ -1,6 +1,6 @@
 import { audiencePages, keyFacts, serviceExtras } from "@/content/answers";
 import { boundaries, engagements, faqs, history, principles, process } from "@/content/company";
-import { partnerFaqs, partnerTypes, sponsorTracks } from "@/content/partnership";
+import { partnerFaqs, partners, partnerTypes, sponsorTracks } from "@/content/partnership";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
@@ -100,6 +100,7 @@ export function buildLlmsFullTxt() {
 
   push("## Partnership", "", `URL: ${u("/partnership/")}`, "");
   for (const t of partnerTypes) push(`### ${t.title}`, "", t.who, `Yang ditawarkan: ${t.offer.join("; ")}.`, ...(t.example ? [t.example] : []), "");
+  push("### Partner saat ini", "", ...partners.map((p) => `- ${p.name} (${p.url}): ${p.type}. ${p.body}`), "");
   push("## Sponsorship", "");
   for (const t of sponsorTracks) push(`### ${t.label}`, "", t.body, `Bentuk dukungan: ${t.forms.join("; ")}.`, `Yang perlu dikirim: ${t.send.join("; ")}.`, t.note, "");
   for (const f of partnerFaqs) push(`T: ${f.q}`, `J: ${f.a}`, "");

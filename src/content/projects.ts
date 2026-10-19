@@ -8,6 +8,7 @@ export type Project = {
   url?: string;
   location?: string;
   image?: { src: string; alt: string; width: number; height: number };
+  logo?: { src: string; width: number; height: number };
   domain?: string;
   cover?: "chat" | "people" | "warehouse" | "store";
   summary: string;
@@ -28,6 +29,7 @@ export const projects: Project[] = [
     status: "Production",
     statusTone: "go",
     location: "Bojonggede, Bogor",
+    logo: { src: "/images/logos/smk-pionir.png", width: 144, height: 144 },
     image: {
       src: "/images/smk-pionir.webp",
       alt: "Halaman depan website SMK Pionir Bojonggede dengan menu PPDB 2026 dan foto siswa",
@@ -51,6 +53,7 @@ export const projects: Project[] = [
     url: "https://hadyvainterior.com",
     domain: "hadyvainterior.com",
     location: "Bojonggede, Bogor",
+    logo: { src: "/images/logos/hadyva-interior.png", width: 162, height: 132 },
     image: {
       src: "/images/hadyva-interior.webp",
       alt: "Halaman depan website HADYVA INTERIOR dengan judul Custom Kitchen Set Specialist di atas foto dapur bernuansa gelap dan lampu hangat",
