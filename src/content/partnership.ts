@@ -132,6 +132,8 @@ export type Partner = {
   url: string;
   body: string;
   logo: { src: string; width: number; height: number };
+  // Where the partner lists FUSIONIFY back, so visitors can verify it.
+  mutual?: { label: string; url: string };
 };
 
 export const partners: Partner[] = [
@@ -140,6 +142,13 @@ export const partners: Partner[] = [
     type: "Teknologi dan integrasi",
     url: "https://autogopay.site",
     body: "Payment gateway untuk menerima QRIS GoPay, ShopeePay, dan OVO lewat satu API, dengan webhook otomatis saat pembayaran lunas.",
-    logo: { src: "/images/logos/autogopay.png", width: 168, height: 50 },
+    logo: { src: "/images/logos/autogopay.png", width: 640, height: 197 },
+  },
+  {
+    name: "Gretongers Team",
+    type: "Partner komunitas",
+    url: "https://t.me/gretongersteamofficial",
+    body: "Komunitas Telegram yang ikut menguji dan memberi masukan untuk aplikasi Fusion Tempest VPN, serta membantu mengenalkan produk FUSIONIFY ke anggotanya.",
+    logo: { src: "/images/logos/gretongers.png", width: 400, height: 400 },
   },
 ];

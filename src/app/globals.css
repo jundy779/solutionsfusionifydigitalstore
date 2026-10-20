@@ -4895,3 +4895,20 @@ main:focus {
 .form select{text-overflow:ellipsis}
 .form .btn{max-width:100%;white-space:normal;text-align:center;justify-content:center}@media (max-width:560px){.form .btn{width:100%}}
 @media (max-width:360px){.btn{letter-spacing:.06em;padding-inline:1rem}}
+/* Logo wordmark lebar (mis. HADYVA, AutoGoPay) dapat kotak lebih lebar */
+.logo-tile__mark--wide{width:7.5rem}
+.logo-tile__mark--wide img{max-width:88%;max-height:62%}
+.partner-row .logo-tile__mark--wide{width:7.5rem}
+@media (max-width:360px){.logo-tile__mark--wide{width:6.25rem}}
+@media (max-width:480px){.logo-tile__mark--wide,.partner-row .logo-tile__mark--wide{width:6rem}.logo-tile{gap:.8rem}}
+.partner-row__text{display:grid;gap:.55rem}
+.partner-row__text>p{color:var(--muted);font-size:.95rem;max-width:42em}
+.partner-row__mutual{display:flex;align-items:flex-start;gap:.45rem;font-size:.9rem!important;color:var(--fg)!important}
+.partner-row__mutual svg{flex:none;width:1rem;height:1rem;margin-top:.2rem;color:#16a34a}
+/* Logo selalu muat di kotaknya, apa pun rasio gambarnya */
+.logo-tile__mark{overflow:hidden}
+.logo-tile__mark img{max-height:2.75rem;max-width:calc(100% - .8rem)}
+.logo-tile__mark--wide img{max-height:2.1rem}
+/* Baris verifikasi partner mengalir sebagai satu kalimat di semua ukuran */
+.partner-row__mutual{display:block!important}
+.partner-row__mutual svg{display:inline-block;vertical-align:-.15em;margin:0 .35rem 0 0}

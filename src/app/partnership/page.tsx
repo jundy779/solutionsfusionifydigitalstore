@@ -55,7 +55,17 @@ export default function PartnershipPage() {
               {partners.map((p) => (
                 <li key={p.name} className="partner-row">
                   <LogoTile name={p.name} meta={p.type} logo={p.logo} href={p.url} external />
-                  <p>{p.body}</p>
+                  <div className="partner-row__text">
+                    <p>{p.body}</p>
+                    {p.mutual && (
+                      <p className="partner-row__mutual">
+                        <Check /> FUSIONIFY juga tercatat sebagai partner di{" "}
+                        <a className="link" href={p.mutual.url} target="_blank" rel="noopener noreferrer">
+                          {p.mutual.label}
+                        </a>
+                      </p>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

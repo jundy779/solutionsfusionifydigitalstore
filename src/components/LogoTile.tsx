@@ -15,7 +15,7 @@ type Props = {
 export function LogoTile({ name, meta, logo, href, external = false }: Props) {
   const inner = (
     <>
-      <span className="logo-tile__mark" aria-hidden="true">
+      <span className={`logo-tile__mark${logo.width / logo.height > 2 ? " logo-tile__mark--wide" : ""}`} aria-hidden="true">
         <Image src={logo.src} alt="" width={logo.width} height={logo.height} />
       </span>
       <span className="logo-tile__text">
