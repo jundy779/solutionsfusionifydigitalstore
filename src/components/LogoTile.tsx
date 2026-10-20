@@ -5,7 +5,7 @@ type Props = {
   name: string;
   meta: string;
   logo: { src: string; width: number; height: number };
-  href: string;
+  href?: string;
   external?: boolean;
 };
 
@@ -25,6 +25,13 @@ export function LogoTile({ name, meta, logo, href, external = false }: Props) {
       <span className="logo-tile__shine" aria-hidden="true" />
     </>
   );
+  if (!href) {
+    return (
+      <div className="logo-tile logo-tile--static" data-spot>
+        {inner}
+      </div>
+    );
+  }
   return external ? (
     <a className="logo-tile" href={href} target="_blank" rel="noopener noreferrer" data-spot>
       {inner}

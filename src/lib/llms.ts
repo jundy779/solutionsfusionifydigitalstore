@@ -100,7 +100,7 @@ export function buildLlmsFullTxt() {
 
   push("## Partnership", "", `URL: ${u("/partnership/")}`, "");
   for (const t of partnerTypes) push(`### ${t.title}`, "", t.who, `Yang ditawarkan: ${t.offer.join("; ")}.`, ...(t.example ? [t.example] : []), "");
-  push("### Partner saat ini", "", ...partners.map((p) => `- ${p.name} (${p.url}): ${p.type}. ${p.body}${p.mutual ? ` FUSIONIFY juga tercatat sebagai partner di ${p.mutual.url}.` : ""}`), "");
+  push("### Partner saat ini", "", ...partners.map((p) => `- ${p.name}${p.url ? ` (${p.url})` : ""}: ${p.type}. ${p.body}${p.mutual ? ` FUSIONIFY juga tercatat sebagai partner di ${p.mutual.url}.` : ""}`), "");
   push("## Sponsorship", "");
   for (const t of sponsorTracks) push(`### ${t.label}`, "", t.body, `Bentuk dukungan: ${t.forms.join("; ")}.`, `Yang perlu dikirim: ${t.send.join("; ")}.`, t.note, "");
   for (const f of partnerFaqs) push(`T: ${f.q}`, `J: ${f.a}`, "");

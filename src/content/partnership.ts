@@ -129,7 +129,7 @@ export const partnerFaqs: QA[] = [
 export type Partner = {
   name: string;
   type: string;
-  url: string;
+  url?: string;
   body: string;
   logo: { src: string; width: number; height: number };
   // Where the partner lists FUSIONIFY back, so visitors can verify it.
@@ -150,5 +150,18 @@ export const partners: Partner[] = [
     url: "https://t.me/gretongersteamofficial",
     body: "Komunitas Telegram yang ikut menguji dan memberi masukan untuk aplikasi Fusion Tempest VPN, serta membantu mengenalkan produk FUSIONIFY ke anggotanya.",
     logo: { src: "/images/logos/gretongers.png", width: 400, height: 400 },
+  },
+  {
+    name: "Syamxuanify",
+    type: "Partner operasional Premiumify",
+    body: "Bisnis produk digital dan akun premium yang ikut memegang dan aktif menjalankan operasional Premiumify bersama FUSIONIFY.",
+    logo: { src: "/images/logos/syamxuanify.png", width: 400, height: 400 },
+  },
+  {
+    name: "PT Raja Server Premium",
+    type: "Partner infrastruktur",
+    url: "https://t.me/RAJA_SERVER_PREMIUM",
+    body: "Penyedia server, cloud, akun VPN, CloudFront, dan kebutuhan tunneling. Mendukung infrastruktur FUSIONIFY, ikut membantu saat terjadi gangguan server, dan kedua pihak saling mengenalkan layanan masing-masing.",
+    logo: { src: "/images/logos/raja-server-premium.png", width: 400, height: 400 },
   },
 ];
