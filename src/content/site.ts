@@ -20,6 +20,15 @@ export const site = {
   sameAs: [] as string[],
 };
 
+// Kontak langsung pimpinan. Nomor pribadi tidak dipublikasikan tanpa izin pemiliknya.
+export const leaders = [
+  {
+    name: "Arya",
+    role: "Co-Founder & Co-CEO",
+    email: "arya@fusionify.id",
+  },
+];
+
 export const ogImage = {
   url: "/og.png",
   width: 1200,
