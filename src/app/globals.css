@@ -4927,3 +4927,55 @@ main:focus {
 .leaders__links{display:flex!important;flex-direction:column;gap:0!important;align-items:flex-start}
 .leaders__links a svg{color:#fff}
 .leaders__links a[href*="wa.me"] svg{color:var(--wa)}
+
+/* ===================== Motion kit (kode sendiri FUSIONIFY) ===================== */
+/* Lenis: biarkan Lenis yang mengatur kehalusan, matikan smooth bawaan */
+html.lenis-on{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* Loader pembuka */
+.fx-loader{display:none}
+html[data-loader="run"] .fx-loader,html[data-loader="done"] .fx-loader{display:grid;position:fixed;inset:0;z-index:200;place-items:center;pointer-events:none}
+html[data-loader="run"] body{overflow:hidden}
+.fx-loader__curtain{position:absolute;inset:0;background:linear-gradient(180deg,var(--hero-from,#1f7ae0),var(--hero-to,#0a5cc4));transform-origin:top}
+.fx-loader__seal{position:relative;width:132px;height:132px;overflow:visible}
+.fx-loader__seal path{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.fx-loader__outer{stroke-width:3.2}
+.fx-loader__inner{stroke-width:2;opacity:.55}
+.fx-loader__mark{position:absolute;width:56px;height:56px;border-radius:50%;opacity:0;transform:scale(.4) rotate(-20deg)}
+html[data-loader="run"] .fx-loader__outer{animation:fx-draw .8s cubic-bezier(.65,0,.35,1) forwards}
+html[data-loader="run"] .fx-loader__inner{animation:fx-draw .7s .15s cubic-bezier(.65,0,.35,1) forwards}
+html[data-loader="run"] .fx-loader__mark{animation:fx-pop .45s .7s cubic-bezier(.2,.9,.3,1.4) forwards}
+html[data-loader="done"] .fx-loader__curtain{animation:fx-lift .7s cubic-bezier(.76,0,.24,1) forwards}
+html[data-loader="done"] .fx-loader__seal,html[data-loader="done"] .fx-loader__mark{animation:fx-out .35s ease forwards;stroke-dashoffset:0;opacity:1;transform:none}
+html[data-loader="done"] .fx-loader{animation:fx-hide 0s .75s forwards}
+@keyframes fx-draw{to{stroke-dashoffset:0}}
+@keyframes fx-pop{to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes fx-lift{to{transform:scaleY(0)}}
+@keyframes fx-out{to{opacity:0;transform:scale(.85) translateY(-8px)}}
+@keyframes fx-hide{to{visibility:hidden}}
+/* Konten hero baru mulai beranimasi setelah tirai terbuka */
+html[data-loader="run"] .enter,html[data-loader="run"] .enter-stage{animation-play-state:paused}
+
+/* Judul section: muncul dari balik "topeng" saat discroll */
+.motion-ok .section-head[data-reveal] h2{clip-path:inset(0 0 100% 0);transform:translateY(.35em);transition:clip-path .9s cubic-bezier(.2,.8,.2,1) .08s,transform .9s cubic-bezier(.2,.8,.2,1) .08s}
+.motion-ok .section-head[data-reveal].is-in h2{clip-path:inset(-.2em -.2em -.25em -.2em);transform:none}
+
+/* Parallax: hanya geser, tanpa mengganggu transform lain */
+[data-parallax]{will-change:translate}
+
+/* Cursor ring */
+.cursor-ring{position:fixed;left:0;top:0;z-index:150;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid #fff;mix-blend-mode:difference;pointer-events:none;opacity:0;transition:opacity .25s ease,width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease}
+.cursor-ring.is-visible{opacity:.85}
+.cursor-ring.is-hover{width:56px;height:56px;margin:-28px 0 0 -28px;background:rgb(255 255 255/.12)}
+.cursor-ring.is-press{width:26px;height:26px;margin:-13px 0 0 -13px}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.cursor-ring{display:none}}
+
+/* Tombol magnetik: kembali memantul halus saat kursor pergi */
+.btn,.theme-toggle,.wa-float,.to-top{transition-property:translate,background,color,box-shadow,transform,border-color,opacity;transition-duration:.45s,.2s,.2s,.2s,.2s,.2s,.25s;transition-timing-function:cubic-bezier(.2,.9,.3,1.3)}
+.is-magnet{transition-duration:.12s,.2s,.2s,.2s,.2s,.2s,.25s!important}
+
+@media (prefers-reduced-motion:reduce){
+  .fx-loader{display:none!important}
+  .motion-ok .section-head[data-reveal] h2{clip-path:none;transform:none}
+}

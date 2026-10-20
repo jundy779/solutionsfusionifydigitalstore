@@ -8,7 +8,7 @@ const clouds = [
 
 export function Clouds({ count = 4 }: { count?: number }) {
   return (
-    <div className="clouds" aria-hidden="true">
+    <div className="clouds" aria-hidden="true" data-parallax="0.18">
       {clouds.slice(0, count).map((c, i) => (
         <span
           key={i}

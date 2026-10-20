@@ -4,7 +4,10 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MotionRoot } from "@/components/motion/MotionRoot";
-import { themeInitScript } from "@/components/ThemeToggle";
+import { loaderInitScript, themeInitScript } from "@/lib/initScripts";
+import { Loader } from "@/components/motion/Loader";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { PointerFx } from "@/components/motion/PointerFx";
 import { graph, orgSchema, websiteSchema } from "@/lib/schema";
 import { ogImage, site } from "@/content/site";
 import "./globals.css";
@@ -48,9 +51,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript + loaderInitScript }} />
       </head>
       <body>
+        <Loader />
         <a href="#isi" className="skip">
           Langsung ke isi
         </a>
@@ -61,6 +65,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsAppFloat />
         <MotionRoot />
+        <SmoothScroll />
+        <PointerFx />
         <JsonLd data={graph(orgSchema(), websiteSchema())} />
       </body>
     </html>

@@ -92,7 +92,7 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <div className="enter-stage">
+          <div className="enter-stage" data-parallax="0.06">
             <Tilt>
               <HeroStage />
             </Tilt>
@@ -259,15 +259,15 @@ export default function Home() {
             </div>
             <div className="facts">
               <div className="fact" data-reveal>
-                <b>2022</b>
+                <b data-count="2022" data-count-from="2010">2022</b>
                 <span>Mulai berjalan, {site.since}</span>
               </div>
               <div className="fact" data-reveal>
-                <b>7</b>
+                <b data-count="7" data-count-from="0">7</b>
                 <span>Kelompok layanan, dari web sampai AI</span>
               </div>
               <div className="fact" data-reveal>
-                <b>2025</b>
+                <b data-count="2025" data-count-from="2013">2025</b>
                 <span>Mulai mengerjakan AI workflow</span>
               </div>
               <div className="fact" data-reveal>

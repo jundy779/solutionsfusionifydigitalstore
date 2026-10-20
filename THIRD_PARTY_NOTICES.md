@@ -2,11 +2,13 @@
 
 ## Blueprint DS (FUSIONIFY Design System)
 
-Fondasi sistem desain FUSIONIFY (token, komponen, dan motion) diadaptasi dari
-portofolio Andika Dwi Saputra:
+Arah visual sistem desain FUSIONIFY (metafora cetak biru, palet langit dan
+kertas, label lembar) terinspirasi dari portofolio Andika Dwi Saputra:
 https://github.com/andikadevs/andikadevs.github.io
 
-Dipakai dengan izin. Panduan lengkap ada di `docs/DESIGN.md`.
+Website ini tidak memakai kode, aset, maupun audio dari portofolio tersebut.
+Seluruh kode, efek, dan animasi ditulis sendiri untuk FUSIONIFY. Panduan
+lengkap ada di `docs/DESIGN.md`.
 
 ## Font
 
@@ -21,3 +23,4 @@ sendiri lewat paket Fontsource (file lisensi ikut di dalam
 
 - Next.js dan React, MIT License
 - three.js, MIT License
+- Lenis (smooth scroll), darkroom.engineering, MIT License

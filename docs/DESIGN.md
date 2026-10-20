@@ -4,7 +4,7 @@ Panduan gaya visual FUSIONIFY untuk membangun website lain (produk, landing page
 
 Dokumen ini bisa dibaca manusia, dan bisa juga langsung diberikan ke AI coding agent (Claude, Cursor, v0, dan sejenisnya) sebagai acuan. Semua nilai di bawah diambil dari kode web fusionify.id (`css/tokens.css`, `css/components.css`, `css/brand.css`).
 
-> **Catatan asal-usul.** Fondasi sistem ini (Blueprint DS: token, komponen, motion) diadaptasi dari portofolio Andika Dwi Saputra ([andikadevs/andikadevs.github.io](https://github.com/andikadevs/andikadevs.github.io)) dengan izin. Sebelum memakainya di web lain di luar fusionify.id, pastikan izin dari Andika juga mencakup pemakaian itu, dan tetap cantumkan kredit di README atau `THIRD_PARTY_NOTICES.md`.
+> **Catatan asal-usul.** Arah visual sistem ini terinspirasi dari portofolio Andika Dwi Saputra ([andikadevs/andikadevs.github.io](https://github.com/andikadevs/andikadevs.github.io)). Pemiliknya tidak mengizinkan kode, aset, dan musiknya dipakai, hanya boleh dijadikan inspirasi. Jadi semua implementasi FUSIONIFY wajib ditulis sendiri: jangan menyalin kode, file CSS/JS, gambar, atau audio dari repo tersebut. Kredit inspirasi tetap dicantumkan di `THIRD_PARTY_NOTICES.md`.
 
 ---
 
