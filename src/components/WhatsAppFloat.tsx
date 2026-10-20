@@ -8,10 +8,20 @@ import { WhatsApp } from "./Icons";
 export function WhatsAppFloat() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 640);
+    // Hidden over the hero and again once the footer (which has its own
+    // WhatsApp button) comes into view, so it never covers footer links.
+    const onScroll = () => {
+      const footer = document.querySelector(".site-footer");
+      const footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+      setShow(window.scrollY > 640 && footerTop > window.innerHeight - 24);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
   return (
     <a
