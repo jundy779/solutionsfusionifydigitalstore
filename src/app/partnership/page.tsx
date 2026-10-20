@@ -6,7 +6,7 @@ import { TrustedBy } from "@/components/TrustedBy";
 import { JsonLd } from "@/components/JsonLd";
 import { Chat, Check, Mail } from "@/components/Icons";
 import { partnerFaqs, partners, partnerSteps, partnerTypes, sponsorTracks } from "@/content/partnership";
-import { LogoTile } from "@/components/LogoTile";
+import { PartnerGrid } from "@/components/PartnerGrid";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { ogImage, site, waLink } from "@/content/site";
 
@@ -49,27 +49,7 @@ export default function PartnershipPage() {
       <section className="section" style={{ paddingTop: "1rem" }}>
         <div className="wrap">
           <TrustedBy />
-          <div className="partners" data-reveal>
-            <p className="trusted__label">Partner</p>
-            <ul className="partners__list">
-              {partners.map((p) => (
-                <li key={p.name} className="partner-row">
-                  <LogoTile name={p.name} meta={p.type} logo={p.logo} href={p.url} external />
-                  <div className="partner-row__text">
-                    <p>{p.body}</p>
-                    {p.mutual && (
-                      <p className="partner-row__mutual">
-                        <Check /> FUSIONIFY juga tercatat sebagai partner di{" "}
-                        <a className="link" href={p.mutual.url} target="_blank" rel="noopener noreferrer">
-                          {p.mutual.label}
-                        </a>
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <PartnerGrid partners={partners} />
         </div>
       </section>
 

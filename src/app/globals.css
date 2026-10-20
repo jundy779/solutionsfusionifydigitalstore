@@ -4979,3 +4979,56 @@ html[data-loader="run"] .enter,html[data-loader="run"] .enter-stage{animation-pl
   .fx-loader{display:none!important}
   .motion-ok .section-head[data-reveal] h2{clip-path:none;transform:none}
 }
+
+/* ===== Logo dalam jumlah banyak ===== */
+/* Marquee client: satu baris yang terus bergeser, berhenti saat disorot */
+.trusted--marquee{grid-template-columns:auto minmax(0,1fr)}
+.logo-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logo-marquee__track{display:flex;gap:.75rem;width:max-content;animation:logo-slide calc(var(--n)*4.5s) linear infinite}
+.logo-marquee:hover .logo-marquee__track,.logo-marquee:focus-within .logo-marquee__track{animation-play-state:paused}
+@keyframes logo-slide{to{transform:translateX(calc(-50% - .375rem))}}
+.logo-chip{position:relative;display:grid;place-items:center;width:8.5rem;height:4.25rem;border-radius:var(--r-md);background:#fff;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .3s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
+.logo-chip img{max-width:76%;max-height:66%;width:auto;height:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:filter .35s ease,opacity .35s ease,transform .35s ease}
+.logo-chip__name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.logo-chip:hover,.logo-chip:focus-visible{box-shadow:inset 0 0 0 1px var(--line-strong),var(--lift-2);transform:translateY(-2px)}
+.logo-chip:hover img,.logo-chip:focus-visible img{filter:none;opacity:1;transform:scale(1.05)}
+@media (hover:none){.logo-chip img{filter:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.logo-marquee{-webkit-mask-image:none;mask-image:none}.logo-marquee__track{animation:none;flex-wrap:wrap;width:auto}.logo-marquee__track>li[aria-hidden]{display:none}}
+@media (max-width:900px){.trusted--marquee{grid-template-columns:1fr}}
+
+/* Partner: grid kartu ringkas, detail terbuka di tempat */
+.partners--grid{align-items:start}
+.partner-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(17.5rem,1fr));gap:.75rem;align-items:start}
+.partner-card2{border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;transition:box-shadow .3s ease}
+.partner-card2[open]{box-shadow:inset 0 0 0 1px var(--line-strong),var(--lift-1)}
+.partner-card2 summary{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem .85rem .85rem;cursor:pointer;list-style:none;min-height:56px}
+.partner-card2 summary::-webkit-details-marker{display:none}
+.partner-card2 summary:focus-visible{outline:2px solid var(--brand);outline-offset:-2px;border-radius:var(--r-md)}
+.partner-card2__text{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.partner-card2__text strong{font-family:var(--font-display);font-weight:800;font-size:1.02rem;line-height:1.2;color:var(--fg)}
+.partner-card2__text span{font-size:.83rem;color:var(--muted)}
+.partner-card2__toggle{flex:none;position:relative;width:1.6rem;height:1.6rem;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line-strong)}
+.partner-card2__toggle::before,.partner-card2__toggle::after{content:"";position:absolute;left:50%;top:50%;width:.6rem;height:1.5px;background:currentColor;translate:-50% -50%;transition:rotate .3s ease}
+.partner-card2__toggle::after{rotate:90deg}
+.partner-card2[open] .partner-card2__toggle::after{rotate:0deg}
+.partner-card2__body{padding:0 1rem 1rem;display:grid;gap:.6rem}
+.partner-card2__body p{font-size:.93rem;color:var(--muted);line-height:1.55}
+.partner-card2 .logo-tile__mark img{filter:grayscale(1);opacity:.75;transition:filter .35s ease,opacity .35s ease}
+.partner-card2:hover .logo-tile__mark img,.partner-card2[open] .logo-tile__mark img{filter:none;opacity:1}
+@media (hover:none){.partner-card2 .logo-tile__mark img{filter:none;opacity:1}}
+@media (max-width:480px){.partner-cards{grid-template-columns:1fr}}
+.partner-filter{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.partner-filter button{min-height:40px;padding:.4rem .9rem;border-radius:999px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);font-size:.88rem;color:var(--fg);cursor:pointer}
+.partner-filter button.is-active{background:var(--brand);color:#fff;box-shadow:none}
+.partner-filter button{font:inherit;font-size:.88rem;border:0;-webkit-appearance:none;appearance:none}
+.partner-filter button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+@media (max-width:640px){
+  .partner-filter{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-.25rem;padding:0 .25rem .2rem}
+  .partner-filter::-webkit-scrollbar{display:none}
+  .partner-filter button{flex:none;white-space:nowrap}
+}
+/* Kolom isi partner & marquee tidak boleh melebar mengikuti isi */
+.partners--grid{grid-template-columns:auto minmax(0,1fr)}
+.partners--grid>div,.trusted--marquee>.logo-marquee{min-width:0}
+@media (max-width:640px){.partners--grid{grid-template-columns:minmax(0,1fr)}}
+.partner-filter{max-width:100%}
