@@ -9,7 +9,9 @@ import { useEffect, useRef } from "react";
 
   Performance rules:
   - three.js is imported only after hydration, in its own chunk.
-  - Skipped on Save-Data and very low-memory devices; lighter on phones.
+  - Skipped on Save-Data and very low-memory devices; lighter on touch screens
+    (fewer nodes, no antialias, pixel ratio capped at 1.25).
+  - Node matrices are computed only during the entrance, not every frame.
   - Pauses when scrolled away or when the tab is hidden.
   - With prefers-reduced-motion it renders one still frame.
 */
@@ -36,6 +38,10 @@ export function HeroScene() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 760px)").matches;
     const lowEnd = (nav.deviceMemory !== undefined && nav.deviceMemory < 4) || navigator.hardwareConcurrency < 4;
+    // Touch screens get the light profile whatever their layout width: a phone in
+    // "Desktop site" mode lays out ~980px wide but still has a phone GPU.
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    const light = small || lowEnd || touch;
 
     let disposed = false;
     let cleanup = () => {};
@@ -44,8 +50,8 @@ export function HeroScene() {
       const THREE = await import("three");
       if (disposed) return;
 
-      const renderer = new THREE.WebGLRenderer({ antialias: !lowEnd, alpha: true, powerPreference: "low-power" });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowEnd ? 1 : 1.75));
+      const renderer = new THREE.WebGLRenderer({ antialias: !lowEnd && !touch, alpha: true, powerPreference: "low-power" });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowEnd ? 1 : touch ? 1.25 : 1.75));
       renderer.setClearColor(0x000000, 0);
       const canvas = renderer.domElement;
       canvas.setAttribute("aria-hidden", "true");
@@ -60,7 +66,7 @@ export function HeroScene() {
 
       // Nodes, laid out deterministically so every visit looks the same.
       const rand = rng(20221222);
-      const count = small || lowEnd ? 26 : 44;
+      const count = light ? 26 : 44;
       const center = small ? new THREE.Vector3(0, -3.4, 0) : new THREE.Vector3(3.6, 0.4, 0);
       const spread = small ? new THREE.Vector3(5.2, 3, 3) : new THREE.Vector3(7.2, 4.6, 3.6);
       const pts: InstanceType<typeof THREE.Vector3>[] = [];
@@ -151,7 +157,7 @@ export function HeroScene() {
         g.fillRect(0, 0, 32, 32);
         return new THREE.CanvasTexture(c);
       })();
-      const packetCount = small || lowEnd ? 10 : 22;
+      const packetCount = light ? 10 : 22;
       const packets = Array.from({ length: packetCount }, () => {
         const from = Math.floor(rand() * count);
         const to = adj[from][Math.floor(rand() * adj[from].length)] ?? from;
@@ -172,7 +178,13 @@ export function HeroScene() {
 
       const m = new THREE.Matrix4();
       const tmp = new THREE.Vector3();
+      // Node matrices only change during the entrance; after that they are final,
+      // so stop recomputing and re-uploading them every frame.
+      const settledAt = 0.6 + 0.4;
+      let settled = false;
       const setNodes = (grow: number) => {
+        if (settled) return;
+        if (grow >= settledAt) settled = true;
         pts.forEach((p, i) => {
           // staggered entrance: nodes nearer the centre appear first
           const delay = Math.min(1, p.distanceTo(center) / 8) * 0.6;
@@ -253,14 +265,15 @@ export function HeroScene() {
         if (!reduced && visible) raf = requestAnimationFrame(frame);
       };
 
+      // Stop drawing once only a sliver of the hero is left on screen.
       const io = new IntersectionObserver(([entry]) => {
         const was = visible;
-        visible = entry.isIntersecting && document.visibilityState === "visible";
+        visible = entry.isIntersecting && entry.intersectionRatio >= 0.15 && document.visibilityState === "visible";
         if (visible && !was && !reduced) {
           last = performance.now();
           raf = requestAnimationFrame(frame);
         }
-      });
+      }, { threshold: [0, 0.15] });
       io.observe(host);
       const onVis = () => {
         const was = visible;

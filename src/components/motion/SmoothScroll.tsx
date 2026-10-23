@@ -42,7 +42,8 @@ export function SmoothScroll() {
         smoothWheel: true,
       }) as unknown as LenisLike;
       window.__lenis = lenis;
-      document.documentElement.classList.add("lenis-on");
+      // Not "lenis-*": Lenis removes every class with that prefix on each update.
+      document.documentElement.classList.add("fx-smooth");
       const loop = (t: number) => {
         lenis?.raf(t);
         frame = requestAnimationFrame(loop);
@@ -74,7 +75,7 @@ export function SmoothScroll() {
       cancelAnimationFrame(frame);
       lenis?.destroy();
       window.__lenis = undefined;
-      document.documentElement.classList.remove("lenis-on");
+      document.documentElement.classList.remove("fx-smooth");
     };
   }, []);
 

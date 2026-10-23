@@ -5,8 +5,9 @@ import { useEffect } from "react";
 /*
   Opening loader: the FUSIONIFY seal draws its wavy outline, the mark pops
   in, then a curtain lifts to reveal the page. Runs once per browser session.
-  Whether it runs is decided by loaderInitScript in <head> before paint, so
-  there is no flash; without JavaScript or with reduced motion it never shows.
+  Whether it runs, and when it ends, is decided by loaderInitScript in <head>
+  before paint, so there is no flash and no wait for hydration; without
+  JavaScript or with reduced motion it never shows.
 */
 
 // Wavy seal outline, generated once (12 lobes, like the brand seal).
@@ -24,19 +25,20 @@ const RING = sealPath(60, 60, 38.5, 2.6);
 
 
 export function Loader() {
+  // The curtain is lifted by loaderInitScript in <head> (no wait for hydration).
+  // This is only a backup in case that timer never ran.
   useEffect(() => {
     const root = document.documentElement;
     if (root.getAttribute("data-loader") !== "run") return;
-    const done = () => {
+    const t = window.setTimeout(() => {
+      if (root.getAttribute("data-loader") !== "run") return;
       root.setAttribute("data-loader", "done");
       try {
         sessionStorage.setItem("fx-loaded", "1");
       } catch {
         /* storage blocked: loader simply runs again next time */
       }
-    };
-    // Total timeline ~1.6s; also end early if the tab was hidden.
-    const t = window.setTimeout(done, 1650);
+    }, Math.max(0, 1700 - performance.now()));
     return () => window.clearTimeout(t);
   }, []);
 

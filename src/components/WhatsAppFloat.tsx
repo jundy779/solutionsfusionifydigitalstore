@@ -10,15 +10,23 @@ export function WhatsAppFloat() {
   useEffect(() => {
     // Hidden over the hero and again once the footer (which has its own
     // WhatsApp button) comes into view, so it never covers footer links.
-    const onScroll = () => {
-      const footer = document.querySelector(".site-footer");
+    // At most once per frame (scroll fires many times per frame on phones),
+    // and the footer is looked up once instead of on every event.
+    const footer = document.querySelector(".site-footer");
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
       setShow(window.scrollY > 640 && footerTop > window.innerHeight - 24);
     };
-    onScroll();
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

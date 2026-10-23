@@ -4930,7 +4930,7 @@ main:focus {
 
 /* ===================== Motion kit (kode sendiri FUSIONIFY) ===================== */
 /* Lenis: biarkan Lenis yang mengatur kehalusan, matikan smooth bawaan */
-html.lenis-on{scroll-behavior:auto!important}
+html.fx-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
 
 /* Loader pembuka */

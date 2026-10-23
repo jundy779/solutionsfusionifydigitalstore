@@ -61,15 +61,18 @@ export function MotionRoot() {
     );
     counters.forEach((el) => countIo.observe(el));
 
-    // Parallax: [data-parallax="0.12"] drifts against the scroll on wider screens.
-    const wide = window.matchMedia("(min-width: 900px)").matches;
+    // Parallax: [data-parallax="0.12"] drifts against the scroll on wider screens
+    // with a mouse. Touch screens skip it, including phones in "Desktop site" mode.
+    const wide = window.matchMedia("(min-width: 900px) and (pointer: fine)").matches;
     const layers = wide ? Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]")) : [];
     let ticking = false;
     const paint = () => {
       ticking = false;
       const vh = window.innerHeight;
-      layers.forEach((el) => {
-        const r = el.getBoundingClientRect();
+      // Read every position first, then write, so one frame never forces layout twice.
+      const reads = layers.map((el) => el.getBoundingClientRect());
+      layers.forEach((el, i) => {
+        const r = reads[i];
         if (r.bottom < -200 || r.top > vh + 200) return;
         const speed = Number(el.dataset.parallax) || 0.1;
         const offset = (r.top + r.height / 2 - vh / 2) * -speed;
